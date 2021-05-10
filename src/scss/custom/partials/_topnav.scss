@@ -1,0 +1,25 @@
+/*topnav*/
+.header {
+    width: 100%;
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    background-color: #fff;
+    z-index: var(--z-fixed);
+    transition: .5s;
+
+    &__toggle {
+        color: var(--dark-color);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    &.show {
+        padding-left: calc(var(--nav-width) + 188px);
+    }
+}
