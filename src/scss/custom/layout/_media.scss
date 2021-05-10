@@ -12,15 +12,19 @@
 
     .l-navbar {
         left: 0;
-        padding: 1rem 1rem 0 0;
+        padding: 1rem 0 0 0;
 
         &.show {
-            width: calc(var(--nav-width) + 156px);
+            width: calc(var(--nav-width) + 176px);
         }
     }
 }
 
 @media screen and (max-width: 767px) {
+    .l-navbar {
+        padding: 1rem 0 0 0;
+    }
+
     .main-content {
         padding-left: 0px !important;
         margin-top: calc(var(--header-height) + .5rem) !important;
