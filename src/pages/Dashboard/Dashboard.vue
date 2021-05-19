@@ -1,42 +1,151 @@
 <template>
 <main-layout>
-    <h6>Dashboard</h6>
-    What is Lorem Ipsum?
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 
-Why do we use it?
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+<!-- Start Breadcrumb -->
+<nav class="breadcrumb is-medium" aria-label="breadcrumbs">
+  <ul class="px-3 pt-3">
+    <li><a href="#">Admin</a></li>
+    <li class="is-active"><a href="#" aria-current="page">Dashboard</a></li>
+  </ul>
+</nav>
+<!-- End Breadcrumb -->
 
+<!-- Start Active User -->
+<section class="hero is-primary">
+  <div class="hero-body is-flex is-align-items-center is-justify-content-space-between">
+    <div class="is-flex is-align-items-center">
+        <figure class="image is-128x128 mx-4">
+            <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+        </figure>
+        <div>
+            <h3 class="is-size-3 has-text-weight-bold">John Doe</h3>
+            <h5 class="is-size-5 has-text-weight-light">
+                Last login <span class="has-text-weight-semibold">12 mins ago</span> from <span class="has-text-weight-semibold">192.168.1.1</span>
+            </h5>
+            <h6 class="is-size-6 has-text-weight-light">
+                You have <span class="has-text-weight-semibold">4 unread notifications</span> today.
+            </h6>
+        </div>
+    </div>
+    <b-button icon-left="account" type="is-light">
+        Manage Profile
+    </b-button>
+  </div>
+</section>
+<!-- End Active User -->
 
-Where does it come from?
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+<!-- Start Simple Widgets -->
+<div class="container is-fluid my-5">
+    <div class="columns is-flex is-flex-wrap-wrap is-justify-content-center">
+        <template v-for="(widget, index) in widgets">
+            <div class="column is-3-desktop is-6-tablet is-12-mobile" :key="index">
+                <simple-widget :data="widget"></simple-widget>
+            </div>
+        </template>
+    </div>
+</div>
+<!-- End Simple Widgets -->
 
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+<!-- Start Payroll Chart -->
+<div class="container is-fluid my-5">
+    <div class="card">
+        <header class="is-flex is-justify-content-space-between is-align-items-center py-2 px-3">
+            <h6 class="has-text-weight-medium is-flex is-align-items-center">
+                <b-icon icon="chart-box-outline"></b-icon> 
+                <h6 class="is-size-6 has-text-weight-semibold px-3">Payroll</h6>
+            </h6>
+            <b-button size="is-small" icon-right="refresh" />
+        </header>
+        <div class="py-4 px-5">
+            <div class="columns is-flex is-flex-wrap-wrap">
+                <div class="column is-8-desktop is-12-tablet is-12-mobile">
+                    <payroll-chart></payroll-chart>
+                </div>
+                <div class="column is-4-desktop is-12-tablet is-12-mobile">
+                    <payroll-mini-chart></payroll-mini-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Payroll Chart -->
 
-Where can I get some?
-There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+<!-- Start Chart Widgets -->
+<div class="container is-fluid my-5">
+    <div class="columns is-flex is-flex-wrap-wrap is-justify-content-center">
+        <div class="column is-4-desktop is-6-tablet is-12-mobile">
+            <chart-widget-1></chart-widget-1>
+        </div>
+        <div class="column is-4-desktop is-6-tablet is-12-mobile">
+            <chart-widget-2></chart-widget-2>
+        </div>
+        <div class="column is-4-desktop is-6-tablet is-12-mobile">
+            <chart-widget-3></chart-widget-3>
+        </div>
+    </div>
+</div>
+<!-- End Chart Widgets -->
 
-What is Lorem Ipsum?
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+<!-- Start Active Employees -->
+<div class="container is-fluid my-5">
+    <active-employees :employees="employees"></active-employees>
+</div>
+<!-- End Active Employees -->
 
-Why do we use it?
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
-
-Where does it come from?
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-
-Where can I get some?
-There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
 </main-layout>
 </template>
 
 <script>
+
 export default {
     components: {
         MainLayout: () => import("@/components/layouts/MainLayout.vue"),
-    }
+        SimpleWidget: () => import("@/components/widgets/SimpleWidget.vue"),
+        ChartWidget1: () => import("@/components/widgets/ChartWidget1.vue"),
+        ChartWidget2: () => import("@/components/widgets/ChartWidget2.vue"),
+        ChartWidget3: () => import("@/components/widgets/ChartWidget3.vue"),
+        PayrollChart: () => import("@/components/charts/PayrollChart.vue"),
+        PayrollMiniChart: () => import("@/components/charts/PayrollMiniChart.vue"),
+        ActiveEmployees: () => import("@/pages/Dashboard/ActiveEmployees.vue"),
+    },
+
+    data() {
+        return {
+            employees: [
+                { 'id': 1, 'name': 'Jesse Simmons', 'position': 'IT Staff', 'department': 'IT Department', 'status': 'Working' },
+                { 'id': 2, 'name': 'John Jacobs', 'position': 'Accounting Staff', 'department': 'Accounting Department', 'status': 'Lunch Break' },
+                { 'id': 3, 'name': 'Tina Gilbert', 'position': 'Tax Specialist', 'department': 'Accounting Department', 'status': 'Working' },
+                { 'id': 4, 'name': 'Clarence Flores', 'position': 'Accounts Payable', 'department': 'Accounting Department', 'status': 'Working' },
+                { 'id': 5, 'name': 'Anne Lee', 'position': 'Sales Staff', 'department': 'Sales Department', 'status': 'Early Out' },
+                { 'id': 6, 'name': 'Bill Gates', 'position': 'IT Programmer', 'department': 'IT Department', 'status': 'Working' },
+                { 'id': 7, 'name': 'Elon Musk', 'position': 'Software Engineer', 'department': 'IT Department', 'status': 'Working' },
+                { 'id': 8, 'name': 'Steve Jobs', 'position': 'Sales Specialist', 'department': 'Sales Department', 'status': 'Working' },
+                { 'id': 9, 'name': 'Warren Buffett', 'position': 'Accountant', 'department': 'Accounting Department', 'status': 'Lunch Break' },
+                { 'id': 10, 'name': 'Jeff Bezos', 'position': 'Sales Manager', 'department': 'Sales Department', 'status': 'Working' },
+            ],
+            widgets: [
+                { notification: "2 new employees", title: "Employees", total: "200", icon: "account-group" },
+                { notification: "12 employees absent", title: "Attendance", total: "188", icon: "calendar-clock" },
+                { notification: "3 completed reports", title: "Reports", total: "10", icon: "file-chart" },
+                { notification: "2 payroll on hold", title: "Payroll", total: "198", icon: "cash-multiple" },
+            ],
+        }
+    },
 }
 </script>
+
+<style lang="scss" scoped>
+.hero-body {
+    padding: 2rem 1.5rem;
+}
+
+/deep/ .table td, 
+/deep/ .table th {
+    border: none;
+}
+
+/deep/ .pagination {
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+</style>
