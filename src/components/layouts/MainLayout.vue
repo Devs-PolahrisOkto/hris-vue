@@ -8,9 +8,7 @@
         :toggle-state="toggleState"
     ></side-nav>
     <div class="main-content" :class="{'show': toggleState}">
-        <div class="px-2">
-            <slot></slot>
-        </div>
+        <slot></slot>
     </div>
 </div>
 </template>

@@ -5,7 +5,7 @@
 @import "~bulma/sass/utilities/_all";
 
 // Import Google fonts
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 // Set your colors
 $primary: #60c8bc;
@@ -20,8 +20,8 @@ $custom-colors: null !default;
 $custom-shades: null !default;
 
 // Custom
-$body-background-color: #f6f7fa;
-$family-sans-serif: 'Noto Sans JP', sans-serif;
+$body-background-color: #f8f8f8;
+$family-sans-serif: 'Lato', sans-serif;
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
