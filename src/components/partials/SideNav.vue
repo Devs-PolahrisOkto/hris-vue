@@ -16,7 +16,7 @@
                     <span class="nav__name">Dashboard</span>
                 </router-link>
 
-                <router-link to="/login" class="nav__link">
+                <router-link to="/employees" class="nav__link">
                     <i class="mdi mdi-account-group nav__icon"></i>
                     <span class="nav__name">Employees</span>
                 </router-link>

@@ -10,7 +10,7 @@
     justify-content: space-between;
     padding: 0 1rem;
     background-color: #fff;
-    z-index: var(--z-fixed);
+    z-index: 10;
     transition: .5s;
 
     &__toggle {
