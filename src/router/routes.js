@@ -3,6 +3,8 @@ const routes = [
     { path: '*', name: 'NotFound', component: () => import(/* webpackChunkName: "NotFound" */ '@/pages/NotFound/NotFound.vue') },
     { path: '/login', name: 'Login', component: () => import(/* webpackChunkName: "Login" */ '@/pages/Auth/Login.vue') },
     { path: '/dashboard', name: 'Dashboard', component: () => import(/* webpackChunkName: "Dashboard" */ '@/pages/Dashboard/Dashboard.vue') },
+
+    { path: '/employees', name: 'AllEmployees', component: () => import(/* webpackChunkName: "AllEmployees" */ '@/pages/Employees/AllEmployees.vue') },
 ];
 
 export default routes;
