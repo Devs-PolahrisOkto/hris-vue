@@ -2,7 +2,7 @@
 <main-layout>
 
 <!-- Start Breadcrumb -->
-<nav class="breadcrumb is-medium" aria-label="breadcrumbs">
+<nav class="breadcrumb px-5" aria-label="breadcrumbs">
   <ul class="px-3 pt-3">
     <li><a href="#">Admin</a></li>
     <li class="is-active"><a href="#" aria-current="page">Dashboard</a></li>
