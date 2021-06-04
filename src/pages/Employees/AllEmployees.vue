@@ -22,7 +22,8 @@
             <b-tooltip label="Filter">
                 <b-button 
                     icon-right="filter" 
-                    class="mr-3" />
+                    class="mr-3" 
+                    @click="isFilterModalActive = !isFilterModalActive" />
             </b-tooltip>
             <b-tooltip label="Presentation">
                 <b-button 
@@ -90,6 +91,13 @@
 </div>
 <!-- End Active Employees -->
 
+<!-- Start Modals -->
+<filter-modal
+    :active="isFilterModalActive"
+    @close="isFilterModalActive = !isFilterModalActive"
+></filter-modal>
+<!-- End Modals -->
+
 </main-layout>
 </template>
 
@@ -98,6 +106,7 @@
 export default {
     components: {
         MainLayout: () => import("@/components/layouts/MainLayout.vue"),
+        FilterModal: () => import("@/pages/Employees/FilterModal.vue"),
     },
 
     data() {
@@ -127,6 +136,8 @@ export default {
             sortIconSize: 'is-small',
             currentPage: 1,
             perPage: 10,
+            // Modals
+            isFilterModalActive: false,
         }
     },
 }
