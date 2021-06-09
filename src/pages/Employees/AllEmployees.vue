@@ -28,10 +28,12 @@
             <b-tooltip label="Presentation">
                 <b-button 
                     icon-right="grid-large" 
-                    class="mr-1" />
+                    class="mr-1"  />
             </b-tooltip>
             <b-tooltip label="Columns">
-                <b-button icon-right="table-column" />
+                <b-button 
+                    icon-right="table-column" 
+                    @click="isColumnModalActive = !isColumnModalActive" />
             </b-tooltip>
         </div>
     </div>
@@ -96,6 +98,11 @@
     :active="isFilterModalActive"
     @close="isFilterModalActive = !isFilterModalActive"
 ></filter-modal>
+
+<column-modal
+    :active="isColumnModalActive"
+    @close="isColumnModalActive = !isColumnModalActive"
+></column-modal>
 <!-- End Modals -->
 
 </main-layout>
@@ -107,6 +114,7 @@ export default {
     components: {
         MainLayout: () => import("@/components/layouts/MainLayout.vue"),
         FilterModal: () => import("@/pages/Employees/FilterModal.vue"),
+        ColumnModal: () => import("@/pages/Employees/ColumnModal.vue"),
     },
 
     data() {
@@ -138,6 +146,7 @@ export default {
             perPage: 10,
             // Modals
             isFilterModalActive: false,
+            isColumnModalActive: false,
         }
     },
 }
