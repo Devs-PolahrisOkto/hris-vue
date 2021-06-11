@@ -37,6 +37,7 @@
                     <span class="is-size-6 has-text-weight-semibold">Gender</span>
                     <b-checkbox></b-checkbox>
                 </div>
+                <button class="button is-primary mt-4">Apply changes</button>
             </section>
             <footer class="modal-card-foot">
                 <b-button
