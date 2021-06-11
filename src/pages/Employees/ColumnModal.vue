@@ -17,27 +17,12 @@
                     @click="$emit('close')"/>
             </header>
             <section class="modal-card-body">
-                <div class="has-background-light px-5 py-3 mb-2 is-flex is-justify-content-space-between is-align-items-center">
-                    <span class="is-size-6 has-text-weight-semibold">Name</span>
-                    <b-checkbox></b-checkbox>
-                </div>
-                <div class="has-background-light px-5 py-3 mb-2 is-flex is-justify-content-space-between is-align-items-center">
-                    <span class="is-size-6 has-text-weight-semibold">Position</span>
-                    <b-checkbox></b-checkbox>
-                </div>
-                <div class="has-background-light px-5 py-3 mb-2 is-flex is-justify-content-space-between is-align-items-center">
-                    <span class="is-size-6 has-text-weight-semibold">Employment Type</span>
-                    <b-checkbox></b-checkbox>
-                </div>
-                <div class="has-background-light px-5 py-3 mb-2 is-flex is-justify-content-space-between is-align-items-center">
-                    <span class="is-size-6 has-text-weight-semibold">Department</span>
-                    <b-checkbox></b-checkbox>
-                </div>
-                <div class="has-background-light px-5 py-3 mb-2 is-flex is-justify-content-space-between is-align-items-center">
-                    <span class="is-size-6 has-text-weight-semibold">Gender</span>
-                    <b-checkbox></b-checkbox>
-                </div>
-                <button class="button is-primary mt-4">Apply changes</button>
+                <template v-for="(column, index) in columns">
+                    <div class="has-background-light px-5 py-3 mb-2 is-flex is-justify-content-space-between is-align-items-center" :key="index">
+                        <span class="is-size-6 has-text-weight-semibold">{{ column.title }}</span>
+                        <b-checkbox v-model="column.visible"></b-checkbox>
+                    </div>
+                </template>
             </section>
             <footer class="modal-card-foot">
                 <b-button
@@ -57,78 +42,11 @@ export default {
     props: {
         active: {
             type: Boolean
+        },
+        columns: {
+            type: Array,
+            default: () => [],
         }
     },
-
-    data() {
-        return {
-            // Array Options
-            positions: [
-                'Office Staff',
-                'Sales Staff',
-                'Accounting Staff',
-                'HR',
-                'Customer Service',
-                'IT Staff',
-                'Supervisor',
-                'Manager',
-            ],
-            departments: [
-                'IT Department',
-                'Sales Department',
-                'Accounting Department',
-                'HR Department',
-                'Gen. Admin',
-            ],
-            employmentTypes: [
-                'Regular',
-                'Probationary',
-                'Contractual',
-                'Part-time',
-                'Freelance',
-            ],
-            batches: [
-                'Batch 1',
-                'Batch 2',
-                'Batch 3',
-            ],
-            // Selected Option
-            selectedPosition: null,
-            selectedDepartment: null,
-            selectedEmploymentType: null,
-            selectedBatch: null,
-            // Input Value
-            position: '',
-            department: '',
-            employmentType: '',
-            batch: '',
-        }
-    },
-
-    computed: {
-        filteredPositions() {
-            return this.filteredDataArray(this.positions, this.position);
-        },
-        filteredDepartments() {
-            return this.filteredDataArray(this.departments, this.department);
-        },
-        filteredEmploymentTypes() {
-            return this.filteredDataArray(this.employmentTypes, this.employmentType);
-        },
-        filteredBatches() {
-            return this.filteredDataArray(this.batches, this.batch);
-        },
-    },
-
-    methods: {
-        filteredDataArray(dataArray, query) {
-            return dataArray.filter((option) => {
-                return option
-                    .toString()
-                    .toLowerCase()
-                    .indexOf(query.toLowerCase()) >= 0
-            })
-        },
-    }
 }
 </script>
