@@ -14,7 +14,7 @@
         <div class="card">
             <header class="py-2 px-3">
                 <h5 class="has-text-weight-medium is-flex is-align-items-center">
-                    <b-icon icon="account-group-outline"></b-icon> 
+                    <b-icon icon="account-plus"></b-icon> 
                     <h5 class="is-size-5 has-text-weight-semibold px-3">Register Employee</h5>
                 </h5>
             </header>
