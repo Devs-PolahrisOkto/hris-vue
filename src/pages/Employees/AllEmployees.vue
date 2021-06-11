@@ -28,16 +28,18 @@
             <b-tooltip label="Presentation">
                 <b-button 
                     icon-right="grid-large" 
-                    class="mr-1" />
+                    class="mr-1"  />
             </b-tooltip>
             <b-tooltip label="Columns">
-                <b-button icon-right="table-column" />
+                <b-button 
+                    icon-right="table-column" 
+                    @click="isColumnModalActive = !isColumnModalActive" />
             </b-tooltip>
         </div>
     </div>
 
     <b-table
-        :data="isEmpty ? [] : employees"
+        :data="isEmpty ? [] : data"
         :striped="isStriped"
         :hoverable="isHoverable"
         :mobile-cards="hasMobileCards"
@@ -50,7 +52,7 @@
         :pagination-rounded="isPaginationRounded"
         :sort-icon="sortIcon"
         :sort-icon-size="sortIconSize"
-        default-sort="user.first_name"
+        default-sort="name"
         aria-next-label="Next page"
         aria-previous-label="Previous page"
         aria-page-label="Page"
@@ -63,21 +65,18 @@
             </figure>
         </b-table-column>
 
-        <b-table-column field="name" label="Name" sortable v-slot="props">
-            {{ props.row.name }}
-        </b-table-column>
-
-        <b-table-column field="position" label="Position" sortable v-slot="props">
-            {{ props.row.position }}
-        </b-table-column>
-
-        <b-table-column field="employment_type" label="Employment Type" sortable v-slot="props">
-            {{ props.row.employment_type }}
-        </b-table-column>
-
-        <b-table-column field="department" label="Department" sortable v-slot="props">
-            {{ props.row.department }}
-        </b-table-column>
+        <template v-for="(column, index) in columns">
+            <b-table-column
+                :key="index"
+                :label="column.title"
+                :field="column.field"
+                :visible="column.visible"
+                v-slot="props"
+                sortable
+            >
+                {{ props.row[column.field] }}
+            </b-table-column>
+        </template>
 
         <b-table-column field="option">
             <b-button size="is-small" type="is-primary" icon-right="eye" />
@@ -96,6 +95,12 @@
     :active="isFilterModalActive"
     @close="isFilterModalActive = !isFilterModalActive"
 ></filter-modal>
+
+<column-modal
+    :active="isColumnModalActive"
+    :columns="columns"
+    @close="isColumnModalActive = !isColumnModalActive"
+></column-modal>
 <!-- End Modals -->
 
 </main-layout>
@@ -107,11 +112,12 @@ export default {
     components: {
         MainLayout: () => import("@/components/layouts/MainLayout.vue"),
         FilterModal: () => import("@/pages/Employees/FilterModal.vue"),
+        ColumnModal: () => import("@/pages/Employees/ColumnModal.vue"),
     },
 
     data() {
         return {
-            employees: [
+            data: [
                 { 'id': 1, 'name': 'Jesse Simmons', 'position': 'IT Staff', 'department': 'IT Department', 'employment_type': 'Regular' },
                 { 'id': 2, 'name': 'John Jacobs', 'position': 'Accounting Staff', 'department': 'Accounting Department', 'employment_type': 'Regular' },
                 { 'id': 3, 'name': 'Tina Gilbert', 'position': 'Tax Specialist', 'department': 'Accounting Department', 'employment_type': 'Regular' },
@@ -122,6 +128,13 @@ export default {
                 { 'id': 8, 'name': 'Steve Jobs', 'position': 'Sales Specialist', 'department': 'Sales Department', 'employment_type': 'Probationary' },
                 { 'id': 9, 'name': 'Warren Buffett', 'position': 'Accountant', 'department': 'Accounting Department', 'employment_type': 'Regular' },
                 { 'id': 10, 'name': 'Jeff Bezos', 'position': 'Sales Manager', 'department': 'Sales Department', 'employment_type': 'Regular' },
+            ],
+            columns: [
+                { title: 'ID', field: 'id', visible: false },
+                { title: 'Name', field: 'name', visible: true },
+                { title: 'Position', field: 'position', visible: true },
+                { title: 'Department', field: 'department', visible: true },
+                { title: 'Employment Type', field: 'employment_type', visible: true }
             ],
             isEmpty: false,
             isStriped: false,
@@ -138,6 +151,7 @@ export default {
             perPage: 10,
             // Modals
             isFilterModalActive: false,
+            isColumnModalActive: false,
         }
     },
 }
