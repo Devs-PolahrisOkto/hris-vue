@@ -236,14 +236,117 @@
                                     <span>Upload Profile Photo</span>
                                 </a>
                             </b-upload>
-                            <span class="is-size-7" v-if="employee_details.profile_photo">
+                            <span class="is-size-6 px-3 py-2" v-if="employee_details.profile_photo">
                                 {{ employee_details.profile_photo.name }}
                             </span>
                         </b-field>
 
+                        <!-- Address -->
+                        <b-collapse class="mt-4" animation="slide" aria-id="contentIdForA11y3">
+                            <template #trigger="props">
+                                <div
+                                    class="is-flex is-justify-content-space-between is-align-items-center mb-1"
+                                    role="button"
+                                    aria-controls="contentIdForA11y3"
+                                >
+                                    <h6 class="is-size-6 has-text-weight-light">Address</h6>
+                                    <a class="card-header-icon">
+                                        <b-icon
+                                            :icon="props.open ? 'chevron-down' : 'chevron-up'">
+                                        </b-icon>
+                                    </a>
+                                </div>
+                            </template>
+                            <div class="content">
+                                <div class="columns">
+                                    <div class="column">
+                                        <b-field 
+                                            label="Street/House/Building"
+                                            label-position="on-border" 
+                                        >
+                                            <b-input></b-input>
+                                        </b-field>
+                                    </div>
+                                    <div class="column">
+                                        <b-field 
+                                            label="Barangay"
+                                            label-position="on-border" 
+                                        >
+                                            <b-input></b-input>
+                                        </b-field>
+                                    </div>
+                                    <div class="column">
+                                        <b-field 
+                                            label="City/Municipality"
+                                            label-position="on-border" 
+                                        >
+                                            <b-input></b-input>
+                                        </b-field>
+                                    </div>
+                                    <div class="column">
+                                        <b-field 
+                                            label="Province/State"
+                                            label-position="on-border" 
+                                        >
+                                            <b-input></b-input>
+                                        </b-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </b-collapse>
+                        <!-- Address -->
+
+                        <!-- Educational Attainment -->
+                        <b-collapse class="mt-4" animation="slide" aria-id="contentIdForA11y3">
+                            <template #trigger="props">
+                                <div
+                                    class="is-flex is-justify-content-space-between is-align-items-center mb-1"
+                                    role="button"
+                                    aria-controls="contentIdForA11y3"
+                                >
+                                    <h6 class="is-size-6 has-text-weight-light">Educational Attainment</h6>
+                                    <a class="card-header-icon">
+                                        <b-icon
+                                            :icon="props.open ? 'chevron-down' : 'chevron-up'">
+                                        </b-icon>
+                                    </a>
+                                </div>
+                            </template>
+                            <div class="content">
+                                <div class="columns">
+                                    <div class="column">
+                                        <b-field 
+                                            label="School Name"
+                                            label-position="on-border" 
+                                        >
+                                            <b-input></b-input>
+                                        </b-field>
+                                    </div>
+                                    <div class="column">
+                                        <b-field 
+                                            label="Level/Degree/Major"
+                                            label-position="on-border" 
+                                        >
+                                            <b-input></b-input>
+                                        </b-field>
+                                    </div>
+                                    <div class="column">
+                                        <b-field 
+                                            label="Inclusive Dates"
+                                            label-position="on-border" 
+                                        >
+                                            <b-input></b-input>
+                                        </b-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </b-collapse>
+                        <!-- Educational Attainment -->
+
+
                         <b-button 
                             native-type="submit" 
-                            class="is-primary mt-4 mr-auto"
+                            class="is-primary mt-6 mr-auto"
                         >
                             <span class="has-text-weight-bold px-5">Register</span>
                         </b-button>
