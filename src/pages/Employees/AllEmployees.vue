@@ -65,13 +65,18 @@
             </figure>
         </b-table-column>
 
-        <b-table-column v-for="(column, index) in columns"
-            :key="index"
-            :label="column.title"
-            :visible="column.visible"
-            v-slot="props">
-            {{ props.row[column.field] }}
-        </b-table-column>
+        <template v-for="(column, index) in columns">
+            <b-table-column
+                :key="index"
+                :label="column.title"
+                :field="column.field"
+                :visible="column.visible"
+                v-slot="props"
+                sortable
+            >
+                {{ props.row[column.field] }}
+            </b-table-column>
+        </template>
 
         <b-table-column field="option">
             <b-button size="is-small" type="is-primary" icon-right="eye" />
