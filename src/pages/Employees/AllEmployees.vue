@@ -39,7 +39,7 @@
     </div>
 
     <b-table
-        :data="isEmpty ? [] : employees"
+        :data="isEmpty ? [] : data"
         :striped="isStriped"
         :hoverable="isHoverable"
         :mobile-cards="hasMobileCards"
@@ -65,20 +65,12 @@
             </figure>
         </b-table-column>
 
-        <b-table-column field="name" label="Name" sortable v-slot="props">
-            {{ props.row.name }}
-        </b-table-column>
-
-        <b-table-column field="position" label="Position" sortable v-slot="props">
-            {{ props.row.position }}
-        </b-table-column>
-
-        <b-table-column field="employment_type" label="Employment Type" sortable v-slot="props">
-            {{ props.row.employment_type }}
-        </b-table-column>
-
-        <b-table-column field="department" label="Department" sortable v-slot="props">
-            {{ props.row.department }}
+        <b-table-column v-for="(column, index) in columns"
+            :key="index"
+            :label="column.title"
+            :visible="column.visible"
+            v-slot="props">
+            {{ props.row[column.field] }}
         </b-table-column>
 
         <b-table-column field="option">
@@ -101,6 +93,7 @@
 
 <column-modal
     :active="isColumnModalActive"
+    :columns="columns"
     @close="isColumnModalActive = !isColumnModalActive"
 ></column-modal>
 <!-- End Modals -->
@@ -119,7 +112,7 @@ export default {
 
     data() {
         return {
-            employees: [
+            data: [
                 { 'id': 1, 'name': 'Jesse Simmons', 'position': 'IT Staff', 'department': 'IT Department', 'employment_type': 'Regular' },
                 { 'id': 2, 'name': 'John Jacobs', 'position': 'Accounting Staff', 'department': 'Accounting Department', 'employment_type': 'Regular' },
                 { 'id': 3, 'name': 'Tina Gilbert', 'position': 'Tax Specialist', 'department': 'Accounting Department', 'employment_type': 'Regular' },
@@ -130,6 +123,13 @@ export default {
                 { 'id': 8, 'name': 'Steve Jobs', 'position': 'Sales Specialist', 'department': 'Sales Department', 'employment_type': 'Probationary' },
                 { 'id': 9, 'name': 'Warren Buffett', 'position': 'Accountant', 'department': 'Accounting Department', 'employment_type': 'Regular' },
                 { 'id': 10, 'name': 'Jeff Bezos', 'position': 'Sales Manager', 'department': 'Sales Department', 'employment_type': 'Regular' },
+            ],
+            columns: [
+                { title: 'ID', field: 'id', visible: false },
+                { title: 'Name', field: 'name', visible: true },
+                { title: 'Position', field: 'position', visible: true },
+                { title: 'Department', field: 'department', visible: true },
+                { title: 'Employment Type', field: 'employment_type', visible: true }
             ],
             isEmpty: false,
             isStriped: false,
