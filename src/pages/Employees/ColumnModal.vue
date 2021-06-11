@@ -17,6 +17,7 @@
                     @click="$emit('close')"/>
             </header>
             <section class="modal-card-body">
+                <h6 class="is-size-6 has-text-weight-light mb-3">Hide or Show table columns.</h6>
                 <template v-for="(column, index) in columns">
                     <div class="has-background-light px-5 py-3 mb-2 is-flex is-justify-content-space-between is-align-items-center" :key="index">
                         <span class="is-size-6 has-text-weight-semibold">{{ column.title }}</span>
