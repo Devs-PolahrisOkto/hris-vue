@@ -221,7 +221,7 @@
                             </div>
                             <div class="column">
                                 <b-field 
-                                    label="SSS"
+                                    label="TIN"
                                     label-position="on-border" 
                                 >
                                     <b-input v-model="employee_details.tin"></b-input>
