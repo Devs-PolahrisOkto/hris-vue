@@ -25,10 +25,11 @@
                     class="mr-3" 
                     @click="isFilterModalActive = !isFilterModalActive" />
             </b-tooltip>
-            <b-tooltip label="Presentation">
+            <b-tooltip label="Layout">
                 <b-button 
                     icon-right="grid-large" 
-                    class="mr-1"  />
+                    class="mr-1" 
+                    @click="isLayoutModalActive = !isLayoutModalActive" />
             </b-tooltip>
             <b-tooltip label="Columns">
                 <b-button 
@@ -38,55 +39,87 @@
         </div>
     </div>
 
-    <b-table
-        :data="isEmpty ? [] : data"
-        :striped="isStriped"
-        :hoverable="isHoverable"
-        :mobile-cards="hasMobileCards"
-        :paginated="isPaginated"
-        :per-page="perPage"
-        :current-page.sync="currentPage"
-        :pagination-simple="isPaginationSimple"
-        :pagination-position="paginationPosition"
-        :default-sort-direction="defaultSortDirection"
-        :pagination-rounded="isPaginationRounded"
-        :sort-icon="sortIcon"
-        :sort-icon-size="sortIconSize"
-        default-sort="name"
-        aria-next-label="Next page"
-        aria-previous-label="Previous page"
-        aria-page-label="Page"
-        aria-current-label="Current page"
-    >
+    <!-- Table Layout -->
+    <div v-show="layout === 'table'">
+        <b-table
+            :data="isEmpty ? [] : data"
+            :striped="isStriped"
+            :hoverable="isHoverable"
+            :mobile-cards="hasMobileCards"
+            :paginated="isPaginated"
+            :per-page="perPage"
+            :current-page.sync="currentPage"
+            :pagination-simple="isPaginationSimple"
+            :pagination-position="paginationPosition"
+            :default-sort-direction="defaultSortDirection"
+            :pagination-rounded="isPaginationRounded"
+            :sort-icon="sortIcon"
+            :sort-icon-size="sortIconSize"
+            default-sort="name"
+            aria-next-label="Next page"
+            aria-previous-label="Previous page"
+            aria-page-label="Page"
+            aria-current-label="Current page"
+        >
 
-        <b-table-column field="id" width="40">
-            <figure class="image is-24x24">
-                <img class="is-rounded" src="https://bulma.io/images/placeholders/24x24.png">
-            </figure>
-        </b-table-column>
-
-        <template v-for="(column, index) in columns">
-            <b-table-column
-                :key="index"
-                :label="column.title"
-                :field="column.field"
-                :visible="column.visible"
-                v-slot="props"
-                sortable
-            >
-                {{ props.row[column.field] }}
+            <b-table-column field="id" width="40">
+                <figure class="image is-24x24">
+                    <img class="is-rounded" src="https://bulma.io/images/placeholders/24x24.png">
+                </figure>
             </b-table-column>
-        </template>
 
-        <b-table-column field="option">
-            <b-button size="is-small" type="is-primary" icon-right="eye" />
-        </b-table-column>
+            <template v-for="(column, index) in columns">
+                <b-table-column
+                    :key="index"
+                    :label="column.title"
+                    :field="column.field"
+                    :visible="column.visible"
+                    v-slot="props"
+                    sortable
+                >
+                    {{ props.row[column.field] }}
+                </b-table-column>
+            </template>
 
-        <template #empty>
-            <div class="has-text-centered">No records</div>
-        </template>
+            <b-table-column field="option">
+                <b-button size="is-small" type="is-primary" icon-right="eye" />
+            </b-table-column>
 
-    </b-table>
+            <template #empty>
+                <div class="has-text-centered">No records</div>
+            </template>
+
+        </b-table>
+    </div>
+    <!-- Table Layout -->
+
+    <!-- Grid Layout -->
+    <div v-show="layout === 'grid'">
+        <div class="columns is-flex is-flex-wrap-wrap">
+            <template v-for="(item, index) in data">
+                <div class="column is-6-desktop is-12-tablet is-12-mobile" :key="index">
+                    <article class="media has-background-white p-4">
+                        <figure class="media-left">
+                            <p class="image is-128x128">
+                            <img src="https://bulma.io/images/placeholders/128x128.png">
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <h5 class="is-size-5 has-text-weight-semibold">{{ item.name }}</h5>
+                            <h6 class="is-size-6 has-text-grey">{{ item.position }}</h6>
+                            <h6 class="is-size-6">{{ item.employment_type }}</h6>
+                            <h6 class="is-size-6">{{ item.department }}</h6>
+                        </div>
+                        <div class="media-right">
+                            <b-button size="is-small" type="is-primary" icon-right="eye" />
+                        </div>
+                    </article>
+                </div>
+            </template>
+        </div>
+    </div>
+    <!-- Grid Layout -->
+
 </div>
 <!-- End Active Employees -->
 
@@ -101,6 +134,14 @@
     :columns="columns"
     @close="isColumnModalActive = !isColumnModalActive"
 ></column-modal>
+
+<layout-modal
+    :active="isLayoutModalActive"
+    :layout="layout"
+    @change-layout="changeLayout"
+    @close="isLayoutModalActive = !isLayoutModalActive"
+></layout-modal> 
+
 <!-- End Modals -->
 
 </main-layout>
@@ -113,10 +154,12 @@ export default {
         MainLayout: () => import("@/components/layouts/MainLayout.vue"),
         FilterModal: () => import("@/pages/Employees/FilterModal.vue"),
         ColumnModal: () => import("@/pages/Employees/ColumnModal.vue"),
+        LayoutModal: () => import("@/pages/Employees/LayoutModal.vue"),
     },
 
     data() {
         return {
+            layout: 'table',
             data: [
                 { 'id': 1, 'name': 'Jesse Simmons', 'position': 'IT Staff', 'department': 'IT Department', 'employment_type': 'Regular' },
                 { 'id': 2, 'name': 'John Jacobs', 'position': 'Accounting Staff', 'department': 'Accounting Department', 'employment_type': 'Regular' },
@@ -152,7 +195,14 @@ export default {
             // Modals
             isFilterModalActive: false,
             isColumnModalActive: false,
+            isLayoutModalActive: false,
         }
     },
+
+    methods: {
+        changeLayout(requestedLayout) {
+            this.layout = requestedLayout;
+        }
+    }
 }
 </script>
