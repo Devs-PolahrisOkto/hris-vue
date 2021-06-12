@@ -15,9 +15,11 @@ body {
 }
 
 .modal-card-body, 
-.dropdown-content {
+.dropdown-content,
+.table-wrapper {
     &::-webkit-scrollbar {
         width: .3em;
+        height: .3em;
     }
 
     &::-webkit-scrollbar-track {
