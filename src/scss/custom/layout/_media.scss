@@ -23,6 +23,32 @@
 @media screen and (max-width: 767px) {
     .l-navbar {
         padding: 1rem 0 0 0;
+
+        &.show {
+            left: 0;
+            padding-left: 0;
+    
+            & .nav__subtitle {
+                display: none;
+            }
+    
+            & .nav__icon {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+    
+            & .nav__name {
+                display: none;
+            }
+    
+            & .nav__logo {
+                padding-left: 1.5rem;
+    
+                &-name {
+                    padding-left: 1rem;
+                }
+            }
+        }
     }
 
     .main-content {
