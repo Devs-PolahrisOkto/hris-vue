@@ -4,66 +4,93 @@
     :class="{'show': toggleState}"
     id="nav-bar"
 >
-    <nav class="nav">
-        <router-link to="/" class="nav__logo">
-            <salary-icon></salary-icon>
-            <span class="nav__logo-name">POLAHRIS</span>
-        </router-link>
-        <div class="nav__menu">
-            <div class="nav__list">
-                <router-link to="/dashboard" class="nav__link">
-                    <i class="mdi mdi-chart-bar nav__icon"></i>
-                    <span class="nav__name">Dashboard</span>
+    <div class="nav">
+        <nav class="nav__container">
+            <div>
+                <router-link to="/" class="nav__logo">
+                    <salary-icon></salary-icon>
+                    <span class="nav__logo-name">POLAHRIS</span>
                 </router-link>
+                <div class="nav__list">
+                    <router-link to="/dashboard" class="nav__link">
+                        <i class="mdi mdi-chart-bar nav__icon"></i>
+                        <span class="nav__name">Dashboard</span>
+                    </router-link>
+                    <div class="nav__items">
+                        <h3 class="nav__subtitle">Management</h3>
+                        <div class="nav__dropdown">
+                            <a class="nav__link">
+                                <i class="mdi mdi-account-group nav__icon"></i>
+                                <span class="nav__name">Employee</span>
+                                <i class="mdi mdi-chevron-down nav__icon nav__dropdown-icon"></i>
+                            </a>
+                            <div class="nav__dropdown-collapse">
+                                <div class="nav__dropdown-content">
+                                    <router-link to="/employees" class="nav__dropdown-item">All Employees</router-link>
+                                    <router-link to="/employees/register" class="nav__dropdown-item">Register Employees</router-link>
+                                    <router-link to="/employees/import" class="nav__dropdown-item">Import Employees</router-link>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav__dropdown">
+                            <a class="nav__link">
+                                <i class="mdi mdi-calendar-clock nav__icon"></i>
+                                <span class="nav__name">Timekeeping</span>
+                                <i class="mdi mdi-chevron-down nav__icon nav__dropdown-icon"></i>
+                            </a>
+                            <div class="nav__dropdown-collapse">
+                                <div class="nav__dropdown-content">
+                                    <router-link to="/" class="nav__dropdown-item">Time In/Out</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Group</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Members</router-link>
+                                </div>
+                            </div>
+                        </div>
+                        <router-link to="/" class="nav__link">
+                            <i class="mdi mdi-cash-multiple nav__icon"></i>
+                            <span class="nav__name">Payroll</span>
+                        </router-link>
+                    </div>
 
-                <router-link to="/employees" class="nav__link">
-                    <i class="mdi mdi-account-group nav__icon"></i>
-                    <span class="nav__name">Employees</span>
-                </router-link>
-                
-                <a class="nav__link collapse" @click="toggleDropdown('dropdown1')">
-                    <i class="mdi mdi-calendar-clock nav__icon"></i>
-                    <span class="nav__name">Time Record</span>
-
-                    <i class="mdi mdi-chevron-down nav__icon collapse__link"></i>
-                    <ul class="collapse__menu" id="dropdown1">
-                        <router-link to="/" class="collapse__sublink">TimeInOut</router-link>
-                        <router-link to="/" class="collapse__sublink">Group</router-link>
-                        <router-link to="/" class="collapse__sublink">Members</router-link>
-                    </ul>
-                </a>
-
-                <router-link to="/" class="nav__link">
-                    <i class="mdi mdi-cash-multiple nav__icon"></i>
-                    <span class="nav__name">Payroll</span>
-                </router-link>
-
-                <router-link to="/" class="nav__link">
-                    <i class="mdi mdi-file-chart nav__icon"></i>
-                    <span class="nav__name">Reports</span>
-                </router-link>
-
-                <a to="/" class="nav__link collapse" @click="toggleDropdown('dropdown2')">
-                    <i class="mdi mdi-cog nav__icon"></i>
-                    <span class="nav__name">Settings</span>
-
-                    <i class="mdi mdi-chevron-down nav__icon collapse__link"></i>
-                    <ul class="collapse__menu" id="dropdown2">
-                        <router-link to="/" class="collapse__sublink">Company</router-link>
-                        <router-link to="/" class="collapse__sublink">Branch</router-link>
-                        <router-link to="/" class="collapse__sublink">Department</router-link>
-                        <router-link to="/" class="collapse__sublink">Holiday</router-link>
-                        <router-link to="/" class="collapse__sublink">Leaves</router-link>
-                        <router-link to="/" class="collapse__sublink">Loans</router-link>
-                    </ul>
-                </a>
+                    <div class="nav__items">
+                        <h3 class="nav__subtitle">Reports</h3>
+                        <router-link to="/" class="nav__link">
+                            <i class="mdi mdi-file-chart nav__icon"></i>
+                            <span class="nav__name">Monthly Report</span>
+                        </router-link>
+                        <router-link to="/" class="nav__link">
+                            <i class="mdi mdi-file-chart nav__icon"></i>
+                            <span class="nav__name">Annual Report</span>
+                        </router-link>
+                    </div>
+                    <div class="nav__items">
+                        <h3 class="nav__subtitle">General</h3>
+                        <div class="nav__dropdown">
+                            <a class="nav__link">
+                                <i class="mdi mdi-cog nav__icon"></i>
+                                <span class="nav__name">Settings</span>
+                                <i class="mdi mdi-chevron-down nav__icon nav__dropdown-icon"></i>
+                            </a>
+                            <div class="nav__dropdown-collapse">
+                                <div class="nav__dropdown-content">
+                                    <router-link to="/" class="nav__dropdown-item">Company</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Branch</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Department</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Holiday</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Leaves</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Loans</router-link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <a href="#" class="nav__link">
-            <i class="mdi mdi-logout nav__icon"></i>
-            <span class="nav__name">Log Out</span>
-        </a>
-    </nav>
+            <a class="nav__link">
+                <i class="mdi mdi-logout nav__icon"></i>
+                <span class="nav__name">Log Out</span>
+            </a>
+        </nav>
+    </div>
 </div>
 </template>
 
@@ -78,14 +105,5 @@ export default {
             type: Boolean
         }
     },
-
-    methods: {
-        toggleDropdown(id) {
-            const collapseMenu = document.getElementById(id);
-            collapseMenu.classList.toggle('expand'); 
-            const rotate = collapseMenu.previousElementSibling
-            rotate.classList.toggle('rotate')
-        }
-    }
 }
 </script>
