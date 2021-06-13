@@ -3,6 +3,8 @@
     class="l-navbar" 
     :class="{'show': toggleState}"
     id="nav-bar"
+    @mouseenter="addClass"
+    @mouseleave="removeClass"
 >
     <div class="nav">
         <nav class="nav__container">
@@ -41,17 +43,27 @@
                             <div class="nav__dropdown-collapse">
                                 <div class="nav__dropdown-content">
                                     <router-link to="/" class="nav__dropdown-item">Time In/Out</router-link>
-                                    <router-link to="/" class="nav__dropdown-item">Group</router-link>
-                                    <router-link to="/" class="nav__dropdown-item">Members</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Schedules</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Leaves</router-link>
                                 </div>
                             </div>
                         </div>
-                        <router-link to="/" class="nav__link">
-                            <i class="mdi mdi-cash-multiple nav__icon"></i>
-                            <span class="nav__name">Payroll</span>
-                        </router-link>
+                        <div class="nav__dropdown">
+                            <a class="nav__link">
+                                <i class="mdi mdi-cash-multiple nav__icon"></i>
+                                <span class="nav__name">Payroll</span>
+                                <i class="mdi mdi-chevron-down nav__icon nav__dropdown-icon"></i>
+                            </a>
+                            <div class="nav__dropdown-collapse">
+                                <div class="nav__dropdown-content">
+                                    <router-link to="/" class="nav__dropdown-item">Payroll Summary</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Compensations</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Deductions</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Loans</router-link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
                     <div class="nav__items">
                         <h3 class="nav__subtitle">Reports</h3>
                         <router-link to="/" class="nav__link">
@@ -77,8 +89,8 @@
                                     <router-link to="/" class="nav__dropdown-item">Branch</router-link>
                                     <router-link to="/" class="nav__dropdown-item">Department</router-link>
                                     <router-link to="/" class="nav__dropdown-item">Holiday</router-link>
-                                    <router-link to="/" class="nav__dropdown-item">Leaves</router-link>
-                                    <router-link to="/" class="nav__dropdown-item">Loans</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Employment Types</router-link>
+                                    <router-link to="/" class="nav__dropdown-item">Positions</router-link>
                                 </div>
                             </div>
                         </div>
@@ -105,5 +117,18 @@ export default {
             type: Boolean
         }
     },
+
+    methods: {
+        addClass(e) {
+            if (!e.target.classList.contains("show")) {
+                e.target.classList.add("show");
+            }
+        },
+        removeClass(e) {
+            if (e.target.classList.contains("show") && !this.toggleState) {
+                e.target.classList.remove("show");
+            }
+        }
+    }
 }
 </script>
