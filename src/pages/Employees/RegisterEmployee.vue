@@ -25,78 +25,64 @@
                         <h6 class="is-size-6 has-text-weight-light mb-4">Basic Information</h6>
                         <div class="columns">
                             <div class="column">
-                                <ValidationProvider name="Last Name" rules="required" v-slot="{ errors, valid }">
-                                    <b-field 
-                                        label="Last Name"
-                                        label-position="on-border" 
-                                        :type="{ 'is-danger': errors[0], 'is-success': valid }" 
-                                        :message="errors"
-                                    >
-                                        <b-input v-model="employee_details.last_name"></b-input>
-                                    </b-field>
-                                </ValidationProvider>
+                                <text-field
+                                    label-position="on-border"
+                                    label="Last Name"
+                                    v-model="employee_details.last_name"
+                                    rules="required"
+                                    mode="eager"
+                                ></text-field>
                             </div>
                             <div class="column">
-                                <ValidationProvider name="First Name" rules="required"  v-slot="{ errors, valid }">
-                                    <b-field 
-                                        label="First Name"
-                                        label-position="on-border" 
-                                        :type="{ 'is-danger': errors[0], 'is-success': valid }" 
-                                        :message="errors"
-                                    >
-                                        <b-input v-model="employee_details.first_name"></b-input>
-                                    </b-field>
-                                </ValidationProvider>
+                                <text-field
+                                    label-position="on-border"
+                                    label="First Name"
+                                    v-model="employee_details.first_name"
+                                    rules="required"
+                                    mode="eager"
+                                ></text-field>
                             </div>
                             <div class="column">
-                                <b-field
+                                <text-field
+                                    label-position="on-border"
                                     label="Middle Name"
-                                    label-position="on-border" 
-                                >
-                                    <b-input v-model="employee_details.middle_name"></b-input>
-                                </b-field>
+                                    v-model="employee_details.middle_name"
+                                    rules=""
+                                    mode="passive"
+                                ></text-field>
                             </div> 
                         </div>
 
                         <div class="columns">
                             <div class="column">
-                                <ValidationProvider name="Gender" rules="required" v-slot="{ errors, valid }">
-                                    <b-field 
-                                        label="Gender"
-                                        label-position="on-border" 
-                                        :type="{ 'is-danger': errors[0], 'is-success': valid }" 
-                                        :message="errors"
-                                    >
-                                        <b-select v-model="employee_details.gender" expanded>
-                                            <option value="">Select a gender</option>
-                                            <option value="1">Male</option>
-                                            <option value="2">Female</option>
-                                        </b-select>
-                                    </b-field>
-                                </ValidationProvider>
+                                <select-field
+                                    label-position="on-border"
+                                    label="Gender"
+                                    v-model="employee_details.gender"
+                                    rules="required"
+                                    mode="eager"
+                                    :options="GENDERS"
+                                ></select-field>
                             </div>
                             <div class="column">
-                                <ValidationProvider name="Civil Status" rules="required" v-slot="{ errors, valid }">
-                                    <b-field 
-                                        label="Civil Status"
-                                        label-position="on-border" 
-                                        :type="{ 'is-danger': errors[0], 'is-success': valid }" 
-                                        :message="errors"
-                                    >
-                                        <b-select v-model="employee_details.civil_status" expanded>
-                                            <option value="">Select civil status</option>
-                                            <option value="1">Single</option>
-                                            <option value="2">Married</option>
-                                            <option value="3">Widowed</option>
-                                            <option value="4">Separated</option>
-                                            <option value="5">Annulled</option>
-                                            <option value="6">Divorced</option>
-                                        </b-select>
-                                    </b-field>
-                                </ValidationProvider>
+                                <select-field
+                                    label-position="on-border"
+                                    label="Civil Status"
+                                    v-model="employee_details.civil_status"
+                                    rules="required"
+                                    mode="eager"
+                                    :options="CIVIL_STATUS"
+                                ></select-field>
                             </div>
                             <div class="column">
-                                <ValidationProvider name="Birthdate" rules="required" v-slot="{ errors, valid }">
+                                <date-picker-field
+                                    label-position="on-border"
+                                    label="Birthdate"
+                                    v-model="employee_details.birthdate"
+                                    rules="required"
+                                    mode="eager"
+                                ></date-picker-field>
+                                <!-- <ValidationProvider name="Birthdate" rules="required" v-slot="{ errors, valid }">
                                     <b-field 
                                         label="Birthdate"
                                         label-position="on-border" 
@@ -105,127 +91,112 @@
                                     >
                                         <b-datepicker v-model="employee_details.birthdate"></b-datepicker>
                                     </b-field>
-                                </ValidationProvider>
+                                </ValidationProvider> -->
                             </div>
                         </div>
 
                         <h6 class="is-size-6 has-text-weight-light mb-4">Contact No.</h6>
                         <div class="columns">
                             <div class="column">
-                                <ValidationProvider name="Contact No.1" rules="required" v-slot="{ errors, valid }">
-                                    <b-field 
-                                        label="Contact No.1"
-                                        label-position="on-border" 
-                                        :type="{ 'is-danger': errors[0], 'is-success': valid }" 
-                                        :message="errors"
-                                    >
-                                        <b-input v-model="employee_details.contact_no1"></b-input>
-                                    </b-field>
-                                </ValidationProvider>
+                                <text-field
+                                    label-position="on-border"
+                                    label="Contact No.1"
+                                    v-model="employee_details.contact_no1"
+                                    rules="required"
+                                    mode="eager"
+                                ></text-field>
                             </div>
                             <div class="column">
-                                <b-field 
+                                <text-field
+                                    label-position="on-border"
                                     label="Contact No.2"
-                                    label-position="on-border" 
-                                >
-                                    <b-input v-model="employee_details.contact_no2"></b-input>
-                                </b-field>
+                                    v-model="employee_details.contact_no2"
+                                    rules=""
+                                    mode="passive"
+                                ></text-field>
                             </div>
                             <div class="column">
-                                <b-field 
+                                <text-field
+                                    label-position="on-border"
                                     label="Contact No.3"
-                                    label-position="on-border" 
-                                >
-                                    <b-input v-model="employee_details.contact_no3"></b-input>
-                                </b-field>
+                                    v-model="employee_details.contact_no3"
+                                    rules=""
+                                    mode="passive"
+                                ></text-field>
                             </div>
                         </div>
 
                         <h6 class="is-size-6 has-text-weight-light mb-4">Basic Employment Information</h6>
                         <div class="columns">
                             <div class="column">
-                                <ValidationProvider name="Employment Type" rules="required" v-slot="{ errors, valid }">
-                                    <b-field 
-                                        label="Employment Type"
-                                        label-position="on-border" 
-                                        :type="{ 'is-danger': errors[0], 'is-success': valid }" 
-                                        :message="errors"
-                                    >
-                                        <b-select v-model="employee_details.employment_type" expanded>
-                                            <option value="">Select type</option>
-                                            <option value="1">Probationary</option>
-                                            <option value="2">Regular</option>
-                                        </b-select>
-                                    </b-field>
-                                </ValidationProvider>
+                                <select-field
+                                    label-position="on-border"
+                                    label="Employment Type"
+                                    v-model="employee_details.employment_type"
+                                    rules="required"
+                                    mode="eager"
+                                    :options="EMPLOYMENT_TYPES"
+                                ></select-field>
                             </div>
                             <div class="column">
-                                <ValidationProvider name="Position" rules="required" v-slot="{ errors, valid }">
-                                    <b-field 
-                                        label="Position"
-                                        label-position="on-border" 
-                                        :type="{ 'is-danger': errors[0], 'is-success': valid }" 
-                                        :message="errors"
-                                    >
-                                        <b-select v-model="employee_details.position" expanded>
-                                            <option value="">Select type</option>
-                                            <option value="1">IT Staff</option>
-                                            <option value="2">Office Staff</option>
-                                        </b-select>
-                                    </b-field>
-                                </ValidationProvider>
+                                <select-field
+                                    label-position="on-border"
+                                    label="Position"
+                                    v-model="employee_details.position"
+                                    rules="required"
+                                    mode="eager"
+                                    :options="POSITIONS"
+                                ></select-field>
                             </div>
                             <div class="column">
-                                <ValidationProvider name="Department" rules="required" v-slot="{ errors, valid }">
-                                    <b-field 
-                                        label="Department"
-                                        label-position="on-border" 
-                                        :type="{ 'is-danger': errors[0], 'is-success': valid }" 
-                                        :message="errors"
-                                    >
-                                        <b-select v-model="employee_details.department" expanded>
-                                            <option value="">Select type</option>
-                                            <option value="1">HR Department</option>
-                                            <option value="2">IT Department</option>
-                                        </b-select>
-                                    </b-field>
-                                </ValidationProvider>
+                                <select-field
+                                    label-position="on-border"
+                                    label="Department"
+                                    v-model="employee_details.department"
+                                    rules="required"
+                                    mode="eager"
+                                    :options="DEPARTMENTS"
+                                ></select-field>
                             </div>
                         </div>
 
                         <h6 class="is-size-6 has-text-weight-light mb-4">Government ID's</h6>
                         <div class="columns">
                             <div class="column">
-                                <b-field 
+                                <text-field
+                                    label-position="on-border"
                                     label="SSS"
-                                    label-position="on-border" 
-                                >
-                                    <b-input v-model="employee_details.sss"></b-input>
-                                </b-field>
+                                    v-model="employee_details.sss"
+                                    rules=""
+                                    mode="passive"
+                                ></text-field>
                             </div>
                             <div class="column">
-                                <b-field 
+                                <text-field
+                                    label-position="on-border"
                                     label="PhilHealth"
-                                    label-position="on-border" 
-                                >
-                                    <b-input v-model="employee_details.philhealth"></b-input>
-                                </b-field>
+                                    v-model="employee_details.philhealth"
+                                    rules=""
+                                    mode="passive"
+                                ></text-field>
                             </div>
                             <div class="column">
-                                <b-field 
+                                <text-field
+                                    label-position="on-border"
                                     label="HDMF"
-                                    label-position="on-border" 
-                                >
-                                    <b-input v-model="employee_details.hdmf"></b-input>
-                                </b-field>
+                                    v-model="employee_details.hdmf"
+                                    rules=""
+                                    mode="passive"
+                                ></text-field>
                             </div>
                             <div class="column">
-                                <b-field 
+                                <text-field
+                                    label-position="on-border"
                                     label="TIN"
-                                    label-position="on-border" 
-                                >
-                                    <b-input v-model="employee_details.tin"></b-input>
-                                </b-field>
+                                    v-model="employee_details.tin"
+                                    rules=""
+                                    mode="passive"
+                                ></text-field>
                             </div>
                         </div>
 
@@ -260,36 +231,36 @@
                             <div class="content">
                                 <div class="columns">
                                     <div class="column">
-                                        <b-field 
+                                        <text-field
+                                            label-position="on-border"
                                             label="Street/House/Building"
-                                            label-position="on-border" 
-                                        >
-                                            <b-input></b-input>
-                                        </b-field>
+                                            rules=""
+                                            mode="passive"
+                                        ></text-field>
                                     </div>
                                     <div class="column">
-                                        <b-field 
+                                        <text-field
+                                            label-position="on-border"
                                             label="Barangay"
-                                            label-position="on-border" 
-                                        >
-                                            <b-input></b-input>
-                                        </b-field>
+                                            rules=""
+                                            mode="passive"
+                                        ></text-field>
                                     </div>
                                     <div class="column">
-                                        <b-field 
+                                        <text-field
+                                            label-position="on-border"
                                             label="City/Municipality"
-                                            label-position="on-border" 
-                                        >
-                                            <b-input></b-input>
-                                        </b-field>
+                                            rules=""
+                                            mode="passive"
+                                        ></text-field>
                                     </div>
                                     <div class="column">
-                                        <b-field 
+                                        <text-field
+                                            label-position="on-border"
                                             label="Province/State"
-                                            label-position="on-border" 
-                                        >
-                                            <b-input></b-input>
-                                        </b-field>
+                                            rules=""
+                                            mode="passive"
+                                        ></text-field>
                                     </div>
                                 </div>
                             </div>
@@ -315,34 +286,33 @@
                             <div class="content">
                                 <div class="columns">
                                     <div class="column">
-                                        <b-field 
+                                        <text-field
+                                            label-position="on-border"
                                             label="School Name"
-                                            label-position="on-border" 
-                                        >
-                                            <b-input></b-input>
-                                        </b-field>
+                                            rules=""
+                                            mode="passive"
+                                        ></text-field>
                                     </div>
                                     <div class="column">
-                                        <b-field 
+                                        <text-field
+                                            label-position="on-border"
                                             label="Level/Degree/Major"
-                                            label-position="on-border" 
-                                        >
-                                            <b-input></b-input>
-                                        </b-field>
+                                            rules=""
+                                            mode="passive"
+                                        ></text-field>
                                     </div>
                                     <div class="column">
-                                        <b-field 
+                                        <text-field
+                                            label-position="on-border"
                                             label="Inclusive Dates"
-                                            label-position="on-border" 
-                                        >
-                                            <b-input></b-input>
-                                        </b-field>
+                                            rules=""
+                                            mode="passive"
+                                        ></text-field>
                                     </div>
                                 </div>
                             </div>
                         </b-collapse>
                         <!-- Educational Attainment -->
-
 
                         <b-button 
                             native-type="submit" 
@@ -361,6 +331,8 @@
 </template>
 
 <script>
+import {GENDERS,CIVIL_STATUS,EMPLOYMENT_TYPES,POSITIONS,DEPARTMENTS} from './../../../core/constants/index';
+
 export default {
     components: {
         MainLayout: () => import("@/components/layouts/MainLayout.vue"),
@@ -368,56 +340,39 @@ export default {
 
     data() {
         return {
+            GENDERS: GENDERS,
+            CIVIL_STATUS: CIVIL_STATUS,
+            EMPLOYMENT_TYPES: EMPLOYMENT_TYPES,
+            POSITIONS: POSITIONS,
+            DEPARTMENTS: DEPARTMENTS,
             employee_details:{
                 last_name: "",
                 first_name: "",
                 middle_name: "",
                 gender: "",
-                birthdate: null,
-                birthplace: "",
                 civil_status: "",
+                birthdate: null,
+                // Contact
                 contact_no1: "",
                 contact_no2: "",
                 contact_no3: "",
+                // Employment
+                employment_type:"",
+                position: "",
+                department:"",
+                // Government ID
                 sss: "",
                 philhealth: "",
                 hdmf: "",
                 tin: "",
                 profile_photo: null,
-                //Employment
-                company:"",
-                department:"",
-                payroll_group:"",
-                employment_type:"",
-                payroll_type:"",
-                pay_period:"",
-                designation:"",
-                manager:"",
-                schedule:"",
-                schedule_type:"",
-                exempt_type:"",
-                monthly_rate:"",
-                work_hours:"",
-                hiring_date:null,
-                resignation_date:null,
-                effectivity_date:null,
-                remark:"",
-                note:"",
-                approver:"",
-                search_company:"",
-                search_department:"",
-                search_payroll_group:"",
-                search_designation:"",
-                search_manager:"",
-                search_schedule:"",
-                search_approver:"",
             },
         }
     },
 
     methods:{
         save() {
-            console.log('form saved');
+            console.log(this.employee_details);
         },
         resetForm() {
             requestAnimationFrame(() => {
