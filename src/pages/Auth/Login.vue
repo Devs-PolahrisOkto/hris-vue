@@ -60,7 +60,7 @@ export default {
         }),
         async handleLogin() {
             await this.login(this.form);
-            console.log('logged in')
+            this.$router.push({name: 'Dashboard'});
         }
     }
 }
