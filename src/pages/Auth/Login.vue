@@ -2,12 +2,11 @@
 <auth-layout>
     <form class="card" @submit.prevent="handleLogin">
         <header class="card-header has-background-light p-2">
-            <p class="card-header-title is-flex is-justify-content-space-between">
+            <p class="card-header-title">
                 <span>
                     <b-icon size="is-small" icon="lock" class="mr-2"></b-icon>
                     <span class="has-text-weight-medium">Login</span>
                 </span>
-                <b-button tag="router-link" to="/dashboard" size="is-small">Dashboard</b-button>
             </p>
         </header>
         <div class="card-content">
