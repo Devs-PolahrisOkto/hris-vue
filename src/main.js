@@ -7,6 +7,8 @@ require('./plugins');
 
 import '@/scss/base.scss';
 
+import '@/api';
+
 Vue.config.productionTip = false;
 
 new Vue({
