@@ -1,6 +1,6 @@
 <template>
 <auth-layout>
-    <form class="card" @submit.prevent="login">
+    <form class="card" @submit.prevent="handleLogin">
         <header class="card-header has-background-light p-2">
             <p class="card-header-title is-flex is-justify-content-space-between">
                 <span>
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex';
+
 export default {
     components: {
         AuthLayout: () => import("@/components/layouts/AuthLayout.vue"),
@@ -46,15 +48,20 @@ export default {
     data() {
         return {
             form: {
-                email: '',
-                password: '',
+                email: 'test@test.com',
+                password: 'password',
+                device_name: "kuyabixby"
             }
         }
     },
 
     methods: {
-        login() {
-            console.log(this.form)
+        ...mapActions({
+            login: 'authentication/login',
+        }),
+        async handleLogin() {
+            await this.login(this.form);
+            console.log('logged in')
         }
     }
 }
