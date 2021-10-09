@@ -17,6 +17,7 @@
                         v-model="form.email"
                         rules="required"
                         mode="eager"
+                        field-class="mb-5"
                     ></text-field>
                     <text-field
                         label="Password"
@@ -24,6 +25,7 @@
                         v-model="form.password"
                         rules="required"
                         mode="eager"
+                        field-class="mb-5"
                     ></text-field>
                     <b-field>
                         <b-checkbox>Remember Me</b-checkbox>
