@@ -12,8 +12,10 @@
         :message="errors"
     >
         <b-input 
+            :type="type"
             :value="value"
             @input.native="$emit('input', $event.target.value)"
+            :password-reveal="type ==='password'"
         ></b-input>
     </b-field>
 </ValidationProvider>
@@ -23,6 +25,10 @@
 export default {
     props: {
         label: String,
+        type: {
+            type: String,
+            default: 'text'
+        },
         value: String,
         labelPosition: String,
         mode: String,
