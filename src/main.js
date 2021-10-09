@@ -3,9 +3,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-require('./plugins');
-
+import '@/plugins';
 import '@/scss/base.scss';
+import './../core/components';
 
 import '@/api';
 
