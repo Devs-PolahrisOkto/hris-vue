@@ -1,6 +1,6 @@
 <template>
 <auth-layout>
-    <ValidationObserver ref="observer" v-slot="{ passes }">
+    <ValidationObserver ref="observer" v-slot="{ invalid, passes }">
         <form class="card" @submit.prevent="passes(handleLogin)">
             <header class="card-header has-background-light p-2">
                 <p class="card-header-title">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <footer class="card-footer is-flex is-flex-direction-column p-5">
-                <button class="button is-primary has-text-weight-semibold" expanded>LOGIN</button>
+                <button class="button is-primary has-text-weight-semibold" :disabled="invalid" expanded>LOGIN</button>
                 <b-button type="is-ghost" class="has-text-dark mt-2">Forgot Password ?</b-button>
             </footer>
         </form>
