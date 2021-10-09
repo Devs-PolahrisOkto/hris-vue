@@ -59,8 +59,8 @@ export default {
             login: 'authentication/login',
         }),
         async handleLogin() {
-            await this.login(this.form);
-            this.$router.push({name: 'Dashboard'});
+            const status = await this.login(this.form);
+            if (status) this.$router.push({name: 'Dashboard'});
         }
     }
 }
