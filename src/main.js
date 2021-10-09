@@ -7,6 +7,8 @@ import '@/plugins';
 import '@/scss/base.scss';
 import './../core/components';
 
+import '@/api';
+
 Vue.config.productionTip = false;
 
 new Vue({
