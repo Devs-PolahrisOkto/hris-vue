@@ -10,12 +10,14 @@
         :label-position="labelPosition" 
         :type="{ 'is-danger': errors[0], 'is-success': valid }" 
         :message="errors"
+        :class="fieldClass"
     >
         <b-input 
             :type="type"
             :value="value"
             @input.native="$emit('input', $event.target.value)"
             :password-reveal="type ==='password'"
+            :class="inputClass"
         ></b-input>
     </b-field>
 </ValidationProvider>
@@ -33,6 +35,8 @@ export default {
         labelPosition: String,
         mode: String,
         rules: String,
+        fieldClass: String,
+        inputClass: String,
     },
 }
 </script>
