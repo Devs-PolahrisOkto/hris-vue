@@ -26,9 +26,15 @@ const mutations = {
 
 const actions = {
     async login({commit}, payload) {
-        const {token, user} = await client.login(payload);
-        commit('SET_AUTH_TOKEN', token);
-        commit('SET_AUTH_USER', user);
+        const {status, data: {token, user}} = await client.login(payload);
+        if(status !== 200) {
+            console.error('login failed');
+            return false;
+        } else {
+            commit('SET_AUTH_TOKEN', token);
+            commit('SET_AUTH_USER', user);
+            return true;
+        }
     },
     logout({commit}) {
         commit('CLEAR_AUTH_USER');
