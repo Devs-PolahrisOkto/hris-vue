@@ -331,7 +331,13 @@
 </template>
 
 <script>
-import {GENDERS,CIVIL_STATUS,EMPLOYMENT_TYPES,POSITIONS,DEPARTMENTS} from './../../../core/constants/index';
+import {
+    GENDERS,
+    CIVIL_STATUS,
+    EMPLOYMENT_TYPES,
+    POSITIONS,
+    DEPARTMENTS
+} from '@/constants/index';
 
 export default {
     components: {

@@ -6,7 +6,7 @@ import store from './store';
 require('./plugins');
 
 import '@/scss/base.scss';
-import './../core';
+import './../core/components';
 
 Vue.config.productionTip = false;
 
