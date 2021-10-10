@@ -100,13 +100,13 @@
 export default {
     components: {
         MainLayout: () => import("@/layouts/MainLayout.vue"),
-        SimpleWidget: () => import("@/components/widgets/SimpleWidget.vue"),
-        ChartWidget1: () => import("@/components/widgets/ChartWidget1.vue"),
-        ChartWidget2: () => import("@/components/widgets/ChartWidget2.vue"),
-        ChartWidget3: () => import("@/components/widgets/ChartWidget3.vue"),
-        PayrollChart: () => import("@/components/charts/PayrollChart.vue"),
-        PayrollMiniChart: () => import("@/components/charts/PayrollMiniChart.vue"),
-        ActiveEmployees: () => import("@/pages/Dashboard/ActiveEmployees.vue"),
+        SimpleWidget: () => import("@/components/Dashboard/Widgets/SimpleWidget.vue"),
+        ChartWidget1: () => import("@/components/Dashboard/Widgets/ChartWidget1.vue"),
+        ChartWidget2: () => import("@/components/Dashboard/Widgets/ChartWidget2.vue"),
+        ChartWidget3: () => import("@/components/Dashboard/Widgets/ChartWidget3.vue"),
+        PayrollChart: () => import("@/components/Dashboard/Charts/PayrollChart.vue"),
+        PayrollMiniChart: () => import("@/components/Dashboard/Charts/PayrollMiniChart.vue"),
+        ActiveEmployees: () => import("@/components/Dashboard/Tables/ActiveEmployees.vue"),
     },
 
     data() {
