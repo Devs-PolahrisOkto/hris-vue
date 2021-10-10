@@ -49,11 +49,11 @@
                     <b-tab-item label="Documents">
                         <personal-documents></personal-documents>
                     </b-tab-item>
-                    <b-tab-item label="Payroll">
-                        <payroll-record></payroll-record>
-                    </b-tab-item>
                     <b-tab-item label="Timekeeping">
                         <timekeeping-record></timekeeping-record>
+                    </b-tab-item>
+                    <b-tab-item label="Payroll">
+                        <payroll-record></payroll-record>
                     </b-tab-item>
                 </b-tabs>
             </div>
@@ -79,3 +79,9 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+/deep/ .tab-content {
+    padding: 1rem 0;
+}
+</style>
