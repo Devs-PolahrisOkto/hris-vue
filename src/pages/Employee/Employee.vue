@@ -44,19 +44,16 @@
             <div class="column is-9">
                 <b-tabs v-model="activeTab">
                     <b-tab-item label="Personal">
-                        personal data
+                        <personal-data></personal-data>
                     </b-tab-item>
-
                     <b-tab-item label="Documents">
-                        documents
+                        <personal-documents></personal-documents>
                     </b-tab-item>
-
                     <b-tab-item label="Payroll">
-                        payroll record
+                        <payroll-record></payroll-record>
                     </b-tab-item>
-
                     <b-tab-item label="Timekeeping">
-                        Timekeeping
+                        <timekeeping-record></timekeeping-record>
                     </b-tab-item>
                 </b-tabs>
             </div>
@@ -69,6 +66,10 @@
 export default {
     components: {
         MainLayout: () => import("@/components/layouts/MainLayout.vue"),
+        PersonalData: () => import("@/components/Employee/Personal/PersonalData.vue"),
+        PersonalDocuments: () => import("@/components/Employee/Documents/Documents.vue"),
+        PayrollRecord: () => import("@/components/Employee/Payroll/Payroll.vue"),
+        TimekeepingRecord: () => import("@/components/Employee/Timekeeping/Timekeeping.vue"),
     },
 
     data() {
