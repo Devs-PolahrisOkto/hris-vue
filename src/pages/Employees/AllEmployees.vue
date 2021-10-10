@@ -164,9 +164,9 @@
 export default {
     components: {
         MainLayout: () => import("@/layouts/MainLayout.vue"),
-        FilterModal: () => import("@/pages/Employees/FilterModal.vue"),
-        ColumnModal: () => import("@/pages/Employees/ColumnModal.vue"),
-        LayoutModal: () => import("@/pages/Employees/LayoutModal.vue"),
+        FilterModal: () => import("@/components/Employees/Modal/FilterModal.vue"),
+        ColumnModal: () => import("@/components/Employees/Modal/ColumnModal.vue"),
+        LayoutModal: () => import("@/components/Employees/Modal/LayoutModal.vue"),
     },
 
     data() {
