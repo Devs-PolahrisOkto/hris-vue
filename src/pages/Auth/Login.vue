@@ -46,7 +46,7 @@ import {mapActions} from 'vuex';
 
 export default {
     components: {
-        AuthLayout: () => import("@/components/layouts/AuthLayout.vue"),
+        AuthLayout: () => import("@/layouts/AuthLayout.vue"),
     },
 
     data() {

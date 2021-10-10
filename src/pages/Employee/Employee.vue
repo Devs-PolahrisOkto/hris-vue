@@ -65,7 +65,7 @@
 <script>
 export default {
     components: {
-        MainLayout: () => import("@/components/layouts/MainLayout.vue"),
+        MainLayout: () => import("@/layouts/MainLayout.vue"),
         PersonalData: () => import("@/components/Employee/Personal/PersonalData.vue"),
         PersonalDocuments: () => import("@/components/Employee/Documents/Documents.vue"),
         PayrollRecord: () => import("@/components/Employee/Payroll/Payroll.vue"),

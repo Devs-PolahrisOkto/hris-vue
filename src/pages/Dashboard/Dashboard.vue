@@ -99,7 +99,7 @@
 
 export default {
     components: {
-        MainLayout: () => import("@/components/layouts/MainLayout.vue"),
+        MainLayout: () => import("@/layouts/MainLayout.vue"),
         SimpleWidget: () => import("@/components/widgets/SimpleWidget.vue"),
         ChartWidget1: () => import("@/components/widgets/ChartWidget1.vue"),
         ChartWidget2: () => import("@/components/widgets/ChartWidget2.vue"),

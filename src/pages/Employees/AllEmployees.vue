@@ -163,7 +163,7 @@
 
 export default {
     components: {
-        MainLayout: () => import("@/components/layouts/MainLayout.vue"),
+        MainLayout: () => import("@/layouts/MainLayout.vue"),
         FilterModal: () => import("@/pages/Employees/FilterModal.vue"),
         ColumnModal: () => import("@/pages/Employees/ColumnModal.vue"),
         LayoutModal: () => import("@/pages/Employees/LayoutModal.vue"),
