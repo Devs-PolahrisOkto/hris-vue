@@ -81,8 +81,14 @@
                 </b-table-column>
             </template>
 
-            <b-table-column field="option">
-                <b-button size="is-small" type="is-primary" icon-right="eye" />
+            <b-table-column field="option" v-slot="props">
+                <b-button 
+                    size="is-small" 
+                    type="is-primary" 
+                    icon-right="eye" 
+                    tag="router-link"
+                    :to="`/employees/${props.row.id}`"
+                />
             </b-table-column>
 
             <template #empty>
@@ -101,7 +107,7 @@
                     <article class="media has-background-white p-4">
                         <figure class="media-left">
                             <p class="image is-128x128">
-                            <img src="https://bulma.io/images/placeholders/128x128.png">
+                                <img src="https://bulma.io/images/placeholders/128x128.png">
                             </p>
                         </figure>
                         <div class="media-content">
@@ -111,7 +117,13 @@
                             <h6 class="is-size-6">{{ item.department }}</h6>
                         </div>
                         <div class="media-right">
-                            <b-button size="is-small" type="is-primary" icon-right="eye" />
+                            <b-button 
+                                size="is-small" 
+                                type="is-primary" 
+                                icon-right="eye" 
+                                tag="router-link"
+                                :to="`/employees/${item.id}`"
+                            />
                         </div>
                     </article>
                 </div>
@@ -151,10 +163,10 @@
 
 export default {
     components: {
-        MainLayout: () => import("@/components/layouts/MainLayout.vue"),
-        FilterModal: () => import("@/pages/Employees/FilterModal.vue"),
-        ColumnModal: () => import("@/pages/Employees/ColumnModal.vue"),
-        LayoutModal: () => import("@/pages/Employees/LayoutModal.vue"),
+        MainLayout: () => import("@/layouts/MainLayout.vue"),
+        FilterModal: () => import("@/components/Employees/Modal/FilterModal.vue"),
+        ColumnModal: () => import("@/components/Employees/Modal/ColumnModal.vue"),
+        LayoutModal: () => import("@/components/Employees/Modal/LayoutModal.vue"),
     },
 
     data() {

@@ -109,7 +109,7 @@
 <script>
 export default {
     components: {
-        SalaryIcon: () => import("@/components/icons/SalaryIcon.vue"),
+        SalaryIcon: () => import("@/components/Icons/SalaryIcon.vue"),
     },
 
     props: {

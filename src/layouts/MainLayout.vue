@@ -16,8 +16,8 @@
 <script>
 export default {
     components: {
-        TopNav: () => import("@/components/partials/TopNav.vue"),
-        SideNav: () => import("@/components/partials/SideNav.vue"),
+        TopNav: () => import("@/partials/TopNav.vue"),
+        SideNav: () => import("@/partials/SideNav.vue"),
     },
 
     data() {

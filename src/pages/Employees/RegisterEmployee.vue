@@ -341,7 +341,7 @@ import {
 
 export default {
     components: {
-        MainLayout: () => import("@/components/layouts/MainLayout.vue"),
+        MainLayout: () => import("@/layouts/MainLayout.vue"),
     },
 
     data() {
