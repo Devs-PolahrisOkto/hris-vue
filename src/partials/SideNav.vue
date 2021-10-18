@@ -87,7 +87,7 @@
                                 <div class="nav__dropdown-content">
                                     <router-link to="/companies" class="nav__dropdown-item">Company</router-link>
                                     <router-link to="/" class="nav__dropdown-item">Departments</router-link>
-                                    <router-link to="/" class="nav__dropdown-item">Positions</router-link>
+                                    <router-link to="/positions" class="nav__dropdown-item">Positions</router-link>
                                     <router-link to="/employment-types" class="nav__dropdown-item">Employment Types</router-link>
                                 </div>
                             </div>
