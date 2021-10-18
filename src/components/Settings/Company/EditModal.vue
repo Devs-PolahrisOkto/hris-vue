@@ -5,6 +5,7 @@
     :can-cancel="['x']"
 >
     <modal-form 
+        :modal-form="companyForm"
         @submit="update"
         @close="$emit('close')"
     >
@@ -16,6 +17,8 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+
 export default {
     components: {
         ModalForm: () => import("@/components/Settings/Common/Form.vue"),
@@ -26,6 +29,13 @@ export default {
             type: Boolean
         },
     },
+
+    computed: {
+        ...mapGetters({
+            companyForm: 'company/companyForm'
+        })
+    },
+
 
     methods: {
         update(form) {
