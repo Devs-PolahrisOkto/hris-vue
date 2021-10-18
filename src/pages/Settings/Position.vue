@@ -5,7 +5,7 @@
 <nav class="breadcrumb px-5" aria-label="breadcrumbs">
   <ul class="px-3 pt-3">
     <li><a href="#">Admin</a></li>
-    <li class="is-active"><a href="#" aria-current="page">Employment Types</a></li>
+    <li class="is-active"><a href="#" aria-current="page">Positions</a></li>
   </ul>
 </nav>
 <!-- End Breadcrumb -->
@@ -19,7 +19,7 @@
           type="search"
           icon="magnify">
         </b-input>
-        <b-tooltip label="Add Employment Type">
+        <b-tooltip label="Add Position">
           <b-button 
             icon-right="plus" 
             class="mr-3" 
@@ -28,7 +28,7 @@
         </b-tooltip>
       </div>
       <b-table
-        :data="isEmpty ? [] : employmentTypes"
+        :data="isEmpty ? [] : positions"
         :striped="isStriped"
         :hoverable="isHoverable"
         :mobile-cards="hasMobileCards"
@@ -78,15 +78,15 @@
   </div>
 
   <!-- Start Modals -->
-  <add-employment-type-modal 
-    :active="addEmploymentTypeModal"
-    @close="addEmploymentTypeModal = !addEmploymentTypeModal"
-  ></add-employment-type-modal>
+  <add-position-modal 
+    :active="addPositionModal"
+    @close="addPositionModal = !addPositionModal"
+  ></add-position-modal>
 
-  <edit-employment-type-modal 
-    :active="editEmploymentTypeModal"
-    @close="editEmploymentTypeModal = !editEmploymentTypeModal"
-  ></edit-employment-type-modal>
+  <edit-position-modal 
+    :active="editPositionModal"
+    @close="editPositionModal = !editPositionModal"
+  ></edit-position-modal>
   <!-- End Modals -->
 </div>
 
@@ -99,8 +99,8 @@ import {mapActions, mapGetters} from 'vuex';
 export default {
   components: {
     MainLayout: () => import("@/layouts/MainLayout.vue"),
-    AddEmploymentTypeModal: () => import("@/components/Settings/EmploymentType/AddModal.vue"),
-    EditEmploymentTypeModal: () => import("@/components/Settings/EmploymentType/EditModal.vue"),
+    AddPositionModal: () => import("@/components/Settings/Position/AddModal.vue"),
+    EditPositionModal: () => import("@/components/Settings/Position/EditModal.vue"),
   },
 
   data() {
@@ -123,20 +123,20 @@ export default {
       sortIconSize: 'is-small',
       currentPage: 1,
       perPage: 10,
-      addEmploymentTypeModal: false,
-      editEmploymentTypeModal: false,
+      addPositionModal: false,
+      editPositionModal: false,
     }
   },
 
   computed: {
     ...mapGetters({
-      employmentTypes: 'employmentType/list'
+      positions: 'position/list'
     })
   },
 
   methods: {
     ...mapActions({
-      setForm: 'employmentType/setForm'
+      setForm: 'position/setForm'
     }),
     add() {
       const company = {
@@ -144,11 +144,11 @@ export default {
         description: ''
       }
       this.setForm(company);
-      this.addEmploymentTypeModal = true;
+      this.addPositionModal = true;
     },
     edit(company) {
       this.setForm(company);
-      this.editEmploymentTypeModal = true;
+      this.editPositionModal = true;
     }
   }
 }
