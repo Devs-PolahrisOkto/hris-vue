@@ -19,7 +19,7 @@
           type="search"
           icon="magnify">
         </b-input>
-        <b-tooltip label="Add Company">
+        <b-tooltip label="Add Employment Type">
           <b-button 
             icon-right="plus" 
             class="mr-3" 
