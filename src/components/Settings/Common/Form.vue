@@ -39,23 +39,18 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
-
 export default {
     props: {
-        company: Object,
+        modalForm: {
+            type: Object, 
+            default: () => {}
+        }
     },
 
     data() {
         return {
             form: {}
         }
-    },
-
-    computed: {
-        ...mapGetters({
-            companyForm: 'company/companyForm'
-        })
     },
 
     methods: {
@@ -65,7 +60,7 @@ export default {
     },
 
     mounted() {
-        this.form = {...this.companyForm};
+        this.form = {...this.modalForm};
     }
 }
 </script>

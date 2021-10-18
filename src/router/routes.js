@@ -53,6 +53,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "EmployeeProfile" */ '@/pages/Settings/Company.vue'),
         meta: { forAuth: true }
     },
+    { 
+        path: '/employment-types', 
+        name: 'EmploymentType', 
+        component: () => import(/* webpackChunkName: "EmploymentType" */ '@/pages/Settings/EmploymentType.vue'),
+        meta: { forAuth: true }
+    },
 ];
 
 export default routes;

@@ -5,12 +5,12 @@
     :can-cancel="['x']"
 >
     <modal-form 
-        :modal-form="companyForm"
-        @submit="update"
+        :modal-form="employmentTypeForm"
+        @submit="save"
         @close="$emit('close')"
     >
         <template v-slot:header-title>
-            Edit Company
+            Add Employment Type
         </template>
     </modal-form>
 </b-modal>
@@ -32,14 +32,13 @@ export default {
 
     computed: {
         ...mapGetters({
-            companyForm: 'company/companyForm'
+            employmentTypeForm: 'employmentType/employmentTypeForm'
         })
     },
 
-
     methods: {
-        update(form) {
-            console.log('update', form)
+        save(form) {
+            console.log('save', form);
         }
     }
 }
