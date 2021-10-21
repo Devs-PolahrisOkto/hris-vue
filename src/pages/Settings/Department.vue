@@ -5,7 +5,7 @@
 <nav class="breadcrumb px-5" aria-label="breadcrumbs">
   <ul class="px-3 pt-3">
     <li><a href="#">Admin</a></li>
-    <li class="is-active"><a href="#" aria-current="page">Positions</a></li>
+    <li class="is-active"><a href="#" aria-current="page">Departments</a></li>
   </ul>
 </nav>
 <!-- End Breadcrumb -->
@@ -19,7 +19,7 @@
           type="search"
           icon="magnify">
         </b-input>
-        <b-tooltip label="Add Position">
+        <b-tooltip label="Add Department">
           <b-button 
             icon-right="plus" 
             class="mr-3" 
@@ -28,7 +28,7 @@
         </b-tooltip>
       </div>
       <b-table
-        :data="isEmpty ? [] : positions"
+        :data="isEmpty ? [] : departments"
         :striped="isStriped"
         :hoverable="isHoverable"
         :mobile-cards="hasMobileCards"
@@ -78,15 +78,15 @@
   </div>
 
   <!-- Start Modals -->
-  <add-position-modal 
-    :active="addPositionModal"
-    @close="addPositionModal = !addPositionModal"
-  ></add-position-modal>
+  <add-department-modal 
+    :active="addDepartmentModal"
+    @close="addDepartmentModal = !addDepartmentModal"
+  ></add-department-modal>
 
-  <edit-position-modal 
-    :active="editPositionModal"
-    @close="editPositionModal = !editPositionModal"
-  ></edit-position-modal>
+  <edit-department-modal 
+    :active="editDepartmentModal"
+    @close="editDepartmentModal = !editDepartmentModal"
+  ></edit-department-modal>
   <!-- End Modals -->
 </div>
 
@@ -99,8 +99,8 @@ import {mapActions, mapGetters} from 'vuex';
 export default {
   components: {
     MainLayout: () => import("@/layouts/MainLayout.vue"),
-    AddPositionModal: () => import("@/components/Settings/Position/AddModal.vue"),
-    EditPositionModal: () => import("@/components/Settings/Position/EditModal.vue"),
+    AddDepartmentModal: () => import("@/components/Settings/Department/AddModal.vue"),
+    EditDepartmentModal: () => import("@/components/Settings/Department/EditModal.vue"),
   },
 
   data() {
@@ -123,32 +123,32 @@ export default {
       sortIconSize: 'is-small',
       currentPage: 1,
       perPage: 10,
-      addPositionModal: false,
-      editPositionModal: false,
+      addDepartmentModal: false,
+      editDepartmentModal: false,
     }
   },
 
   computed: {
     ...mapGetters({
-      positions: 'position/list'
+      departments: 'department/list'
     })
   },
 
   methods: {
     ...mapActions({
-      setForm: 'position/setForm'
+      setForm: 'department/setForm'
     }),
     add() {
-      const position = {
+      const department = {
         name: '',
         description: ''
       }
-      this.setForm(position);
-      this.addPositionModal = true;
+      this.setForm(department);
+      this.addDepartmentModal = true;
     },
-    edit(position) {
-      this.setForm(position);
-      this.editPositionModal = true;
+    edit(department) {
+      this.setForm(department);
+      this.editDepartmentModal = true;
     }
   }
 }
