@@ -139,15 +139,15 @@ export default {
       setForm: 'employmentType/setForm'
     }),
     add() {
-      const company = {
+      const employmentType = {
         name: '',
         description: ''
       }
-      this.setForm(company);
+      this.setForm(employmentType);
       this.addEmploymentTypeModal = true;
     },
-    edit(company) {
-      this.setForm(company);
+    edit(employmentType) {
+      this.setForm(employmentType);
       this.editEmploymentTypeModal = true;
     }
   }

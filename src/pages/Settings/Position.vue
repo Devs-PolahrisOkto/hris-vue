@@ -139,15 +139,15 @@ export default {
       setForm: 'position/setForm'
     }),
     add() {
-      const company = {
+      const position = {
         name: '',
         description: ''
       }
-      this.setForm(company);
+      this.setForm(position);
       this.addPositionModal = true;
     },
-    edit(company) {
-      this.setForm(company);
+    edit(position) {
+      this.setForm(position);
       this.editPositionModal = true;
     }
   }
