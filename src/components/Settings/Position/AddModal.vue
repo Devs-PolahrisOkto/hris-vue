@@ -1,45 +1,48 @@
 <template>
-<b-modal 
+  <b-modal 
     v-model="active" 
     :width="640"
     :can-cancel="['x']"
->
+  >
     <modal-form 
-        :modal-form="positionForm"
-        @submit="save"
-        @close="$emit('close')"
+      :modal-form="positionForm"
+      @submit="save"
+      @close="$emit('close')"
     >
-        <template v-slot:header-title>
-            Add Position
-        </template>
+      <template v-slot:header-title>
+        Add Position
+      </template>
     </modal-form>
-</b-modal>
+  </b-modal>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    components: {
-        ModalForm: () => import("@/components/Settings/Common/Form.vue"),
-    },
+  components: {
+    ModalForm: () => import("@/components/Settings/Common/Form.vue"),
+  },
 
-    props: {
-        active: {
-            type: Boolean
-        },
+  props: {
+    active: {
+      type: Boolean
     },
+  },
 
-    computed: {
-        ...mapGetters({
-            positionForm: 'position/positionForm'
-        })
-    },
+  computed: {
+    ...mapGetters({
+      positionForm: 'position/positionForm'
+    })
+  },
 
-    methods: {
-        save(form) {
-            console.log('save', form);
-        }
+  methods: {
+    ...mapActions({
+      savePosition: 'position/save',
+    }),
+    save(form) {
+      this.savePosition(form).then(this.$emit('close'));
     }
+  }
 }
 </script>
