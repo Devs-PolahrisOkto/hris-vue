@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" :class="{'mini': toggleState}">
+  <div class="sidebar" :class="{'mini': (toggleState || isMobile) }">
     <div class="logo-details">
       <salary-icon class="logo_icon"></salary-icon>
       <span class="logo_name">POLAHRIS</span>
@@ -93,10 +93,14 @@
 </template>
 
 <script>
+import Breakpoints from '@/mixins/breakpoints';
+
 export default {
   components: {
     SalaryIcon: () => import("@/components/Icons/SalaryIcon.vue"),
   },
+
+  mixins: [ Breakpoints ],
 
   props: {
     toggleState: {
@@ -109,6 +113,6 @@ export default {
       let arrowParent = e.target.parentElement.parentElement;
       arrowParent.classList.toggle("showMenu");
     }
-  }
+  },
 }
 </script>
