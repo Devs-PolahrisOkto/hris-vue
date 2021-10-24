@@ -52,7 +52,7 @@
           pointer-events: none;
 
           & .link_name {
-            font-size: 18px;
+            font-size: 16px;
             opacity: 1;
             display: block;
           }
@@ -159,7 +159,7 @@
         text-decoration: none;
 
         & .link_name {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 400;
           color: #ffffff;
         }
@@ -191,7 +191,7 @@
         &.blank {
           opacity: 1;
           pointer-events: auto;
-          padding: 7px 20px 7px 16px;
+          padding: 8.5px 20px 8.5px 16px;
           opacity: 0;
           pointer-events: none;
         }
@@ -237,12 +237,12 @@
       color: #ffffff;
       font-weight: 500;
       white-space: nowrap;
-      font-size: 12px;
+      font-size: 14px;
     }
 
     & .profile_name {
       color: #ffffff;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 500;
       white-space: nowrap;
     }

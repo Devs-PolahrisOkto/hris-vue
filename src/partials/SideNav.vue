@@ -83,7 +83,7 @@
           </div>
           <div class="name-job">
             <div class="profile_name">John Doe</div>
-            <div class="job">Web Designer</div>
+            <div class="job">Web Developer</div>
           </div>
           <i class="mdi mdi-logout log-out"></i>
         </div>
