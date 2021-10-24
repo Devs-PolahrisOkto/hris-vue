@@ -15,6 +15,7 @@
     <div class="container is-fluid pr-0">
       <div class="is-flex is-justify-content-space-between py-2">
         <b-input 
+          v-model="searchField"
           placeholder="Search..."
           type="search"
           icon="magnify">
@@ -28,7 +29,7 @@
         </b-tooltip>
       </div>
       <b-table
-        :data="isEmpty ? [] : companies"
+        :data="isEmpty ? [] : filteredCompanies"
         :striped="isStriped"
         :hoverable="isHoverable"
         :mobile-cards="hasMobileCards"
@@ -125,13 +126,19 @@ export default {
       perPage: 10,
       addCompanyModal: false,
       editCompanyModal: false,
+      searchField: ''
     }
   },
 
   computed: {
     ...mapGetters({
       companies: 'company/list'
-    })
+    }),
+    filteredCompanies() {
+      return this.companies.filter(company => {
+        return company.name.toLowerCase().includes(this.searchField.toLowerCase());
+      });
+    },
   },
 
   methods: {
