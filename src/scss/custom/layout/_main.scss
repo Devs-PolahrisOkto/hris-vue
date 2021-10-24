@@ -1,11 +1,14 @@
-/*content*/
-.main-content {
-    width: 100%;
-    margin-top: calc(var(--header-height) + 1.5rem);
-    padding-left: var(--nav-width);
-    transition: .5s;
+.main-section {
+  position: relative;
+  height: 100%;
+  left: 260px;
+  height: 100%;
+  width: calc(100% - 260px);
+  transition: all 0.5s ease;
 
-    &.show {
-        padding-left: calc(var(--nav-width) + 176px);
-    }
+  &__content {
+    width: 100%;
+    margin-top: var(--header-height);
+    padding-top: 24px;
+  }
 }

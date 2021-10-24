@@ -1,25 +1,24 @@
-/*topnav*/
-.header {
-    width: 100%;
-    height: var(--header-height);
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 1rem;
-    background-color: #fff;
-    z-index: 10;
-    transition: .5s;
+.topbar {
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  top: 0;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background-color: #fff;
+  z-index: 10;
+  transition: .5s;
 
-    &__toggle {
-        color: var(--dark-color);
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
+  &__toggle {
+    color: var(--dark-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
 
-    &.show {
-        padding-left: calc(var(--nav-width) + 188px);
-    }
+  &.show {
+    padding-left: calc(var(--nav-width) + 188px);
+  }
 }
