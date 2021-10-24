@@ -136,7 +136,8 @@ export default {
 
   methods: {
     ...mapActions({
-      setForm: 'company/setForm'
+      setForm: 'company/setForm',
+      getList: 'company/list',
     }),
     add() {
       const company = {
@@ -150,6 +151,10 @@ export default {
       this.setForm(company);
       this.editCompanyModal = true;
     }
+  },
+
+  created() {
+    this.getList();
   }
 }
 </script>
