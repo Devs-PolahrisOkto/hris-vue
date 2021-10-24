@@ -3,7 +3,12 @@ import axios from 'axios';
 class BaseClient {
 
   constructor() {
-    this.axios = axios.create();
+    this.axios = axios.create({
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        Accept: 'application/json'
+      }
+    });
     this.axios.interceptors.response.use(function (response) {
       const {headers: { authorization = "" }} = response;
       const authHeader = authorization.split(/\s+/);

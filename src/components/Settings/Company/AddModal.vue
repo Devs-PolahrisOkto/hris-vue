@@ -1,45 +1,48 @@
 <template>
-<b-modal 
+  <b-modal 
     v-model="active" 
     :width="640"
     :can-cancel="['x']"
->
+  >
     <modal-form 
-        :modal-form="companyForm"
-        @submit="save"
-        @close="$emit('close')"
+      :modal-form="companyForm"
+      @submit="save"
+      @close="$emit('close')"
     >
-        <template v-slot:header-title>
-            Add Company
-        </template>
+      <template v-slot:header-title>
+        Add Company
+      </template>
     </modal-form>
-</b-modal>
+  </b-modal>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    components: {
-        ModalForm: () => import("@/components/Settings/Common/Form.vue"),
-    },
+  components: {
+    ModalForm: () => import("@/components/Settings/Common/Form.vue"),
+  },
 
-    props: {
-        active: {
-            type: Boolean
-        },
+  props: {
+    active: {
+      type: Boolean
     },
+  },
 
-    computed: {
-        ...mapGetters({
-            companyForm: 'company/companyForm'
-        })
-    },
+  computed: {
+    ...mapGetters({
+      companyForm: 'company/companyForm',
+    })
+  },
 
-    methods: {
-        save(form) {
-            console.log('save', form);
-        }
+  methods: {
+    ...mapActions({
+      saveCompany: 'company/save',
+    }),
+    save(form) {
+      this.saveCompany(form).then(this.$emit('close'));
     }
+  },
 }
 </script>
