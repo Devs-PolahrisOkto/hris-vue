@@ -1,12 +1,12 @@
-.modal-content,
-.modal-card {
+.modal {
+  &-content {
     max-height: 100vh !important;
-}
-
-.modal-card {
+  }
+  &-card {
+    max-height: 100vh !important;
     width: auto !important;
-}
-
-.modal-close {
-    display: none !important;
+  }
+  &-close {
+    display: none !important;  
+  }
 }

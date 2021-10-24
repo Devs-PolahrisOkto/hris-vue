@@ -1,69 +1,9 @@
-/* media queries */
 @media screen and (min-width: 768px) {
-    body {
-        margin: calc(var(--header-height) + 1rem) 0 0 0;
-        padding-left: calc(var(--nav-width) + 2rem);
-    }
-
-    .header {
-        height: calc(var(--header-height) + 1rem);
-        padding: 0 2rem 0 calc(var(--nav-width) + 2rem);
-    }
-
-    .l-navbar {
-        left: 0;
-        padding: 1rem 0 0 0;
-
-        &.show {
-            width: calc(var(--nav-width) + 176px);
-        }
-    }
+  .topbar {
+    height: calc(var(--header-height) + 1rem);
+  }
 }
 
 @media screen and (max-width: 767px) {
-    .l-navbar {
-        padding: 1rem 0 0 0;
-
-        &.show {
-            left: 0;
-            padding-left: 0;
     
-            & .nav__subtitle {
-                display: none;
-            }
-    
-            & .nav__icon {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-    
-            & .nav__name {
-                display: none;
-            }
-    
-            & .nav__logo {
-                padding-left: 1.5rem;
-    
-                &-name {
-                    padding-left: 1rem;
-                }
-            }
-        }
-    }
-
-    .main-content {
-        padding-left: 0px !important;
-        margin-top: calc(var(--header-height) + .5rem) !important;
-
-        &.show {
-            padding-left: calc(var(--nav-width) + .5rem) !important;
-        }
-    }
-
-    .header {
-
-        &.show {
-            padding-left: calc(var(--nav-width) + 1rem);
-        }
-    }
 }
