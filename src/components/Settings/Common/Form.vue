@@ -1,5 +1,5 @@
 <template>
-<ValidationObserver ref="observer" v-slot="{ passes }">
+<ValidationObserver ref="observer" v-slot="{ invalid, passes }">
     <form @submit.prevent="passes(submit)">
         <div class="modal-card">
             <header class="modal-card-head is-flex is-justify-content-space-between">
@@ -29,6 +29,7 @@
                     label="Close"
                     @click="$emit('close')" />
                 <b-button
+                    :disabled="invalid"
                     native-type="submit" 
                     label="Save"
                     type="is-primary" />
