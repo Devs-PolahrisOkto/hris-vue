@@ -14,7 +14,8 @@
   <div class="column is-9">
     <div class="container is-fluid pr-0">
       <div class="is-flex is-justify-content-space-between py-2">
-        <b-input 
+        <b-input
+          v-model="searchField"
           placeholder="Search..."
           type="search"
           icon="magnify">
@@ -28,7 +29,7 @@
         </b-tooltip>
       </div>
       <b-table
-        :data="isEmpty ? [] : employmentTypes"
+        :data="isEmpty ? [] : filteredEmploymentTypes"
         :striped="isStriped"
         :hoverable="isHoverable"
         :mobile-cards="hasMobileCards"
@@ -125,18 +126,25 @@ export default {
       perPage: 10,
       addEmploymentTypeModal: false,
       editEmploymentTypeModal: false,
+      searchField: ''
     }
   },
 
   computed: {
     ...mapGetters({
       employmentTypes: 'employmentType/list'
-    })
+    }),
+    filteredEmploymentTypes() {
+      return this.employmentTypes.filter(employmentType => {
+        return employmentType.name.toLowerCase().includes(this.searchField.toLowerCase());
+      });
+    },
   },
 
   methods: {
     ...mapActions({
-      setForm: 'employmentType/setForm'
+      setForm: 'employmentType/setForm',
+      getList: 'employmentType/list',
     }),
     add() {
       const employmentType = {
@@ -150,6 +158,10 @@ export default {
       this.setForm(employmentType);
       this.editEmploymentTypeModal = true;
     }
+  },
+
+  created() {
+    this.getList();
   }
 }
 </script>
