@@ -1,45 +1,48 @@
 <template>
-<b-modal 
+  <b-modal 
     v-model="active" 
     :width="640"
     :can-cancel="['x']"
->
+  >
     <modal-form 
-        :modal-form="departmentForm"
-        @submit="save"
-        @close="$emit('close')"
+      :modal-form="departmentForm"
+      @submit="save"
+      @close="$emit('close')"
     >
-        <template v-slot:header-title>
-            Add Department
-        </template>
+      <template v-slot:header-title>
+        Add Department
+      </template>
     </modal-form>
-</b-modal>
+  </b-modal>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    components: {
-        ModalForm: () => import("@/components/Settings/Common/Form.vue"),
-    },
+  components: {
+    ModalForm: () => import("@/components/Settings/Common/Form.vue"),
+  },
 
-    props: {
-        active: {
-            type: Boolean
-        },
+  props: {
+    active: {
+      type: Boolean
     },
+  },
 
-    computed: {
-        ...mapGetters({
-            departmentForm: 'department/departmentForm'
-        })
-    },
+  computed: {
+    ...mapGetters({
+      departmentForm: 'department/departmentForm'
+    })
+  },
 
-    methods: {
-        save(form) {
-            console.log('save', form);
-        }
+  methods: {
+    ...mapActions({
+      saveDepartment: 'department/save',
+    }),
+    save(form) {
+      this.saveDepartment(form).then(this.$emit('close'));
     }
+  }
 }
 </script>

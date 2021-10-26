@@ -14,7 +14,8 @@
   <div class="column is-9">
     <div class="container is-fluid pr-0">
       <div class="is-flex is-justify-content-space-between py-2">
-        <b-input 
+        <b-input
+          v-model="searchField"
           placeholder="Search..."
           type="search"
           icon="magnify">
@@ -28,7 +29,7 @@
         </b-tooltip>
       </div>
       <b-table
-        :data="isEmpty ? [] : departments"
+        :data="isEmpty ? [] : filteredDepartments"
         :striped="isStriped"
         :hoverable="isHoverable"
         :mobile-cards="hasMobileCards"
@@ -125,18 +126,25 @@ export default {
       perPage: 10,
       addDepartmentModal: false,
       editDepartmentModal: false,
+      searchField: ''
     }
   },
 
   computed: {
     ...mapGetters({
       departments: 'department/list'
-    })
+    }),
+    filteredDepartments() {
+      return this.departments.filter(department => {
+        return department.name.toLowerCase().includes(this.searchField.toLowerCase());
+      });
+    },
   },
 
   methods: {
     ...mapActions({
-      setForm: 'department/setForm'
+      setForm: 'department/setForm',
+      getList: 'department/list',
     }),
     add() {
       const department = {
@@ -150,6 +158,10 @@ export default {
       this.setForm(department);
       this.editDepartmentModal = true;
     }
+  },
+
+  created() {
+    this.getList();
   }
 }
 </script>
