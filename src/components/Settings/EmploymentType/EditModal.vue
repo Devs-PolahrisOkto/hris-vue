@@ -1,45 +1,48 @@
 <template>
-<b-modal 
+  <b-modal 
     v-model="active" 
     :width="640"
     :can-cancel="['x']"
->
+  >
     <modal-form 
-        :modal-form="employmentTypeForm"
-        @submit="update"
-        @close="$emit('close')"
+      :modal-form="employmentTypeForm"
+      @submit="update"
+      @close="$emit('close')"
     >
-        <template v-slot:header-title>
-            Edit Employment Type
-        </template>
+      <template v-slot:header-title>
+        Edit Employment Type
+      </template>
     </modal-form>
-</b-modal>
+  </b-modal>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
-    components: {
-        ModalForm: () => import("@/components/Settings/Common/Form.vue"),
-    },
+  components: {
+    ModalForm: () => import("@/components/Settings/Common/Form.vue"),
+  },
 
-    props: {
-        active: {
-            type: Boolean
-        },
+  props: {
+    active: {
+      type: Boolean
     },
+  },
 
-    computed: {
-        ...mapGetters({
-            employmentTypeForm: 'employmentType/employmentTypeForm'
-        })
-    },
+  computed: {
+    ...mapGetters({
+      employmentTypeForm: 'employmentType/employmentTypeForm'
+    })
+  },
 
-    methods: {
-        update(form) {
-            console.log('update', form)
-        }
+  methods: {
+    ...mapActions({
+      updateEmploymentType: 'employmentType/update',
+    }),
+    update(form) {
+      this.updateEmploymentType(form).then(this.$emit('close'));
     }
+  }
 }
 </script>
