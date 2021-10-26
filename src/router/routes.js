@@ -71,6 +71,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "Department" */ '@/pages/Settings/Department.vue'),
         meta: { forAuth: true }
     },
+    { 
+        path: '/address-types', 
+        name: 'AddressType', 
+        component: () => import(/* webpackChunkName: "AddressType" */ '@/pages/Settings/AddressType.vue'),
+        meta: { forAuth: true }
+    },
 ];
 
 export default routes;
