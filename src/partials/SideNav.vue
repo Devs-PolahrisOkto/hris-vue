@@ -74,6 +74,7 @@
           <li><router-link to="/departments">Departments</router-link></li>
           <li><router-link to="/positions">Positions</router-link></li>
           <li><router-link to="/employment-types">Employment Types</router-link></li>
+          <li><router-link to="/address-types">Address Types</router-link></li>
         </ul>
       </li>
       <li>
