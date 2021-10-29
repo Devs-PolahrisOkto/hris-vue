@@ -83,13 +83,13 @@
       <li>
         <div class="profile-details">
           <div class="profile-content">
-            <img class="is-rounded" src="https://bulma.io/images/placeholders/24x24.png" alt="Profile">
+            <img class="is-rounded" :src="authUserAvatar" alt="Profile">
           </div>
           <div class="name-job">
-            <div class="profile_name">John Doe</div>
-            <div class="job">Web Developer</div>
+            <div class="profile_name">{{ authUserName }}</div>
+            <div class="job">{{ authUserEmail }}</div>
           </div>
-          <i class="mdi mdi-logout log-out"></i>
+          <a @click="handleLogout"><i class="mdi mdi-logout log-out"></i></a>
         </div>
       </li>
     </ul>
@@ -98,6 +98,7 @@
 
 <script>
 import Breakpoints from '@/mixins/breakpoints';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -112,13 +113,29 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters({
+      authUserObj: 'authentication/authUserObj',
+      authUserName: 'authentication/authUserName',
+      authUserAvatar: 'authentication/authUserAvatar',
+      authUserEmail: 'authentication/authUserEmail',
+    }),
+  },
+
   methods: {
+    ...mapActions({
+      logout: 'authentication/logout',
+    }),
     toggleDropdown(e) {
       let arrowParent = e.target.parentElement.parentElement;
       arrowParent.classList.toggle("showMenu");
     },
     isDropdownActive(parent) {
       return this.$router.currentRoute.meta.parent === parent;
+    },
+    async handleLogout() {
+      await this.logout();
+      this.$router.push({name: 'Login'});
     }
   },
 }
