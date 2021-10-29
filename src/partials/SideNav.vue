@@ -14,7 +14,7 @@
           <li><router-link to="/dashboard" class="link_name">Dashboard</router-link></li>
         </ul>
       </li>
-      <li>
+      <li :class="{'showMenu': isDropdownActive('employees')}">
         <div class="icon-link">
           <a>
             <i class="mdi mdi-account-group link_icon"></i>
@@ -60,7 +60,7 @@
           <li><router-link to="/">Loans</router-link></li>
         </ul>
       </li>
-      <li>
+      <li :class="{'showMenu': isDropdownActive('settings')}">
         <div class="icon-link">
           <a>
             <i class="mdi mdi-cog link_icon"></i>
@@ -69,15 +69,15 @@
           <i class="mdi mdi-chevron-down arrow" @click="toggleDropdown"></i>
         </div>
         <ul class="sub-menu">
-          <li><router-link to="/companies" class="link_name">Settings</router-link></li>
-          <li><router-link to="/companies">Company</router-link></li>
-          <li><router-link to="/departments">Departments</router-link></li>
-          <li><router-link to="/positions">Positions</router-link></li>
-          <li><router-link to="/employment-types">Employment Types</router-link></li>
-          <li><router-link to="/address-types">Address Types</router-link></li>
-          <li><router-link to="/document-types">Document Types</router-link></li>
-          <li><router-link to="/banks">Banks</router-link></li>
-          <li><router-link to="/civil-statuses">Civil Status</router-link></li>
+          <li><router-link to="/settings/companies" class="link_name">Settings</router-link></li>
+          <li><router-link to="/settings/companies">Company</router-link></li>
+          <li><router-link to="/settings/departments">Departments</router-link></li>
+          <li><router-link to="/settings/positions">Positions</router-link></li>
+          <li><router-link to="/settings/employment-types">Employment Types</router-link></li>
+          <li><router-link to="/settings/address-types">Address Types</router-link></li>
+          <li><router-link to="/settings/document-types">Document Types</router-link></li>
+          <li><router-link to="/settings/banks">Banks</router-link></li>
+          <li><router-link to="/settings/civil-statuses">Civil Status</router-link></li>
         </ul>
       </li>
       <li>
@@ -116,6 +116,9 @@ export default {
     toggleDropdown(e) {
       let arrowParent = e.target.parentElement.parentElement;
       arrowParent.classList.toggle("showMenu");
+    },
+    isDropdownActive(parent) {
+      return this.$router.currentRoute.meta.parent === parent;
     }
   },
 }
