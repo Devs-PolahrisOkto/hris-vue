@@ -77,6 +77,7 @@
           <li><router-link to="/address-types">Address Types</router-link></li>
           <li><router-link to="/document-types">Document Types</router-link></li>
           <li><router-link to="/banks">Banks</router-link></li>
+          <li><router-link to="/civil-statuses">Civil Status</router-link></li>
         </ul>
       </li>
       <li>
