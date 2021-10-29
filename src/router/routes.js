@@ -89,6 +89,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "Bank" */ '@/pages/Settings/Bank.vue'),
     meta: { forAuth: true }
   },
+  { 
+    path: '/civil-statuses', 
+    name: 'CivilStatus', 
+    component: () => import(/* webpackChunkName: "CivilStatus" */ '@/pages/Settings/CivilStatus.vue'),
+    meta: { forAuth: true }
+  },
 ];
 
 export default routes;
