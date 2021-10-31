@@ -8,8 +8,43 @@
   z-index: 40;
   transition: all 0.5s ease;
 
+  &.close {
+    width: 0px;
+
+    & ~ .main-section {
+      left: 0;
+      width: 100%;
+    }
+
+    & .logo-details .logo_icon {
+      left: 0;
+      transition-delay: 0s;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    & .profile-details {
+      left: 0;
+      transition-delay: 0s;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
   &.mini {
     width: 78px;
+
+    &.close {
+      left: 0;
+      transition-delay: 0s;
+      opacity: 0;
+      pointer-events: none;
+
+      & ~ .main-section {
+        left: 0;
+        width: 100%;
+      }
+    }
 
     & ~ .main-section {
       left: 78px;
@@ -79,7 +114,7 @@
         padding: 10px
       }
 
-      & .log-out, & .profile_name, & .job {
+      & .collapse, & .profile_name, & .job {
         display: none;
       }
     }
@@ -223,6 +258,7 @@
     background: #3c414b;
     padding: 6px 0;
     transition: all 0.5s ease;
+    cursor: pointer;
 
     & .profile-content {
       display: flex;
@@ -254,7 +290,7 @@
     }
   }
 
-  & .log-out {
+  & .collapse {
     font-size: 1.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
