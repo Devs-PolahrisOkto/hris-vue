@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" :class="{'mini': (sidebarMiniState || isMobile) }">
+  <div class="sidebar" :class="{'mini': (sidebarMiniState || isMobile), 'close': sidebarState }">
     <div class="logo-details">
       <salary-icon class="logo_icon"></salary-icon>
       <span class="logo_name">POLAHRIS</span>
@@ -112,6 +112,7 @@ export default {
       authUserName: 'authentication/authUserName',
       authUserAvatar: 'authentication/authUserAvatar',
       authUserEmail: 'authentication/authUserEmail',
+      sidebarState: 'navigation/sidebarState',
       sidebarMiniState: 'navigation/sidebarMiniState',
     }),
   },

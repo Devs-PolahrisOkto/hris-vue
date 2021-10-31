@@ -3,9 +3,8 @@
     class="topbar" 
     id="header"
   >
-    <div class="topbar__toggle" @click="toggleSidebarMini">
-      <i id="topbar-toggle" class="mdi mdi-menu-open" v-show="!sidebarMiniState"></i>
-      <i id="topbar-toggle" class="mdi mdi-backburger" v-show="sidebarMiniState"></i>
+    <div class="topbar__toggle" @click="toggleSidebar">
+      <i id="topbar-toggle" class="mdi mdi-menu"></i>
     </div>
     <div class="topbar__menu">
       <div class="dropdown is-right is-hoverable">
@@ -47,6 +46,7 @@ export default {
 
   methods: {
     ...mapActions({
+      toggleSidebar: 'navigation/toggleSidebar',
       toggleSidebarMini: 'navigation/toggleSidebarMini',
       logout: 'authentication/logout',
     }),
