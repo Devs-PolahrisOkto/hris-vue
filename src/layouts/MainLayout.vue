@@ -1,14 +1,8 @@
 <template>
   <div>
-    <side-nav
-      :toggle-state="toggleState"
-    ></side-nav>
-
+    <side-nav></side-nav>
     <div class="main-section">
-      <top-nav
-        :toggle-state="toggleState"
-        @toggle-sidenav="toggleSideNav"
-      ></top-nav>
+      <top-nav></top-nav>
       <div class="main-section__content">
         <slot></slot>
       </div>
@@ -22,17 +16,5 @@ export default {
     TopNav: () => import("@/partials/TopNav.vue"),
     SideNav: () => import("@/partials/SideNav.vue"),
   },
-
-  data() {
-    return {
-      toggleState: false,
-    }
-  },
-
-  methods: {
-    toggleSideNav() {
-      this.toggleState = !this.toggleState;      
-    }
-  }
 }
 </script>
