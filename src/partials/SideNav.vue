@@ -81,15 +81,14 @@
         </ul>
       </li>
       <li>
-        <div class="profile-details">
+        <div class="profile-details" @click="toggleSidebarMini">
           <div class="profile-content">
             <img class="is-rounded" :src="authUserAvatar" alt="Profile">
           </div>
           <div class="name-job">
             <div class="profile_name">{{ authUserName }}</div>
-            <div class="job">{{ authUserEmail }}</div>
           </div>
-          <a @click="handleLogout"><i class="mdi mdi-logout log-out"></i></a>
+          <a class="collapse"><i class="mdi mdi-chevron-double-left"></i></a>
         </div>
       </li>
     </ul>
@@ -120,6 +119,7 @@ export default {
   methods: {
     ...mapActions({
       logout: 'authentication/logout',
+      toggleSidebarMini: 'navigation/toggleSidebarMini',
     }),
     toggleDropdown(e) {
       let arrowParent = e.target.parentElement.parentElement;
