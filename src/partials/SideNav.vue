@@ -78,6 +78,7 @@
           <li><router-link to="/settings/document-types">Document Types</router-link></li>
           <li><router-link to="/settings/banks">Banks</router-link></li>
           <li><router-link to="/settings/civil-statuses">Civil Status</router-link></li>
+          <li><router-link to="/settings/genders">Gender</router-link></li>
         </ul>
       </li>
       <li>
