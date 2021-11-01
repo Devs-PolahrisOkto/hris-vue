@@ -131,6 +131,15 @@ const routes = [
       parent: 'settings'
     }
   },
+  { 
+    path: '/settings/genders', 
+    name: 'Gender', 
+    component: () => import(/* webpackChunkName: "Gender" */ '@/pages/Settings/Gender.vue'),
+    meta: { 
+      forAuth: true,
+      parent: 'settings'
+    }
+  },
 ];
 
 export default routes;
