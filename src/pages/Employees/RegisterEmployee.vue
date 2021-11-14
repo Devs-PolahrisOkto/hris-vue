@@ -27,7 +27,7 @@
                   <text-field
                     label-position="on-border"
                     label="Last Name"
-                    v-model="employee_details.last_name"
+                    v-model="employeeDetails.last_name"
                     rules="required"
                     mode="eager"
                   ></text-field>
@@ -36,7 +36,7 @@
                   <text-field
                     label-position="on-border"
                     label="First Name"
-                    v-model="employee_details.first_name"
+                    v-model="employeeDetails.first_name"
                     rules="required"
                     mode="eager"
                   ></text-field>
@@ -45,7 +45,7 @@
                   <text-field
                     label-position="on-border"
                     label="Middle Name"
-                    v-model="employee_details.middle_name"
+                    v-model="employeeDetails.middle_name"
                     rules=""
                     mode="passive"
                   ></text-field>
@@ -57,7 +57,7 @@
                   <select-field
                     label-position="on-border"
                     label="Gender"
-                    v-model="employee_details.gender"
+                    v-model="employeeDetails.gender"
                     rules="required"
                     mode="eager"
                     :options="gendersState"
@@ -67,7 +67,7 @@
                   <select-field
                     label-position="on-border"
                     label="Civil Status"
-                    v-model="employee_details.civil_status"
+                    v-model="employeeDetails.civil_status"
                     rules="required"
                     mode="eager"
                     :options="CIVIL_STATUS"
@@ -77,53 +77,49 @@
                   <date-picker-field
                     label-position="on-border"
                     label="Birthdate"
-                    v-model="employee_details.birthdate"
+                    v-model="employeeDetails.birthdate"
                     rules="required"
                     mode="eager"
                   ></date-picker-field>
-                  <!-- <ValidationProvider name="Birthdate" rules="required" v-slot="{ errors, valid }">
-                      <b-field 
-                          label="Birthdate"
-                          label-position="on-border" 
-                          :type="{ 'is-danger': errors[0], 'is-success': valid }" 
-                          :message="errors"
-                      >
-                          <b-datepicker v-model="employee_details.birthdate"></b-datepicker>
-                      </b-field>
-                  </ValidationProvider> -->
                 </div>
               </div>
 
-              <h6 class="is-size-6 has-text-weight-light mb-4">Contact No.</h6>
-              <div class="columns">
-                <div class="column">
-                  <text-field
-                    label-position="on-border"
-                    label="Contact No.1"
-                    v-model="employee_details.contact_no1"
-                    rules="required"
-                    mode="eager"
-                  ></text-field>
-                </div>
-                <div class="column">
-                  <text-field
-                    label-position="on-border"
-                    label="Contact No.2"
-                    v-model="employee_details.contact_no2"
-                    rules=""
-                    mode="passive"
-                  ></text-field>
-                </div>
-                <div class="column">
-                  <text-field
-                    label-position="on-border"
-                    label="Contact No.3"
-                    v-model="employee_details.contact_no3"
-                    rules=""
-                    mode="passive"
-                  ></text-field>
-                </div>
+              <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
+                <h6 class="is-size-6 has-text-weight-light">Contact No.</h6>
+                <b-button
+                  icon-right="plus"
+                  @click="addContact"
+                />
               </div>
+              <template v-for="(contact, i) in employeeDetails.contacts">
+                <div class="columns" :key="i">
+                  <div class="column is-6">
+                      <text-field
+                        label-position="on-border"
+                        label="Name"
+                        v-model="contact.name"
+                        rules="required"
+                        mode="eager"
+                      ></text-field>
+                  </div>
+                  <div class="column is-5">
+                    <text-field
+                      label-position="on-border"
+                      label="Description"
+                      v-model="contact.description"
+                      rules="required"
+                      mode="eager"
+                    ></text-field>
+                  </div>
+                  <div class="column is-1">
+                    <b-button
+                      class="is-pulled-right"
+                      icon-right="delete"
+                      @click="removeContact(contact)"
+                    />
+                  </div>
+                </div>
+              </template>
 
               <h6 class="is-size-6 has-text-weight-light mb-4">Basic Employment Information</h6>
               <div class="columns">
@@ -131,7 +127,7 @@
                   <select-field
                     label-position="on-border"
                     label="Employment Type"
-                    v-model="employee_details.employment_type"
+                    v-model="employeeDetails.employment_type"
                     rules="required"
                     mode="eager"
                     :options="employmentTypesState"
@@ -141,7 +137,7 @@
                   <select-field
                     label-position="on-border"
                     label="Position"
-                    v-model="employee_details.position"
+                    v-model="employeeDetails.position"
                     rules="required"
                     mode="eager"
                     :options="positionsState"
@@ -151,7 +147,7 @@
                   <select-field
                     label-position="on-border"
                     label="Department"
-                    v-model="employee_details.department"
+                    v-model="employeeDetails.department"
                     rules="required"
                     mode="eager"
                     :options="departmentsState"
@@ -165,7 +161,7 @@
                   <text-field
                     label-position="on-border"
                     label="SSS"
-                    v-model="employee_details.sss"
+                    v-model="employeeDetails.sss"
                     rules=""
                     mode="passive"
                   ></text-field>
@@ -174,7 +170,7 @@
                   <text-field
                     label-position="on-border"
                     label="PhilHealth"
-                    v-model="employee_details.philhealth"
+                    v-model="employeeDetails.philhealth"
                     rules=""
                     mode="passive"
                   ></text-field>
@@ -183,7 +179,7 @@
                   <text-field
                     label-position="on-border"
                     label="HDMF"
-                    v-model="employee_details.hdmf"
+                    v-model="employeeDetails.hdmf"
                     rules=""
                     mode="passive"
                   ></text-field>
@@ -192,7 +188,7 @@
                   <text-field
                     label-position="on-border"
                     label="TIN"
-                    v-model="employee_details.tin"
+                    v-model="employeeDetails.tin"
                     rules=""
                     mode="passive"
                   ></text-field>
@@ -200,14 +196,14 @@
               </div>
 
               <b-field class="file">
-                <b-upload v-model="employee_details.profile_photo">
+                <b-upload v-model="employeeDetails.profile_photo">
                   <a class="button">
                     <b-icon icon="upload"></b-icon>
                     <span>Upload Profile Photo</span>
                   </a>
                 </b-upload>
-                <span class="is-size-6 px-3 py-2" v-if="employee_details.profile_photo">
-                  {{ employee_details.profile_photo.name }}
+                <span class="is-size-6 px-3 py-2" v-if="employeeDetails.profile_photo">
+                  {{ employeeDetails.profile_photo.name }}
                 </span>
               </b-field>
 
@@ -344,17 +340,16 @@ export default {
       EMPLOYMENT_TYPES: [],
       POSITIONS: [],
       DEPARTMENTS: [],
-      employee_details:{
-        last_name: "",
-        first_name: "",
-        middle_name: "",
+      employeeDetails:{
+        lastname: "",
+        firstname: "",
+        middlename: "",
         gender: "",
-        civil_status: "",
+        civilstatus: "",
         birthdate: null,
-        // Contact
-        contact_no1: "",
-        contact_no2: "",
-        contact_no3: "",
+        contacts:[
+          { name: '', description: '', },
+        ],
         // Employment
         employment_type:"",
         position: "",
@@ -388,13 +383,20 @@ export default {
       getList: 'setting/list',
     }),
     save() {
-      console.log(this.employee_details);
+      console.log(this.employeeDetails);
     },
     resetForm() {
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });
-    }
+    },
+    addContact() {
+      this.employeeDetails.contacts.push({ name: '', description: '', });
+    },
+    removeContact(contact) {
+      const index = this.employeeDetails.contacts.indexOf(contact);
+      this.employeeDetails.contacts.splice(index, 1);
+    },
   },
 
   created() {
