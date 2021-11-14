@@ -91,8 +91,8 @@
                   @click="addContact"
                 />
               </div>
-              <template v-for="(contact, i) in employeeDetails.contacts">
-                <div class="columns" :key="i">
+              <template v-for="contact in employeeDetails.contacts">
+                <div class="columns" :key="contact.id">
                   <div class="column is-6">
                       <text-field
                         label-position="on-border"
@@ -208,58 +208,61 @@
               </b-field>
 
               <!-- Address -->
-              <b-collapse class="mt-4" animation="slide" aria-id="contentIdForA11y3">
-                <template #trigger="props">
-                  <div
-                    class="is-flex is-justify-content-space-between is-align-items-center mb-1"
-                    role="button"
-                    aria-controls="contentIdForA11y3"
-                  >
-                    <h6 class="is-size-6 has-text-weight-light">Address</h6>
-                    <a class="card-header-icon">
-                      <b-icon
-                        :icon="props.open ? 'chevron-down' : 'chevron-up'">
-                      </b-icon>
-                    </a>
+              <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
+                <h6 class="is-size-6 has-text-weight-light">Addresses</h6>
+                <b-button
+                  icon-right="plus"
+                  @click="addAddress"
+                />
+              </div>
+              <template v-for="address in employeeDetails.addresses">
+                <div class="columns" :key="address.id">
+                  <div class="column is-3">
+                    <text-field
+                      label-position="on-border"
+                      label="Name"
+                      v-model="address.name"
+                      rules="required"
+                      mode="eager"
+                    ></text-field>
                   </div>
-                </template>
-                <div class="content">
-                  <div class="columns">
-                    <div class="column">
-                      <text-field
-                        label-position="on-border"
-                        label="Street/House/Building"
-                        rules=""
-                        mode="passive"
-                      ></text-field>
-                    </div>
-                    <div class="column">
-                      <text-field
-                        label-position="on-border"
-                        label="Barangay"
-                        rules=""
-                        mode="passive"
-                      ></text-field>
-                    </div>
-                    <div class="column">
-                      <text-field
-                        label-position="on-border"
-                        label="City/Municipality"
-                        rules=""
-                        mode="passive"
-                      ></text-field>
-                    </div>
-                    <div class="column">
-                      <text-field
-                        label-position="on-border"
-                        label="Province/State"
-                        rules=""
-                        mode="passive"
-                      ></text-field>
-                    </div>
+                  <div class="column is-3">
+                    <text-field
+                      label-position="on-border"
+                      label="Address 1"
+                      v-model="address.address1"
+                      rules="required"
+                      mode="eager"
+                    ></text-field>
+                  </div>
+                  <div class="column is-3">
+                    <text-field
+                      label-position="on-border"
+                      label="Address 2"
+                      v-model="address.address2"
+                      rules="required"
+                      mode="eager"
+                    ></text-field>
+                  </div>
+                  <div class="column is-2">
+                    <select-field
+                      label-position="on-border"
+                      label="Type"
+                      v-model="address.address_type_id"
+                      rules="required"
+                      mode="eager"
+                      :options="addressTypesState"
+                    ></select-field>
+                  </div>
+                  <div class="column is-1">
+                    <b-button
+                      class="is-pulled-right"
+                      icon-right="delete"
+                      @click="removeAddress(address)"
+                    />
                   </div>
                 </div>
-              </b-collapse>
+              </template>
               <!-- Address -->
 
               <!-- Educational Attainment -->
@@ -327,6 +330,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex';
+import {uniqueId} from 'lodash';
 
 export default {
   components: {
@@ -348,7 +352,10 @@ export default {
         civilstatus: "",
         birthdate: null,
         contacts:[
-          { name: '', description: '', },
+          { id: uniqueId(), name: '', description: '', },
+        ],
+        addresses:[
+          { id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '' },
         ],
         // Employment
         employment_type:"",
@@ -391,12 +398,19 @@ export default {
       });
     },
     addContact() {
-      this.employeeDetails.contacts.push({ name: '', description: '', });
+      this.employeeDetails.contacts.push({ id: uniqueId(), name: '', description: '', });
     },
     removeContact(contact) {
       const index = this.employeeDetails.contacts.indexOf(contact);
       this.employeeDetails.contacts.splice(index, 1);
     },
+    addAddress() {
+      this.employeeDetails.addresses.push({ id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '' });
+    },
+    removeAddress(address) {
+      const index = this.employeeDetails.addresses.indexOf(address);
+      this.employeeDetails.addresses.splice(index, 1);
+    }
   },
 
   created() {
