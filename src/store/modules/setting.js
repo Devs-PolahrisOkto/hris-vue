@@ -151,13 +151,13 @@ const actions = {
       }
       return response.data.data;
     });
-    // const documentTypeList = client.documentTypeList().then(response => {
-    //   if (response.status !== 200) {
-    //     console.error('fetching document type list failed');
-    //     return [];
-    //   }
-    //   return response.data.data;
-    // });
+    const documentTypeList = client.documentTypeList().then(response => {
+      if (response.status !== 200) {
+        console.error('fetching document type list failed');
+        return [];
+      }
+      return response.data.data;
+    });
     const bankList = client.bankList().then(response => {
       if (response.status !== 200) {
         console.error('fetching bank list failed');
@@ -165,13 +165,13 @@ const actions = {
       }
       return response.data.data;
     });
-    // const civilStatusList = client.civilStatusList().then(response => {
-    //   if (response.status !== 200) {
-    //     console.error('fetching civil status list failed');
-    //     return [];
-    //   }
-    //   return response.data.data;
-    // });
+    const civilStatusList = client.civilStatusList().then(response => {
+      if (response.status !== 200) {
+        console.error('fetching civil status list failed');
+        return [];
+      }
+      return response.data.data;
+    });
     const genderList = client.genderList().then(response => {
       if (response.status !== 200) {
         console.error('fetching gender list failed');
@@ -186,9 +186,9 @@ const actions = {
       positionList,
       employmentTypeList,
       addressTypeList,
-      // documentTypeList,
+      documentTypeList,
       bankList,
-      // civilStatusList,
+      civilStatusList,
       genderList,
     ]).then(results => {
       return {
@@ -197,10 +197,10 @@ const actions = {
         positionList: results[2],
         employmentTypeList: results[3],
         addressTypeList: results[4],
-        // documentTypeList: results[5],
-        bankList: results[5],
-        // civilStatusList: results[7],
-        genderList: results[6],
+        documentTypeList: results[5],
+        bankList: results[6],
+        civilStatusList: results[7],
+        genderList: results[8],
       }
     });
     
