@@ -26,17 +26,15 @@
                 <div class="column">
                   <text-field
                     label-position="on-border"
-                    label="Last Name"
-                    v-model="employeeDetails.last_name"
-                    rules="required"
-                    mode="eager"
+                    label="Extension"
+                    v-model="employeeDetails.user.extension"
                   ></text-field>
                 </div>
                 <div class="column">
                   <text-field
                     label-position="on-border"
                     label="First Name"
-                    v-model="employeeDetails.first_name"
+                    v-model="employeeDetails.user.firstname"
                     rules="required"
                     mode="eager"
                   ></text-field>
@@ -45,11 +43,63 @@
                   <text-field
                     label-position="on-border"
                     label="Middle Name"
-                    v-model="employeeDetails.middle_name"
-                    rules=""
+                    v-model="employeeDetails.user.middlename"
                     mode="passive"
                   ></text-field>
-                </div> 
+                </div>
+                <div class="column">
+                  <text-field
+                    label-position="on-border"
+                    label="Last Name"
+                    v-model="employeeDetails.user.lastname"
+                    rules="required"
+                    mode="eager"
+                  ></text-field>
+                </div>
+                <div class="column">
+                  <text-field
+                    label-position="on-border"
+                    label="Title"
+                    v-model="employeeDetails.user.title"
+                  ></text-field>
+                </div>
+              </div>
+
+              <div class="columns">
+                <div class="column">
+                  <text-field
+                    label-position="on-border"
+                    label="Nickname"
+                    v-model="employeeDetails.user.nickname"
+                  ></text-field>
+                </div>
+                <div class="column">
+                  <text-field
+                    label-position="on-border"
+                    label="Username"
+                    v-model="employeeDetails.user.username"
+                    rules="required"
+                    mode="eager"
+                  ></text-field>
+                </div>
+                <div class="column">
+                  <text-field
+                    label-position="on-border"
+                    label="Email"
+                    v-model="employeeDetails.user.email"
+                    rules="required"
+                    mode="eager"
+                  ></text-field>
+                </div>
+                <div class="column">
+                  <text-field
+                    label-position="on-border"
+                    label="Password"
+                    v-model="employeeDetails.user.password"
+                    rules="required"
+                    mode="eager"
+                  ></text-field>
+                </div>
               </div>
 
               <div class="columns">
@@ -57,7 +107,7 @@
                   <select-field
                     label-position="on-border"
                     label="Gender"
-                    v-model="employeeDetails.gender"
+                    v-model="employeeDetails.user.gender_id"
                     rules="required"
                     mode="eager"
                     :options="gendersState"
@@ -67,17 +117,17 @@
                   <select-field
                     label-position="on-border"
                     label="Civil Status"
-                    v-model="employeeDetails.civil_status"
+                    v-model="employeeDetails.user.civilstatus_id"
                     rules="required"
                     mode="eager"
-                    :options="CIVIL_STATUS"
+                    :options="civilStatusesState"
                   ></select-field>
                 </div>
                 <div class="column">
                   <date-picker-field
                     label-position="on-border"
                     label="Birthdate"
-                    v-model="employeeDetails.birthdate"
+                    v-model="employeeDetails.user.birthDate"
                     rules="required"
                     mode="eager"
                   ></date-picker-field>
@@ -90,7 +140,7 @@
                   <select-field
                     label-position="on-border"
                     label="Employment Type"
-                    v-model="employeeDetails.employment_type"
+                    v-model="employeeDetails.user.employment_type_id"
                     rules="required"
                     mode="eager"
                     :options="employmentTypesState"
@@ -100,7 +150,7 @@
                   <select-field
                     label-position="on-border"
                     label="Position"
-                    v-model="employeeDetails.position"
+                    v-model="employeeDetails.positions"
                     rules="required"
                     mode="eager"
                     :options="positionsState"
@@ -109,8 +159,18 @@
                 <div class="column">
                   <select-field
                     label-position="on-border"
+                    label="Company"
+                    v-model="employeeDetails.company_id"
+                    rules="required"
+                    mode="eager"
+                    :options="companiesState"
+                  ></select-field>
+                </div>
+                <div class="column">
+                  <select-field
+                    label-position="on-border"
                     label="Department"
-                    v-model="employeeDetails.department"
+                    v-model="employeeDetails.department_id"
                     rules="required"
                     mode="eager"
                     :options="departmentsState"
@@ -257,7 +317,7 @@
                       label-position="on-border"
                       label="Start at"
                       v-model="education.start_at"
-                      rules="required"
+                   
                       mode="eager"
                     ></date-picker-field>
                   </div>
@@ -266,7 +326,7 @@
                       label-position="on-border"
                       label="End at"
                       v-model="education.end_at"
-                      rules="required"
+                
                       mode="eager"
                     ></date-picker-field>
                   </div>
@@ -326,24 +386,29 @@ export default {
       POSITIONS: [],
       DEPARTMENTS: [],
       employeeDetails:{
-        lastname: "",
-        firstname: "",
-        middlename: "",
-        gender: "",
-        civilstatus: "",
-        birthdate: null,
-        contacts:[
-          { id: uniqueId(), name: '', description: '', },
-        ],
-        addresses:[
-          { id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '' },
-        ],
-        education:[
-          { id: uniqueId(), description: '', school: '', degree: '', start_at: null, end_at: null },
-        ],
-        employment_type:"",
-        position: "",
-        department:"",
+        user: {
+          firstname: "",
+          middlename: "",
+          lastname: "",
+          nickname: "",
+          extension: "",
+          title: "",
+          birthDate: null,
+          username: "",
+          email: "",
+          password: "",
+          gender_id: "",
+          employment_type_id: "",
+          branch_id: "",
+          civilstatus_id: "",
+        },
+        company_id: "",
+        department_id: "",
+        positions: "",
+        documents: [],
+        contacts:[ { id: uniqueId(), name: '', description: '', }, ],
+        addresses:[ { id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '' }, ],
+        education:[ { id: uniqueId(), description: '', school: '', degree: '', start_at: null, end_at: null }, ],
         profile_photo: null,
       },
     }
@@ -366,9 +431,11 @@ export default {
   methods:{
     ...mapActions({
       getList: 'setting/list',
+      saveEmployee: 'employee/save',
     }),
     save() {
       console.log(this.employeeDetails);
+      this.saveEmployee(this.employeeDetails);
     },
     resetForm() {
       requestAnimationFrame(() => {
