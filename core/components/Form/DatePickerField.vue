@@ -13,7 +13,7 @@
     >
         <b-datepicker 
             :value="value"
-            @input.native="$emit('input', $event.target.value)"
+            @input="$emit('input', $event)"
         ></b-datepicker>
     </b-field>
 </ValidationProvider>
@@ -23,7 +23,7 @@
 export default {
     props: {
         label: String,
-        value: Object,
+        value: Date,
         labelPosition: String,
         mode: String,
         rules: String,
