@@ -66,6 +66,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   components: {
     MainLayout: () => import('@/layouts/MainLayout.vue'),
@@ -79,6 +81,16 @@ export default {
     return {
       activeTab: 0,
     };
+  },
+
+  created () {
+    this.findEmployee(this.$route.params.id);
+  },
+
+  methods: {
+    ...mapActions({
+      findEmployee: 'employee/find',
+    }),
   },
 };
 </script>
