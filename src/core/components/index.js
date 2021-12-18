@@ -1,17 +1,17 @@
-import camelCase from 'lodash/camelCase'
-import upperFirst from 'lodash/upperFirst'
-import Vue from 'vue'
+import camelCase from 'lodash/camelCase';
+import upperFirst from 'lodash/upperFirst';
+import Vue from 'vue';
 
 const components = {
   install (Vue) {
     const requireComponent = require.context(
       '.',
       true,
-      /[A-Z]\w+\.(vue|js)$/
-    )
+      /[A-Z]\w+\.(vue|js)$/,
+    );
 
     requireComponent.keys().forEach(fileName => {
-      const componentConfig = requireComponent(fileName)
+      const componentConfig = requireComponent(fileName);
 
       const componentName = componentConfig.default.name || upperFirst(
         camelCase(
@@ -19,19 +19,19 @@ const components = {
             .split('/')
             .pop()
             .replace(/\.[^/.]+$/, '')
-            .replace(/^\.\/(.*)\.\w+$/, '$1')
-        )
-      )
+            .replace(/^\.\/(.*)\.\w+$/, '$1'),
+        ),
+      );
 
       Vue.component(
         componentName,
         // Look for the component options on `.default`, which will
         // exist if the component was exported with `export default`,
         // otherwise fall back to module's root.
-        componentConfig.default || componentConfig
-      )
-    })
-  }
-}
+        componentConfig.default || componentConfig,
+      );
+    });
+  },
+};
 
-Vue.use(components)
+Vue.use(components);

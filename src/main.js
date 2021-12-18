@@ -5,7 +5,7 @@ import store from './store';
 
 import '@/plugins';
 import '@/scss/base.scss';
-import '../core/components';
+import '@/core/components';
 
 import '@/api';
 
