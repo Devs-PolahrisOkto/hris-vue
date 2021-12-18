@@ -9,15 +9,15 @@ import Chart from 'chart.js/auto';
 import { payrollChartData } from '@/utilities/payroll-chart-data.js';
 
 export default {
-  data() {
+  data () {
     return {
-      payrollChartData
-    }
+      payrollChartData,
+    };
   },
-  
-  mounted() {
+
+  mounted () {
     const ctx = document.getElementById('payroll-chart');
-    new Chart(ctx, this.payrollChartData);
-  }
-}
+    return new Chart(ctx, this.payrollChartData);
+  },
+};
 </script>

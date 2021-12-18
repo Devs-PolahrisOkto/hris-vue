@@ -1,24 +1,24 @@
-import BaseClient from "./base-client";
+import BaseClient from './base-client';
 
 class DocumentTypeClient extends BaseClient {
-  constructor(appUrl) {
+  constructor (appUrl) {
     super();
     this.baseUrl = `${appUrl}/document-types`;
   }
 
-  list() {
+  list () {
     return this.axios.get(this.baseUrl)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  save(documentType) {
+  save (documentType) {
     return this.axios.post(this.baseUrl, documentType)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  update(documentType) {
+  update (documentType) {
     return this.axios.put(`${this.baseUrl}/${documentType.id}`, documentType)
-      .then(response => { return response; });
+      .then(response => response);
   }
 }
 

@@ -21,10 +21,10 @@
           icon="magnify">
         </b-input>
         <b-tooltip label="Add Bank">
-          <b-button 
-            icon-right="plus" 
-            class="mr-3" 
-            @click="add" 
+          <b-button
+            icon-right="plus"
+            class="mr-3"
+            @click="add"
           />
         </b-tooltip>
       </div>
@@ -51,20 +51,24 @@
         <template v-for="(column, index) in columns">
           <b-table-column
             :key="index"
+            v-slot="props"
             :label="column.title"
             :field="column.field"
             :visible="column.visible"
-            v-slot="props"
             sortable
           >
             {{ props.row[column.field] }}
           </b-table-column>
         </template>
-        <b-table-column field="option" v-slot="props" width="100" centered>
-          <b-button 
-            size="is-small" 
-            type="is-primary" 
-            icon-right="pencil" 
+        <b-table-column
+          v-slot="props" field="option"
+          width="100"
+          centered
+        >
+          <b-button
+            size="is-small"
+            type="is-primary"
+            icon-right="pencil"
             @click="edit(props.row)"
           />
         </b-table-column>
@@ -79,12 +83,12 @@
   </div>
 
   <!-- Start Modals -->
-  <add-bank-modal 
+  <add-bank-modal
     :active="addBankModal"
     @close="addBankModal = !addBankModal"
   ></add-bank-modal>
 
-  <edit-bank-modal 
+  <edit-bank-modal
     :active="editBankModal"
     @close="editBankModal = !editBankModal"
   ></edit-bank-modal>
@@ -95,16 +99,16 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
-    MainLayout: () => import("@/layouts/MainLayout.vue"),
-    AddBankModal: () => import("@/components/Settings/Bank/AddModal.vue"),
-    EditBankModal: () => import("@/components/Settings/Bank/EditModal.vue"),
+    MainLayout: () => import('@/layouts/MainLayout.vue'),
+    AddBankModal: () => import('@/components/Settings/Bank/AddModal.vue'),
+    EditBankModal: () => import('@/components/Settings/Bank/EditModal.vue'),
   },
 
-  data() {
+  data () {
     return {
       layout: 'table',
       columns: [
@@ -115,7 +119,7 @@ export default {
       isStriped: false,
       isHoverable: true,
       hasMobileCards: true,
-      isPaginated: false,  
+      isPaginated: false,
       isPaginationSimple: true,
       isPaginationRounded: false,
       paginationPosition: 'bottom',
@@ -126,18 +130,19 @@ export default {
       perPage: 10,
       addBankModal: false,
       editBankModal: false,
-      searchField: ''
-    }
+      searchField: '',
+    };
   },
 
   computed: {
     ...mapGetters({
-      banks: 'bank/list'
+      banks: 'bank/list',
     }),
-    filteredBanks() {
-      return this.banks.filter(bank => {
-        return bank.name.toLowerCase().includes(this.searchField.toLowerCase());
-      });
+    filteredBanks () {
+      return this.banks.filter(bank => bank
+        .name
+        .toLowerCase()
+        .includes(this.searchField.toLowerCase()));
     },
   },
 
@@ -146,22 +151,22 @@ export default {
       setForm: 'bank/setForm',
       getList: 'bank/list',
     }),
-    add() {
+    add () {
       const bank = {
         name: '',
-        description: ''
-      }
+        description: '',
+      };
       this.setForm(bank);
       this.addBankModal = true;
     },
-    edit(bank) {
+    edit (bank) {
       this.setForm(bank);
       this.editBankModal = true;
-    }
+    },
   },
 
-  created() {
+  created () {
     this.getList();
-  }
-}
+  },
+};
 </script>

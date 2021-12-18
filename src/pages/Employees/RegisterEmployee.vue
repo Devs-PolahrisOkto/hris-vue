@@ -14,7 +14,7 @@
       <div class="card">
         <header class="py-2 px-3">
           <h5 class="has-text-weight-medium is-flex is-align-items-center">
-            <b-icon icon="account-plus"></b-icon> 
+            <b-icon icon="account-plus"></b-icon>
             <h5 class="is-size-5 has-text-weight-semibold px-3">Register Employee</h5>
           </h5>
         </header>
@@ -25,42 +25,42 @@
               <div class="columns">
                 <div class="column">
                   <text-field
+                    v-model="employeeDetails.user.extension"
                     label-position="on-border"
                     label="Extension"
-                    v-model="employeeDetails.user.extension"
                   ></text-field>
                 </div>
                 <div class="column">
                   <text-field
+                    v-model="employeeDetails.user.firstname"
                     label-position="on-border"
                     label="First Name"
-                    v-model="employeeDetails.user.firstname"
                     rules="required"
                     mode="eager"
                   ></text-field>
                 </div>
                 <div class="column">
                   <text-field
+                    v-model="employeeDetails.user.middlename"
                     label-position="on-border"
                     label="Middle Name"
-                    v-model="employeeDetails.user.middlename"
                     mode="passive"
                   ></text-field>
                 </div>
                 <div class="column">
                   <text-field
+                    v-model="employeeDetails.user.lastname"
                     label-position="on-border"
                     label="Last Name"
-                    v-model="employeeDetails.user.lastname"
                     rules="required"
                     mode="eager"
                   ></text-field>
                 </div>
                 <div class="column">
                   <text-field
+                    v-model="employeeDetails.user.title"
                     label-position="on-border"
                     label="Title"
-                    v-model="employeeDetails.user.title"
                   ></text-field>
                 </div>
               </div>
@@ -68,34 +68,34 @@
               <div class="columns">
                 <div class="column">
                   <text-field
+                    v-model="employeeDetails.user.nickname"
                     label-position="on-border"
                     label="Nickname"
-                    v-model="employeeDetails.user.nickname"
                   ></text-field>
                 </div>
                 <div class="column">
                   <text-field
+                    v-model="employeeDetails.user.username"
                     label-position="on-border"
                     label="Username"
-                    v-model="employeeDetails.user.username"
                     rules="required"
                     mode="eager"
                   ></text-field>
                 </div>
                 <div class="column">
                   <text-field
+                    v-model="employeeDetails.user.email"
                     label-position="on-border"
                     label="Email"
-                    v-model="employeeDetails.user.email"
                     rules="required"
                     mode="eager"
                   ></text-field>
                 </div>
                 <div class="column">
                   <text-field
+                    v-model="employeeDetails.user.password"
                     label-position="on-border"
                     label="Password"
-                    v-model="employeeDetails.user.password"
                     rules="required"
                     mode="eager"
                   ></text-field>
@@ -105,9 +105,9 @@
               <div class="columns">
                 <div class="column">
                   <select-field
+                    v-model="employeeDetails.user.gender_id"
                     label-position="on-border"
                     label="Gender"
-                    v-model="employeeDetails.user.gender_id"
                     rules="required"
                     mode="eager"
                     :options="gendersState"
@@ -115,9 +115,9 @@
                 </div>
                 <div class="column">
                   <select-field
+                    v-model="employeeDetails.user.civilstatus_id"
                     label-position="on-border"
                     label="Civil Status"
-                    v-model="employeeDetails.user.civilstatus_id"
                     rules="required"
                     mode="eager"
                     :options="civilStatusesState"
@@ -125,9 +125,9 @@
                 </div>
                 <div class="column">
                   <date-picker-field
+                    v-model="employeeDetails.user.birthDate"
                     label-position="on-border"
                     label="Birthdate"
-                    v-model="employeeDetails.user.birthDate"
                     rules="required"
                     mode="eager"
                   ></date-picker-field>
@@ -138,9 +138,9 @@
               <div class="columns">
                 <div class="column">
                   <select-field
+                    v-model="employeeDetails.user.employment_type_id"
                     label-position="on-border"
                     label="Employment Type"
-                    v-model="employeeDetails.user.employment_type_id"
                     rules="required"
                     mode="eager"
                     :options="employmentTypesState"
@@ -148,9 +148,9 @@
                 </div>
                 <div class="column">
                   <select-field
+                    v-model="employeeDetails.positions"
                     label-position="on-border"
                     label="Position"
-                    v-model="employeeDetails.positions"
                     rules="required"
                     mode="eager"
                     :options="positionsState"
@@ -158,9 +158,9 @@
                 </div>
                 <div class="column">
                   <select-field
+                    v-model="employeeDetails.company_id"
                     label-position="on-border"
                     label="Company"
-                    v-model="employeeDetails.company_id"
                     rules="required"
                     mode="eager"
                     :options="companiesState"
@@ -168,9 +168,9 @@
                 </div>
                 <div class="column">
                   <select-field
+                    v-model="employeeDetails.department_id"
                     label-position="on-border"
                     label="Department"
-                    v-model="employeeDetails.department_id"
                     rules="required"
                     mode="eager"
                     :options="departmentsState"
@@ -187,21 +187,21 @@
                 />
               </div>
               <template v-for="contact in employeeDetails.contacts">
-                <div class="columns" :key="contact.id">
+                <div :key="contact.id" class="columns">
                   <div class="column is-6">
                       <text-field
+                        v-model="contact.name"
                         label-position="on-border"
                         label="Name"
-                        v-model="contact.name"
                         rules="required"
                         mode="eager"
                       ></text-field>
                   </div>
                   <div class="column is-5">
                     <text-field
+                      v-model="contact.description"
                       label-position="on-border"
                       label="Description"
-                      v-model="contact.description"
                       rules="required"
                       mode="eager"
                     ></text-field>
@@ -226,39 +226,39 @@
                 />
               </div>
               <template v-for="address in employeeDetails.addresses">
-                <div class="columns" :key="address.id">
+                <div :key="address.id" class="columns">
                   <div class="column is-3">
                     <text-field
+                      v-model="address.name"
                       label-position="on-border"
                       label="Name"
-                      v-model="address.name"
                       rules="required"
                       mode="eager"
                     ></text-field>
                   </div>
                   <div class="column is-3">
                     <text-field
+                      v-model="address.address1"
                       label-position="on-border"
                       label="Address 1"
-                      v-model="address.address1"
                       rules="required"
                       mode="eager"
                     ></text-field>
                   </div>
                   <div class="column is-3">
                     <text-field
+                      v-model="address.address2"
                       label-position="on-border"
                       label="Address 2"
-                      v-model="address.address2"
                       rules="required"
                       mode="eager"
                     ></text-field>
                   </div>
                   <div class="column is-2">
                     <select-field
+                      v-model="address.address_type_id"
                       label-position="on-border"
                       label="Type"
-                      v-model="address.address_type_id"
                       rules="required"
                       mode="eager"
                       :options="addressTypesState"
@@ -284,49 +284,49 @@
                 />
               </div>
               <template v-for="education in employeeDetails.education">
-                <div class="columns" :key="education.id">
+                <div :key="education.id" class="columns">
                   <div class="column is-3">
                       <text-field
+                        v-model="education.description"
                         label-position="on-border"
                         label="Description"
-                        v-model="education.description"
                         rules="required"
                         mode="eager"
                       ></text-field>
                   </div>
                   <div class="column is-2">
                     <text-field
+                      v-model="education.school"
                       label-position="on-border"
                       label="School"
-                      v-model="education.school"
                       rules="required"
                       mode="eager"
                     ></text-field>
                   </div>
                   <div class="column is-2">
                     <text-field
+                      v-model="education.degree"
                       label-position="on-border"
                       label="Degree"
-                      v-model="education.degree"
                       rules="required"
                       mode="eager"
                     ></text-field>
                   </div>
                   <div class="column is-2">
                     <date-picker-field
+                      v-model="education.start_at"
                       label-position="on-border"
                       label="Start at"
-                      v-model="education.start_at"
-                   
+
                       mode="eager"
                     ></date-picker-field>
                   </div>
                   <div class="column is-2">
                     <date-picker-field
+                      v-model="education.end_at"
                       label-position="on-border"
                       label="End at"
-                      v-model="education.end_at"
-                
+
                       mode="eager"
                     ></date-picker-field>
                   </div>
@@ -348,70 +348,74 @@
                     <span>Upload Profile Photo</span>
                   </a>
                 </b-upload>
-                <span class="is-size-6 px-3 py-2" v-if="employeeDetails.profile_photo">
+                <span v-if="employeeDetails.profile_photo" class="is-size-6 px-3 py-2">
                   {{ employeeDetails.profile_photo.name }}
                 </span>
               </b-field>
 
-              <b-button 
-                native-type="submit" 
+              <b-button
+                native-type="submit"
                 class="is-primary mt-6 mr-auto"
               >
                 <span class="has-text-weight-bold px-5">Register</span>
               </b-button>
-              
+
             </form>
           </ValidationObserver>
         </div>
       </div>
     </div>
-      
+
   </main-layout>
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
-import {uniqueId} from 'lodash';
+import { mapActions, mapGetters } from 'vuex';
+import { uniqueId } from 'lodash';
 
 export default {
   components: {
-    MainLayout: () => import("@/layouts/MainLayout.vue"),
+    MainLayout: () => import('@/layouts/MainLayout.vue'),
   },
 
-  data() {
+  data () {
     return {
       GENDERS: [],
       CIVIL_STATUS: [],
       EMPLOYMENT_TYPES: [],
       POSITIONS: [],
       DEPARTMENTS: [],
-      employeeDetails:{
+      employeeDetails: {
         user: {
-          firstname: "",
-          middlename: "",
-          lastname: "",
-          nickname: "",
-          extension: "",
-          title: "",
+          firstname: '',
+          middlename: '',
+          lastname: '',
+          nickname: '',
+          extension: '',
+          title: '',
           birthDate: null,
-          username: "",
-          email: "",
-          password: "",
-          gender_id: "",
-          employment_type_id: "",
-          branch_id: "",
-          civilstatus_id: "",
+          username: '',
+          email: '',
+          password: '',
+          gender_id: '',
+          employment_type_id: '',
+          branch_id: '',
+          civilstatus_id: '',
         },
-        company_id: "",
-        department_id: "",
-        positions: "",
+        company_id: '',
+        department_id: '',
+        positions: '',
         documents: [],
-        contacts:[ { id: uniqueId(), name: '', description: '', }, ],
-        addresses:[ { id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '' }, ],
-        education:[ { id: uniqueId(), description: '', school: '', degree: '', start_at: null, end_at: null }, ],
+        contacts: [{ id: uniqueId(), name: '', description: '' }],
+        addresses: [{
+          id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '',
+        }],
+        education: [{
+          id: uniqueId(), description: '', school: '', degree: '', start_at: null, end_at: null,
+        }],
         profile_photo: null,
       },
-    }
+    };
   },
 
   computed: {
@@ -428,45 +432,49 @@ export default {
     }),
   },
 
-  methods:{
+  methods: {
     ...mapActions({
       getList: 'setting/list',
       saveEmployee: 'employee/save',
     }),
-    save() {
+    save () {
       console.log(this.employeeDetails);
       this.saveEmployee(this.employeeDetails);
     },
-    resetForm() {
+    resetForm () {
       requestAnimationFrame(() => {
         this.$refs.observer.reset();
       });
     },
-    addContact() {
-      this.employeeDetails.contacts.push({ id: uniqueId(), name: '', description: '', });
+    addContact () {
+      this.employeeDetails.contacts.push({ id: uniqueId(), name: '', description: '' });
     },
-    removeContact(contact) {
+    removeContact (contact) {
       const index = this.employeeDetails.contacts.indexOf(contact);
       this.employeeDetails.contacts.splice(index, 1);
     },
-    addAddress() {
-      this.employeeDetails.addresses.push({ id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '' });
+    addAddress () {
+      this.employeeDetails.addresses.push({
+        id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '',
+      });
     },
-    removeAddress(address) {
+    removeAddress (address) {
       const index = this.employeeDetails.addresses.indexOf(address);
       this.employeeDetails.addresses.splice(index, 1);
     },
-    addEducation() {
-      this.employeeDetails.education.push({ id: uniqueId(), description: '', school: '', degree: '', start_at: null, end_at: null });
+    addEducation () {
+      this.employeeDetails.education.push({
+        id: uniqueId(), description: '', school: '', degree: '', start_at: null, end_at: null,
+      });
     },
-    removeEducation(education) {
+    removeEducation (education) {
       const index = this.employeeDetails.education.indexOf(education);
       this.employeeDetails.education.splice(index, 1);
-    }
+    },
   },
 
-  created() {
+  created () {
     this.getList();
-  }
-}
+  },
+};
 </script>

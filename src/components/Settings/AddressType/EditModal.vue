@@ -1,10 +1,10 @@
 <template>
-  <b-modal 
-    v-model="active" 
+  <b-modal
+    v-model="active"
     :width="640"
     :can-cancel="['x']"
   >
-    <modal-form 
+    <modal-form
       :modal-form="addressTypeForm"
       @submit="update"
       @close="$emit('close')"
@@ -21,28 +21,28 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   components: {
-    ModalForm: () => import("@/components/Settings/Common/Form.vue"),
+    ModalForm: () => import('@/components/Settings/Common/Form.vue'),
   },
 
   props: {
     active: {
-      type: Boolean
+      type: Boolean,
     },
   },
 
   computed: {
     ...mapGetters({
-      addressTypeForm: 'addressType/addressTypeForm'
-    })
+      addressTypeForm: 'addressType/addressTypeForm',
+    }),
   },
 
   methods: {
     ...mapActions({
       updateAddressType: 'addressType/update',
     }),
-    update(form) {
+    update (form) {
       this.updateAddressType(form).then(this.$emit('close'));
-    }
-  }
-}
+    },
+  },
+};
 </script>

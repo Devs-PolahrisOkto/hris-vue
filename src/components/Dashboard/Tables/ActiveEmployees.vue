@@ -2,18 +2,23 @@
 <div class="card">
     <header class="is-flex is-justify-content-space-between is-align-items-center py-2 px-3">
         <h6 class="has-text-weight-medium is-flex is-align-items-center">
-            <b-icon icon="account-group-outline"></b-icon> 
+            <b-icon icon="account-group-outline"></b-icon>
             <h6 class="is-size-6 has-text-weight-semibold px-3">Active Employees</h6>
         </h6>
         <b-button size="is-small" icon-right="refresh" />
     </header>
-    <div class="has-background-light is-flex is-justify-content-space-between is-align-items-start px-3 pt-5">
+    <div
+      class="has-background-light is-flex
+      is-justify-content-space-between
+      is-align-items-start px-3 pt-5"
+    >
         <div class="buttons has-addons">
             <button class="button">Present</button>
             <button class="button">Absent</button>
             <button class="button">On Leave</button>
         </div>
-        <b-input placeholder="Search..."
+        <b-input
+placeholder="Search..."
             type="search"
             icon="magnify">
         </b-input>
@@ -45,19 +50,31 @@
             </figure>
         </b-table-column>
 
-        <b-table-column field="name" label="Name" sortable v-slot="props">
+        <b-table-column
+v-slot="props" field="name"
+label="Name"
+sortable>
             {{ props.row.name }}
         </b-table-column>
 
-        <b-table-column field="position" label="Position" sortable v-slot="props">
+        <b-table-column
+v-slot="props" field="position"
+label="Position"
+sortable>
             {{ props.row.position }}
         </b-table-column>
 
-        <b-table-column field="department" label="Department" sortable v-slot="props">
+        <b-table-column
+v-slot="props" field="department"
+label="Department"
+sortable>
             {{ props.row.department }}
         </b-table-column>
 
-        <b-table-column field="status" label="Status" sortable v-slot="props">
+        <b-table-column
+v-slot="props" field="status"
+label="Status"
+sortable>
             <b-tag type="is-info">{{ props.row.status }}</b-tag>
         </b-table-column>
 
@@ -75,28 +92,28 @@
 
 <script>
 export default {
-    props: {
-        employees: {
-            type: Array
-        }
+  props: {
+    employees: {
+      type: Array,
     },
+  },
 
-    data() {
-        return {
-            isEmpty: false,
-            isStriped: true,
-            isHoverable: true,
-            hasMobileCards: true,
-            isPaginated: true,
-            isPaginationSimple: true,
-            isPaginationRounded: false,
-            paginationPosition: 'bottom',
-            defaultSortDirection: 'asc',
-            sortIcon: 'arrow-up',
-            sortIconSize: 'is-small',
-            currentPage: 1,
-            perPage: 10,
-        }
-    }
-}
+  data () {
+    return {
+      isEmpty: false,
+      isStriped: true,
+      isHoverable: true,
+      hasMobileCards: true,
+      isPaginated: true,
+      isPaginationSimple: true,
+      isPaginationRounded: false,
+      paginationPosition: 'bottom',
+      defaultSortDirection: 'asc',
+      sortIcon: 'arrow-up',
+      sortIconSize: 'is-small',
+      currentPage: 1,
+      perPage: 10,
+    };
+  },
+};
 </script>

@@ -24,11 +24,17 @@
         aria-page-label="Page"
         aria-current-label="Current page"
     >
-        <b-table-column field="file" label="File" sortable v-slot="props">
+        <b-table-column
+v-slot="props" field="file"
+label="File"
+sortable>
             {{ props.row.file }}
         </b-table-column>
 
-        <b-table-column field="description" label="Description" sortable v-slot="props">
+        <b-table-column
+v-slot="props" field="description"
+label="Description"
+sortable>
             {{ props.row.description }}
         </b-table-column>
 
@@ -42,35 +48,35 @@
 
 <script>
 export default {
-    props: {
-        documents: {
-            type: Array,
-            default: () => []
-        }
+  props: {
+    documents: {
+      type: Array,
+      default: () => [],
     },
+  },
 
-    data() {
-        return {
-            isEmpty: false,
-            isStriped: true,
-            isHoverable: true,
-            hasMobileCards: true,
-            isPaginated: false,
-            isPaginationSimple: true,
-            isPaginationRounded: false,
-            paginationPosition: 'bottom',
-            defaultSortDirection: 'asc',
-            sortIcon: 'arrow-up',
-            sortIconSize: 'is-small',
-            currentPage: 1,
-            perPage: 10,
-        }
-    }
-}
+  data () {
+    return {
+      isEmpty: false,
+      isStriped: true,
+      isHoverable: true,
+      hasMobileCards: true,
+      isPaginated: false,
+      isPaginationSimple: true,
+      isPaginationRounded: false,
+      paginationPosition: 'bottom',
+      defaultSortDirection: 'asc',
+      sortIcon: 'arrow-up',
+      sortIconSize: 'is-small',
+      currentPage: 1,
+      perPage: 10,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-/deep/ .table td, 
+/deep/ .table td,
 /deep/ .table th {
     border: none;
 }

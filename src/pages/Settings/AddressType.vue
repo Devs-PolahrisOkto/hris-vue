@@ -21,10 +21,10 @@
           icon="magnify">
         </b-input>
         <b-tooltip label="Add Address Type">
-          <b-button 
-            icon-right="plus" 
-            class="mr-3" 
-            @click="add" 
+          <b-button
+            icon-right="plus"
+            class="mr-3"
+            @click="add"
           />
         </b-tooltip>
       </div>
@@ -51,20 +51,24 @@
         <template v-for="(column, index) in columns">
           <b-table-column
             :key="index"
+            v-slot="props"
             :label="column.title"
             :field="column.field"
             :visible="column.visible"
-            v-slot="props"
             sortable
           >
             {{ props.row[column.field] }}
           </b-table-column>
         </template>
-        <b-table-column field="option" v-slot="props" width="100" centered>
-          <b-button 
-            size="is-small" 
-            type="is-primary" 
-            icon-right="pencil" 
+        <b-table-column
+          v-slot="props" field="option"
+          width="100"
+          centered
+        >
+          <b-button
+            size="is-small"
+            type="is-primary"
+            icon-right="pencil"
             @click="edit(props.row)"
           />
         </b-table-column>
@@ -79,12 +83,12 @@
   </div>
 
   <!-- Start Modals -->
-  <add-address-type-modal 
+  <add-address-type-modal
     :active="addAddressTypeModal"
     @close="addAddressTypeModal = !addAddressTypeModal"
   ></add-address-type-modal>
 
-  <edit-address-type-modal 
+  <edit-address-type-modal
     :active="editAddressTypeModal"
     @close="editAddressTypeModal = !editAddressTypeModal"
   ></edit-address-type-modal>
@@ -95,16 +99,16 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
-    MainLayout: () => import("@/layouts/MainLayout.vue"),
-    AddAddressTypeModal: () => import("@/components/Settings/AddressType/AddModal.vue"),
-    EditAddressTypeModal: () => import("@/components/Settings/AddressType/EditModal.vue"),
+    MainLayout: () => import('@/layouts/MainLayout.vue'),
+    AddAddressTypeModal: () => import('@/components/Settings/AddressType/AddModal.vue'),
+    EditAddressTypeModal: () => import('@/components/Settings/AddressType/EditModal.vue'),
   },
 
-  data() {
+  data () {
     return {
       layout: 'table',
       columns: [
@@ -115,7 +119,7 @@ export default {
       isStriped: false,
       isHoverable: true,
       hasMobileCards: true,
-      isPaginated: false,  
+      isPaginated: false,
       isPaginationSimple: true,
       isPaginationRounded: false,
       paginationPosition: 'bottom',
@@ -126,18 +130,19 @@ export default {
       perPage: 10,
       addAddressTypeModal: false,
       editAddressTypeModal: false,
-      searchField: ''
-    }
+      searchField: '',
+    };
   },
 
   computed: {
     ...mapGetters({
-      addressTypes: 'addressType/list'
+      addressTypes: 'addressType/list',
     }),
-    filteredAddressTypes() {
-      return this.addressTypes.filter(addressType => {
-        return addressType.name.toLowerCase().includes(this.searchField.toLowerCase());
-      });
+    filteredAddressTypes () {
+      return this.addressTypes.filter(addressType => addressType
+        .name
+        .toLowerCase()
+        .includes(this.searchField.toLowerCase()));
     },
   },
 
@@ -146,22 +151,22 @@ export default {
       setForm: 'addressType/setForm',
       getList: 'addressType/list',
     }),
-    add() {
+    add () {
       const addressType = {
         name: '',
-        description: ''
-      }
+        description: '',
+      };
       this.setForm(addressType);
       this.addAddressTypeModal = true;
     },
-    edit(addressType) {
+    edit (addressType) {
       this.setForm(addressType);
       this.editAddressTypeModal = true;
-    }
+    },
   },
 
-  created() {
+  created () {
     this.getList();
-  }
-}
+  },
+};
 </script>

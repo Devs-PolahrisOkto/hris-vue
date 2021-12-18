@@ -21,10 +21,10 @@
           icon="magnify">
         </b-input>
         <b-tooltip label="Add Department">
-          <b-button 
-            icon-right="plus" 
-            class="mr-3" 
-            @click="add" 
+          <b-button
+            icon-right="plus"
+            class="mr-3"
+            @click="add"
           />
         </b-tooltip>
       </div>
@@ -51,20 +51,24 @@
         <template v-for="(column, index) in columns">
           <b-table-column
             :key="index"
+            v-slot="props"
             :label="column.title"
             :field="column.field"
             :visible="column.visible"
-            v-slot="props"
             sortable
           >
             {{ props.row[column.field] }}
           </b-table-column>
         </template>
-        <b-table-column field="option" v-slot="props" width="100" centered>
-          <b-button 
-            size="is-small" 
-            type="is-primary" 
-            icon-right="pencil" 
+        <b-table-column
+          v-slot="props" field="option"
+          width="100"
+          centered
+        >
+          <b-button
+            size="is-small"
+            type="is-primary"
+            icon-right="pencil"
             @click="edit(props.row)"
           />
         </b-table-column>
@@ -79,12 +83,12 @@
   </div>
 
   <!-- Start Modals -->
-  <add-department-modal 
+  <add-department-modal
     :active="addDepartmentModal"
     @close="addDepartmentModal = !addDepartmentModal"
   ></add-department-modal>
 
-  <edit-department-modal 
+  <edit-department-modal
     :active="editDepartmentModal"
     @close="editDepartmentModal = !editDepartmentModal"
   ></edit-department-modal>
@@ -95,16 +99,16 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
-    MainLayout: () => import("@/layouts/MainLayout.vue"),
-    AddDepartmentModal: () => import("@/components/Settings/Department/AddModal.vue"),
-    EditDepartmentModal: () => import("@/components/Settings/Department/EditModal.vue"),
+    MainLayout: () => import('@/layouts/MainLayout.vue'),
+    AddDepartmentModal: () => import('@/components/Settings/Department/AddModal.vue'),
+    EditDepartmentModal: () => import('@/components/Settings/Department/EditModal.vue'),
   },
 
-  data() {
+  data () {
     return {
       layout: 'table',
       columns: [
@@ -115,7 +119,7 @@ export default {
       isStriped: false,
       isHoverable: true,
       hasMobileCards: true,
-      isPaginated: false,  
+      isPaginated: false,
       isPaginationSimple: true,
       isPaginationRounded: false,
       paginationPosition: 'bottom',
@@ -126,18 +130,19 @@ export default {
       perPage: 10,
       addDepartmentModal: false,
       editDepartmentModal: false,
-      searchField: ''
-    }
+      searchField: '',
+    };
   },
 
   computed: {
     ...mapGetters({
-      departments: 'department/list'
+      departments: 'department/list',
     }),
-    filteredDepartments() {
-      return this.departments.filter(department => {
-        return department.name.toLowerCase().includes(this.searchField.toLowerCase());
-      });
+    filteredDepartments () {
+      return this.departments.filter(department => department
+        .name
+        .toLowerCase()
+        .includes(this.searchField.toLowerCase()));
     },
   },
 
@@ -146,22 +151,22 @@ export default {
       setForm: 'department/setForm',
       getList: 'department/list',
     }),
-    add() {
+    add () {
       const department = {
         name: '',
-        description: ''
-      }
+        description: '',
+      };
       this.setForm(department);
       this.addDepartmentModal = true;
     },
-    edit(department) {
+    edit (department) {
       this.setForm(department);
       this.editDepartmentModal = true;
-    }
+    },
   },
 
-  created() {
+  created () {
     this.getList();
-  }
-}
+  },
+};
 </script>

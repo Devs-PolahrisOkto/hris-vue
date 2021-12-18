@@ -1,24 +1,24 @@
-import BaseClient from "./base-client";
+import BaseClient from './base-client';
 
 class CompanyClient extends BaseClient {
-  constructor(appUrl) {
+  constructor (appUrl) {
     super();
     this.baseUrl = `${appUrl}/companies`;
   }
 
-  list() {
+  list () {
     return this.axios.get(this.baseUrl)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  save(company) {
+  save (company) {
     return this.axios.post(this.baseUrl, company)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  update(company) {
+  update (company) {
     return this.axios.put(`${this.baseUrl}/${company.id}`, company)
-      .then(response => { return response; });
+      .then(response => response);
   }
 }
 

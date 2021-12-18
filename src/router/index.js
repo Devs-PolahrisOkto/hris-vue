@@ -18,20 +18,20 @@ router.beforeEach((to, from, next) => {
     const authToken = window.localStorage.getItem('authToken');
     const authUser = JSON.parse(window.localStorage.getItem('authUser'));
     if (authToken && authUser) {
-        next()
+      next();
     } else {
-        next({name: 'Login'})
+      next({ name: 'Login' });
     }
   } else if (to.meta.forVisitors) {
     const authToken = window.localStorage.getItem('authToken');
-    const authUser = JSON.parse(window.localStorage.getItem('authUser'))
+    const authUser = JSON.parse(window.localStorage.getItem('authUser'));
     if (!authToken || !authUser) {
-        next()
+      next();
     } else {
-        next({name: 'Dashboard'})
+      next({ name: 'Dashboard' });
     }
   } else {
-    next()
+    next();
   }
 });
 

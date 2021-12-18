@@ -13,16 +13,16 @@
             <div class="card-content">
                 <div class="content">
                     <text-field
-                        label="Email"
                         v-model="form.email"
+                        label="Email"
                         rules="required"
                         mode="eager"
                         field-class="mb-5"
                     ></text-field>
                     <text-field
+                        v-model="form.password"
                         label="Password"
                         type="password"
-                        v-model="form.password"
                         rules="required"
                         mode="eager"
                         field-class="mb-5"
@@ -33,8 +33,15 @@
                 </div>
             </div>
             <footer class="card-footer is-flex is-flex-direction-column p-5">
-                <button class="button is-primary has-text-weight-semibold" :disabled="invalid" expanded>LOGIN</button>
-                <b-button type="is-ghost" class="has-text-dark mt-2">Forgot Password ?</b-button>
+                <button
+                  class="button is-primary has-text-weight-semibold"
+                  :disabled="invalid"
+                  expanded
+                >LOGIN</button>
+                <b-button
+                  type="is-ghost"
+                  class="has-text-dark mt-2"
+                >Forgot Password ?</b-button>
             </footer>
         </form>
     </ValidationObserver>
@@ -42,31 +49,31 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
-    components: {
-        AuthLayout: () => import("@/layouts/AuthLayout.vue"),
-    },
+  components: {
+    AuthLayout: () => import('@/layouts/AuthLayout.vue'),
+  },
 
-    data() {
-        return {
-            form: {
-                email: 'test@test.com',
-                password: 'password',
-                device_name: "kuyabixby"
-            }
-        }
-    },
+  data () {
+    return {
+      form: {
+        email: 'test@test.com',
+        password: 'password',
+        device_name: 'kuyabixby',
+      },
+    };
+  },
 
-    methods: {
-        ...mapActions({
-            login: 'authentication/login',
-        }),
-        async handleLogin() {
-            const status = await this.login(this.form);
-            if (status) this.$router.push({name: 'Dashboard'});
-        }
-    }
-}
+  methods: {
+    ...mapActions({
+      login: 'authentication/login',
+    }),
+    async handleLogin () {
+      const status = await this.login(this.form);
+      if (status) { this.$router.push({ name: 'Dashboard' }); }
+    },
+  },
+};
 </script>

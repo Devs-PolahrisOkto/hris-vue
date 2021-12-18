@@ -13,8 +13,8 @@
 <script>
 export default {
   components: {
-    TopNav: () => import("@/partials/TopNav.vue"),
-    SideNav: () => import("@/partials/SideNav.vue"),
+    TopNav: () => import('@/partials/TopNav.vue'),
+    SideNav: () => import('@/partials/SideNav.vue'),
   },
-}
+};
 </script>

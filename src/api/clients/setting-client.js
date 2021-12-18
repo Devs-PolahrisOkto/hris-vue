@@ -1,54 +1,54 @@
-import BaseClient from "./base-client";
+import BaseClient from './base-client';
 
 class SettingClient extends BaseClient {
-  constructor(appUrl) {
+  constructor (appUrl) {
     super();
     this.baseUrl = `${appUrl}`;
   }
 
-  companyList() {
+  companyList () {
     return this.axios.get(`${this.baseUrl}/companies`)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  departmentList() {
+  departmentList () {
     return this.axios.get(`${this.baseUrl}/departments`)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  positionList() {
+  positionList () {
     return this.axios.get(`${this.baseUrl}/positions`)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  employmentTypeList() {
+  employmentTypeList () {
     return this.axios.get(`${this.baseUrl}/employment-types`)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  addressTypeList() {
+  addressTypeList () {
     return this.axios.get(`${this.baseUrl}/address-types`)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  documentTypeList() {
+  documentTypeList () {
     return this.axios.get(`${this.baseUrl}/document-types`)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  bankList() {
+  bankList () {
     return this.axios.get(`${this.baseUrl}/banks`)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  civilStatusList() {
+  civilStatusList () {
     return this.axios.get(`${this.baseUrl}/civil-statuses`)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  genderList() {
+  genderList () {
     return this.axios.get(`${this.baseUrl}/genders`)
-      .then(response => { return response; });
+      .then(response => response);
   }
 }
 

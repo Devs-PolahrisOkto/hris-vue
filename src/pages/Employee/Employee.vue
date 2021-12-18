@@ -14,7 +14,10 @@
         <div class="columns">
             <div class="column is-3">
                 <div class="card">
-                    <div class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center py-5">
+                    <div
+                        class="is-flex is-flex-direction-column
+                        is-justify-content-center is-align-items-center py-5"
+                    >
                         <figure class="image is-128x128 mb-2">
                             <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
                         </figure>
@@ -64,20 +67,20 @@
 
 <script>
 export default {
-    components: {
-        MainLayout: () => import("@/layouts/MainLayout.vue"),
-        PersonalData: () => import("@/components/Employee/Personal/PersonalData.vue"),
-        PersonalDocuments: () => import("@/components/Employee/Documents/Documents.vue"),
-        PayrollRecord: () => import("@/components/Employee/Payroll/Payroll.vue"),
-        TimekeepingRecord: () => import("@/components/Employee/Timekeeping/Timekeeping.vue"),
-    },
+  components: {
+    MainLayout: () => import('@/layouts/MainLayout.vue'),
+    PersonalData: () => import('@/components/Employee/Personal/PersonalData.vue'),
+    PersonalDocuments: () => import('@/components/Employee/Documents/Documents.vue'),
+    PayrollRecord: () => import('@/components/Employee/Payroll/Payroll.vue'),
+    TimekeepingRecord: () => import('@/components/Employee/Timekeeping/Timekeeping.vue'),
+  },
 
-    data() {
-        return {
-            activeTab: 0
-        }
-    }
-}
+  data () {
+    return {
+      activeTab: 0,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

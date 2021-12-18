@@ -1,6 +1,6 @@
 class Employee {
-  constructor(props) {
-    if (!props) return;
+  constructor (props) {
+    if (!props) { return; }
     this.id = props.id;
     this.avatar = props.avatar;
     this.gender_id = props.gender_id;
@@ -26,8 +26,8 @@ class Employee {
     this.two_factor_secret = props.two_factor_secret;
   }
 
-  get employeeName() {
-    return `${this.firstname} ${this.lastname}`
+  get employeeName () {
+    return `${this.firstname} ${this.lastname}`;
   }
 }
 

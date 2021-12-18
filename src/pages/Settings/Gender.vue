@@ -21,10 +21,10 @@
           icon="magnify">
         </b-input>
         <b-tooltip label="Add Gender">
-          <b-button 
-            icon-right="plus" 
-            class="mr-3" 
-            @click="add" 
+          <b-button
+            icon-right="plus"
+            class="mr-3"
+            @click="add"
           />
         </b-tooltip>
       </div>
@@ -51,20 +51,25 @@
         <template v-for="(column, index) in columns">
           <b-table-column
             :key="index"
+            v-slot="props"
             :label="column.title"
             :field="column.field"
             :visible="column.visible"
-            v-slot="props"
             sortable
           >
             {{ props.row[column.field] }}
           </b-table-column>
         </template>
-        <b-table-column field="option" v-slot="props" width="100" centered>
-          <b-button 
-            size="is-small" 
-            type="is-primary" 
-            icon-right="pencil" 
+        <b-table-column
+          v-slot="props"
+          field="option"
+          width="100"
+          centered
+        >
+          <b-button
+            size="is-small"
+            type="is-primary"
+            icon-right="pencil"
             @click="edit(props.row)"
           />
         </b-table-column>
@@ -79,12 +84,12 @@
   </div>
 
   <!-- Start Modals -->
-  <add-gender-modal 
+  <add-gender-modal
     :active="addGenderModal"
     @close="addGenderModal = !addGenderModal"
   ></add-gender-modal>
 
-  <edit-gender-modal 
+  <edit-gender-modal
     :active="editGenderModal"
     @close="editGenderModal = !editGenderModal"
   ></edit-gender-modal>
@@ -95,16 +100,16 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
-    MainLayout: () => import("@/layouts/MainLayout.vue"),
-    AddGenderModal: () => import("@/components/Settings/Gender/AddModal.vue"),
-    EditGenderModal: () => import("@/components/Settings/Gender/EditModal.vue"),
+    MainLayout: () => import('@/layouts/MainLayout.vue'),
+    AddGenderModal: () => import('@/components/Settings/Gender/AddModal.vue'),
+    EditGenderModal: () => import('@/components/Settings/Gender/EditModal.vue'),
   },
 
-  data() {
+  data () {
     return {
       layout: 'table',
       columns: [
@@ -115,7 +120,7 @@ export default {
       isStriped: false,
       isHoverable: true,
       hasMobileCards: true,
-      isPaginated: false,  
+      isPaginated: false,
       isPaginationSimple: true,
       isPaginationRounded: false,
       paginationPosition: 'bottom',
@@ -126,18 +131,19 @@ export default {
       perPage: 10,
       addGenderModal: false,
       editGenderModal: false,
-      searchField: ''
-    }
+      searchField: '',
+    };
   },
 
   computed: {
     ...mapGetters({
-      genders: 'gender/list'
+      genders: 'gender/list',
     }),
-    filteredGenders() {
-      return this.genders.filter(gender => {
-        return gender.name.toLowerCase().includes(this.searchField.toLowerCase());
-      });
+    filteredGenders () {
+      return this.genders.filter(gender => gender
+        .name
+        .toLowerCase()
+        .includes(this.searchField.toLowerCase()));
     },
   },
 
@@ -146,22 +152,22 @@ export default {
       setForm: 'gender/setForm',
       getList: 'gender/list',
     }),
-    add() {
+    add () {
       const gender = {
         name: '',
-        description: ''
-      }
+        description: '',
+      };
       this.setForm(gender);
       this.addGenderModal = true;
     },
-    edit(gender) {
+    edit (gender) {
       this.setForm(gender);
       this.editGenderModal = true;
-    }
+    },
   },
 
-  created() {
+  created () {
     this.getList();
-  }
-}
+  },
+};
 </script>

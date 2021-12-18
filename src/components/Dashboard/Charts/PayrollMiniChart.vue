@@ -13,15 +13,15 @@ import Chart from 'chart.js/auto';
 import { payrollMiniChartData } from '@/utilities/payroll-chart-data.js';
 
 export default {
-  data() {
+  data () {
     return {
-      payrollMiniChartData
-    }
+      payrollMiniChartData,
+    };
   },
-  
-  mounted() {
+
+  mounted () {
     const ctx = document.getElementById('payroll-mini-chart');
-    new Chart(ctx, this.payrollMiniChartData);
-  }
-}
+    return new Chart(ctx, this.payrollMiniChartData);
+  },
+};
 </script>

@@ -1,37 +1,34 @@
 import axios from 'axios';
 
 class BaseClient {
-
-  constructor() {
+  constructor () {
     this.axios = axios.create({
       headers: {
         Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-        Accept: 'application/json'
-      }
+        Accept: 'application/json',
+      },
     });
-    this.axios.interceptors.response.use(function (response) {
-      const {headers: { authorization = "" }} = response;
+    this.axios.interceptors.response.use(response => {
+      const { headers: { authorization = '' } } = response;
       const authHeader = authorization.split(/\s+/);
       const token = authHeader.length > 1 && authHeader[1];
-      localStorage.setItem("accessToken", token);
+      localStorage.setItem('accessToken', token);
       return response;
-    }, function (error) {
-      const {response: {status}} = error;
+    }, error => {
+      const { response: { status } } = error;
       if (status === 401) {
-        window.location = "/";
-        return;
+        window.location = '/';
       }
-      return Promise.reject(error);
     });
   }
 
-  _handleResponse(filter) {
+  _handleResponse (filter) {
     return response => {
       if (filter(response)) {
         return response;
       }
 
-      console.error("Response from server: ", response);
+      console.error('Response from server: ', response);
       throw response;
     };
   }

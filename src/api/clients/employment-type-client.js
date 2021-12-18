@@ -1,24 +1,24 @@
-import BaseClient from "./base-client";
+import BaseClient from './base-client';
 
 class EmploymentTypeClient extends BaseClient {
-  constructor(appUrl) {
+  constructor (appUrl) {
     super();
     this.baseUrl = `${appUrl}/employment-types`;
   }
 
-  list() {
+  list () {
     return this.axios.get(this.baseUrl)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  save(employmentType) {
+  save (employmentType) {
     return this.axios.post(this.baseUrl, employmentType)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  update(employmentType) {
+  update (employmentType) {
     return this.axios.put(`${this.baseUrl}/${employmentType.id}`, employmentType)
-      .then(response => { return response; });
+      .then(response => response);
   }
 }
 

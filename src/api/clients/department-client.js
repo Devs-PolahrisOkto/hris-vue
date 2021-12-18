@@ -1,24 +1,24 @@
-import BaseClient from "./base-client";
+import BaseClient from './base-client';
 
 class DepartmentClient extends BaseClient {
-  constructor(appUrl) {
+  constructor (appUrl) {
     super();
     this.baseUrl = `${appUrl}/departments`;
   }
 
-  list() {
+  list () {
     return this.axios.get(this.baseUrl)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  save(department) {
+  save (department) {
     return this.axios.post(this.baseUrl, department)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  update(department) {
+  update (department) {
     return this.axios.put(`${this.baseUrl}/${department.id}`, department)
-      .then(response => { return response; });
+      .then(response => response);
   }
 }
 

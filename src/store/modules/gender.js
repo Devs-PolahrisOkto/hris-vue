@@ -1,5 +1,5 @@
-import GenderClient from '@/api/clients/gender-client';
 import Vue from 'vue';
+import GenderClient from '@/api/clients/gender-client';
 
 const client = new GenderClient('https://apistaging.polahrisokto.com/api');
 
@@ -8,58 +8,58 @@ const state = {
   form: {
     id: '',
     name: '',
-    description: ''
+    description: '',
   },
 };
 
 const getters = {
-  genderForm(state) {
+  genderForm (state) {
     return state.form;
   },
-  list(state) {
+  list (state) {
     return state.genders;
-  }
-}
+  },
+};
 
 const mutations = {
-  SET_FORM(state, gender) {
-    state.form = {...gender};
+  SET_FORM (state, gender) {
+    state.form = { ...gender };
   },
-  SET_LIST(state, genders) {
+  SET_LIST (state, genders) {
     state.genders = genders;
   },
-  ADD_GENDER(state, gender) {
+  ADD_GENDER (state, gender) {
     state.genders.push(gender);
   },
-  UPDATE_GENDER(state, gender) {
-    const index = state.genders.findIndex(obj => { return obj.id === gender.id });
+  UPDATE_GENDER (state, gender) {
+    const index = state.genders.findIndex(obj => obj.id === gender.id);
     Vue.set(state.genders, index, gender);
-  }
+  },
 };
 
 const actions = {
-  setForm({commit}, payload) {
+  setForm ({ commit }, payload) {
     commit('SET_FORM', payload);
   },
-  async list({commit}) {
-    const {status, data: {data}} = await client.list();
-    if(status !== 200) {
+  async list ({ commit }) {
+    const { status, data: { data } } = await client.list();
+    if (status !== 200) {
       console.error('fetching gender list failed');
     } else {
       commit('SET_LIST', data);
     }
   },
-  async save({commit}, payload) {
-    const {status, data: {data}} = await client.save(payload);
-    if(status !== 200) {
+  async save ({ commit }, payload) {
+    const { status, data: { data } } = await client.save(payload);
+    if (status !== 200) {
       console.error('saving gender failed');
     } else {
       commit('ADD_GENDER', data);
     }
   },
-  async update({commit}, payload) {
-    const {status, data: {data}} = await client.update(payload);
-    if(status !== 200) {
+  async update ({ commit }, payload) {
+    const { status, data: { data } } = await client.update(payload);
+    if (status !== 200) {
       console.error('updating gender failed');
     } else {
       commit('UPDATE_GENDER', data);
@@ -69,8 +69,8 @@ const actions = {
 
 export default {
   namespaced: true,
-  state, 
+  state,
   getters,
-  mutations, 
+  mutations,
   actions,
 };

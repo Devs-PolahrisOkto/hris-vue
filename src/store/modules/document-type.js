@@ -1,5 +1,5 @@
-import DocumentTypeClient from '@/api/clients/document-type-client';
 import Vue from 'vue';
+import DocumentTypeClient from '@/api/clients/document-type-client';
 
 const client = new DocumentTypeClient('https://apistaging.polahrisokto.com/api');
 
@@ -8,58 +8,58 @@ const state = {
   form: {
     id: '',
     name: '',
-    description: ''
+    description: '',
   },
 };
 
 const getters = {
-  documentTypeForm(state) {
+  documentTypeForm (state) {
     return state.form;
   },
-  list(state) {
+  list (state) {
     return state.documentTypes;
-  }
-}
+  },
+};
 
 const mutations = {
-  SET_FORM(state, documentType) {
-    state.form = {...documentType};
+  SET_FORM (state, documentType) {
+    state.form = { ...documentType };
   },
-  SET_LIST(state, documentTypes) {
+  SET_LIST (state, documentTypes) {
     state.documentTypes = documentTypes;
   },
-  ADD_DOCUMENT_TYPE(state, documentType) {
+  ADD_DOCUMENT_TYPE (state, documentType) {
     state.documentTypes.push(documentType);
   },
-  UPDATE_DOCUMENT_TYPE(state, documentType) {
-    const index = state.documentTypes.findIndex(obj => { return obj.id === documentType.id });
+  UPDATE_DOCUMENT_TYPE (state, documentType) {
+    const index = state.documentTypes.findIndex(obj => obj.id === documentType.id);
     Vue.set(state.documentTypes, index, documentType);
-  }
+  },
 };
 
 const actions = {
-  setForm({commit}, payload) {
+  setForm ({ commit }, payload) {
     commit('SET_FORM', payload);
   },
-  async list({commit}) {
-    const {status, data: {data}} = await client.list();
-    if(status !== 200) {
+  async list ({ commit }) {
+    const { status, data: { data } } = await client.list();
+    if (status !== 200) {
       console.error('fetching document type list failed');
     } else {
       commit('SET_LIST', data);
     }
   },
-  async save({commit}, payload) {
-    const {status, data: {data}} = await client.save(payload);
-    if(status !== 200) {
+  async save ({ commit }, payload) {
+    const { status, data: { data } } = await client.save(payload);
+    if (status !== 200) {
       console.error('saving document type failed');
     } else {
       commit('ADD_DOCUMENT_TYPE', data);
     }
   },
-  async update({commit}, payload) {
-    const {status, data: {data}} = await client.update(payload);
-    if(status !== 200) {
+  async update ({ commit }, payload) {
+    const { status, data: { data } } = await client.update(payload);
+    if (status !== 200) {
       console.error('updating document type failed');
     } else {
       commit('UPDATE_DOCUMENT_TYPE', data);
@@ -69,8 +69,8 @@ const actions = {
 
 export default {
   namespaced: true,
-  state, 
+  state,
   getters,
-  mutations, 
+  mutations,
   actions,
 };

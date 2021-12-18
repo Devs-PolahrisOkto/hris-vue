@@ -21,20 +21,20 @@
       </b-input>
       <div>
         <b-tooltip label="Filter">
-          <b-button 
-            icon-right="filter" 
-            class="mr-1" 
+          <b-button
+            icon-right="filter"
+            class="mr-1"
             @click="isFilterModalActive = !isFilterModalActive" />
         </b-tooltip>
         <b-tooltip label="Layout">
-          <b-button 
-            icon-right="grid-large" 
-            class="mr-1" 
+          <b-button
+            icon-right="grid-large"
+            class="mr-1"
             @click="isLayoutModalActive = !isLayoutModalActive" />
         </b-tooltip>
         <b-tooltip label="Columns">
-          <b-button 
-            icon-right="table-column" 
+          <b-button
+            icon-right="table-column"
             @click="isColumnModalActive = !isColumnModalActive" />
         </b-tooltip>
       </div>
@@ -62,7 +62,7 @@
         aria-page-label="Page"
         aria-current-label="Current page"
       >
-        <b-table-column field="avatar" width="40" v-slot="props">
+        <b-table-column v-slot="props" field="avatar" width="40">
           <figure class="image is-24x24">
             <img class="is-rounded" :src="props.row.avatar">
           </figure>
@@ -71,21 +71,21 @@
         <template v-for="(column, index) in columns">
           <b-table-column
             :key="index"
+            v-slot="props"
             :label="column.title"
             :field="column.field"
             :visible="column.visible"
-            v-slot="props"
             sortable
           >
             {{ props.row[column.field] }}
           </b-table-column>
         </template>
 
-        <b-table-column field="option" v-slot="props">
-          <b-button 
-            size="is-small" 
-            type="is-primary" 
-            icon-right="eye" 
+        <b-table-column v-slot="props" field="option">
+          <b-button
+            size="is-small"
+            type="is-primary"
+            icon-right="eye"
             tag="router-link"
             :to="`/employees/${props.row.id}`"
           />
@@ -103,7 +103,7 @@
     <div v-show="layout === 'grid'">
       <div class="columns is-flex is-flex-wrap-wrap">
         <template v-for="(item, index) in employees">
-          <div class="column is-6-desktop is-12-tablet is-12-mobile" :key="index">
+          <div :key="index" class="column is-6-desktop is-12-tablet is-12-mobile">
             <article class="media has-background-white p-4">
               <figure class="media-left">
                 <p class="image is-128x128">
@@ -117,10 +117,10 @@
                 <h6 class="is-size-6">{{ item.department }}</h6>
               </div>
               <div class="media-right">
-                <b-button 
-                  size="is-small" 
-                  type="is-primary" 
-                  icon-right="eye" 
+                <b-button
+                  size="is-small"
+                  type="is-primary"
+                  icon-right="eye"
                   tag="router-link"
                   :to="`/employees/${item.id}`"
                 />
@@ -152,7 +152,7 @@
     :layout="layout"
     @change-layout="changeLayout"
     @close="isLayoutModalActive = !isLayoutModalActive"
-  ></layout-modal> 
+  ></layout-modal>
 
   <!-- End Modals -->
 
@@ -160,30 +160,30 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
-    MainLayout: () => import("@/layouts/MainLayout.vue"),
-    FilterModal: () => import("@/components/Employees/Modal/FilterModal.vue"),
-    ColumnModal: () => import("@/components/Employees/Modal/ColumnModal.vue"),
-    LayoutModal: () => import("@/components/Employees/Modal/LayoutModal.vue"),
+    MainLayout: () => import('@/layouts/MainLayout.vue'),
+    FilterModal: () => import('@/components/Employees/Modal/FilterModal.vue'),
+    ColumnModal: () => import('@/components/Employees/Modal/ColumnModal.vue'),
+    LayoutModal: () => import('@/components/Employees/Modal/LayoutModal.vue'),
   },
 
-  data() {
+  data () {
     return {
       layout: 'table',
       columns: [
         { title: 'Name', field: 'employeeName', visible: true },
         { title: 'Position', field: 'position', visible: true },
         { title: 'Department', field: 'department', visible: true },
-        { title: 'Employment Type', field: 'employment_type', visible: true }
+        { title: 'Employment Type', field: 'employment_type', visible: true },
       ],
       isEmpty: false,
       isStriped: false,
       isHoverable: true,
       hasMobileCards: true,
-      isPaginated: true,  
+      isPaginated: true,
       isPaginationSimple: true,
       isPaginationRounded: false,
       paginationPosition: 'bottom',
@@ -195,18 +195,19 @@ export default {
       isFilterModalActive: false,
       isColumnModalActive: false,
       isLayoutModalActive: false,
-      searchField: ''
-    }
+      searchField: '',
+    };
   },
 
   computed: {
     ...mapGetters({
-      employees: 'employee/list'
+      employees: 'employee/list',
     }),
-    filteredEmployees() {
-      return this.employees.filter(employee => {
-        return employee.employeeName.toLowerCase().includes(this.searchField.toLowerCase());
-      });
+    filteredEmployees () {
+      return this.employees.filter(employee => employee
+        .employeeName
+        .toLowerCase()
+        .includes(this.searchField.toLowerCase()));
     },
   },
 
@@ -215,13 +216,13 @@ export default {
       setForm: 'employee/setForm',
       getList: 'employee/list',
     }),
-    changeLayout(requestedLayout) {
+    changeLayout (requestedLayout) {
       this.layout = requestedLayout;
-    }
+    },
   },
 
-  created() {
+  created () {
     this.getList();
-  }
-}
+  },
+};
 </script>

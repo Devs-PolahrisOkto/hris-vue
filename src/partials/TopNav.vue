@@ -1,7 +1,7 @@
 <template>
-  <header 
-    class="topbar" 
+  <header
     id="header"
+    class="topbar"
   >
     <div class="topbar__toggle" @click="toggleSidebar">
       <i id="topbar-toggle" class="mdi mdi-menu"></i>
@@ -16,7 +16,7 @@
             </span>
           </button>
         </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div id="dropdown-menu" class="dropdown-menu" role="menu">
           <div class="dropdown-content">
             <a class="dropdown-item">
               <i class="mdi mdi-account-circle pr-2"></i>
@@ -50,10 +50,10 @@ export default {
       toggleSidebarMini: 'navigation/toggleSidebarMini',
       logout: 'authentication/logout',
     }),
-    async handleLogout() {
+    async handleLogout () {
       await this.logout();
-      this.$router.push({name: 'Login'});
-    }
-  }
-}
+      this.$router.push({ name: 'Login' });
+    },
+  },
+};
 </script>

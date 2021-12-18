@@ -21,15 +21,15 @@ import Chart from 'chart.js/auto';
 import { payrollWidgetChartData2 } from '@/utilities/payroll-chart-data.js';
 
 export default {
-  data() {
+  data () {
     return {
-      payrollWidgetChartData2
-    }
+      payrollWidgetChartData2,
+    };
   },
-  
-  mounted() {
+
+  mounted () {
     const ctx = document.getElementById('payroll-widget2-chart');
-    new Chart(ctx, this.payrollWidgetChartData2);
-  }
-}
+    return new Chart(ctx, this.payrollWidgetChartData2);
+  },
+};
 </script>

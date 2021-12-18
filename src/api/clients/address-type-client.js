@@ -1,24 +1,24 @@
-import BaseClient from "./base-client";
+import BaseClient from './base-client';
 
 class AddressTypeClient extends BaseClient {
-  constructor(appUrl) {
+  constructor (appUrl) {
     super();
     this.baseUrl = `${appUrl}/address-types`;
   }
 
-  list() {
+  list () {
     return this.axios.get(this.baseUrl)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  save(addressType) {
+  save (addressType) {
     return this.axios.post(this.baseUrl, addressType)
-      .then(response => { return response; });
+      .then(response => response);
   }
 
-  update(addressType) {
+  update (addressType) {
     return this.axios.put(`${this.baseUrl}/${addressType.id}`, addressType)
-      .then(response => { return response; });
+      .then(response => response);
   }
 }
 

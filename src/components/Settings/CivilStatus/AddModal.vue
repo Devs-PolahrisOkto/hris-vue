@@ -1,10 +1,10 @@
 <template>
-  <b-modal 
-    v-model="active" 
+  <b-modal
+    v-model="active"
     :width="640"
     :can-cancel="['x']"
   >
-    <modal-form 
+    <modal-form
       :modal-form="civilStatusForm"
       @submit="save"
       @close="$emit('close')"
@@ -21,28 +21,28 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   components: {
-    ModalForm: () => import("@/components/Settings/Common/Form.vue"),
+    ModalForm: () => import('@/components/Settings/Common/Form.vue'),
   },
 
   props: {
     active: {
-      type: Boolean
+      type: Boolean,
     },
   },
 
   computed: {
     ...mapGetters({
-      civilStatusForm: 'civilStatus/civilStatusForm'
-    })
+      civilStatusForm: 'civilStatus/civilStatusForm',
+    }),
   },
 
   methods: {
     ...mapActions({
       saveCivilStatus: 'civilStatus/save',
     }),
-    save(form) {
+    save (form) {
       this.saveCivilStatus(form).then(this.$emit('close'));
-    }
-  }
-}
+    },
+  },
+};
 </script>

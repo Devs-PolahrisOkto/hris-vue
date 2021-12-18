@@ -15,82 +15,64 @@ const state = {
 };
 
 const getters = {
-  companiesState(state) {
-    return state.companies.map(obj => {
-      return {
-        value: obj.id,
-        text: obj.name,
-      };
-    });
+  companiesState (state) {
+    return state.companies.map(obj => ({
+      value: obj.id,
+      text: obj.name,
+    }));
   },
-  departmentsState(state) {
-    return state.departments.map(obj => {
-      return {
-        value: obj.id,
-        text: obj.name,
-      };
-    });
+  departmentsState (state) {
+    return state.departments.map(obj => ({
+      value: obj.id,
+      text: obj.name,
+    }));
   },
-  positionsState(state) {
-    return state.positions.map(obj => {
-      return {
-        value: obj.id,
-        text: obj.name,
-      };
-    });
+  positionsState (state) {
+    return state.positions.map(obj => ({
+      value: obj.id,
+      text: obj.name,
+    }));
   },
-  employmentTypesState(state) {
-    return state.employmentTypes.map(obj => {
-      return {
-        value: obj.id,
-        text: obj.name,
-      };
-    });
+  employmentTypesState (state) {
+    return state.employmentTypes.map(obj => ({
+      value: obj.id,
+      text: obj.name,
+    }));
   },
-  addressTypesState(state) {
-    return state.addressTypes.map(obj => {
-      return {
-        value: obj.id,
-        text: obj.name,
-      };
-    });
+  addressTypesState (state) {
+    return state.addressTypes.map(obj => ({
+      value: obj.id,
+      text: obj.name,
+    }));
   },
-  documentTypesState(state) {
-    return state.documentTypes.map(obj => {
-      return {
-        value: obj.id,
-        text: obj.name,
-      };
-    });
+  documentTypesState (state) {
+    return state.documentTypes.map(obj => ({
+      value: obj.id,
+      text: obj.name,
+    }));
   },
-  banksState(state) {
-    return state.banks.map(obj => {
-      return {
-        value: obj.id,
-        text: obj.name,
-      };
-    });
+  banksState (state) {
+    return state.banks.map(obj => ({
+      value: obj.id,
+      text: obj.name,
+    }));
   },
-  civilStatusesState(state) {
-    return state.civilStatuses.map(obj => {
-      return {
-        value: obj.id,
-        text: obj.name,
-      };
-    });
+  civilStatusesState (state) {
+    return state.civilStatuses.map(obj => ({
+      value: obj.id,
+      text: obj.name,
+    }));
   },
-  gendersState(state) {
-    return state.genders.map(obj => {
-      return {
-        value: obj.id,
-        text: obj.name,
-      };
-    });
+  gendersState (state) {
+    return state.genders.map(obj => ({
+      value: obj.id,
+      text: obj.name,
+    }));
   },
-}
+};
 
 const mutations = {
-  SET_LIST(state, settings) {
+  SET_LIST (state, settings) {
     const {
       companyList,
       departmentList,
@@ -115,7 +97,7 @@ const mutations = {
 };
 
 const actions = {
-  async list({commit}) {
+  async list ({ commit }) {
     const companyList = client.companyList().then(response => {
       if (response.status !== 200) {
         console.error('fetching company list failed');
@@ -190,28 +172,26 @@ const actions = {
       bankList,
       civilStatusList,
       genderList,
-    ]).then(results => {
-      return {
-        companyList: results[0],
-        departmentList: results[1],
-        positionList: results[2],
-        employmentTypeList: results[3],
-        addressTypeList: results[4],
-        documentTypeList: results[5],
-        bankList: results[6],
-        civilStatusList: results[7],
-        genderList: results[8],
-      }
-    });
-    
+    ]).then(results => ({
+      companyList: results[0],
+      departmentList: results[1],
+      positionList: results[2],
+      employmentTypeList: results[3],
+      addressTypeList: results[4],
+      documentTypeList: results[5],
+      bankList: results[6],
+      civilStatusList: results[7],
+      genderList: results[8],
+    }));
+
     commit('SET_LIST', settings);
   },
 };
 
 export default {
   namespaced: true,
-  state, 
+  state,
   getters,
-  mutations, 
+  mutations,
   actions,
 };

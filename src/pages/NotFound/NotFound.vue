@@ -7,17 +7,18 @@
                     <h5 class="is-size-5 has-text-weight-semibold">
                         <b-icon icon="alert"></b-icon> Page not found
                     </h5>
-                    <b-button 
-                        @click="$router.go(-1)" 
-                        icon-left="chevron-left" 
-                        size="is-small">
+                    <b-button
+                        icon-left="chevron-left"
+                        size="is-small"
+                        @click="$router.go(-1)">
                         Go back
                     </b-button>
                 </header>
                 <div class="card-content">
-                    <img src="./../../assets/not_found.svg" 
-                         alt="not_found" 
-                         class="p-4" />
+                    <img
+src="./../../assets/not_found.svg"
+                         alt="not_found"
+                         class="p-4" >
                 </div>
             </div>
         </div>
