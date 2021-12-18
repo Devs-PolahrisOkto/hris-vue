@@ -62,6 +62,15 @@ const actions = {
       commit('SET_LIST', data);
     }
   },
+  async find ({ commit }, id) {
+    const { status, data: { data } } = await client.find(id);
+    if (status !== 200) {
+      console.error('fetching employee failed');
+    } else {
+      console.log(data);
+      commit('', data);
+    }
+  },
   async save ({ commit }, payload) {
     const { status, data: { data } } = await client.save(payload);
     if (status !== 200) {
