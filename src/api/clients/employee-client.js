@@ -11,6 +11,11 @@ class EmployeeClient extends BaseClient {
       .then(response => response);
   }
 
+  find (id) {
+    return this.axios.get(`${this.baseUrl}/${id}`)
+      .then(response => response);
+  }
+
   save (user) {
     return this.axios.post(this.baseUrl, user)
       .then(response => response);
