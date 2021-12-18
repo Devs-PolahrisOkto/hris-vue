@@ -1,9 +1,9 @@
 <template>
-<div>
+  <div>
     <educational-background></educational-background>
     <addresses-table></addresses-table>
     <contacts-table></contacts-table>
-</div>
+  </div>
 </template>
 
 <script>

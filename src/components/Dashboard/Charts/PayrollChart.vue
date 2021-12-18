@@ -1,7 +1,7 @@
 <template>
-<div>
+  <div>
     <canvas id="payroll-chart" height="200"></canvas>
-</div>
+  </div>
 </template>
 
 <script>

@@ -1,19 +1,19 @@
 <template>
-<div class="card p-5">
+  <div class="card p-5">
     <canvas id="payroll-widget3-chart" height="250"></canvas>
     <div class="pt-2">
-        <h6 class="is-size-7 has-text-grey">July 2021</h6>
-        <h3 class="is-size-3 has-text-weight-semibold">240,000.00</h3>
+      <h6 class="is-size-7 has-text-grey">July 2021</h6>
+      <h3 class="is-size-3 has-text-weight-semibold">240,000.00</h3>
     </div>
     <div class="pt-2">
-        <h6 class="is-size-7 has-text-grey">August 2021</h6>
-        <h3 class="is-size-3 has-text-weight-semibold">325,000.00</h3>
+      <h6 class="is-size-7 has-text-grey">August 2021</h6>
+      <h3 class="is-size-3 has-text-weight-semibold">325,000.00</h3>
     </div>
     <div class="pt-2">
-        <h6 class="is-size-7 has-text-grey">September 2021</h6>
-        <h3 class="is-size-3 has-text-weight-semibold">515,000.00</h3>
+      <h6 class="is-size-7 has-text-grey">September 2021</h6>
+      <h3 class="is-size-3 has-text-weight-semibold">515,000.00</h3>
     </div>
-</div>
+  </div>
 </template>
 
 <script>

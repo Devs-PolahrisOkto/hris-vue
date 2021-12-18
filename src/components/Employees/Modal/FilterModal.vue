@@ -1,81 +1,84 @@
 <template>
-<b-modal
+  <b-modal
     v-model="active"
     :width="640"
     :can-cancel="['x']"
->
+  >
     <form action="">
-        <div class="modal-card">
-            <header class="modal-card-head is-flex is-justify-content-space-between">
-                <h6 class="is-flex is-align-items-center">
-                    <b-icon icon="filter" size="is-small"></b-icon>
-                    <h6 class="is-size-6 has-text-weight-bold px-3">Filter</h6>
-                </h6>
-                <button
-                    type="button"
-                    class="delete"
-                    @click="$emit('close')"></button>
-            </header>
-            <section class="modal-card-body">
-                <form class="py-4">
-                    <b-field label="Position" label-position="on-border" class="mb-5">
-                        <b-autocomplete
-                            v-model="position"
-                            :data="filteredPositions"
-                            placeholder="e.g. Accounting Staff"
-                            icon="magnify"
-                            clearable
-                            @select="option => selectedPosition = option">
-                            <template #empty>No results found</template>
-                        </b-autocomplete>
-                    </b-field>
-                    <b-field label="Department" label-position="on-border" class="mb-5">
-                        <b-autocomplete
-                            v-model="department"
-                            :data="filteredDepartments"
-                            placeholder="e.g. Accounting Department"
-                            icon="magnify"
-                            clearable
-                            @select="option => selectedDepartment = option">
-                            <template #empty>No results found</template>
-                        </b-autocomplete>
-                    </b-field>
-                    <b-field label="Employment Type" label-position="on-border" class="mb-5">
-                        <b-autocomplete
-                            v-model="employmentType"
-                            :data="filteredEmploymentTypes"
-                            placeholder="e.g. Probationary"
-                            icon="magnify"
-                            clearable
-                            @select="option => selectedEmploymentType = option">
-                            <template #empty>No results found</template>
-                        </b-autocomplete>
-                    </b-field>
-                    <b-field label="Batch" label-position="on-border" class="mb-5">
-                        <b-autocomplete
-                            v-model="batch"
-                            :data="filteredBatches"
-                            placeholder="e.g. Batch 1"
-                            icon="magnify"
-                            clearable
-                            @select="option => selectedBatch = option">
-                            <template #empty>No results found</template>
-                        </b-autocomplete>
-                    </b-field>
-                    <button class="button is-primary">Filter Employee</button>
-                </form>
-            </section>
-            <footer class="modal-card-foot">
-                <b-button
-                    label="Cancel"
-                    @click="$emit('close')" />
-                <b-button
-                    label="Save as default"
-                    type="is-primary" />
-            </footer>
-        </div>
+      <div class="modal-card">
+        <header class="modal-card-head is-flex is-justify-content-space-between">
+          <h6 class="is-flex is-align-items-center">
+            <b-icon icon="filter" size="is-small"></b-icon>
+            <h6 class="is-size-6 has-text-weight-bold px-3">Filter</h6>
+          </h6>
+          <button
+            type="button"
+            class="delete"
+            @click="$emit('close')"
+          ></button>
+        </header>
+        <section class="modal-card-body">
+          <form class="py-4">
+            <b-field label="Position" label-position="on-border" class="mb-5">
+              <b-autocomplete
+                v-model="position"
+                :data="filteredPositions"
+                placeholder="e.g. Accounting Staff"
+                icon="magnify"
+                clearable
+                @select="option => selectedPosition = option">
+                <template #empty>No results found</template>
+              </b-autocomplete>
+            </b-field>
+            <b-field label="Department" label-position="on-border" class="mb-5">
+              <b-autocomplete
+                v-model="department"
+                :data="filteredDepartments"
+                placeholder="e.g. Accounting Department"
+                icon="magnify"
+                clearable
+                @select="option => selectedDepartment = option">
+                <template #empty>No results found</template>
+              </b-autocomplete>
+            </b-field>
+            <b-field label="Employment Type" label-position="on-border" class="mb-5">
+              <b-autocomplete
+                v-model="employmentType"
+                :data="filteredEmploymentTypes"
+                placeholder="e.g. Probationary"
+                icon="magnify"
+                clearable
+                @select="option => selectedEmploymentType = option">
+                <template #empty>No results found</template>
+              </b-autocomplete>
+            </b-field>
+            <b-field label="Batch" label-position="on-border" class="mb-5">
+              <b-autocomplete
+                v-model="batch"
+                :data="filteredBatches"
+                placeholder="e.g. Batch 1"
+                icon="magnify"
+                clearable
+                @select="option => selectedBatch = option">
+                <template #empty>No results found</template>
+              </b-autocomplete>
+            </b-field>
+            <button class="button is-primary">Filter Employee</button>
+          </form>
+        </section>
+        <footer class="modal-card-foot">
+          <b-button
+            label="Cancel"
+            @click="$emit('close')"
+          />
+          <b-button
+            label="Save as default"
+            type="is-primary"
+          />
+        </footer>
+      </div>
     </form>
-</b-modal>
+  </b-modal>
 </template>
 
 <script>
