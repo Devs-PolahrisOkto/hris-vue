@@ -86,7 +86,23 @@
               </b-table-column>
             </template>
 
-            <b-table-column v-slot="props" field="option">
+            <b-table-column
+              v-slot="props"
+              field="positions"
+              label="Position"
+            >
+              <b-tag
+                v-if="props.row.positions[0]"
+                type="is-info"
+              >
+                {{ props.row.positions && props.row.positions[0] && props.row.positions[0].name }}
+              </b-tag>
+            </b-table-column>
+
+            <b-table-column
+              v-slot="props"
+              field="option"
+            >
               <b-button
                 size="is-small"
                 type="is-primary"
@@ -178,7 +194,6 @@ export default {
       layout: 'table',
       columns: [
         { title: 'Name', field: 'employeeName', visible: true },
-        { title: 'Position', field: 'position', visible: true },
         { title: 'Department', field: 'department', visible: true },
         { title: 'Employment Type', field: 'employmentTypeName', visible: true },
       ],
@@ -214,6 +229,10 @@ export default {
     },
   },
 
+  created () {
+    this.getList();
+  },
+
   methods: {
     ...mapActions({
       setForm: 'employee/setForm',
@@ -222,10 +241,6 @@ export default {
     changeLayout (requestedLayout) {
       this.layout = requestedLayout;
     },
-  },
-
-  created () {
-    this.getList();
   },
 };
 </script>
