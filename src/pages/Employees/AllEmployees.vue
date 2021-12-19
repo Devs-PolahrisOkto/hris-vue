@@ -180,7 +180,7 @@ export default {
         { title: 'Name', field: 'employeeName', visible: true },
         { title: 'Position', field: 'position', visible: true },
         { title: 'Department', field: 'department', visible: true },
-        { title: 'Employment Type', field: 'employment_type', visible: true },
+        { title: 'Employment Type', field: 'employmentTypeName', visible: true },
       ],
       isEmpty: false,
       isStriped: false,
