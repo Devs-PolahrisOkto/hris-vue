@@ -6,6 +6,7 @@ const client = new EmployeeClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
   employees: [],
+  selectedEmployee: {},
   form: {
     id: '',
     name: '',
@@ -32,6 +33,9 @@ const getters = {
   list (state) {
     return state.employees.map(employee => new Employee(employee));
   },
+  selectedEmployee (state) {
+    return state.selectedEmployee;
+  },
 };
 
 const mutations = {
@@ -47,6 +51,9 @@ const mutations = {
   UPDATE_EMPLOYEE (state, employee) {
     const index = state.employees.findIndex(obj => obj.id === employee.id);
     Vue.set(state.employees, index, employee);
+  },
+  SET_EMPLOYEE (state, employee) {
+    state.selectedEmployee = new Employee(employee);
   },
 };
 
@@ -67,8 +74,7 @@ const actions = {
     if (status !== 200) {
       console.error('fetching employee failed');
     } else {
-      console.log(data);
-      commit('', data);
+      commit('SET_EMPLOYEE', data);
     }
   },
   async save ({ commit }, payload) {
