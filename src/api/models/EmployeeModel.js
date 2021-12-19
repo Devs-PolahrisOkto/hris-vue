@@ -24,6 +24,8 @@ class Employee {
     this.deleted_at = props.deleted_at;
     this.two_factor_recovery_codes = props.two_factor_recovery_codes;
     this.two_factor_secret = props.two_factor_secret;
+    this.gender = props.gender;
+    this.employment_type = props.employment_type;
     this.positions = props.positions;
     this.banks = props.banks;
     this.branch = props.branch;
