@@ -9,89 +9,84 @@
     </nav>
     <!-- End Breadcrumb -->
 
-    <div class="columns">
-      <div class="column is-9">
-        <div class="container is-fluid pr-0">
-          <div class="is-flex is-justify-content-space-between py-2">
-            <b-input
-              v-model="searchField"
-              placeholder="Search..."
-              type="search"
-              icon="magnify">
-            </b-input>
-            <b-tooltip label="Add Document Type">
-              <b-button
-                icon-right="plus"
-                class="mr-3"
-                @click="add"
-              />
-            </b-tooltip>
-          </div>
-          <b-table
-            :data="isEmpty ? [] : filteredDocumentTypes"
-            :striped="isStriped"
-            :hoverable="isHoverable"
-            :mobile-cards="hasMobileCards"
-            :paginated="isPaginated"
-            :per-page="perPage"
-            :current-page.sync="currentPage"
-            :pagination-simple="isPaginationSimple"
-            :pagination-position="paginationPosition"
-            :default-sort-direction="defaultSortDirection"
-            :pagination-rounded="isPaginationRounded"
-            :sort-icon="sortIcon"
-            :sort-icon-size="sortIconSize"
-            default-sort="name"
-            aria-next-label="Next page"
-            aria-previous-label="Previous page"
-            aria-page-label="Page"
-            aria-current-label="Current page"
-          >
-            <template v-for="(column, index) in columns">
-              <b-table-column
-                :key="index"
-                v-slot="props"
-                :label="column.title"
-                :field="column.field"
-                :visible="column.visible"
-                sortable
-              >
-                {{ props.row[column.field] }}
-              </b-table-column>
-            </template>
-            <b-table-column
-              v-slot="props" field="option"
-              width="100"
-              centered
-            >
-              <b-button
-                size="is-small"
-                type="is-primary"
-                icon-right="pencil"
-                @click="edit(props.row)"
-              />
-            </b-table-column>
-            <template #empty>
-              <div class="has-text-centered">No records</div>
-            </template>
-          </b-table>
-        </div>
+    <!-- Document Type Table -->
+    <setting-layout>
+      <div class="is-flex is-justify-content-space-between py-2">
+        <b-input
+          v-model="searchField"
+          placeholder="Search..."
+          type="search"
+          icon="magnify">
+        </b-input>
+        <b-tooltip label="Add Document Type">
+          <b-button
+            icon-right="plus"
+            @click="add"
+          />
+        </b-tooltip>
       </div>
-      <div class="column is-3"></div>
+      <b-table
+        :data="isEmpty ? [] : filteredDocumentTypes"
+        :striped="isStriped"
+        :hoverable="isHoverable"
+        :mobile-cards="hasMobileCards"
+        :paginated="isPaginated"
+        :per-page="perPage"
+        :current-page.sync="currentPage"
+        :pagination-simple="isPaginationSimple"
+        :pagination-position="paginationPosition"
+        :default-sort-direction="defaultSortDirection"
+        :pagination-rounded="isPaginationRounded"
+        :sort-icon="sortIcon"
+        :sort-icon-size="sortIconSize"
+        default-sort="name"
+        aria-next-label="Next page"
+        aria-previous-label="Previous page"
+        aria-page-label="Page"
+        aria-current-label="Current page"
+      >
+        <template v-for="(column, index) in columns">
+          <b-table-column
+            :key="index"
+            v-slot="props"
+            :label="column.title"
+            :field="column.field"
+            :visible="column.visible"
+            sortable
+          >
+            {{ props.row[column.field] }}
+          </b-table-column>
+        </template>
+        <b-table-column
+          v-slot="props" field="option"
+          width="100"
+          centered
+        >
+          <b-button
+            size="is-small"
+            type="is-primary"
+            icon-right="pencil"
+            @click="edit(props.row)"
+          />
+        </b-table-column>
+        <template #empty>
+          <div class="has-text-centered">No records</div>
+        </template>
+      </b-table>
+    </setting-layout>
+    <!-- Document Type Table -->
 
-      <!-- Start Modals -->
-      <add-document-type-modal
-        :active="addDocumentTypeModal"
-        @close="addDocumentTypeModal = !addDocumentTypeModal"
-      ></add-document-type-modal>
+    <!-- Start Modals -->
+    <add-document-type-modal
+      :active="addDocumentTypeModal"
+      @close="addDocumentTypeModal = !addDocumentTypeModal"
+    ></add-document-type-modal>
 
-      <edit-document-type-modal
-        :active="editDocumentTypeModal"
-        @close="editDocumentTypeModal = !editDocumentTypeModal"
-      ></edit-document-type-modal>
-      <!-- End Modals -->
-    </div>
-
+    <edit-document-type-modal
+      :active="editDocumentTypeModal"
+      @close="editDocumentTypeModal = !editDocumentTypeModal"
+    ></edit-document-type-modal>
+    <!-- End Modals -->
   </main-layout>
 </template>
 
@@ -101,6 +96,7 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   components: {
     MainLayout: () => import('@/layouts/MainLayout.vue'),
+    SettingLayout: () => import('@/layouts/SettingLayout.vue'),
     AddDocumentTypeModal: () => import('@/components/Settings/DocumentType/AddModal.vue'),
     EditDocumentTypeModal: () => import('@/components/Settings/DocumentType/EditModal.vue'),
   },
