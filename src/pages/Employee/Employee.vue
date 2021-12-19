@@ -21,7 +21,7 @@
               <figure class="image is-128x128 mb-2">
                 <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
               </figure>
-              <h5 class="is-size-5">John Doe</h5>
+              <h5 class="is-size-5">{{ selectedEmployee.employeeName }}</h5>
               <h6 class="is-size-6">IT Staff</h6>
             </div>
             <div class="card-content">
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -81,6 +81,12 @@ export default {
     return {
       activeTab: 0,
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      selectedEmployee: 'employee/selectedEmployee',
+    }),
   },
 
   created () {
