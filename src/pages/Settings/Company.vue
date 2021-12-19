@@ -70,7 +70,7 @@
           />
         </b-table-column>
         <template #empty>
-          <div class="has-text-centered">No records</div>
+          <no-record></no-record>
         </template>
       </b-table>
     </setting-layout>
@@ -98,6 +98,7 @@ export default {
     SettingLayout: () => import('@/layouts/SettingLayout.vue'),
     AddCompanyModal: () => import('@/components/Settings/Company/AddModal.vue'),
     EditCompanyModal: () => import('@/components/Settings/Company/EditModal.vue'),
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   data () {
