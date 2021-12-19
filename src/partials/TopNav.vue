@@ -10,7 +10,7 @@
       <div class="dropdown is-right is-hoverable">
         <div class="dropdown-trigger">
           <button class="button is-white" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span>test@test.com</span>
+            <span>{{ authUserEmail }}</span>
             <span class="icon is-small">
               <i class="mdi mdi-chevron-down"></i>
             </span>
@@ -41,6 +41,7 @@ export default {
   computed: {
     ...mapGetters({
       sidebarMiniState: 'navigation/sidebarMiniState',
+      authUserEmail: 'authentication/authUserEmail',
     }),
   },
 
