@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import BankClient from '@/api/clients/bank-client';
+import BankClient from '@/api/clients/BankClient';
 
 const client = new BankClient('https://apistaging.polahrisokto.com/api');
 

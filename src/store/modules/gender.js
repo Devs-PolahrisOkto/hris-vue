@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import GenderClient from '@/api/clients/gender-client';
+import GenderClient from '@/api/clients/GenderClient';
 
 const client = new GenderClient('https://apistaging.polahrisokto.com/api');
 

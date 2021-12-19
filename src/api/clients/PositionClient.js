@@ -1,4 +1,4 @@
-import BaseClient from './base-client';
+import BaseClient from './BaseClient';
 
 class PositionClient extends BaseClient {
   constructor (appUrl) {

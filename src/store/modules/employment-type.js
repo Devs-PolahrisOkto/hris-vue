@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import EmploymentTypeClient from '@/api/clients/employment-type-client';
+import EmploymentTypeClient from '@/api/clients/EmploymentTypeClient';
 
 const client = new EmploymentTypeClient('https://apistaging.polahrisokto.com/api');
 

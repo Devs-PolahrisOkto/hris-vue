@@ -1,4 +1,4 @@
-import AuthenticationClient from '@/api/clients/authentication-client';
+import AuthenticationClient from '@/api/clients/AuthenticationClient';
 
 const client = new AuthenticationClient('https://apistaging.polahrisokto.com/api');
 

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import CivilStatusClient from '@/api/clients/civil-status-client';
+import CivilStatusClient from '@/api/clients/CivilStatusClient';
 
 const client = new CivilStatusClient('https://apistaging.polahrisokto.com/api');
 

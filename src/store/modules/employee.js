@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import EmployeeClient from '@/api/clients/employee-client';
-import Employee from '@/api/models/employee-model';
+import EmployeeClient from '@/api/clients/EmployeeClient';
+import Employee from '@/api/models/EmployeeModel';
 import initialState from '@/config/employee.state';
 
 const client = new EmployeeClient('https://apistaging.polahrisokto.com/api');

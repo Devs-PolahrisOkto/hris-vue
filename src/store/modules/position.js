@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import PositionClient from '@/api/clients/position-client';
+import PositionClient from '@/api/clients/PositionClient';
 
 const client = new PositionClient('https://apistaging.polahrisokto.com/api');
 

@@ -1,4 +1,4 @@
-import SettingClient from '@/api/clients/setting-client';
+import SettingClient from '@/api/clients/SettingClient';
 
 const client = new SettingClient('https://apistaging.polahrisokto.com/api');
 

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import CompanyClient from '@/api/clients/company-client';
+import CompanyClient from '@/api/clients/CompanyClient';
 
 const client = new CompanyClient('https://apistaging.polahrisokto.com/api');
 

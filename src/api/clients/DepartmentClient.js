@@ -1,4 +1,4 @@
-import BaseClient from './base-client';
+import BaseClient from './BaseClient';
 
 class DepartmentClient extends BaseClient {
   constructor (appUrl) {

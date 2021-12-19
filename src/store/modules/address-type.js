@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import AddressTypeClient from '@/api/clients/address-type-client';
+import AddressTypeClient from '@/api/clients/AddressTypeClient';
 
 const client = new AddressTypeClient('https://apistaging.polahrisokto.com/api');
 
