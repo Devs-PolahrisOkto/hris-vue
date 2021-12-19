@@ -24,6 +24,14 @@ class Employee {
     this.deleted_at = props.deleted_at;
     this.two_factor_recovery_codes = props.two_factor_recovery_codes;
     this.two_factor_secret = props.two_factor_secret;
+    this.positions = props.positions;
+    this.banks = props.banks;
+    this.branch = props.branch;
+    this.departments = props.departments;
+    this.addresses = props.addresses;
+    this.contacts = props.contacts;
+    this.education = props.education;
+    this.documents = props.documents;
   }
 
   get employeeName () {
