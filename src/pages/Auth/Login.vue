@@ -63,8 +63,8 @@ export default {
   data () {
     return {
       form: {
-        email: 'test@test.com',
-        password: 'password',
+        email: '',
+        password: '',
         device_name: 'kuyabixby',
       },
     };
