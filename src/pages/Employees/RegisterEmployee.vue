@@ -25,14 +25,14 @@
               <div class="columns">
                 <div class="column">
                   <text-field
-                    v-model="employeeDetails.user.extension"
+                    v-model="form.user.extension"
                     label-position="on-border"
                     label="Extension"
                   ></text-field>
                 </div>
                 <div class="column">
                   <text-field
-                    v-model="employeeDetails.user.firstname"
+                    v-model="form.user.firstname"
                     label-position="on-border"
                     label="First Name"
                     rules="required"
@@ -41,7 +41,7 @@
                 </div>
                 <div class="column">
                   <text-field
-                    v-model="employeeDetails.user.middlename"
+                    v-model="form.user.middlename"
                     label-position="on-border"
                     label="Middle Name"
                     mode="passive"
@@ -49,7 +49,7 @@
                 </div>
                 <div class="column">
                   <text-field
-                    v-model="employeeDetails.user.lastname"
+                    v-model="form.user.lastname"
                     label-position="on-border"
                     label="Last Name"
                     rules="required"
@@ -58,7 +58,7 @@
                 </div>
                 <div class="column">
                   <text-field
-                    v-model="employeeDetails.user.title"
+                    v-model="form.user.title"
                     label-position="on-border"
                     label="Title"
                   ></text-field>
@@ -68,14 +68,14 @@
               <div class="columns">
                 <div class="column">
                   <text-field
-                    v-model="employeeDetails.user.nickname"
+                    v-model="form.user.nickname"
                     label-position="on-border"
                     label="Nickname"
                   ></text-field>
                 </div>
                 <div class="column">
                   <text-field
-                    v-model="employeeDetails.user.username"
+                    v-model="form.user.username"
                     label-position="on-border"
                     label="Username"
                     rules="required"
@@ -84,7 +84,7 @@
                 </div>
                 <div class="column">
                   <text-field
-                    v-model="employeeDetails.user.email"
+                    v-model="form.user.email"
                     label-position="on-border"
                     label="Email"
                     rules="required"
@@ -93,7 +93,7 @@
                 </div>
                 <div class="column">
                   <text-field
-                    v-model="employeeDetails.user.password"
+                    v-model="form.user.password"
                     label-position="on-border"
                     label="Password"
                     rules="required"
@@ -105,7 +105,7 @@
               <div class="columns">
                 <div class="column">
                   <select-field
-                    v-model="employeeDetails.user.gender_id"
+                    v-model="form.user.gender_id"
                     label-position="on-border"
                     label="Gender"
                     rules="required"
@@ -115,7 +115,7 @@
                 </div>
                 <div class="column">
                   <select-field
-                    v-model="employeeDetails.user.civilstatus_id"
+                    v-model="form.user.civilstatus_id"
                     label-position="on-border"
                     label="Civil Status"
                     rules="required"
@@ -125,7 +125,7 @@
                 </div>
                 <div class="column">
                   <date-picker-field
-                    v-model="employeeDetails.user.birthDate"
+                    v-model="form.user.birthDate"
                     label-position="on-border"
                     label="Birthdate"
                     rules="required"
@@ -138,7 +138,7 @@
               <div class="columns">
                 <div class="column">
                   <select-field
-                    v-model="employeeDetails.user.employment_type_id"
+                    v-model="form.user.employment_type_id"
                     label-position="on-border"
                     label="Employment Type"
                     rules="required"
@@ -148,7 +148,7 @@
                 </div>
                 <div class="column">
                   <select-field
-                    v-model="employeeDetails.positions"
+                    v-model="form.positions"
                     label-position="on-border"
                     label="Position"
                     rules="required"
@@ -158,7 +158,7 @@
                 </div>
                 <div class="column">
                   <select-field
-                    v-model="employeeDetails.company_id"
+                    v-model="form.company_id"
                     label-position="on-border"
                     label="Company"
                     rules="required"
@@ -168,7 +168,7 @@
                 </div>
                 <div class="column">
                   <select-field
-                    v-model="employeeDetails.department_id"
+                    v-model="form.department_id"
                     label-position="on-border"
                     label="Department"
                     rules="required"
@@ -186,7 +186,7 @@
                   @click="addContact"
                 />
               </div>
-              <template v-for="contact in employeeDetails.contacts">
+              <template v-for="contact in form.contacts">
                 <div :key="contact.id" class="columns">
                   <div class="column is-6">
                       <text-field
@@ -225,7 +225,7 @@
                   @click="addAddress"
                 />
               </div>
-              <template v-for="address in employeeDetails.addresses">
+              <template v-for="address in form.addresses">
                 <div :key="address.id" class="columns">
                   <div class="column is-3">
                     <text-field
@@ -283,7 +283,7 @@
                   @click="addEducation"
                 />
               </div>
-              <template v-for="education in employeeDetails.education">
+              <template v-for="education in form.education">
                 <div :key="education.id" class="columns">
                   <div class="column is-3">
                       <text-field
@@ -342,14 +342,14 @@
               <!-- Educational Background -->
 
               <b-field class="file">
-                <b-upload v-model="employeeDetails.profile_photo">
+                <b-upload v-model="form.profile_photo">
                   <a class="button">
                     <b-icon icon="upload"></b-icon>
                     <span>Upload Profile Photo</span>
                   </a>
                 </b-upload>
-                <span v-if="employeeDetails.profile_photo" class="is-size-6 px-3 py-2">
-                  {{ employeeDetails.profile_photo.name }}
+                <span v-if="form.profile_photo" class="is-size-6 px-3 py-2">
+                  {{ form.profile_photo.name }}
                 </span>
               </b-field>
 
@@ -371,6 +371,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { uniqueId } from 'lodash';
+import EmployeeRepresentation from '@/api/representations/EmployeeRepresentation';
 
 export default {
   components: {
@@ -379,36 +380,7 @@ export default {
 
   data () {
     return {
-      employeeDetails: {
-        user: {
-          firstname: '',
-          middlename: '',
-          lastname: '',
-          nickname: '',
-          extension: '',
-          title: '',
-          birthDate: null,
-          username: '',
-          email: '',
-          password: '',
-          gender_id: '',
-          employment_type_id: '',
-          branch_id: '',
-          civilstatus_id: '',
-        },
-        company_id: '',
-        department_id: '',
-        positions: '',
-        documents: [],
-        contacts: [{ id: uniqueId(), name: '', description: '' }],
-        addresses: [{
-          id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '',
-        }],
-        education: [{
-          id: uniqueId(), description: '', school: '', degree: '', start_at: null, end_at: null,
-        }],
-        profile_photo: null,
-      },
+      form: new EmployeeRepresentation(),
     };
   },
 
@@ -436,7 +408,7 @@ export default {
       saveEmployee: 'employee/save',
     }),
     save () {
-      this.saveEmployee(this.employeeDetails);
+      this.saveEmployee(this.form);
     },
     resetForm () {
       requestAnimationFrame(() => {
@@ -444,29 +416,29 @@ export default {
       });
     },
     addContact () {
-      this.employeeDetails.contacts.push({ id: uniqueId(), name: '', description: '' });
+      this.form.contacts.push({ id: uniqueId(), name: '', description: '' });
     },
     removeContact (contact) {
-      const index = this.employeeDetails.contacts.indexOf(contact);
-      this.employeeDetails.contacts.splice(index, 1);
+      const index = this.form.contacts.indexOf(contact);
+      this.form.contacts.splice(index, 1);
     },
     addAddress () {
-      this.employeeDetails.addresses.push({
+      this.form.addresses.push({
         id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '',
       });
     },
     removeAddress (address) {
-      const index = this.employeeDetails.addresses.indexOf(address);
-      this.employeeDetails.addresses.splice(index, 1);
+      const index = this.form.addresses.indexOf(address);
+      this.form.addresses.splice(index, 1);
     },
     addEducation () {
-      this.employeeDetails.education.push({
+      this.form.education.push({
         id: uniqueId(), description: '', school: '', degree: '', start_at: null, end_at: null,
       });
     },
     removeEducation (education) {
-      const index = this.employeeDetails.education.indexOf(education);
-      this.employeeDetails.education.splice(index, 1);
+      const index = this.form.education.indexOf(education);
+      this.form.education.splice(index, 1);
     },
   },
 };
