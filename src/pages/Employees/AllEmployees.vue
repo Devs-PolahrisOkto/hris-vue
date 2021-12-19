@@ -97,7 +97,7 @@
             </b-table-column>
 
             <template #empty>
-              <div class="has-text-centered">No records</div>
+              <no-record></no-record>
             </template>
           </b-table>
         </div>
@@ -170,6 +170,7 @@ export default {
     FilterModal: () => import('@/components/Employees/Modal/FilterModal.vue'),
     ColumnModal: () => import('@/components/Employees/Modal/ColumnModal.vue'),
     LayoutModal: () => import('@/components/Employees/Modal/LayoutModal.vue'),
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   data () {
