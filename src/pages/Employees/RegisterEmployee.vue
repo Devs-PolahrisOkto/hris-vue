@@ -379,11 +379,6 @@ export default {
 
   data () {
     return {
-      GENDERS: [],
-      CIVIL_STATUS: [],
-      EMPLOYMENT_TYPES: [],
-      POSITIONS: [],
-      DEPARTMENTS: [],
       employeeDetails: {
         user: {
           firstname: '',
@@ -431,13 +426,16 @@ export default {
     }),
   },
 
+  created () {
+    this.getList();
+  },
+
   methods: {
     ...mapActions({
       getList: 'setting/list',
       saveEmployee: 'employee/save',
     }),
     save () {
-      console.log(this.employeeDetails);
       this.saveEmployee(this.employeeDetails);
     },
     resetForm () {
@@ -470,10 +468,6 @@ export default {
       const index = this.employeeDetails.education.indexOf(education);
       this.employeeDetails.education.splice(index, 1);
     },
-  },
-
-  created () {
-    this.getList();
   },
 };
 </script>
