@@ -19,7 +19,7 @@
           </h5>
         </header>
         <div class="card-content">
-          <ValidationObserver ref="observer" v-slot="{ passes }">
+          <ValidationObserver ref="observer" v-slot="{ invalid, passes }">
             <form @submit.prevent="passes(save)">
               <h6 class="is-size-6 has-text-weight-light mb-4">Basic Information</h6>
               <div class="columns">
@@ -250,8 +250,6 @@
                       v-model="address.address2"
                       label-position="on-border"
                       label="Address 2"
-                      rules="required"
-                      mode="eager"
                     ></text-field>
                   </div>
                   <div class="column is-2">
@@ -356,6 +354,7 @@
               <b-button
                 native-type="submit"
                 class="is-primary mt-6 mr-auto"
+                :disabled="invalid"
               >
                 <span class="has-text-weight-bold px-5">Register</span>
               </b-button>
