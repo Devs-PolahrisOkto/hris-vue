@@ -12,8 +12,8 @@
       :message="errors"
     >
       <b-datepicker
-        :value="dateValue"
-        @input="$emit('input', $moment($event).format('L'))"
+        :value="value"
+        @input="$emit('input', $event)"
       ></b-datepicker>
     </b-field>
   </ValidationProvider>
@@ -23,16 +23,10 @@
 export default {
   props: {
     label: String,
-    value: String,
+    value: [ Date, String ],
     labelPosition: String,
     mode: String,
     rules: String,
-  },
-  computed: {
-    dateValue: {
-      // eslint-disable-next-line max-len
-      get () { return this.value ? this.$moment(this.value, this.$moment.defaultFormat).toDate() : null; },
-    },
   },
 };
 </script>
