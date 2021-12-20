@@ -48,14 +48,9 @@
 </template>
 
 <script>
-export default {
-  props: {
-    contacts: {
-      type: Array,
-      default: () => [],
-    },
-  },
+import { mapGetters } from 'vuex';
 
+export default {
   data () {
     return {
       isEmpty: false,
@@ -72,6 +67,12 @@ export default {
       currentPage: 1,
       perPage: 10,
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      contacts: 'employee/selected/contacts',
+    }),
   },
 };
 </script>
