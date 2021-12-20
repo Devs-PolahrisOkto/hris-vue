@@ -408,7 +408,13 @@ export default {
       saveEmployee: 'employee/save',
     }),
     save () {
-      this.saveEmployee(this.form);
+      const form = { ...this.form };
+      form.education = form.education.map(obj => ({
+        ...obj,
+        start_at: this.$moment(obj.start_at).format('YYYY-MM-DD hh:mm:ss'),
+        end_at: this.$moment(obj.end_at).format('YYYY-MM-DD hh:mm:ss'),
+      }));
+      this.saveEmployee(form);
     },
     resetForm () {
       requestAnimationFrame(() => {
