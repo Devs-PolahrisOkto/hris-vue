@@ -74,6 +74,14 @@ const actions = {
       commit('UPDATE_EMPLOYEE', data);
     }
   },
+  async upload ({ commit }, payload) {
+    const { status, data: { data } } = await client.upload(payload);
+    if (status !== 200) {
+      console.error('uploading file failed');
+    } else {
+      commit('', data);
+    }
+  },
   updateHeaders ({ commit }, headers) {
     commit('UPDATE_HEADERS', headers);
   },
