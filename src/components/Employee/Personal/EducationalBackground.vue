@@ -49,7 +49,7 @@
       </b-table-column>
 
       <template #empty>
-        <div class="has-text-centered">No records</div>
+        <no-record :width="160" :height="160"></no-record>
       </template>
     </b-table>
   </div>
@@ -78,6 +78,10 @@ export default {
       currentPage: 1,
       perPage: 10,
     };
+  },
+
+  components: {
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   computed: {
