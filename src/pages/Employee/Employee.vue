@@ -19,27 +19,23 @@
               is-justify-content-center is-align-items-center py-5"
             >
               <figure class="image is-128x128 mb-2">
-                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                <img class="is-rounded" :src="employee.avatar">
               </figure>
-              <h5 class="is-size-5">{{ selectedEmployee.employeeName }}</h5>
-              <h6 class="is-size-6">IT Staff</h6>
+              <h5 class="is-size-5">{{ employee.employeeName }}</h5>
+              <h6 v-show="position" class="is-size-6">{{ position }}</h6>
             </div>
             <div class="card-content">
-              <div class="pb-2">
-                <h6 class="is-size-7 has-text-grey-light">Department</h6>
-                <h6 class="is-size-6">IT Department</h6>
-              </div>
-              <div class="pt-2">
+              <div v-show="employmentType" class="pt-2">
                 <h6 class="is-size-7 has-text-grey-light">Employment Type</h6>
-                <h6 class="is-size-6">Probationary</h6>
+                <h6 class="is-size-6">{{ employmentType }}</h6>
               </div>
-              <div class="pt-2">
+              <div v-show="contact" class="pt-2">
                 <h6 class="is-size-7 has-text-grey-light">Contact No.</h6>
-                <h6 class="is-size-6">21-254-456</h6>
+                <h6 class="is-size-6">{{ contact }}</h6>
               </div>
-              <div class="pt-2">
+              <div v-show="address" class="pt-2">
                 <h6 class="is-size-7 has-text-grey-light">Address</h6>
-                <h6 class="is-size-6">Makati City, Philippines</h6>
+                <h6 class="is-size-6">{{ address }}</h6>
               </div>
             </div>
           </div>
@@ -85,7 +81,11 @@ export default {
 
   computed: {
     ...mapGetters({
-      selectedEmployee: 'employee/selectedEmployee',
+      employee: 'employee/selected',
+      position: 'employee/selected/position',
+      contact: 'employee/selected/contact',
+      address: 'employee/selected/address',
+      employmentType: 'employee/selected/employmentType',
     }),
   },
 
