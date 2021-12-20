@@ -18,8 +18,8 @@
           is-align-items-center is-flex-wrap-wrap"
         >
           <div class="is-flex is-flex-wrap-wrap">
-            <b-field class="file mr-3">
-              <span v-if="file" class="is-size-6 px-3 py-2">{{ file }}</span>
+            <b-field class="file mr-1">
+              <span v-if="fileName" class="is-size-6 px-3 py-2">{{ fileName }}</span>
               <b-upload>
                 <a class="button">
                   <b-icon icon="file-import" size="is-small"></b-icon>
@@ -32,6 +32,8 @@
               <b-button
                 icon-right="cloud-upload"
                 class="mr-1"
+                :disabled="!file"
+                @click="uploadFile()"
               />
             </b-tooltip>
             <b-tooltip label="Template">
@@ -65,6 +67,7 @@
 <script>
 import XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { mapActions } from 'vuex';
 
 export default {
   components: {
@@ -75,6 +78,7 @@ export default {
   data () {
     return {
       file: null,
+      fileName: '',
       importedData: [],
       columns: [
         {
@@ -116,10 +120,14 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      upload: 'employee/upload',
+    }),
     change (evt) {
       const file = evt.target.files;
       const [ firstFile ] = file;
-      this.file = firstFile.name;
+      this.file = firstFile;
+      this.fileName = firstFile.name;
       const reader = new FileReader();
       reader.onload = file => {
         const fileTargetResult = file.target.result;
@@ -168,6 +176,9 @@ export default {
       saveAs(new Blob([ s2ab(wbout) ], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       }), `Employees Template.${excelFormat}`);
+    },
+    uploadFile () {
+      this.upload(this.file);
     },
   },
 };
