@@ -5,7 +5,7 @@
       <b-button size="is-small" icon-right="refresh" />
     </header>
     <b-table
-      :data="isEmpty ? [] : educationalBackground"
+      :data="isEmpty ? [] : education"
       :striped="isStriped"
       :hoverable="isHoverable"
       :mobile-cards="hasMobileCards"
@@ -41,11 +41,11 @@
       </b-table-column>
 
       <b-table-column
-        v-slot="props" field="inclusiveDates"
+        v-slot="props" field="start_at"
         label="Inclusive Dates"
         sortable width="240"
       >
-        {{ props.row.inclusiveDates }}
+        {{ `${formatDateToString(props.row.start_at)} - ${formatDateToString(props.row.end_at)}` }}
       </b-table-column>
 
       <template #empty>
@@ -56,13 +56,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import date from '@/mixins/date';
+
 export default {
-  props: {
-    educationalBackground: {
-      type: Array,
-      default: () => [],
-    },
-  },
+  mixins: [ date ],
 
   data () {
     return {
@@ -80,6 +78,12 @@ export default {
       currentPage: 1,
       perPage: 10,
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      education: 'employee/selected/education',
+    }),
   },
 };
 </script>
