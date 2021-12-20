@@ -36,7 +36,6 @@ module.exports = {
     'vue/html-self-closing': [ 'error', { html: { void: 'never', normal: 'never', component: 'any' }, svg: 'any', math: 'always' }],
     'vue/no-v-html': 'off',
     'vue/attributes-order': [ 'error' ],
-    "linebreak-style": ["error", "windows"]
   },
   overrides: [
     {
