@@ -11,12 +11,16 @@ const state = {
 
 const getters = {
   'table/headers': ({ table: { headers } }) => headers,
-  list (state) {
-    return state.employees.map(employee => new Employee(employee));
-  },
-  selectedEmployee (state) {
-    return state.selectedEmployee;
-  },
+  list: ({ employees }) => employees.map(employee => new Employee(employee)),
+  selected: ({ selectedEmployee }) => selectedEmployee,
+  'selected/employmentType': ({ selectedEmployee }) => selectedEmployee && selectedEmployee.employment_type && selectedEmployee.employment_type.description,
+  'selected/position': ({ selectedEmployee: { positions } }) => positions && positions[0] && positions[0].name,
+  'selected/contact': ({ selectedEmployee: { contacts } }) => contacts && contacts[0] && contacts[0].name,
+  'selected/address': ({ selectedEmployee: { addresses } }) => addresses && addresses[0] && addresses[0].address1,
+  'selected/education': ({ selectedEmployee: { education } }) => education,
+  'selected/addresses': ({ selectedEmployee: { addresses } }) => addresses,
+  'selected/contacts': ({ selectedEmployee: { contacts } }) => contacts,
+  'selected/documents': ({ selectedEmployee: { documents } }) => documents,
 };
 
 const mutations = {
