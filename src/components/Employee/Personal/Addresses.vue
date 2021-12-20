@@ -33,19 +33,19 @@
       </b-table-column>
 
       <b-table-column
-        v-slot="props" field="address"
-        label="Address"
+        v-slot="props" field="address1"
+        label="Address 1"
         sortable
       >
-        {{ props.row.address }}
+        {{ props.row.address1 }}
       </b-table-column>
 
       <b-table-column
-        v-slot="props" field="type"
-        label="Type"
+        v-slot="props" field="address2"
+        label="Address 2"
         sortable width="240"
       >
-        {{ props.row.type }}
+        {{ props.row.address2 }}
       </b-table-column>
 
       <template #empty>
@@ -56,14 +56,9 @@
 </template>
 
 <script>
-export default {
-  props: {
-    addresses: {
-      type: Array,
-      default: () => [],
-    },
-  },
+import { mapGetters } from 'vuex';
 
+export default {
   data () {
     return {
       isEmpty: false,
@@ -80,6 +75,12 @@ export default {
       currentPage: 1,
       perPage: 10,
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      addresses: 'employee/selected/addresses',
+    }),
   },
 };
 </script>
