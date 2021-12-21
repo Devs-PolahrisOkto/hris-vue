@@ -413,7 +413,14 @@ export default {
         start_at: this.$moment(obj.start_at).format('YYYY-MM-DD hh:mm:ss'),
         end_at: this.$moment(obj.end_at).format('YYYY-MM-DD hh:mm:ss'),
       }));
-      this.saveEmployee(form);
+      this.saveEmployee(form).then(() => {
+        this.$buefy.snackbar.open({
+          message: 'Employee has been successfully registered.',
+          position: 'is-top',
+          queue: true,
+        });
+        this.$router.push({ path: '/employees' });
+      });
     },
     resetForm () {
       requestAnimationFrame(() => {
