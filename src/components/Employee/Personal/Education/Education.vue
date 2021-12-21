@@ -2,8 +2,13 @@
   <div class="card mb-4">
     <header class="is-flex is-justify-content-space-between is-align-items-center py-2 pr-2">
       <h6 class="is-size-6 has-text-weight-light px-3">Educational Background</h6>
-      <b-button size="is-small" icon-right="plus" />
+      <b-button
+        size="is-small"
+        icon-right="plus"
+        @click="addEducationModal = true"
+      />
     </header>
+    <!-- Employee Educational Background -->
     <b-table
       :data="isEmpty ? [] : education"
       :striped="isStriped"
@@ -52,6 +57,13 @@
         <no-record :width="160" :height="160"></no-record>
       </template>
     </b-table>
+    <!-- Employee Educational Background -->
+    <!-- Start Modals -->
+    <add-modal
+      :active="addEducationModal"
+      @close="addEducationModal = !addEducationModal"
+    ></add-modal>
+    <!-- End Modals -->
   </div>
 </template>
 
@@ -61,6 +73,11 @@ import date from '@/mixins/date';
 
 export default {
   mixins: [ date ],
+
+  components: {
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
+    AddModal: () => import('@/components/Employee/Personal/Education/AddModal.vue'),
+  },
 
   data () {
     return {
@@ -77,11 +94,8 @@ export default {
       sortIconSize: 'is-small',
       currentPage: 1,
       perPage: 10,
+      addEducationModal: false,
     };
-  },
-
-  components: {
-    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   computed: {
