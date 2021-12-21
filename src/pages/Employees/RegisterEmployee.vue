@@ -339,7 +339,7 @@
               </template>
               <!-- Educational Background -->
 
-              <b-field class="file">
+              <!-- <b-field class="file">
                 <b-upload v-model="form.profile_photo">
                   <a class="button">
                     <b-icon icon="upload"></b-icon>
@@ -349,7 +349,7 @@
                 <span v-if="form.profile_photo" class="is-size-6 px-3 py-2">
                   {{ form.profile_photo.name }}
                 </span>
-              </b-field>
+              </b-field> -->
 
               <b-button
                 native-type="submit"
