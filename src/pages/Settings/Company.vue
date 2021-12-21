@@ -1,30 +1,27 @@
 <template>
-<main-layout>
+  <main-layout>
+    <!-- Start Breadcrumb -->
+    <nav class="breadcrumb px-5" aria-label="breadcrumbs">
+      <ul class="px-3 pt-3">
+        <li><a href="#">Admin</a></li>
+        <li class="is-active"><a href="#" aria-current="page">Companies</a></li>
+      </ul>
+    </nav>
+    <!-- End Breadcrumb -->
 
-<!-- Start Breadcrumb -->
-<nav class="breadcrumb px-5" aria-label="breadcrumbs">
-  <ul class="px-3 pt-3">
-    <li><a href="#">Admin</a></li>
-    <li class="is-active"><a href="#" aria-current="page">Companies</a></li>
-  </ul>
-</nav>
-<!-- End Breadcrumb -->
-
-<div class="columns">
-  <div class="column is-9">
-    <div class="container is-fluid pr-0">
+    <!-- Company Table-->
+    <setting-layout>
       <div class="is-flex is-justify-content-space-between py-2">
-        <b-input 
+        <b-input
           v-model="searchField"
           placeholder="Search..."
           type="search"
           icon="magnify">
         </b-input>
         <b-tooltip label="Add Company">
-          <b-button 
-            icon-right="plus" 
-            class="mr-3" 
-            @click="add" 
+          <b-button
+            icon-right="plus"
+            @click="add"
           />
         </b-tooltip>
       </div>
@@ -51,60 +48,60 @@
         <template v-for="(column, index) in columns">
           <b-table-column
             :key="index"
+            v-slot="props"
             :label="column.title"
             :field="column.field"
             :visible="column.visible"
-            v-slot="props"
             sortable
           >
             {{ props.row[column.field] }}
           </b-table-column>
         </template>
-        <b-table-column field="option" v-slot="props" width="100" centered>
-          <b-button 
-            size="is-small" 
-            type="is-primary" 
-            icon-right="pencil" 
+        <b-table-column
+          v-slot="props" field="option"
+          width="100"
+          centered
+        >
+          <b-button
+            size="is-small"
+            type="is-primary"
+            icon-right="pencil"
             @click="edit(props.row)"
           />
         </b-table-column>
         <template #empty>
-          <div class="has-text-centered">No records</div>
+          <no-record></no-record>
         </template>
       </b-table>
-    </div>
-  </div>
-  <div class="column is-3">
+    </setting-layout>
+    <!-- Company Table -->
 
-  </div>
-
-  <!-- Start Modals -->
-  <add-company-modal 
-    :active="addCompanyModal"
-    @close="addCompanyModal = !addCompanyModal"
-  ></add-company-modal>
-
-  <edit-company-modal 
-    :active="editCompanyModal"
-    @close="editCompanyModal = !editCompanyModal"
-  ></edit-company-modal>
-  <!-- End Modals -->
-</div>
-
-</main-layout>
+    <!-- Start Modals -->
+    <add-company-modal
+      :active="addCompanyModal"
+      @close="addCompanyModal = !addCompanyModal"
+    ></add-company-modal>
+    <edit-company-modal
+      :active="editCompanyModal"
+      @close="editCompanyModal = !editCompanyModal"
+    ></edit-company-modal>
+    <!-- End Modals -->
+  </main-layout>
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
-    MainLayout: () => import("@/layouts/MainLayout.vue"),
-    AddCompanyModal: () => import("@/components/Settings/Company/AddModal.vue"),
-    EditCompanyModal: () => import("@/components/Settings/Company/EditModal.vue"),
+    MainLayout: () => import('@/layouts/MainLayout.vue'),
+    SettingLayout: () => import('@/layouts/SettingLayout.vue'),
+    AddCompanyModal: () => import('@/components/Settings/Company/AddModal.vue'),
+    EditCompanyModal: () => import('@/components/Settings/Company/EditModal.vue'),
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
-  data() {
+  data () {
     return {
       layout: 'table',
       columns: [
@@ -115,7 +112,7 @@ export default {
       isStriped: false,
       isHoverable: true,
       hasMobileCards: true,
-      isPaginated: false,  
+      isPaginated: false,
       isPaginationSimple: true,
       isPaginationRounded: false,
       paginationPosition: 'bottom',
@@ -126,18 +123,19 @@ export default {
       perPage: 10,
       addCompanyModal: false,
       editCompanyModal: false,
-      searchField: ''
-    }
+      searchField: '',
+    };
   },
 
   computed: {
     ...mapGetters({
-      companies: 'company/list'
+      companies: 'company/list',
     }),
-    filteredCompanies() {
-      return this.companies.filter(company => {
-        return company.name.toLowerCase().includes(this.searchField.toLowerCase());
-      });
+    filteredCompanies () {
+      return this.companies.filter(company => company
+        .name
+        .toLowerCase()
+        .includes(this.searchField.toLowerCase()));
     },
   },
 
@@ -146,22 +144,22 @@ export default {
       setForm: 'company/setForm',
       getList: 'company/list',
     }),
-    add() {
+    add () {
       const company = {
         name: '',
-        description: ''
-      }
+        description: '',
+      };
       this.setForm(company);
       this.addCompanyModal = true;
     },
-    edit(company) {
+    edit (company) {
       this.setForm(company);
       this.editCompanyModal = true;
-    }
+    },
   },
 
-  created() {
+  created () {
     this.getList();
-  }
-}
+  },
+};
 </script>

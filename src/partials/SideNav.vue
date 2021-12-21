@@ -97,12 +97,12 @@
 </template>
 
 <script>
-import Breakpoints from '@/mixins/breakpoints';
 import { mapActions, mapGetters } from 'vuex';
+import Breakpoints from '@/mixins/breakpoints';
 
 export default {
   components: {
-    SalaryIcon: () => import("@/components/Icons/SalaryIcon.vue"),
+    SalaryIcon: () => import('@/components/Icons/SalaryIcon.vue'),
   },
 
   mixins: [ Breakpoints ],
@@ -123,17 +123,17 @@ export default {
       logout: 'authentication/logout',
       toggleSidebarMini: 'navigation/toggleSidebarMini',
     }),
-    toggleDropdown(e) {
-      let arrowParent = e.target.parentElement.parentElement;
-      arrowParent.classList.toggle("showMenu");
+    toggleDropdown (e) {
+      const arrowParent = e.target.parentElement.parentElement;
+      arrowParent.classList.toggle('showMenu');
     },
-    isDropdownActive(parent) {
+    isDropdownActive (parent) {
       return this.$router.currentRoute.meta.parent === parent;
     },
-    async handleLogout() {
+    async handleLogout () {
       await this.logout();
-      this.$router.push({name: 'Login'});
-    }
+      this.$router.push({ name: 'Login' });
+    },
   },
-}
+};
 </script>

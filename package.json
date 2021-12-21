@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --no-fix",
+    "lint:fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
     "@mdi/font": "^5.9.55",
@@ -29,9 +30,16 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-airbnb": "^5.3.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-transform-require-context": "^0.1.1",
+    "eslint": "^6.8.0",
+    "eslint-import-resolver-node": "^0.3.6",
+    "eslint-import-resolver-webpack": "^0.13.2",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vuejs-accessibility": "^1.1.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"

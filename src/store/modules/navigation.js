@@ -4,36 +4,36 @@ const state = {
 };
 
 const getters = {
-  sidebarState(state) {
+  sidebarState (state) {
     return state.sidebar;
   },
-  sidebarMiniState(state) {
+  sidebarMiniState (state) {
     return state.sidebarMini;
-  }
+  },
 };
 
 const mutations = {
-  TOGGLE_SIDEBAR(state) {
+  TOGGLE_SIDEBAR (state) {
     state.sidebar = !state.sidebar;
   },
-  TOGGLE_SIDEBAR_MINI(state) {
+  TOGGLE_SIDEBAR_MINI (state) {
     state.sidebarMini = !state.sidebarMini;
   },
 };
 
 const actions = {
-  toggleSidebar({commit}) {
+  toggleSidebar ({ commit }) {
     commit('TOGGLE_SIDEBAR');
   },
-  toggleSidebarMini({commit}) {
+  toggleSidebarMini ({ commit }) {
     commit('TOGGLE_SIDEBAR_MINI');
   },
 };
 
 export default {
   namespaced: true,
-  state, 
+  state,
   getters,
-  mutations, 
+  mutations,
   actions,
 };

@@ -1,7 +1,7 @@
 <template>
-  <header 
-    class="topbar" 
+  <header
     id="header"
+    class="topbar"
   >
     <div class="topbar__toggle" @click="toggleSidebar">
       <i id="topbar-toggle" class="mdi mdi-menu"></i>
@@ -10,13 +10,13 @@
       <div class="dropdown is-right is-hoverable">
         <div class="dropdown-trigger">
           <button class="button is-white" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span>test@test.com</span>
+            <span>{{ authUserEmail }}</span>
             <span class="icon is-small">
               <i class="mdi mdi-chevron-down"></i>
             </span>
           </button>
         </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div id="dropdown-menu" class="dropdown-menu" role="menu">
           <div class="dropdown-content">
             <a class="dropdown-item">
               <i class="mdi mdi-account-circle pr-2"></i>
@@ -41,6 +41,7 @@ export default {
   computed: {
     ...mapGetters({
       sidebarMiniState: 'navigation/sidebarMiniState',
+      authUserEmail: 'authentication/authUserEmail',
     }),
   },
 
@@ -50,10 +51,10 @@ export default {
       toggleSidebarMini: 'navigation/toggleSidebarMini',
       logout: 'authentication/logout',
     }),
-    async handleLogout() {
+    async handleLogout () {
       await this.logout();
-      this.$router.push({name: 'Login'});
-    }
-  }
-}
+      this.$router.push({ name: 'Login' });
+    },
+  },
+};
 </script>

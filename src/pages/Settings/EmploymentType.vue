@@ -1,18 +1,16 @@
 <template>
-<main-layout>
+  <main-layout>
+    <!-- Start Breadcrumb -->
+    <nav class="breadcrumb px-5" aria-label="breadcrumbs">
+      <ul class="px-3 pt-3">
+        <li><a href="#">Admin</a></li>
+        <li class="is-active"><a href="#" aria-current="page">Employment Types</a></li>
+      </ul>
+    </nav>
+    <!-- End Breadcrumb -->
 
-<!-- Start Breadcrumb -->
-<nav class="breadcrumb px-5" aria-label="breadcrumbs">
-  <ul class="px-3 pt-3">
-    <li><a href="#">Admin</a></li>
-    <li class="is-active"><a href="#" aria-current="page">Employment Types</a></li>
-  </ul>
-</nav>
-<!-- End Breadcrumb -->
-
-<div class="columns">
-  <div class="column is-9">
-    <div class="container is-fluid pr-0">
+    <!-- Employment Type Table -->
+    <setting-layout>
       <div class="is-flex is-justify-content-space-between py-2">
         <b-input
           v-model="searchField"
@@ -21,10 +19,9 @@
           icon="magnify">
         </b-input>
         <b-tooltip label="Add Employment Type">
-          <b-button 
-            icon-right="plus" 
-            class="mr-3" 
-            @click="add" 
+          <b-button
+            icon-right="plus"
+            @click="add"
           />
         </b-tooltip>
       </div>
@@ -51,60 +48,61 @@
         <template v-for="(column, index) in columns">
           <b-table-column
             :key="index"
+            v-slot="props"
             :label="column.title"
             :field="column.field"
             :visible="column.visible"
-            v-slot="props"
             sortable
           >
             {{ props.row[column.field] }}
           </b-table-column>
         </template>
-        <b-table-column field="option" v-slot="props" width="100" centered>
-          <b-button 
-            size="is-small" 
-            type="is-primary" 
-            icon-right="pencil" 
+        <b-table-column
+          v-slot="props" field="option"
+          width="100"
+          centered
+        >
+          <b-button
+            size="is-small"
+            type="is-primary"
+            icon-right="pencil"
             @click="edit(props.row)"
           />
         </b-table-column>
         <template #empty>
-          <div class="has-text-centered">No records</div>
+          <no-record></no-record>
         </template>
       </b-table>
-    </div>
-  </div>
-  <div class="column is-3">
+    </setting-layout>
+    <!-- Employment Type Table -->
 
-  </div>
+    <!-- Start Modals -->
+    <add-employment-type-modal
+      :active="addEmploymentTypeModal"
+      @close="addEmploymentTypeModal = !addEmploymentTypeModal"
+    ></add-employment-type-modal>
 
-  <!-- Start Modals -->
-  <add-employment-type-modal 
-    :active="addEmploymentTypeModal"
-    @close="addEmploymentTypeModal = !addEmploymentTypeModal"
-  ></add-employment-type-modal>
-
-  <edit-employment-type-modal 
-    :active="editEmploymentTypeModal"
-    @close="editEmploymentTypeModal = !editEmploymentTypeModal"
-  ></edit-employment-type-modal>
-  <!-- End Modals -->
-</div>
-
-</main-layout>
+    <edit-employment-type-modal
+      :active="editEmploymentTypeModal"
+      @close="editEmploymentTypeModal = !editEmploymentTypeModal"
+    ></edit-employment-type-modal>
+    <!-- End Modals -->
+  </main-layout>
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
-    MainLayout: () => import("@/layouts/MainLayout.vue"),
-    AddEmploymentTypeModal: () => import("@/components/Settings/EmploymentType/AddModal.vue"),
-    EditEmploymentTypeModal: () => import("@/components/Settings/EmploymentType/EditModal.vue"),
+    MainLayout: () => import('@/layouts/MainLayout.vue'),
+    SettingLayout: () => import('@/layouts/SettingLayout.vue'),
+    AddEmploymentTypeModal: () => import('@/components/Settings/EmploymentType/AddModal.vue'),
+    EditEmploymentTypeModal: () => import('@/components/Settings/EmploymentType/EditModal.vue'),
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
-  data() {
+  data () {
     return {
       layout: 'table',
       columns: [
@@ -115,7 +113,7 @@ export default {
       isStriped: false,
       isHoverable: true,
       hasMobileCards: true,
-      isPaginated: false,  
+      isPaginated: false,
       isPaginationSimple: true,
       isPaginationRounded: false,
       paginationPosition: 'bottom',
@@ -126,18 +124,19 @@ export default {
       perPage: 10,
       addEmploymentTypeModal: false,
       editEmploymentTypeModal: false,
-      searchField: ''
-    }
+      searchField: '',
+    };
   },
 
   computed: {
     ...mapGetters({
-      employmentTypes: 'employmentType/list'
+      employmentTypes: 'employmentType/list',
     }),
-    filteredEmploymentTypes() {
-      return this.employmentTypes.filter(employmentType => {
-        return employmentType.name.toLowerCase().includes(this.searchField.toLowerCase());
-      });
+    filteredEmploymentTypes () {
+      return this.employmentTypes.filter(employmentType => employmentType
+        .name
+        .toLowerCase()
+        .includes(this.searchField.toLowerCase()));
     },
   },
 
@@ -146,22 +145,22 @@ export default {
       setForm: 'employmentType/setForm',
       getList: 'employmentType/list',
     }),
-    add() {
+    add () {
       const employmentType = {
         name: '',
-        description: ''
-      }
+        description: '',
+      };
       this.setForm(employmentType);
       this.addEmploymentTypeModal = true;
     },
-    edit(employmentType) {
+    edit (employmentType) {
       this.setForm(employmentType);
       this.editEmploymentTypeModal = true;
-    }
+    },
   },
 
-  created() {
+  created () {
     this.getList();
-  }
-}
+  },
+};
 </script>

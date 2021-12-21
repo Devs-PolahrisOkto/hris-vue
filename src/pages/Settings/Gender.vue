@@ -1,18 +1,16 @@
 <template>
-<main-layout>
+  <main-layout>
+    <!-- Start Breadcrumb -->
+    <nav class="breadcrumb px-5" aria-label="breadcrumbs">
+      <ul class="px-3 pt-3">
+        <li><a href="#">Admin</a></li>
+        <li class="is-active"><a href="#" aria-current="page">Genders</a></li>
+      </ul>
+    </nav>
+    <!-- End Breadcrumb -->
 
-<!-- Start Breadcrumb -->
-<nav class="breadcrumb px-5" aria-label="breadcrumbs">
-  <ul class="px-3 pt-3">
-    <li><a href="#">Admin</a></li>
-    <li class="is-active"><a href="#" aria-current="page">Genders</a></li>
-  </ul>
-</nav>
-<!-- End Breadcrumb -->
-
-<div class="columns">
-  <div class="column is-9">
-    <div class="container is-fluid pr-0">
+    <!-- Gender Table -->
+    <setting-layout>
       <div class="is-flex is-justify-content-space-between py-2">
         <b-input
           v-model="searchField"
@@ -21,10 +19,9 @@
           icon="magnify">
         </b-input>
         <b-tooltip label="Add Gender">
-          <b-button 
-            icon-right="plus" 
-            class="mr-3" 
-            @click="add" 
+          <b-button
+            icon-right="plus"
+            @click="add"
           />
         </b-tooltip>
       </div>
@@ -51,60 +48,62 @@
         <template v-for="(column, index) in columns">
           <b-table-column
             :key="index"
+            v-slot="props"
             :label="column.title"
             :field="column.field"
             :visible="column.visible"
-            v-slot="props"
             sortable
           >
             {{ props.row[column.field] }}
           </b-table-column>
         </template>
-        <b-table-column field="option" v-slot="props" width="100" centered>
-          <b-button 
-            size="is-small" 
-            type="is-primary" 
-            icon-right="pencil" 
+        <b-table-column
+          v-slot="props"
+          field="option"
+          width="100"
+          centered
+        >
+          <b-button
+            size="is-small"
+            type="is-primary"
+            icon-right="pencil"
             @click="edit(props.row)"
           />
         </b-table-column>
         <template #empty>
-          <div class="has-text-centered">No records</div>
+          <no-record></no-record>
         </template>
       </b-table>
-    </div>
-  </div>
-  <div class="column is-3">
+    </setting-layout>
+    <!-- Gender Table -->
 
-  </div>
+    <!-- Start Modals -->
+    <add-gender-modal
+      :active="addGenderModal"
+      @close="addGenderModal = !addGenderModal"
+    ></add-gender-modal>
 
-  <!-- Start Modals -->
-  <add-gender-modal 
-    :active="addGenderModal"
-    @close="addGenderModal = !addGenderModal"
-  ></add-gender-modal>
-
-  <edit-gender-modal 
-    :active="editGenderModal"
-    @close="editGenderModal = !editGenderModal"
-  ></edit-gender-modal>
-  <!-- End Modals -->
-</div>
-
-</main-layout>
+    <edit-gender-modal
+      :active="editGenderModal"
+      @close="editGenderModal = !editGenderModal"
+    ></edit-gender-modal>
+    <!-- End Modals -->
+  </main-layout>
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
-    MainLayout: () => import("@/layouts/MainLayout.vue"),
-    AddGenderModal: () => import("@/components/Settings/Gender/AddModal.vue"),
-    EditGenderModal: () => import("@/components/Settings/Gender/EditModal.vue"),
+    MainLayout: () => import('@/layouts/MainLayout.vue'),
+    SettingLayout: () => import('@/layouts/SettingLayout.vue'),
+    AddGenderModal: () => import('@/components/Settings/Gender/AddModal.vue'),
+    EditGenderModal: () => import('@/components/Settings/Gender/EditModal.vue'),
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
-  data() {
+  data () {
     return {
       layout: 'table',
       columns: [
@@ -115,7 +114,7 @@ export default {
       isStriped: false,
       isHoverable: true,
       hasMobileCards: true,
-      isPaginated: false,  
+      isPaginated: false,
       isPaginationSimple: true,
       isPaginationRounded: false,
       paginationPosition: 'bottom',
@@ -126,18 +125,19 @@ export default {
       perPage: 10,
       addGenderModal: false,
       editGenderModal: false,
-      searchField: ''
-    }
+      searchField: '',
+    };
   },
 
   computed: {
     ...mapGetters({
-      genders: 'gender/list'
+      genders: 'gender/list',
     }),
-    filteredGenders() {
-      return this.genders.filter(gender => {
-        return gender.name.toLowerCase().includes(this.searchField.toLowerCase());
-      });
+    filteredGenders () {
+      return this.genders.filter(gender => gender
+        .name
+        .toLowerCase()
+        .includes(this.searchField.toLowerCase()));
     },
   },
 
@@ -146,22 +146,22 @@ export default {
       setForm: 'gender/setForm',
       getList: 'gender/list',
     }),
-    add() {
+    add () {
       const gender = {
         name: '',
-        description: ''
-      }
+        description: '',
+      };
       this.setForm(gender);
       this.addGenderModal = true;
     },
-    edit(gender) {
+    edit (gender) {
       this.setForm(gender);
       this.editGenderModal = true;
-    }
+    },
   },
 
-  created() {
+  created () {
     this.getList();
-  }
-}
+  },
+};
 </script>

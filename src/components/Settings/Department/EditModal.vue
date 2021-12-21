@@ -1,10 +1,10 @@
 <template>
-  <b-modal 
-    v-model="active" 
+  <b-modal
+    v-model="active"
     :width="640"
     :can-cancel="['x']"
   >
-    <modal-form 
+    <modal-form
       :modal-form="departmentForm"
       @submit="update"
       @close="$emit('close')"
@@ -21,28 +21,28 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   components: {
-    ModalForm: () => import("@/components/Settings/Common/Form.vue"),
+    ModalForm: () => import('@/components/Settings/Common/Form.vue'),
   },
 
   props: {
     active: {
-      type: Boolean
+      type: Boolean,
     },
   },
 
   computed: {
     ...mapGetters({
-      departmentForm: 'department/departmentForm'
-    })
+      departmentForm: 'department/departmentForm',
+    }),
   },
 
   methods: {
     ...mapActions({
       updateDepartment: 'department/update',
     }),
-    update(form) {
+    update (form) {
       this.updateDepartment(form).then(this.$emit('close'));
-    }
-  }
-}
+    },
+  },
+};
 </script>

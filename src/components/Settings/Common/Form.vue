@@ -9,18 +9,18 @@
                 <button
                     type="button"
                     class="delete"
-                    @click="$emit('close')"/>
+                    @click="$emit('close')"></button>
             </header>
             <section class="modal-card-body">
                 <text-field
-                    label="Name"
                     v-model="form.name"
+                    label="Name"
                     rules="required"
                     mode="eager"
                 ></text-field>
                 <text-field
-                    label="Description"
                     v-model="form.description"
+                    label="Description"
                     mode="eager"
                 ></text-field>
             </section>
@@ -30,7 +30,7 @@
                     @click="$emit('close')" />
                 <b-button
                     :disabled="invalid"
-                    native-type="submit" 
+                    native-type="submit"
                     label="Save"
                     type="is-primary" />
             </footer>
@@ -41,27 +41,27 @@
 
 <script>
 export default {
-    props: {
-        modalForm: {
-            type: Object, 
-            default: () => {}
-        }
+  props: {
+    modalForm: {
+      type: Object,
+      default: () => {},
     },
+  },
 
-    data() {
-        return {
-            form: {}
-        }
+  data () {
+    return {
+      form: {},
+    };
+  },
+
+  methods: {
+    submit () {
+      this.$emit('submit', this.form);
     },
+  },
 
-    methods: {
-        submit() {
-            this.$emit('submit', this.form);
-        },
-    },
-
-    mounted() {
-        this.form = {...this.modalForm};
-    }
-}
+  mounted () {
+    this.form = { ...this.modalForm };
+  },
+};
 </script>

@@ -1,11 +1,11 @@
 <template>
-<div>
+  <div>
     <canvas id="payroll-mini-chart" height="180"></canvas>
     <div class="mt-5 has-text-centered">
-        <h5 class="is-size-5 has-text-grey">Total</h5>
-        <h2 class="is-size-2 has-text-weight-semibold">2,230,000.00</h2>
+      <h5 class="is-size-5 has-text-grey">Total</h5>
+      <h2 class="is-size-2 has-text-weight-semibold">2,230,000.00</h2>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -13,15 +13,15 @@ import Chart from 'chart.js/auto';
 import { payrollMiniChartData } from '@/utilities/payroll-chart-data.js';
 
 export default {
-  data() {
+  data () {
     return {
-      payrollMiniChartData
-    }
+      payrollMiniChartData,
+    };
   },
-  
-  mounted() {
+
+  mounted () {
     const ctx = document.getElementById('payroll-mini-chart');
-    new Chart(ctx, this.payrollMiniChartData);
-  }
-}
+    return new Chart(ctx, this.payrollMiniChartData);
+  },
+};
 </script>
