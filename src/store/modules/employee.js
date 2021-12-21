@@ -86,6 +86,14 @@ const actions = {
       commit('', data);
     }
   },
+  async uploadDocument ({ commit }, { file, id }) {
+    const { status, data: { data } } = await client.uploadDocument(file, id);
+    if (status !== 200) {
+      console.error('uploading document failed');
+    } else {
+      commit('', data);
+    }
+  },
   updateHeaders ({ commit }, headers) {
     commit('UPDATE_HEADERS', headers);
   },
