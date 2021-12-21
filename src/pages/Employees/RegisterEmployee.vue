@@ -315,7 +315,7 @@
                       v-model="education.start_at"
                       label-position="on-border"
                       label="Start at"
-
+                      rules="required"
                       mode="eager"
                     ></date-picker-field>
                   </div>
@@ -324,7 +324,7 @@
                       v-model="education.end_at"
                       label-position="on-border"
                       label="End at"
-
+                      rules="required"
                       mode="eager"
                     ></date-picker-field>
                   </div>
