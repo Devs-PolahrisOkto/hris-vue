@@ -2,7 +2,11 @@
   <div class="card mb-4">
     <header class="is-flex is-justify-content-space-between is-align-items-center py-2 pr-2">
       <h6 class="is-size-6 has-text-weight-light px-3">Documents</h6>
-      <b-button size="is-small" icon-right="refresh" />
+      <b-button
+        size="is-small"
+        icon-right="plus"
+        @click="uploadModal = true"
+      />
     </header>
     <b-table
       :data="isEmpty ? [] : documents"
@@ -29,7 +33,19 @@
         label="File"
         sortable
       >
-        {{ props.row.file }}
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <img :src="`https://hris-resources.s3.us-east-2.amazonaws.com/${props.row.file}`">
+          </p>
+        </figure>
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props" field="name"
+        label="Name"
+        sortable
+      >
+        {{ props.row.name }}
       </b-table-column>
 
       <b-table-column
@@ -44,20 +60,22 @@
         <no-record :width="160" :height="160"></no-record>
       </template>
     </b-table>
+    <!-- Upload Modal -->
+    <upload-modal
+      :active="uploadModal"
+      @close="uploadModal = !uploadModal"
+    ></upload-modal>
+    <!-- Upload Modal -->
   </div>
 </template>
 
 <script>
-export default {
-  props: {
-    documents: {
-      type: Array,
-      default: () => [],
-    },
-  },
+import { mapGetters } from 'vuex';
 
+export default {
   data () {
     return {
+      uploadModal: false,
       isEmpty: false,
       isStriped: true,
       isHoverable: true,
@@ -74,7 +92,14 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters({
+      documents: 'employee/selected/documents',
+    }),
+  },
+
   components: {
+    UploadModal: () => import('@/components/Employee/Documents/UploadModal.vue'),
     NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 };
