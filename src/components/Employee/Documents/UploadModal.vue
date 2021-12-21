@@ -27,7 +27,7 @@
                   size="is-large"
                 ></b-icon>
               </p>
-              <p>Drop your files here or click to upload</p>
+              <p>Choose your file to upload</p>
             </div>
           </section>
         </b-upload>
