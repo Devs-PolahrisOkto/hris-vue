@@ -60,6 +60,33 @@ const routes = [
     },
   },
   {
+    path: '/timekeeping/timerecord',
+    name: 'TimeRecord',
+    component: () => import(/* webpackChunkName: "TimeRecord" */ '@/pages/Timekeeping/TimeRecord.vue'),
+    meta: {
+      forAuth: true,
+      parent: 'timekeeping',
+    },
+  },
+  {
+    path: '/timekeeping/schedules',
+    name: 'Schedules',
+    component: () => import(/* webpackChunkName: "Schedules" */ '@/pages/Timekeeping/Schedules.vue'),
+    meta: {
+      forAuth: true,
+      parent: 'timekeeping',
+    },
+  },
+  {
+    path: '/timekeeping/leaves',
+    name: 'Leaves',
+    component: () => import(/* webpackChunkName: "Leaves" */ '@/pages/Timekeeping/Leaves.vue'),
+    meta: {
+      forAuth: true,
+      parent: 'timekeeping',
+    },
+  },
+  {
     path: '/settings/companies',
     name: 'Company',
     component: () => import(/* webpackChunkName: "EmployeeProfile" */ '@/pages/Settings/Company.vue'),

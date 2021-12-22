@@ -178,7 +178,14 @@ export default {
       }), `Employees Template.${excelFormat}`);
     },
     uploadFile () {
-      this.upload(this.file);
+      this.upload(this.file).then(() => {
+        this.$buefy.snackbar.open({
+          message: 'Employees Data has been successfully uploaded.',
+          position: 'is-top',
+          queue: true,
+        });
+        this.$router.push({ path: '/employees' });
+      });
     },
   },
 };
