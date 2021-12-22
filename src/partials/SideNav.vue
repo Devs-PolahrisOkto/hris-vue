@@ -29,7 +29,7 @@
           <li><router-link to="/employees/import">Import Employees</router-link></li>
         </ul>
       </li>
-      <li>
+      <li :class="{'showMenu': isDropdownActive('timekeeping')}">
         <div class="icon-link">
           <a>
             <i class="mdi mdi-calendar-clock link_icon"></i>
@@ -38,10 +38,12 @@
           <i class="mdi mdi-chevron-down arrow" @click="toggleDropdown"></i>
         </div>
         <ul class="sub-menu">
-            <li><router-link to="/" class="link_name">Timekeeping</router-link></li>
-            <li><router-link to="/">Time In/Out</router-link></li>
-            <li><router-link to="/">Schedules</router-link></li>
-            <li><router-link to="/">Leaves</router-link></li>
+            <li>
+              <router-link to="/timekeeping/timerecord" class="link_name">Timekeeping</router-link>
+            </li>
+            <li><router-link to="/timekeeping/timerecord">Time In/Out</router-link></li>
+            <li><router-link to="/timekeeping/schedules">Schedules</router-link></li>
+            <li><router-link to="/timekeeping/leaves">Leaves</router-link></li>
         </ul>
       </li>
       <li>
