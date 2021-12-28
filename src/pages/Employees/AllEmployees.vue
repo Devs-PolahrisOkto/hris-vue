@@ -48,20 +48,20 @@
         <!-- Table Layout -->
         <div v-show="layout === 'table'">
           <b-table
-            :data="isEmpty ? [] : filteredEmployees"
-            :striped="isStriped"
-            :hoverable="isHoverable"
-            :mobile-cards="hasMobileCards"
-            :paginated="isPaginated"
-            :per-page="perPage"
-            :current-page.sync="currentPage"
-            :pagination-simple="isPaginationSimple"
-            :pagination-position="paginationPosition"
-            :default-sort-direction="defaultSortDirection"
-            :pagination-rounded="isPaginationRounded"
-            :sort-icon="sortIcon"
-            :sort-icon-size="sortIconSize"
-            default-sort="name"
+            :data="meta.isEmpty ? [] : filteredEmployees"
+            :striped="meta.isStriped"
+            :hoverable="meta.isHoverable"
+            :mobile-cards="meta.hasMobileCards"
+            :paginated="meta.isPaginated"
+            :per-page="meta.perPage"
+            :current-page.sync="meta.currentPage"
+            :pagination-simple="meta.isPaginationSimple"
+            :pagination-position="meta.paginationPosition"
+            :default-sort-direction="meta.defaultSortDirection"
+            :pagination-rounded="meta.isPaginationRounded"
+            :sort-icon="meta.sortIcon"
+            :sort-icon-size="meta.sortIconSize"
+            :default-sort="meta.defaultSortColumn"
             aria-next-label="Next page"
             aria-previous-label="Previous page"
             aria-page-label="Page"
@@ -88,19 +88,6 @@
 
             <b-table-column
               v-slot="props"
-              field="positions"
-              label="Position"
-            >
-              <b-tag
-                v-if="props.row.positions[0]"
-                type="is-info"
-              >
-                {{ props.row.positions && props.row.positions[0] && props.row.positions[0].name }}
-              </b-tag>
-            </b-table-column>
-
-            <b-table-column
-              v-slot="props"
               field="option"
             >
               <b-button
@@ -122,7 +109,7 @@
         <!-- Grid Layout -->
         <div v-show="layout === 'grid'">
           <div class="columns is-flex is-flex-wrap-wrap">
-            <template v-for="(item, index) in employees">
+            <template v-for="(item, index) in list">
               <div :key="index" class="column is-6-desktop is-12-tablet is-12-mobile">
                 <article class="media has-background-white p-4">
                   <figure class="media-left">
@@ -192,37 +179,21 @@ export default {
   data () {
     return {
       layout: 'table',
-      columns: [
-        { title: 'Name', field: 'employeeName', visible: true },
-        { title: 'Department', field: 'department', visible: true },
-        { title: 'Employment Type', field: 'employmentTypeName', visible: true },
-      ],
-      isEmpty: false,
-      isStriped: false,
-      isHoverable: true,
-      hasMobileCards: true,
-      isPaginated: true,
-      isPaginationSimple: true,
-      isPaginationRounded: false,
-      paginationPosition: 'bottom',
-      defaultSortDirection: 'asc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
-      currentPage: 1,
-      perPage: 10,
+      searchField: '',
       isFilterModalActive: false,
       isColumnModalActive: false,
       isLayoutModalActive: false,
-      searchField: '',
     };
   },
 
   computed: {
     ...mapGetters({
-      employees: 'employee/list',
+      columns: 'employee/table/columns',
+      list: 'employee/table/list',
+      meta: 'employee/table/meta',
     }),
     filteredEmployees () {
-      return this.employees.filter(employee => employee
+      return this.list.filter(employee => employee
         .employeeName
         .toLowerCase()
         .includes(this.searchField.toLowerCase()));

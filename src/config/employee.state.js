@@ -2,11 +2,28 @@ export default {
   employees: [],
   selectedEmployee: {},
   table: {
-    headers: [
+    columns: [
       { title: 'Name', field: 'employeeName', visible: true },
-      { title: 'Position', field: 'position', visible: true },
+      { title: 'Position', field: 'positionName', visible: true },
       { title: 'Department', field: 'department', visible: true },
-      { title: 'Employment Type', field: 'employment_type', visible: true },
+      { title: 'Employment Type', field: 'employmentTypeName', visible: true },
     ],
+    list: [],
+    meta: {
+      isEmpty: false,
+      isStriped: false,
+      isHoverable: true,
+      hasMobileCards: true,
+      isPaginated: false,
+      isPaginationSimple: true,
+      isPaginationRounded: false,
+      paginationPosition: 'bottom',
+      defaultSortDirection: 'asc',
+      defaultSortColumn: 'name',
+      sortIcon: 'arrow-up',
+      sortIconSize: 'is-small',
+      currentPage: 1,
+      perPage: 10,
+    },
   },
 };
