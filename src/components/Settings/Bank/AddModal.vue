@@ -5,7 +5,7 @@
     :can-cancel="['x']"
   >
     <modal-form
-      :modal-form="bankForm"
+      :modal-form="form"
       @submit="save"
       @close="$emit('close')"
     >
@@ -32,7 +32,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      bankForm: 'bank/bankForm',
+      form: 'bank/form',
     }),
   },
 
