@@ -1,39 +1,33 @@
 import Vue from 'vue';
+import initialState from '@/config/addresstype.state';
 import DepartmentClient from '@/api/clients/DepartmentClient';
 
 const client = new DepartmentClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-  departments: [],
-  form: {
-    id: '',
-    name: '',
-    description: '',
-  },
+  ...initialState,
 };
 
 const getters = {
-  departmentForm (state) {
-    return state.form;
-  },
-  list (state) {
-    return state.departments;
-  },
+  form: ({ form }) => form,
+  'table/columns': ({ table: { columns } }) => columns,
+  'table/list': ({ table: { list } }) => list,
+  'table/meta': ({ table: { meta } }) => meta,
 };
 
 const mutations = {
-  SET_FORM (state, position) {
-    state.form = { ...position };
+  SET_FORM (state, department) {
+    state.form = { ...department };
   },
-  SET_LIST (state, departments) {
-    state.departments = departments;
+  SET_LIST ({ table }, departments) {
+    table.list = [ ...departments ];
   },
-  ADD_DEPARTMENT (state, department) {
-    state.departments.push(department);
+  ADD_DEPARTMENT ({ table: { list } }, department) {
+    list.push(department);
   },
-  UPDATE_DEPARTMENT (state, department) {
-    const index = state.departments.findIndex(obj => obj.id === department.id);
-    Vue.set(state.departments, index, department);
+  UPDATE_DEPARTMENT ({ table: { list } }, department) {
+    const index = list.findIndex(obj => obj.id === department.id);
+    Vue.set(list, index, department);
   },
 };
 

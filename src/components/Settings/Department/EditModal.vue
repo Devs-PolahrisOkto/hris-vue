@@ -5,7 +5,7 @@
     :can-cancel="['x']"
   >
     <modal-form
-      :modal-form="departmentForm"
+      :modal-form="form"
       @submit="update"
       @close="$emit('close')"
     >
@@ -32,7 +32,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      departmentForm: 'department/departmentForm',
+      form: 'department/form',
     }),
   },
 
