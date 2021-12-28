@@ -26,20 +26,20 @@
         </b-tooltip>
       </div>
       <b-table
-        :data="isEmpty ? [] : filteredCivilStatuses"
-        :striped="isStriped"
-        :hoverable="isHoverable"
-        :mobile-cards="hasMobileCards"
-        :paginated="isPaginated"
-        :per-page="perPage"
-        :current-page.sync="currentPage"
-        :pagination-simple="isPaginationSimple"
-        :pagination-position="paginationPosition"
-        :default-sort-direction="defaultSortDirection"
-        :pagination-rounded="isPaginationRounded"
-        :sort-icon="sortIcon"
-        :sort-icon-size="sortIconSize"
-        default-sort="name"
+        :data="meta.isEmpty ? [] : filteredCivilStatuses"
+        :striped="meta.isStriped"
+        :hoverable="meta.isHoverable"
+        :mobile-cards="meta.hasMobileCards"
+        :paginated="meta.isPaginated"
+        :per-page="meta.perPage"
+        :current-page.sync="meta.currentPage"
+        :pagination-simple="meta.isPaginationSimple"
+        :pagination-position="meta.paginationPosition"
+        :default-sort-direction="meta.defaultSortDirection"
+        :pagination-rounded="meta.isPaginationRounded"
+        :sort-icon="meta.sortIcon"
+        :sort-icon-size="meta.sortIconSize"
+        :default-sort="meta.defaultSortColumn"
         aria-next-label="Next page"
         aria-previous-label="Previous page"
         aria-page-label="Page"
@@ -104,46 +104,34 @@ export default {
 
   data () {
     return {
-      layout: 'table',
-      columns: [
-        { title: 'Name', field: 'name', visible: true },
-        { title: 'Description', field: 'description', visible: true },
-      ],
-      isEmpty: false,
-      isStriped: false,
-      isHoverable: true,
-      hasMobileCards: true,
-      isPaginated: false,
-      isPaginationSimple: true,
-      isPaginationRounded: false,
-      paginationPosition: 'bottom',
-      defaultSortDirection: 'asc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
-      currentPage: 1,
-      perPage: 10,
+      searchField: '',
       addCivilStatusModal: false,
       editCivilStatusModal: false,
-      searchField: '',
     };
   },
 
   computed: {
     ...mapGetters({
-      civilStatuses: 'civilStatus/list',
+      columns: 'civilstatus/table/columns',
+      list: 'civilstatus/table/list',
+      meta: 'civilstatus/table/meta',
     }),
     filteredCivilStatuses () {
-      return this.civilStatuses.filter(civilStatus => civilStatus
+      return this.list.filter(civilStatus => civilStatus
         .name
         .toLowerCase()
         .includes(this.searchField.toLowerCase()));
     },
   },
 
+  created () {
+    this.getList();
+  },
+
   methods: {
     ...mapActions({
-      setForm: 'civilStatus/setForm',
-      getList: 'civilStatus/list',
+      setForm: 'civilstatus/setForm',
+      getList: 'civilstatus/list',
     }),
     add () {
       const civilStatus = {
@@ -157,10 +145,6 @@ export default {
       this.setForm(civilStatus);
       this.editCivilStatusModal = true;
     },
-  },
-
-  created () {
-    this.getList();
   },
 };
 </script>

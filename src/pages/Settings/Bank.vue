@@ -124,6 +124,10 @@ export default {
     },
   },
 
+  created () {
+    this.getList();
+  },
+
   methods: {
     ...mapActions({
       setForm: 'bank/setForm',
@@ -141,10 +145,6 @@ export default {
       this.setForm(bank);
       this.editBankModal = true;
     },
-  },
-
-  created () {
-    this.getList();
   },
 };
 </script>

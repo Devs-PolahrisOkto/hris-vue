@@ -5,7 +5,7 @@
     :can-cancel="['x']"
   >
     <modal-form
-      :modal-form="civilStatusForm"
+      :modal-form="form"
       @submit="save"
       @close="$emit('close')"
     >
@@ -32,13 +32,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      civilStatusForm: 'civilStatus/civilStatusForm',
+      form: 'civilstatus/form',
     }),
   },
 
   methods: {
     ...mapActions({
-      saveCivilStatus: 'civilStatus/save',
+      saveCivilStatus: 'civilstatus/save',
     }),
     save (form) {
       this.saveCivilStatus(form).then(this.$emit('close'));

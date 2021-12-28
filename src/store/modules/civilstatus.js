@@ -1,39 +1,33 @@
 import Vue from 'vue';
+import initialState from '@/config/addresstype.state';
 import CivilStatusClient from '@/api/clients/CivilStatusClient';
 
 const client = new CivilStatusClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-  civilStatuses: [],
-  form: {
-    id: '',
-    name: '',
-    description: '',
-  },
+  ...initialState,
 };
 
 const getters = {
-  civilStatusForm (state) {
-    return state.form;
-  },
-  list (state) {
-    return state.civilStatuses;
-  },
+  form: ({ form }) => form,
+  'table/columns': ({ table: { columns } }) => columns,
+  'table/list': ({ table: { list } }) => list,
+  'table/meta': ({ table: { meta } }) => meta,
 };
 
 const mutations = {
   SET_FORM (state, civilStatus) {
     state.form = { ...civilStatus };
   },
-  SET_LIST (state, civilStatuses) {
-    state.civilStatuses = civilStatuses;
+  SET_LIST ({ table }, civilStatuses) {
+    table.list = [ ...civilStatuses ];
   },
-  ADD_CIVIL_STATUS (state, civilStatus) {
-    state.civilStatuses.push(civilStatus);
+  ADD_CIVIL_STATUS ({ table: { list } }, civilStatus) {
+    list.push(civilStatus);
   },
-  UPDATE_CIVIL_STATUS (state, civilStatus) {
-    const index = state.civilStatuses.findIndex(obj => obj.id === civilStatus.id);
-    Vue.set(state.civilStatuses, index, civilStatus);
+  UPDATE_CIVIL_STATUS ({ table: { list } }, civilStatus) {
+    const index = list.findIndex(obj => obj.id === civilStatus.id);
+    Vue.set(list, index, civilStatus);
   },
 };
 
