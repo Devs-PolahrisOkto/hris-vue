@@ -5,7 +5,7 @@
     :can-cancel="['x']"
   >
     <modal-form
-      :modal-form="addressTypeForm"
+      :modal-form="form"
       @submit="save"
       @close="$emit('close')"
     >
@@ -32,13 +32,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      addressTypeForm: 'addressType/addressTypeForm',
+      form: 'addresstype/form',
     }),
   },
 
   methods: {
     ...mapActions({
-      saveAddressType: 'addressType/save',
+      saveAddressType: 'addresstype/save',
     }),
     save (form) {
       this.saveAddressType(form).then(this.$emit('close'));
