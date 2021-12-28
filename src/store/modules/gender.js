@@ -1,39 +1,33 @@
 import Vue from 'vue';
+import initialState from '@/config/gender.state';
 import GenderClient from '@/api/clients/GenderClient';
 
 const client = new GenderClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-  genders: [],
-  form: {
-    id: '',
-    name: '',
-    description: '',
-  },
+  ...initialState,
 };
 
 const getters = {
-  genderForm (state) {
-    return state.form;
-  },
-  list (state) {
-    return state.genders;
-  },
+  form: ({ form }) => form,
+  'table/columns': ({ table: { columns } }) => columns,
+  'table/list': ({ table: { list } }) => list,
+  'table/meta': ({ table: { meta } }) => meta,
 };
 
 const mutations = {
   SET_FORM (state, gender) {
     state.form = { ...gender };
   },
-  SET_LIST (state, genders) {
-    state.genders = genders;
+  SET_LIST ({ table }, genders) {
+    table.list = [ ...genders ];
   },
-  ADD_GENDER (state, gender) {
-    state.genders.push(gender);
+  ADD_GENDER ({ table: { list } }, gender) {
+    list.push(gender);
   },
-  UPDATE_GENDER (state, gender) {
-    const index = state.genders.findIndex(obj => obj.id === gender.id);
-    Vue.set(state.genders, index, gender);
+  UPDATE_GENDER ({ table: { list } }, gender) {
+    const index = list.findIndex(obj => obj.id === gender.id);
+    Vue.set(list, index, gender);
   },
 };
 
