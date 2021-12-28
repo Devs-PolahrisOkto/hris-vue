@@ -1,39 +1,33 @@
 import Vue from 'vue';
+import initialState from '@/config/employmenttype.state';
 import EmploymentTypeClient from '@/api/clients/EmploymentTypeClient';
 
 const client = new EmploymentTypeClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-  employmentTypes: [],
-  form: {
-    id: '',
-    name: '',
-    description: '',
-  },
+  ...initialState,
 };
 
 const getters = {
-  employmentTypeForm (state) {
-    return state.form;
-  },
-  list (state) {
-    return state.employmentTypes;
-  },
+  form: ({ form }) => form,
+  'table/columns': ({ table: { columns } }) => columns,
+  'table/list': ({ table: { list } }) => list,
+  'table/meta': ({ table: { meta } }) => meta,
 };
 
 const mutations = {
   SET_FORM (state, employmentType) {
     state.form = { ...employmentType };
   },
-  SET_LIST (state, employmentTypes) {
-    state.employmentTypes = employmentTypes;
+  SET_LIST ({ table }, employmentTypes) {
+    table.list = [ ...employmentTypes ];
   },
-  ADD_EMPLOYMENT_TYPE (state, employmentType) {
-    state.employmentTypes.push(employmentType);
+  ADD_EMPLOYMENT_TYPE ({ table: { list } }, employmentType) {
+    list.push(employmentType);
   },
-  UPDATE_EMPLOYMENT_TYPE (state, employmentType) {
-    const index = state.employmentTypes.findIndex(obj => obj.id === employmentType.id);
-    Vue.set(state.employmentTypes, index, employmentType);
+  UPDATE_EMPLOYMENT_TYPE ({ table: { list } }, employmentType) {
+    const index = list.findIndex(obj => obj.id === employmentType.id);
+    Vue.set(list, index, employmentType);
   },
 };
 

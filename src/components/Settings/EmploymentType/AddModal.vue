@@ -5,7 +5,7 @@
     :can-cancel="['x']"
   >
     <modal-form
-      :modal-form="employmentTypeForm"
+      :modal-form="form"
       @submit="save"
       @close="$emit('close')"
     >
@@ -32,13 +32,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      employmentTypeForm: 'employmentType/employmentTypeForm',
+      form: 'employmenttype/form',
     }),
   },
 
   methods: {
     ...mapActions({
-      saveEmploymentType: 'employmentType/save',
+      saveEmploymentType: 'employmenttype/save',
     }),
     save (form) {
       this.saveEmploymentType(form).then(this.$emit('close'));
