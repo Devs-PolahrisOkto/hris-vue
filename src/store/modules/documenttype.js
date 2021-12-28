@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import initialState from '@/config/addresstype.state';
+import initialState from '@/config/documenttype.state';
 import DocumentTypeClient from '@/api/clients/DocumentTypeClient';
 
 const client = new DocumentTypeClient('https://apistaging.polahrisokto.com/api');

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import initialState from '@/config/addresstype.state';
+import initialState from '@/config/civilstatus.state';
 import CivilStatusClient from '@/api/clients/CivilStatusClient';
 
 const client = new CivilStatusClient('https://apistaging.polahrisokto.com/api');

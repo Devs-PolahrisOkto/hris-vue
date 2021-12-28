@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import initialState from '@/config/addresstype.state';
+import initialState from '@/config/department.state';
 import DepartmentClient from '@/api/clients/DepartmentClient';
 
 const client = new DepartmentClient('https://apistaging.polahrisokto.com/api');
