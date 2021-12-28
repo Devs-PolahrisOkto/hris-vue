@@ -111,9 +111,9 @@ export default {
 
   computed: {
     ...mapGetters({
-      columns: 'civilstatus/table/columns',
-      list: 'civilstatus/table/list',
-      meta: 'civilstatus/table/meta',
+      columns: 'company/table/columns',
+      list: 'company/table/list',
+      meta: 'company/table/meta',
     }),
     filteredCompanies () {
       return this.list.filter(company => company
