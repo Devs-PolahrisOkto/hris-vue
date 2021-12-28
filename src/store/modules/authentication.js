@@ -1,25 +1,17 @@
+import initialState from '@/config/authentication.state';
 import AuthenticationClient from '@/api/clients/AuthenticationClient';
 
 const client = new AuthenticationClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-  authToken: localStorage.getItem('authToken'),
-  authUser: JSON.parse(localStorage.getItem('authUser')),
+  ...initialState,
 };
 
 const getters = {
-  authUserObj (state) {
-    return state.authUser;
-  },
-  authUserName (state) {
-    return state.authUser ? `${state.authUser.firstname} ${state.authUser.lastname}` : '';
-  },
-  authUserAvatar (state) {
-    return state.authUser && state.authUser.avatar;
-  },
-  authUserEmail (state) {
-    return state.authUser && state.authUser.email;
-  },
+  authUserObj: ({ authUser }) => authUser,
+  authUserName: ({ authUser }) => (authUser ? `${authUser.firstname} ${authUser.lastname}` : ''),
+  authUserAvatar: ({ authUser }) => (authUser ? authUser.avatar : ''),
+  authUserEmail: ({ authUser }) => (authUser ? authUser.email : ''),
 };
 
 const mutations = {
