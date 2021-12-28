@@ -5,7 +5,7 @@
     :can-cancel="['x']"
   >
     <modal-form
-      :modal-form="positionForm"
+      :modal-form="form"
       @submit="save"
       @close="$emit('close')"
     >
@@ -32,7 +32,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      positionForm: 'position/positionForm',
+      form: 'position/form',
     }),
   },
 
