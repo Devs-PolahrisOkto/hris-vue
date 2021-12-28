@@ -5,7 +5,7 @@
     :can-cancel="['x']"
   >
     <modal-form
-      :modal-form="documentTypeForm"
+      :modal-form="form"
       @submit="save"
       @close="$emit('close')"
     >
@@ -32,13 +32,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      documentTypeForm: 'documentType/documentTypeForm',
+      form: 'documenttype/form',
     }),
   },
 
   methods: {
     ...mapActions({
-      saveDocumentType: 'documentType/save',
+      saveDocumentType: 'documenttype/save',
     }),
     save (form) {
       this.saveDocumentType(form).then(this.$emit('close'));

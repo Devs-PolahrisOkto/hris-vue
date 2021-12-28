@@ -1,39 +1,33 @@
 import Vue from 'vue';
+import initialState from '@/config/addresstype.state';
 import DocumentTypeClient from '@/api/clients/DocumentTypeClient';
 
 const client = new DocumentTypeClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-  documentTypes: [],
-  form: {
-    id: '',
-    name: '',
-    description: '',
-  },
+  ...initialState,
 };
 
 const getters = {
-  documentTypeForm (state) {
-    return state.form;
-  },
-  list (state) {
-    return state.documentTypes;
-  },
+  form: ({ form }) => form,
+  'table/columns': ({ table: { columns } }) => columns,
+  'table/list': ({ table: { list } }) => list,
+  'table/meta': ({ table: { meta } }) => meta,
 };
 
 const mutations = {
   SET_FORM (state, documentType) {
     state.form = { ...documentType };
   },
-  SET_LIST (state, documentTypes) {
-    state.documentTypes = documentTypes;
+  SET_LIST ({ table }, documentTypes) {
+    table.list = [ ...documentTypes ];
   },
-  ADD_DOCUMENT_TYPE (state, documentType) {
-    state.documentTypes.push(documentType);
+  ADD_DOCUMENT_TYPE ({ table: { list } }, documentType) {
+    list.push(documentType);
   },
-  UPDATE_DOCUMENT_TYPE (state, documentType) {
-    const index = state.documentTypes.findIndex(obj => obj.id === documentType.id);
-    Vue.set(state.documentTypes, index, documentType);
+  UPDATE_DOCUMENT_TYPE ({ table: { list } }, documentType) {
+    const index = list.findIndex(obj => obj.id === documentType.id);
+    Vue.set(list, index, documentType);
   },
 };
 
