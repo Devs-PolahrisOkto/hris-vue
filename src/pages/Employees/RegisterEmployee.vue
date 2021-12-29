@@ -21,15 +21,8 @@
         <div class="card-content">
           <ValidationObserver ref="observer" v-slot="{ invalid, passes }">
             <form @submit.prevent="passes(save)">
-              <h6 class="is-size-6 has-text-weight-light mb-4">Basic Information</h6>
+              <h6 class="is-size-6 has-text-weight-medium has-text-grey mb-4">Personal</h6>
               <div class="columns">
-                <div class="column">
-                  <text-field
-                    v-model="form.user.extension"
-                    label-position="on-border"
-                    label="Extension"
-                  ></text-field>
-                </div>
                 <div class="column">
                   <text-field
                     v-model="form.user.firstname"
@@ -56,6 +49,16 @@
                     mode="eager"
                   ></text-field>
                 </div>
+              </div>
+
+              <div class="columns">
+                <div class="column">
+                  <text-field
+                    v-model="form.user.extension"
+                    label-position="on-border"
+                    label="Extension"
+                  ></text-field>
+                </div>
                 <div class="column">
                   <text-field
                     v-model="form.user.title"
@@ -63,41 +66,11 @@
                     label="Title"
                   ></text-field>
                 </div>
-              </div>
-
-              <div class="columns">
                 <div class="column">
                   <text-field
                     v-model="form.user.nickname"
                     label-position="on-border"
                     label="Nickname"
-                  ></text-field>
-                </div>
-                <div class="column">
-                  <text-field
-                    v-model="form.user.username"
-                    label-position="on-border"
-                    label="Username"
-                    rules="required"
-                    mode="eager"
-                  ></text-field>
-                </div>
-                <div class="column">
-                  <text-field
-                    v-model="form.user.email"
-                    label-position="on-border"
-                    label="Email"
-                    rules="required"
-                    mode="eager"
-                  ></text-field>
-                </div>
-                <div class="column">
-                  <text-field
-                    v-model="form.user.password"
-                    label-position="on-border"
-                    label="Password"
-                    rules="required"
-                    mode="eager"
                   ></text-field>
                 </div>
               </div>
@@ -134,7 +107,39 @@
                 </div>
               </div>
 
-              <h6 class="is-size-6 has-text-weight-light mb-4">Basic Employment Information</h6>
+              <h6 class="is-size-6 has-text-weight-medium has-text-grey mb-4">Authentication</h6>
+              <div class="columns">
+                <div class="column">
+                  <text-field
+                    v-model="form.user.username"
+                    label-position="on-border"
+                    label="Username"
+                    rules="required"
+                    mode="eager"
+                  ></text-field>
+                </div>
+                <div class="column">
+                  <text-field
+                    v-model="form.user.email"
+                    label-position="on-border"
+                    label="Email"
+                    rules="required"
+                    mode="eager"
+                  ></text-field>
+                </div>
+                <div class="column">
+                  <text-field
+                    v-model="form.user.password"
+                    label-position="on-border"
+                    label="Password"
+                    type="password"
+                    rules="required"
+                    mode="eager"
+                  ></text-field>
+                </div>
+              </div>
+
+              <h6 class="is-size-6 has-text-weight-medium has-text-grey mb-4">Employment</h6>
               <div class="columns">
                 <div class="column">
                   <select-field
@@ -180,7 +185,7 @@
 
               <!-- Contact -->
               <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
-                <h6 class="is-size-6 has-text-weight-light">Contact No.</h6>
+                <h6 class="is-size-6 has-text-weight-medium has-text-grey">Contact No.</h6>
                 <b-button
                   icon-right="plus"
                   @click="addContact"
@@ -219,7 +224,7 @@
 
               <!-- Address -->
               <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
-                <h6 class="is-size-6 has-text-weight-light">Addresses</h6>
+                <h6 class="is-size-6 has-text-weight-medium has-text-grey">Addresses</h6>
                 <b-button
                   icon-right="plus"
                   @click="addAddress"
@@ -275,7 +280,7 @@
 
               <!-- Educational Background -->
               <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
-                <h6 class="is-size-6 has-text-weight-light">Educational Background</h6>
+                <h6 class="is-size-6 has-text-weight-medium has-text-grey">Educational Background</h6>
                 <b-button
                   icon-right="plus"
                   @click="addEducation"
