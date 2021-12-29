@@ -1,15 +1,12 @@
+import initialState from '@/config/navigation.state';
+
 const state = {
-  sidebar: false,
-  sidebarMini: false,
+  ...initialState,
 };
 
 const getters = {
-  sidebarState (state) {
-    return state.sidebar;
-  },
-  sidebarMiniState (state) {
-    return state.sidebarMini;
-  },
+  sidebarState: ({ sidebar }) => sidebar,
+  sidebarMiniState: ({ sidebarMini }) => sidebarMini,
 };
 
 const mutations = {

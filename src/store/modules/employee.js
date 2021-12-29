@@ -1,7 +1,7 @@
 import Vue from 'vue';
+import initialState from '@/config/employee.state';
 import EmployeeClient from '@/api/clients/EmployeeClient';
 import Employee from '@/api/models/EmployeeModel';
-import initialState from '@/config/employee.state';
 
 const client = new EmployeeClient('https://apistaging.polahrisokto.com/api');
 
@@ -10,8 +10,9 @@ const state = {
 };
 
 const getters = {
-  'table/headers': ({ table: { headers } }) => headers,
-  list: ({ employees }) => employees.map(employee => new Employee(employee)),
+  'table/columns': ({ table: { columns } }) => columns,
+  'table/list': ({ table: { list } }) => list.map(employee => new Employee(employee)),
+  'table/meta': ({ table: { meta } }) => meta,
   selected: ({ selectedEmployee }) => selectedEmployee,
   'selected/employmentType': ({ selectedEmployee }) => selectedEmployee && selectedEmployee.employment_type && selectedEmployee.employment_type.description,
   'selected/position': ({ selectedEmployee: { positions } }) => positions && positions[0] && positions[0].name,
@@ -27,15 +28,15 @@ const mutations = {
   SET_FORM (state, employee) {
     state.form = { ...employee };
   },
-  SET_LIST (state, employees) {
-    state.employees = employees;
+  SET_LIST ({ table }, employees) {
+    table.list = [ ...employees ];
   },
-  ADD_EMPLOYEE (state, employee) {
-    state.employees.push(employee);
+  ADD_EMPLOYEE ({ table: { list } }, employee) {
+    list.push(employee);
   },
-  UPDATE_EMPLOYEE (state, employee) {
-    const index = state.employees.findIndex(obj => obj.id === employee.id);
-    Vue.set(state.employees, index, employee);
+  UPDATE_EMPLOYEE ({ table: { list } }, employee) {
+    const index = list.findIndex(obj => obj.id === employee.id);
+    Vue.set(list, index, employee);
   },
   SET_EMPLOYEE (state, employee) {
     state.selectedEmployee = new Employee(employee);

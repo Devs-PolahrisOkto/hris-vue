@@ -43,6 +43,10 @@ class Employee {
   get employmentTypeName () {
     return this.employment_type && this.employment_type.name;
   }
+
+  get positionName () {
+    return this.positions && this.positions[0] && this.positions[0].name;
+  }
 }
 
 export default Employee;

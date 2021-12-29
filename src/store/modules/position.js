@@ -1,39 +1,33 @@
 import Vue from 'vue';
+import initialState from '@/config/position.state';
 import PositionClient from '@/api/clients/PositionClient';
 
 const client = new PositionClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-  positions: [],
-  form: {
-    id: '',
-    name: '',
-    description: '',
-  },
+  ...initialState,
 };
 
 const getters = {
-  positionForm (state) {
-    return state.form;
-  },
-  list (state) {
-    return state.positions;
-  },
+  form: ({ form }) => form,
+  'table/columns': ({ table: { columns } }) => columns,
+  'table/list': ({ table: { list } }) => list,
+  'table/meta': ({ table: { meta } }) => meta,
 };
 
 const mutations = {
   SET_FORM (state, position) {
     state.form = { ...position };
   },
-  SET_LIST (state, positions) {
-    state.positions = positions;
+  SET_LIST ({ table }, positions) {
+    table.list = [ ...positions ];
   },
-  ADD_POSITION (state, position) {
-    state.positions.push(position);
+  ADD_POSITION ({ table: { list } }, position) {
+    list.push(position);
   },
-  UPDATE_POSITION (state, position) {
-    const index = state.positions.findIndex(obj => obj.id === position.id);
-    Vue.set(state.positions, index, position);
+  UPDATE_POSITION ({ table: { list } }, position) {
+    const index = list.findIndex(obj => obj.id === position.id);
+    Vue.set(list, index, position);
   },
 };
 

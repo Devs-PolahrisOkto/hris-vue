@@ -21,15 +21,10 @@
         <div class="card-content">
           <ValidationObserver ref="observer" v-slot="{ invalid, passes }">
             <form @submit.prevent="passes(save)">
-              <h6 class="is-size-6 has-text-weight-light mb-4">Basic Information</h6>
+              <h6 class="is-size-6 has-text-weight-medium has-text-grey mb-4">
+                Personal
+              </h6>
               <div class="columns">
-                <div class="column">
-                  <text-field
-                    v-model="form.user.extension"
-                    label-position="on-border"
-                    label="Extension"
-                  ></text-field>
-                </div>
                 <div class="column">
                   <text-field
                     v-model="form.user.firstname"
@@ -56,6 +51,16 @@
                     mode="eager"
                   ></text-field>
                 </div>
+              </div>
+
+              <div class="columns">
+                <div class="column">
+                  <text-field
+                    v-model="form.user.extension"
+                    label-position="on-border"
+                    label="Extension"
+                  ></text-field>
+                </div>
                 <div class="column">
                   <text-field
                     v-model="form.user.title"
@@ -63,41 +68,11 @@
                     label="Title"
                   ></text-field>
                 </div>
-              </div>
-
-              <div class="columns">
                 <div class="column">
                   <text-field
                     v-model="form.user.nickname"
                     label-position="on-border"
                     label="Nickname"
-                  ></text-field>
-                </div>
-                <div class="column">
-                  <text-field
-                    v-model="form.user.username"
-                    label-position="on-border"
-                    label="Username"
-                    rules="required"
-                    mode="eager"
-                  ></text-field>
-                </div>
-                <div class="column">
-                  <text-field
-                    v-model="form.user.email"
-                    label-position="on-border"
-                    label="Email"
-                    rules="required"
-                    mode="eager"
-                  ></text-field>
-                </div>
-                <div class="column">
-                  <text-field
-                    v-model="form.user.password"
-                    label-position="on-border"
-                    label="Password"
-                    rules="required"
-                    mode="eager"
                   ></text-field>
                 </div>
               </div>
@@ -134,7 +109,43 @@
                 </div>
               </div>
 
-              <h6 class="is-size-6 has-text-weight-light mb-4">Basic Employment Information</h6>
+              <h6 class="is-size-6 has-text-weight-medium has-text-grey mb-4">
+                Authentication
+              </h6>
+              <div class="columns">
+                <div class="column">
+                  <text-field
+                    v-model="form.user.username"
+                    label-position="on-border"
+                    label="Username"
+                    rules="required"
+                    mode="eager"
+                  ></text-field>
+                </div>
+                <div class="column">
+                  <text-field
+                    v-model="form.user.email"
+                    label-position="on-border"
+                    label="Email"
+                    rules="required"
+                    mode="eager"
+                  ></text-field>
+                </div>
+                <div class="column">
+                  <text-field
+                    v-model="form.user.password"
+                    label-position="on-border"
+                    label="Password"
+                    type="password"
+                    rules="required"
+                    mode="eager"
+                  ></text-field>
+                </div>
+              </div>
+
+              <h6 class="is-size-6 has-text-weight-medium has-text-grey mb-4">
+                Employment
+              </h6>
               <div class="columns">
                 <div class="column">
                   <select-field
@@ -180,161 +191,230 @@
 
               <!-- Contact -->
               <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
-                <h6 class="is-size-6 has-text-weight-light">Contact No.</h6>
+                <h6 class="is-size-6 has-text-weight-medium has-text-grey">
+                  Contacts
+                </h6>
                 <b-button
-                  icon-right="plus"
+                  v-if="form.contacts.length > 0"
+                  icon-left="playlist-edit"
+                  type="is-ghost"
+                  class="px-2"
                   @click="addContact"
-                />
+                >
+                  Add Contact
+                </b-button>
               </div>
-              <template v-for="contact in form.contacts">
-                <div :key="contact.id" class="columns">
-                  <div class="column is-6">
+              <template v-if="form.contacts.length > 0">
+                <template v-for="contact in form.contacts">
+                  <div :key="contact.id" class="columns">
+                    <div class="column is-6">
+                        <text-field
+                          v-model="contact.name"
+                          label-position="on-border"
+                          label="Name"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                    </div>
+                    <div class="column is-5">
                       <text-field
-                        v-model="contact.name"
+                        v-model="contact.description"
                         label-position="on-border"
-                        label="Name"
+                        label="Description"
                         rules="required"
                         mode="eager"
                       ></text-field>
+                    </div>
+                    <div class="column is-1">
+                      <b-tooltip label="Remove">
+                        <b-button
+                          class="is-pulled-right px-4"
+                          icon-right="delete"
+                          rounded
+                          @click="removeContact(contact)"
+                        />
+                      </b-tooltip>
+                    </div>
                   </div>
-                  <div class="column is-5">
-                    <text-field
-                      v-model="contact.description"
-                      label-position="on-border"
-                      label="Description"
-                      rules="required"
-                      mode="eager"
-                    ></text-field>
-                  </div>
-                  <div class="column is-1">
-                    <b-button
-                      class="is-pulled-right"
-                      icon-right="delete"
-                      @click="removeContact(contact)"
-                    />
-                  </div>
+                </template>
+              </template>
+              <template v-else>
+                <div class="is-flex is-justify-content-center">
+                  <b-button
+                    icon-left="playlist-edit"
+                    type="is-ghost"
+                    @click="addContact"
+                  >
+                    Add Contact
+                  </b-button>
                 </div>
               </template>
               <!-- Contact -->
 
               <!-- Address -->
               <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
-                <h6 class="is-size-6 has-text-weight-light">Addresses</h6>
+                <h6 class="is-size-6 has-text-weight-medium has-text-grey">
+                  Addresses
+                </h6>
                 <b-button
-                  icon-right="plus"
+                  v-if="form.addresses.length > 0"
+                  icon-left="playlist-edit"
+                  type="is-ghost"
+                  class="px-2"
                   @click="addAddress"
-                />
+                >
+                  Add Address
+                </b-button>
               </div>
-              <template v-for="address in form.addresses">
-                <div :key="address.id" class="columns">
-                  <div class="column is-3">
-                    <text-field
-                      v-model="address.name"
-                      label-position="on-border"
-                      label="Name"
-                      rules="required"
-                      mode="eager"
-                    ></text-field>
+              <template v-if="form.addresses.length > 0">
+                <template v-for="address in form.addresses">
+                  <div :key="address.id" class="columns">
+                    <div class="column is-3">
+                      <text-field
+                        v-model="address.name"
+                        label-position="on-border"
+                        label="Name"
+                        rules="required"
+                        mode="eager"
+                      ></text-field>
+                    </div>
+                    <div class="column is-3">
+                      <text-field
+                        v-model="address.address1"
+                        label-position="on-border"
+                        label="Address 1"
+                        rules="required"
+                        mode="eager"
+                      ></text-field>
+                    </div>
+                    <div class="column is-3">
+                      <text-field
+                        v-model="address.address2"
+                        label-position="on-border"
+                        label="Address 2"
+                      ></text-field>
+                    </div>
+                    <div class="column is-2">
+                      <select-field
+                        v-model="address.address_type_id"
+                        label-position="on-border"
+                        label="Type"
+                        rules="required"
+                        mode="eager"
+                        :options="addressTypesState"
+                      ></select-field>
+                    </div>
+                    <div class="column is-1">
+                      <b-tooltip label="Remove">
+                        <b-button
+                          class="is-pulled-right px-4"
+                          icon-right="delete"
+                          rounded
+                          @click="removeAddress(address)"
+                        />
+                      </b-tooltip>
+                    </div>
                   </div>
-                  <div class="column is-3">
-                    <text-field
-                      v-model="address.address1"
-                      label-position="on-border"
-                      label="Address 1"
-                      rules="required"
-                      mode="eager"
-                    ></text-field>
-                  </div>
-                  <div class="column is-3">
-                    <text-field
-                      v-model="address.address2"
-                      label-position="on-border"
-                      label="Address 2"
-                    ></text-field>
-                  </div>
-                  <div class="column is-2">
-                    <select-field
-                      v-model="address.address_type_id"
-                      label-position="on-border"
-                      label="Type"
-                      rules="required"
-                      mode="eager"
-                      :options="addressTypesState"
-                    ></select-field>
-                  </div>
-                  <div class="column is-1">
-                    <b-button
-                      class="is-pulled-right"
-                      icon-right="delete"
-                      @click="removeAddress(address)"
-                    />
-                  </div>
+                </template>
+              </template>
+              <template v-else>
+                <div class="is-flex is-justify-content-center">
+                  <b-button
+                    icon-left="playlist-edit"
+                    type="is-ghost"
+                    @click="addAddress"
+                  >
+                    Add Address
+                  </b-button>
                 </div>
               </template>
               <!-- Address -->
 
               <!-- Educational Background -->
               <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
-                <h6 class="is-size-6 has-text-weight-light">Educational Background</h6>
+                <h6 class="is-size-6 has-text-weight-medium has-text-grey">
+                  Educational Background
+                </h6>
                 <b-button
-                  icon-right="plus"
+                  v-if="form.education.length > 0"
+                  icon-left="playlist-edit"
+                  type="is-ghost"
+                  class="px-2"
                   @click="addEducation"
-                />
+                >
+                  Add Education
+                </b-button>
               </div>
-              <template v-for="education in form.education">
-                <div :key="education.id" class="columns">
-                  <div class="column is-3">
+              <template v-if="form.education.length > 0">
+                <template v-for="education in form.education">
+                  <div :key="education.id" class="columns">
+                    <div class="column is-3">
+                        <text-field
+                          v-model="education.description"
+                          label-position="on-border"
+                          label="Description"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                    </div>
+                    <div class="column is-2">
                       <text-field
-                        v-model="education.description"
+                        v-model="education.school"
                         label-position="on-border"
-                        label="Description"
+                        label="School"
                         rules="required"
                         mode="eager"
                       ></text-field>
+                    </div>
+                    <div class="column is-2">
+                      <text-field
+                        v-model="education.degree"
+                        label-position="on-border"
+                        label="Degree"
+                        rules="required"
+                        mode="eager"
+                      ></text-field>
+                    </div>
+                    <div class="column is-2">
+                      <date-picker-field
+                        v-model="education.start_at"
+                        label-position="on-border"
+                        label="Start at"
+                        rules="required"
+                        mode="eager"
+                      ></date-picker-field>
+                    </div>
+                    <div class="column is-2">
+                      <date-picker-field
+                        v-model="education.end_at"
+                        label-position="on-border"
+                        label="End at"
+                        rules="required"
+                        mode="eager"
+                      ></date-picker-field>
+                    </div>
+                    <div class="column is-1">
+                      <b-tooltip label="Remove" class="px-0">
+                        <b-button
+                          class="is-pulled-right px-4"
+                          icon-right="delete"
+                          rounded
+                          @click="removeEducation(education)"
+                        />
+                      </b-tooltip>
+                    </div>
                   </div>
-                  <div class="column is-2">
-                    <text-field
-                      v-model="education.school"
-                      label-position="on-border"
-                      label="School"
-                      rules="required"
-                      mode="eager"
-                    ></text-field>
-                  </div>
-                  <div class="column is-2">
-                    <text-field
-                      v-model="education.degree"
-                      label-position="on-border"
-                      label="Degree"
-                      rules="required"
-                      mode="eager"
-                    ></text-field>
-                  </div>
-                  <div class="column is-2">
-                    <date-picker-field
-                      v-model="education.start_at"
-                      label-position="on-border"
-                      label="Start at"
-                      rules="required"
-                      mode="eager"
-                    ></date-picker-field>
-                  </div>
-                  <div class="column is-2">
-                    <date-picker-field
-                      v-model="education.end_at"
-                      label-position="on-border"
-                      label="End at"
-                      rules="required"
-                      mode="eager"
-                    ></date-picker-field>
-                  </div>
-                  <div class="column is-1">
-                    <b-button
-                      class="is-pulled-right"
-                      icon-right="delete"
-                      @click="removeEducation(education)"
-                    />
-                  </div>
+                </template>
+              </template>
+              <template v-else>
+                <div class="is-flex is-justify-content-center">
+                  <b-button
+                    icon-left="playlist-edit"
+                    type="is-ghost"
+                    @click="addEducation"
+                  >
+                    Add Education
+                  </b-button>
                 </div>
               </template>
               <!-- Educational Background -->
@@ -351,13 +431,15 @@
                 </span>
               </b-field> -->
 
-              <b-button
-                native-type="submit"
-                class="is-primary mt-6 mr-auto"
-                :disabled="invalid"
-              >
-                <span class="has-text-weight-bold px-5">Register</span>
-              </b-button>
+              <div class="is-flex is-justify-content-end">
+                <b-button
+                  native-type="submit"
+                  class="is-primary mt-6 mr-auto"
+                  :disabled="invalid"
+                >
+                  <span class="has-text-weight-bold px-6">Register</span>
+                </b-button>
+              </div>
 
             </form>
           </ValidationObserver>

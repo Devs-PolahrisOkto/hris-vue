@@ -1,11 +1,10 @@
+import BasicRepresentation from '@/api/representations/BasicRepresentation';
+
 export default {
-  employees: [],
-  selectedEmployee: {},
   table: {
     columns: [
-      { title: 'Name', field: 'employeeName', visible: true },
-      { title: 'Position', field: 'positionName', visible: true },
-      { title: 'Employment Type', field: 'employmentTypeName', visible: true },
+      { title: 'Name', field: 'name', visible: true },
+      { title: 'Description', field: 'description', visible: true },
     ],
     list: [],
     meta: {
@@ -13,7 +12,7 @@ export default {
       isStriped: false,
       isHoverable: true,
       hasMobileCards: true,
-      isPaginated: true,
+      isPaginated: false,
       isPaginationSimple: true,
       isPaginationRounded: false,
       paginationPosition: 'bottom',
@@ -25,4 +24,5 @@ export default {
       perPage: 10,
     },
   },
+  form: new BasicRepresentation(),
 };

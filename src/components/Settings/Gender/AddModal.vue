@@ -5,7 +5,7 @@
     :can-cancel="['x']"
   >
     <modal-form
-      :modal-form="genderForm"
+      :modal-form="form"
       @submit="save"
       @close="$emit('close')"
     >
@@ -32,7 +32,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      genderForm: 'gender/genderForm',
+      form: 'gender/form',
     }),
   },
 

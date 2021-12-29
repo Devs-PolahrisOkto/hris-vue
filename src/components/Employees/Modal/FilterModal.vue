@@ -66,7 +66,7 @@
             <button class="button is-primary">Filter Employee</button>
           </form>
         </section>
-        <footer class="modal-card-foot">
+        <footer class="modal-card-foot is-flex is-justify-content-end">
           <b-button
             label="Cancel"
             @click="$emit('close')"

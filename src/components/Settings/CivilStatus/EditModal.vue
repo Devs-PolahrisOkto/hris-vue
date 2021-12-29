@@ -5,7 +5,7 @@
     :can-cancel="['x']"
   >
     <modal-form
-      :modal-form="civilStatusForm"
+      :modal-form="form"
       @submit="update"
       @close="$emit('close')"
     >
@@ -32,13 +32,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      civilStatusForm: 'civilStatus/civilStatusForm',
+      form: 'civilstatus/form',
     }),
   },
 
   methods: {
     ...mapActions({
-      updateCivilStatus: 'civilStatus/update',
+      updateCivilStatus: 'civilstatus/update',
     }),
     update (form) {
       this.updateCivilStatus(form).then(this.$emit('close'));

@@ -5,7 +5,7 @@
     :can-cancel="['x']"
   >
     <modal-form
-      :modal-form="documentTypeForm"
+      :modal-form="form"
       @submit="update"
       @close="$emit('close')"
     >
@@ -32,13 +32,13 @@ export default {
 
   computed: {
     ...mapGetters({
-      documentTypeForm: 'documentType/documentTypeForm',
+      form: 'documenttype/form',
     }),
   },
 
   methods: {
     ...mapActions({
-      updateDocumentType: 'documentType/update',
+      updateDocumentType: 'documenttype/update',
     }),
     update (form) {
       this.updateDocumentType(form).then(this.$emit('close'));

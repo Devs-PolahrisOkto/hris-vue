@@ -1,39 +1,33 @@
 import Vue from 'vue';
+import initialState from '@/config/company.state';
 import CompanyClient from '@/api/clients/CompanyClient';
 
 const client = new CompanyClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-  companies: [],
-  form: {
-    id: '',
-    name: '',
-    description: '',
-  },
+  ...initialState,
 };
 
 const getters = {
-  companyForm (state) {
-    return state.form;
-  },
-  list (state) {
-    return state.companies;
-  },
+  form: ({ form }) => form,
+  'table/columns': ({ table: { columns } }) => columns,
+  'table/list': ({ table: { list } }) => list,
+  'table/meta': ({ table: { meta } }) => meta,
 };
 
 const mutations = {
   SET_FORM (state, company) {
     state.form = { ...company };
   },
-  SET_LIST (state, companies) {
-    state.companies = companies;
+  SET_LIST ({ table }, companies) {
+    table.list = [ ...companies ];
   },
-  ADD_COMPANY (state, company) {
-    state.companies.push(company);
+  ADD_COMPANY ({ table: { list } }, company) {
+    list.push(company);
   },
-  UPDATE_COMPANY (state, company) {
-    const index = state.companies.findIndex(obj => obj.id === company.id);
-    Vue.set(state.companies, index, company);
+  UPDATE_COMPANY ({ table: { list } }, company) {
+    const index = list.findIndex(obj => obj.id === company.id);
+    Vue.set(list, index, company);
   },
 };
 

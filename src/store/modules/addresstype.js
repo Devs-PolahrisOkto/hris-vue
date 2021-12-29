@@ -1,39 +1,33 @@
 import Vue from 'vue';
+import initialState from '@/config/addresstype.state';
 import AddressTypeClient from '@/api/clients/AddressTypeClient';
 
 const client = new AddressTypeClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-  addressTypes: [],
-  form: {
-    id: '',
-    name: '',
-    description: '',
-  },
+  ...initialState,
 };
 
 const getters = {
-  addressTypeForm (state) {
-    return state.form;
-  },
-  list (state) {
-    return state.addressTypes;
-  },
+  form: ({ form }) => form,
+  'table/columns': ({ table: { columns } }) => columns,
+  'table/list': ({ table: { list } }) => list,
+  'table/meta': ({ table: { meta } }) => meta,
 };
 
 const mutations = {
   SET_FORM (state, addressType) {
     state.form = { ...addressType };
   },
-  SET_LIST (state, addressTypes) {
-    state.addressTypes = addressTypes;
+  SET_LIST ({ table }, addressTypes) {
+    table.list = [ ...addressTypes ];
   },
-  ADD_ADDRESS_TYPE (state, addressType) {
-    state.addressTypes.push(addressType);
+  ADD_ADDRESS_TYPE ({ table: { list } }, addressType) {
+    list.push(addressType);
   },
-  UPDATE_ADDRESS_TYPE (state, addressType) {
-    const index = state.addressTypes.findIndex(obj => obj.id === addressType.id);
-    Vue.set(state.addressTypes, index, addressType);
+  UPDATE_ADDRESS_TYPE ({ table: { list } }, addressType) {
+    const index = list.findIndex(obj => obj.id === addressType.id);
+    Vue.set(list, index, addressType);
   },
 };
 

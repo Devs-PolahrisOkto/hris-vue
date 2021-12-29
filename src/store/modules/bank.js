@@ -1,39 +1,33 @@
 import Vue from 'vue';
+import initialState from '@/config/bank.state';
 import BankClient from '@/api/clients/BankClient';
 
 const client = new BankClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-  banks: [],
-  form: {
-    id: '',
-    name: '',
-    description: '',
-  },
+  ...initialState,
 };
 
 const getters = {
-  bankForm (state) {
-    return state.form;
-  },
-  list (state) {
-    return state.banks;
-  },
+  form: ({ form }) => form,
+  'table/columns': ({ table: { columns } }) => columns,
+  'table/list': ({ table: { list } }) => list,
+  'table/meta': ({ table: { meta } }) => meta,
 };
 
 const mutations = {
   SET_FORM (state, bank) {
     state.form = { ...bank };
   },
-  SET_LIST (state, banks) {
-    state.banks = banks;
+  SET_LIST ({ table }, banks) {
+    table.list = [ ...banks ];
   },
-  ADD_BANK (state, bank) {
-    state.banks.push(bank);
+  ADD_BANK ({ table: { list } }, bank) {
+    list.push(bank);
   },
-  UPDATE_BANK (state, bank) {
-    const index = state.banks.findIndex(obj => obj.id === bank.id);
-    Vue.set(state.banks, index, bank);
+  UPDATE_BANK ({ table: { list } }, bank) {
+    const index = list.findIndex(obj => obj.id === bank.id);
+    Vue.set(list, index, bank);
   },
 };
 

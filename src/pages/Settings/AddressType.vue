@@ -26,20 +26,20 @@
         </b-tooltip>
       </div>
       <b-table
-        :data="isEmpty ? [] : filteredAddressTypes"
-        :striped="isStriped"
-        :hoverable="isHoverable"
-        :mobile-cards="hasMobileCards"
-        :paginated="isPaginated"
-        :per-page="perPage"
-        :current-page.sync="currentPage"
-        :pagination-simple="isPaginationSimple"
-        :pagination-position="paginationPosition"
-        :default-sort-direction="defaultSortDirection"
-        :pagination-rounded="isPaginationRounded"
-        :sort-icon="sortIcon"
-        :sort-icon-size="sortIconSize"
-        default-sort="name"
+        :data="meta.isEmpty ? [] : filteredAddressTypes"
+        :striped="meta.isStriped"
+        :hoverable="meta.isHoverable"
+        :mobile-cards="meta.hasMobileCards"
+        :paginated="meta.isPaginated"
+        :per-page="meta.perPage"
+        :current-page.sync="meta.currentPage"
+        :pagination-simple="meta.isPaginationSimple"
+        :pagination-position="meta.paginationPosition"
+        :default-sort-direction="meta.defaultSortDirection"
+        :pagination-rounded="meta.isPaginationRounded"
+        :sort-icon="meta.sortIcon"
+        :sort-icon-size="meta.sortIconSize"
+        :default-sort="meta.defaultSortColumn"
         aria-next-label="Next page"
         aria-previous-label="Previous page"
         aria-page-label="Page"
@@ -104,46 +104,34 @@ export default {
 
   data () {
     return {
-      layout: 'table',
-      columns: [
-        { title: 'Name', field: 'name', visible: true },
-        { title: 'Description', field: 'description', visible: true },
-      ],
-      isEmpty: false,
-      isStriped: false,
-      isHoverable: true,
-      hasMobileCards: true,
-      isPaginated: false,
-      isPaginationSimple: true,
-      isPaginationRounded: false,
-      paginationPosition: 'bottom',
-      defaultSortDirection: 'asc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
-      currentPage: 1,
-      perPage: 10,
+      searchField: '',
       addAddressTypeModal: false,
       editAddressTypeModal: false,
-      searchField: '',
     };
   },
 
   computed: {
     ...mapGetters({
-      addressTypes: 'addressType/list',
+      columns: 'addresstype/table/columns',
+      list: 'addresstype/table/list',
+      meta: 'addresstype/table/meta',
     }),
     filteredAddressTypes () {
-      return this.addressTypes.filter(addressType => addressType
+      return this.list.filter(addressType => addressType
         .name
         .toLowerCase()
         .includes(this.searchField.toLowerCase()));
     },
   },
 
+  created () {
+    this.getList();
+  },
+
   methods: {
     ...mapActions({
-      setForm: 'addressType/setForm',
-      getList: 'addressType/list',
+      setForm: 'addresstype/setForm',
+      getList: 'addresstype/list',
     }),
     add () {
       const addressType = {
@@ -157,10 +145,6 @@ export default {
       this.setForm(addressType);
       this.editAddressTypeModal = true;
     },
-  },
-
-  created () {
-    this.getList();
   },
 };
 </script>
