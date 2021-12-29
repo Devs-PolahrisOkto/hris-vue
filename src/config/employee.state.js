@@ -13,7 +13,7 @@ export default {
       isStriped: false,
       isHoverable: true,
       hasMobileCards: true,
-      isPaginated: false,
+      isPaginated: true,
       isPaginationSimple: true,
       isPaginationRounded: false,
       paginationPosition: 'bottom',
