@@ -185,7 +185,7 @@
 
               <!-- Contact -->
               <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
-                <h6 class="is-size-6 has-text-weight-medium has-text-grey">Contact No.</h6>
+                <h6 class="is-size-6 has-text-weight-medium has-text-grey">Contacts</h6>
                 <b-button
                   icon-right="plus"
                   @click="addContact"
@@ -356,13 +356,15 @@
                 </span>
               </b-field> -->
 
-              <b-button
-                native-type="submit"
-                class="is-primary mt-6 mr-auto"
-                :disabled="invalid"
-              >
-                <span class="has-text-weight-bold px-5">Register</span>
-              </b-button>
+              <div class="is-flex is-justify-content-end">
+                <b-button
+                  native-type="submit"
+                  class="is-primary mt-6 mr-auto"
+                  :disabled="invalid"
+                >
+                  <span class="has-text-weight-bold px-6">Register</span>
+                </b-button>
+              </div>
 
             </form>
           </ValidationObserver>
