@@ -27,8 +27,13 @@
               is-justify-content-space-between
               is-align-items-center"
             >
-              <span class="is-size-6 has-text-weight-semibold">{{ column.title }}</span>
-              <b-checkbox v-model="column.visible" :disabled="column.field === 'employeeName'"></b-checkbox>
+              <span class="is-size-6 has-text-weight-semibold">
+                {{ column.title }}
+              </span>
+              <b-checkbox
+                v-model="column.visible"
+                :disabled="column.field === 'employeeName'"
+              ></b-checkbox>
             </div>
           </template>
         </section>
