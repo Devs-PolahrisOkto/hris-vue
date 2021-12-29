@@ -5,7 +5,6 @@ export default {
     columns: [
       { title: 'Name', field: 'employeeName', visible: true },
       { title: 'Position', field: 'positionName', visible: true },
-      { title: 'Department', field: 'department', visible: true },
       { title: 'Employment Type', field: 'employmentTypeName', visible: true },
     ],
     list: [],

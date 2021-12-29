@@ -120,8 +120,7 @@
                   <div class="media-content">
                     <h5 class="is-size-5 has-text-weight-semibold">{{ item.employeeName }}</h5>
                     <h6 class="is-size-6 has-text-grey">{{ item.position }}</h6>
-                    <h6 class="is-size-6">{{ item.employment_type }}</h6>
-                    <h6 class="is-size-6">{{ item.department }}</h6>
+                    <h6 class="is-size-6">{{ item.employmentTypeName }}</h6>
                   </div>
                   <div class="media-right">
                     <b-button
