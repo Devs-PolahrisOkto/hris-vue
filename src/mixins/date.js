@@ -6,5 +6,11 @@ export default {
       }
       return '';
     },
+    formatTimeToString (date) {
+      if (this.$moment(date).isValid()) {
+        return this.$moment(date).format('LT');
+      }
+      return '';
+    },
   },
 };
