@@ -80,7 +80,7 @@ const routes = [
   {
     path: '/timekeeping/workshifts',
     name: 'Schedules',
-    component: () => import(/* webpackChunkName: "WorkShifts" */ '@/pages/Timekeeping/WorkShifts.vue'),
+    component: () => import(/* webpackChunkName: "WorkShifts" */ '@/pages/Timekeeping/WorkShift/WorkShifts.vue'),
     meta: {
       forAuth: true,
       parent: 'timekeeping',
