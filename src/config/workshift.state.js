@@ -122,4 +122,39 @@ export default {
       perPage: 10,
     },
   },
+  addWorkShift: {
+    columns: [
+      {
+        title: 'Date', field: 'date', visible: true, centered: true, sortable: false, custom: false,
+      },
+      {
+        title: 'Time In & Time Out', field: 'timeIn', visible: true, centered: true, sortable: false, custom: true,
+      },
+      {
+        title: 'Morning Break Time', field: 'morningBreak', visible: true, centered: true, sortable: false, custom: true,
+      },
+      {
+        title: 'Lunch Break Time', field: 'lunchBreak', visible: true, centered: true, sortable: false, custom: true,
+      },
+      {
+        title: 'Afternoon Break Time', field: 'afternoonBreak', visible: true, centered: true, sortable: false, custom: true,
+      },
+    ],
+    meta: {
+      isEmpty: false,
+      isStriped: false,
+      isHoverable: true,
+      hasMobileCards: true,
+      isPaginated: false,
+      isPaginationSimple: true,
+      isPaginationRounded: false,
+      paginationPosition: 'bottom',
+      defaultSortDirection: 'asc',
+      defaultSortColumn: 'name',
+      sortIcon: 'arrow-up',
+      sortIconSize: 'is-small',
+      currentPage: 1,
+      perPage: 10,
+    },
+  },
 };
