@@ -79,8 +79,17 @@ const routes = [
   },
   {
     path: '/timekeeping/workshifts',
-    name: 'Schedules',
+    name: 'WorkShifts',
     component: () => import(/* webpackChunkName: "WorkShifts" */ '@/pages/Timekeeping/WorkShift/WorkShifts.vue'),
+    meta: {
+      forAuth: true,
+      parent: 'timekeeping',
+    },
+  },
+  {
+    path: '/timekeeping/workshifts/add',
+    name: 'AddWorkShift',
+    component: () => import(/* webpackChunkName: "AddWorkShift" */ '@/pages/Timekeeping/WorkShift/AddWorkShift.vue'),
     meta: {
       forAuth: true,
       parent: 'timekeeping',
