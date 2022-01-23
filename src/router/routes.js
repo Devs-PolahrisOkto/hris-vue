@@ -78,6 +78,15 @@ const routes = [
     },
   },
   {
+    path: '/timekeeping/workshifts',
+    name: 'Schedules',
+    component: () => import(/* webpackChunkName: "WorkShifts" */ '@/pages/Timekeeping/WorkShifts.vue'),
+    meta: {
+      forAuth: true,
+      parent: 'timekeeping',
+    },
+  },
+  {
     path: '/timekeeping/leaves',
     name: 'Leaves',
     component: () => import(/* webpackChunkName: "Leaves" */ '@/pages/Timekeeping/Leaves.vue'),
