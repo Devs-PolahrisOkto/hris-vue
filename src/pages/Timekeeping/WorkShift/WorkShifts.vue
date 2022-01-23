@@ -21,7 +21,8 @@
               <b-button
                 size="is-small"
                 icon-right="plus"
-                @click="addModal = true"
+                tag="router-link"
+                to="/timekeeping/workshifts/add"
               />
             </b-tooltip>
           </div>
@@ -115,12 +116,6 @@
       </div>
     </div>
     <!-- Work Shifts Table -->
-    <!-- Start Modals -->
-    <add-modal
-      :active="addModal"
-      @close="addModal = !addModal"
-    ></add-modal>
-    <!-- End Modals -->
   </main-layout>
 </template>
 
@@ -130,13 +125,11 @@ import { mapGetters } from 'vuex';
 export default {
   components: {
     MainLayout: () => import('@/layouts/MainLayout.vue'),
-    AddModal: () => import('@/components/Timekeeping/Schedule/AddModal.vue'),
     NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   data () {
     return {
-      addModal: false,
       selectedEmployee: null,
       employee: '',
     };
