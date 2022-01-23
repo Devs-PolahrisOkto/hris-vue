@@ -9,6 +9,8 @@ const getters = {
   'table/list': ({ table: { list } }) => list,
   'table/meta': ({ table: { meta } }) => meta,
   employeeList: ({ employeeList }) => employeeList,
+  'addWorkShift/table/columns': ({ addWorkShift: { columns } }) => columns,
+  'addWorkShift/table/meta': ({ addWorkShift: { meta } }) => meta,
 };
 
 const mutations = {
