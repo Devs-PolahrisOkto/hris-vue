@@ -84,7 +84,6 @@
               v-slot="props" field="timeIn"
               label="Time In & Time Out"
               centered
-              sortable
             >
               {{ `${props.row.timeIn} - ${props.row.timeOut}` }}
             </b-table-column>
@@ -93,7 +92,6 @@
               v-slot="props" field="morningBreak"
               label="Morning Break Time"
               centered
-              sortable
             >
               {{ `${props.row.morningBreakIn} - ${props.row.morningBreakOut}` }}
             </b-table-column>
@@ -102,7 +100,6 @@
               v-slot="props" field="lunchBreak"
               label="Lunch Break Time"
               centered
-              sortable
             >
               {{ `${props.row.lunchBreakIn} - ${props.row.lunchBreakOut}` }}
             </b-table-column>
@@ -111,9 +108,22 @@
               v-slot="props" field="afternoonBreak"
               label="Afternoon Break Time"
               centered
-              sortable
             >
               {{ `${props.row.afternoonBreakIn} - ${props.row.afternoonBreakOut}` }}
+            </b-table-column>
+
+            <b-table-column
+              v-slot="props" field="remove"
+              label=""
+              centered
+            >
+              <b-button
+                type="is-danger"
+                icon-right="delete"
+                class="px-4"
+                rounded
+                @click="removeWorkShift(props.row)"
+              />
             </b-table-column>
 
             <template #empty>
@@ -147,6 +157,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { uniqueId } from 'lodash';
 import date from '@/mixins/date';
 
 export default {
@@ -175,6 +186,7 @@ export default {
     }),
     filteredWorkShifts () {
       return this.workShifts.map(shift => ({
+        id: shift.id,
         date: this.formatDateToString(shift.date),
         timeIn: this.formatTimeToString(shift.timeIn),
         timeOut: this.formatTimeToString(shift.timeOut),
@@ -193,7 +205,11 @@ export default {
 
   methods: {
     addWorkShift (form) {
-      this.workShifts.push(form);
+      this.workShifts.push({ ...form, id: uniqueId() });
+    },
+    removeWorkShift (workshift) {
+      const index = this.workShifts.findIndex(item => item.id === workshift.id);
+      this.workShifts.splice(index, 1);
     },
   },
 };
