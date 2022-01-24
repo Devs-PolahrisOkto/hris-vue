@@ -125,7 +125,7 @@ export default {
   addWorkShift: {
     columns: [
       {
-        title: 'Date', field: 'date', visible: true, centered: true, sortable: false, custom: false,
+        title: 'Date', field: 'date', visible: true, centered: true, sortable: true, custom: false,
       },
       {
         title: 'Time In & Time Out', field: 'timeIn', visible: true, centered: true, sortable: false, custom: true,
@@ -138,6 +138,9 @@ export default {
       },
       {
         title: 'Afternoon Break Time', field: 'afternoonBreak', visible: true, centered: true, sortable: false, custom: true,
+      },
+      {
+        title: '', field: 'remove', visible: true, centered: true, sortable: false, custom: true,
       },
     ],
     meta: {
