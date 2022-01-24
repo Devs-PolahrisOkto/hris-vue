@@ -121,7 +121,10 @@
             </template>
           </b-table>
         </div>
-        <div class="is-flex is-justify-content-end p-3">
+        <div
+          v-if="hasWorkShifts"
+          class="is-flex is-justify-content-end p-3"
+        >
           <b-button
             native-type="submit"
             class="is-primary mt-6 mr-auto"
@@ -182,6 +185,9 @@ export default {
         afternoonBreakIn: this.formatTimeToString(shift.afternoonBreakIn),
         afternoonBreakOut: this.formatTimeToString(shift.afternoonBreakOut),
       }));
+    },
+    hasWorkShifts () {
+      return this.filteredWorkShifts.length > 0;
     },
   },
 
