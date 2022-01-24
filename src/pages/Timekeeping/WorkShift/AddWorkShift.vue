@@ -18,7 +18,10 @@
             <h6 class="is-size-6 has-text-weight-semibold px-3">Add Work Shift</h6>
           </h6>
           <div>
-            <b-tooltip label="Add">
+            <b-tooltip
+              v-if="hasWorkShifts"
+              label="Add"
+            >
               <b-button
                 size="is-small"
                 icon-right="plus"
@@ -46,6 +49,7 @@
         </div>
         <div class="card-content">
           <b-table
+            v-if="hasWorkShifts"
             :data="meta.isEmpty ? [] : filteredWorkShifts"
             :striped="meta.isStriped"
             :hoverable="meta.isHoverable"
@@ -125,11 +129,23 @@
                 @click="removeWorkShift(props.row)"
               />
             </b-table-column>
-
-            <template #empty>
-              <no-record></no-record>
-            </template>
           </b-table>
+          <div v-else>
+            <div
+              class="is-flex is-justify-content-center
+              is-align-items-center is-flex-direction-column m-5 p-5"
+            >
+              <add-file-illustration width="250" height="250"></add-file-illustration>
+              <b-button
+                native-type="submit"
+                class="is-primary mt-6 mr-auto"
+                outlined
+                @click="addModal = true"
+              >
+                <span class="has-text-weight-bold px-6">Add Work Shift</span>
+              </b-button>
+            </div>
+          </div>
         </div>
         <div
           v-if="hasWorkShifts"
@@ -164,7 +180,7 @@ export default {
   components: {
     MainLayout: () => import('@/layouts/MainLayout.vue'),
     AddModal: () => import('@/components/Timekeeping/WorkShift/AddModal.vue'),
-    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
+    AddFileIllustration: () => import('@/components/Illustrations/AddFileIllustration.vue'),
   },
 
   data () {
