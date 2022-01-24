@@ -138,6 +138,8 @@
 </template>
 
 <script>
+import WorkShiftRepresentation from '@/api/representations/WorkShiftRepresentation';
+
 export default {
   props: {
     active: {
@@ -147,17 +149,7 @@ export default {
 
   data () {
     return {
-      form: {
-        date: null,
-        timeIn: null,
-        timeOut: null,
-        morningBreakIn: null,
-        morningBreakOut: null,
-        lunchBreakIn: null,
-        lunchBreakOut: null,
-        afternoonBreakIn: null,
-        afternoonBreakOut: null,
-      },
+      form: new WorkShiftRepresentation(),
     };
   },
 
@@ -165,6 +157,7 @@ export default {
     submit () {
       this.$emit('submit', this.form);
       this.$emit('close');
+      this.form = new WorkShiftRepresentation();
     },
   },
 };
