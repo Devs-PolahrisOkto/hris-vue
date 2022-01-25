@@ -71,7 +71,16 @@ const routes = [
   {
     path: '/timekeeping/schedules',
     name: 'Schedules',
-    component: () => import(/* webpackChunkName: "Schedules" */ '@/pages/Timekeeping/Schedules.vue'),
+    component: () => import(/* webpackChunkName: "Schedules" */ '@/pages/Timekeeping/Schedule/Schedules.vue'),
+    meta: {
+      forAuth: true,
+      parent: 'timekeeping',
+    },
+  },
+  {
+    path: '/timekeeping/schedules/add',
+    name: 'AddSchedule',
+    component: () => import(/* webpackChunkName: "AddSchedule" */ '@/pages/Timekeeping/Schedule/AddSchedule.vue'),
     meta: {
       forAuth: true,
       parent: 'timekeeping',
