@@ -36,7 +36,7 @@
           <b-field class="mb-5">
             <b-autocomplete
               v-model="schedule"
-              :data="filteredSchedules"
+              :data="scheduleList"
               placeholder="Search schedule name"
               icon="magnify"
               clearable
@@ -45,154 +45,94 @@
             </b-autocomplete>
           </b-field>
         </div>
-
         <b-table
-          :data="isEmpty ? [] : schedules"
-          :striped="isStriped"
-          :hoverable="isHoverable"
-          :mobile-cards="hasMobileCards"
-          :paginated="isPaginated"
-          :per-page="perPage"
-          :current-page.sync="currentPage"
-          :pagination-simple="isPaginationSimple"
-          :pagination-position="paginationPosition"
-          :default-sort-direction="defaultSortDirection"
-          :pagination-rounded="isPaginationRounded"
-          :sort-icon="sortIcon"
-          :sort-icon-size="sortIconSize"
-          default-sort="user.first_name"
+          :data="meta.isEmpty ? [] : filteredSchedules"
+          :striped="meta.isStriped"
+          :hoverable="meta.isHoverable"
+          :mobile-cards="meta.hasMobileCards"
+          :paginated="meta.isPaginated"
+          :per-page="meta.perPage"
+          :current-page.sync="meta.currentPage"
+          :pagination-simple="meta.isPaginationSimple"
+          :pagination-position="meta.paginationPosition"
+          :default-sort-direction="meta.defaultSortDirection"
+          :pagination-rounded="meta.isPaginationRounded"
+          :sort-icon="meta.sortIcon"
+          :sort-icon-size="meta.sortIconSize"
+          :default-sort="meta.defaultSortColumn"
           aria-next-label="Next page"
           aria-previous-label="Previous page"
           aria-page-label="Page"
           aria-current-label="Current page"
         >
+          <template v-for="(column, index) in columns">
+            <b-table-column
+              v-if="!column.custom"
+              :key="index"
+              v-slot="props"
+              :label="column.title"
+              :field="column.field"
+              :visible="column.visible"
+              :centered="column.centered"
+              :sortable="column.sortable"
+            >
+              {{ props.row[column.field] }}
+            </b-table-column>
+          </template>
+
           <b-table-column
-            v-slot="props" field="day"
-            label="Day"
+            v-slot="props" field="status"
+            label="Status"
+            centered
             sortable
           >
-            {{ props.row.day }}
-          </b-table-column>
-
-          <b-table-column
-            v-slot="props" field="timein"
-            label="Time In"
-          >
-            {{ props.row.timein }}
-          </b-table-column>
-
-          <b-table-column
-            v-slot="props" field="timeout"
-            label="Time Out"
-          >
-            {{ props.row.timeout }}
-          </b-table-column>
-
-          <b-table-column
-            v-slot="props" field="breakin"
-            label="Break In"
-          >
-            {{ props.row.breakin }}
-          </b-table-column>
-
-          <b-table-column
-            v-slot="props" field="breakout"
-            label="Break Out"
-          >
-            {{ props.row.breakout }}
+            <span
+              class="tag"
+              :class="{
+                'is-success': props.row.status,
+                'is-danger': !props.row.status,
+              }"
+            >{{ props.row.status ? 'Active' : 'Inactive' }}</span>
           </b-table-column>
 
           <template #empty>
-              <div class="has-text-centered">No records</div>
+            <no-record></no-record>
           </template>
         </b-table>
       </div>
     </div>
     <!-- Schedules Table -->
-    <!-- Start Modals -->
-    <add-modal
-      :active="addModal"
-      @close="addModal = !addModal"
-    ></add-modal>
-    <!-- End Modals -->
   </main-layout>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   components: {
     MainLayout: () => import('@/layouts/MainLayout.vue'),
-    AddModal: () => import('@/components/Timekeeping/Schedule/AddModal.vue'),
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   data () {
     return {
-      addModal: false,
-      uploadModal: false,
-      isEmpty: false,
-      isStriped: true,
-      isHoverable: true,
-      hasMobileCards: true,
-      isPaginated: true,
-      isPaginationSimple: true,
-      isPaginationRounded: false,
-      paginationPosition: 'bottom',
-      defaultSortDirection: 'asc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
-      currentPage: 1,
-      perPage: 10,
-      schedules: [
-        {
-          id: 1, day: 'Monday', timein: '7:00AM', timeout: '5:00 PM', breakin: '12:00 PM', breakout: '1:00 PM',
-        },
-        {
-          id: 2, day: 'Tuesday', timein: '7:00AM', timeout: '5:00 PM', breakin: '12:00 PM', breakout: '1:00 PM',
-        },
-        {
-          id: 3, day: 'Wednesday', timein: '7:00AM', timeout: '5:00 PM', breakin: '12:00 PM', breakout: '1:00 PM',
-        },
-        {
-          id: 4, day: 'Thursday', timein: '7:00AM', timeout: '5:00 PM', breakin: '12:00 PM', breakout: '1:00 PM',
-        },
-        {
-          id: 5, day: 'Friday', timein: '7:00AM', timeout: '5:00 PM', breakin: '12:00 PM', breakout: '1:00 PM',
-        },
-        {
-          id: 6, day: 'Saturday', timein: '-', timeout: '-', breakin: '-', breakout: '-',
-        },
-        {
-          id: 7, day: 'Sunday', timein: '-', timeout: '-', breakin: '-', breakout: '-',
-        },
-      ],
-      scheduleList: [
-        'IT Dept Schedule',
-        'HR Dept Schedule',
-        'Accounting Dept Schedule',
-        'Standard Schedule',
-        'Company Schedule',
-        'Partimer Schedule',
-        'Fulltimer Schedule',
-      ],
-      // Selected option
       selectedSchedule: null,
-      // Input Value
       schedule: '',
     };
   },
 
   computed: {
+    ...mapGetters({
+      columns: 'schedule/table/columns',
+      list: 'schedule/table/list',
+      meta: 'schedule/table/meta',
+      scheduleList: 'schedule/scheduleList',
+    }),
     filteredSchedules () {
-      return this.filteredDataArray(this.scheduleList, this.schedule);
-    },
-  },
-
-  methods: {
-    filteredDataArray (dataArray, query) {
-      return dataArray.filter(option => option
-        .toString()
+      return this.list.filter(schedule => schedule
+        .scheduleName
         .toLowerCase()
-        .indexOf(query.toLowerCase()) >= 0);
+        .includes((this.selectedSchedule && this.selectedSchedule.toLowerCase()) || ''));
     },
   },
 };
