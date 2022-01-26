@@ -1,7 +1,7 @@
 <template>
   <b-modal
     v-model="active"
-    :width="1200"
+    :width="800"
     :can-cancel="['x']"
     :trap-focus="false"
   >
@@ -10,7 +10,7 @@
         <div class="modal-card">
           <header class="modal-card-head is-flex is-justify-content-space-between">
             <h6 class="is-size-6 has-text-weight-bold">
-              Add Schedule
+              Add Work Shift
             </h6>
             <button
               type="button"
@@ -18,61 +18,106 @@
               @click="$emit('close')"
             ></button>
           </header>
-          <section class="modal-card-body py-6" style="height: 700px;">
-            <text-field
-              label="Schedule Name"
-              rules="required"
-              mode="eager"
-            ></text-field>
-            <div class="py-5">
-              <template v-for="schedule in schedules">
-                <div :key="schedule.id" class="columns">
-                  <div class="column">{{ schedule.day }}</div>
-                  <div class="column">
-                    <b-clockpicker
-                      placeholder="Time In"
-                      label-position="on-border"
-                      icon="clock"
-                      editable>
-                    </b-clockpicker>
-                  </div>
-                  <div class="column">
-                    <b-clockpicker
-                      placeholder="Time Out"
-                      label-position="on-border"
-                      icon="clock"
-                      editable>
-                    </b-clockpicker>
-                  </div>
-                  <div class="column">
-                    <b-clockpicker
-                      placeholder="Break In"
-                      label-position="on-border"
-                      icon="clock"
-                      editable>
-                    </b-clockpicker>
-                  </div>
-                  <div class="column">
-                    <b-clockpicker
-                      placeholder="Break In"
-                      label-position="on-border"
-                      icon="clock"
-                      editable>
-                    </b-clockpicker>
-                  </div>
-                </div>
-              </template>
+          <section class="modal-card-body py-6" style="height: 600px;">
+            <h5 class="is-size-5 has-text-weight-bold mb-5" v-text="form.day"></h5>
+            <h5 class="is-size-6 mb-3">Time In & Time Out</h5>
+            <div class="columns">
+              <div class="column">
+                <clock-picker-field
+                  v-model="form.timeIn"
+                  placeholder="From"
+                  label-position="on-border"
+                  label="From"
+                  rules="required"
+                  mode="eager"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+              <div class="column">
+                <clock-picker-field
+                  v-model="form.timeOut"
+                  placeholder="To"
+                  label-position="on-border"
+                  label="To"
+                  rules="required"
+                  mode="eager"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+            </div>
+            <h5 class="is-size-6 mb-3">Morning Break Time</h5>
+            <div class="columns">
+              <div class="column">
+                <clock-picker-field
+                  v-model="form.morningBreakIn"
+                  placeholder="From"
+                  label-position="on-border"
+                  label="From"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+              <div class="column">
+                <clock-picker-field
+                  v-model="form.morningBreakOut"
+                  placeholder="To"
+                  label-position="on-border"
+                  label="To"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+            </div>
+            <h5 class="is-size-6 mb-3">Lunch Break Time</h5>
+            <div class="columns">
+              <div class="column">
+                <clock-picker-field
+                  v-model="form.lunchBreakIn"
+                  placeholder="From"
+                  label-position="on-border"
+                  label="From"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+              <div class="column">
+                <clock-picker-field
+                  v-model="form.lunchBreakOut"
+                  placeholder="To"
+                  label-position="on-border"
+                  label="To"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+            </div>
+            <h5 class="is-size-6 mb-3">Afternoon Break Time</h5>
+            <div class="columns">
+              <div class="column">
+                <clock-picker-field
+                  v-model="form.afternoonBreakIn"
+                  placeholder="From"
+                  label-position="on-border"
+                  label="From"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+              <div class="column">
+                <clock-picker-field
+                  v-model="form.afternoonBreakOut"
+                  placeholder="To"
+                  label-position="on-border"
+                  label="To"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
             </div>
           </section>
-          <footer class="modal-card-foot">
+          <footer class="modal-card-foot is-flex is-justify-content-flex-end">
             <b-button
-              label="Close"
+              label="Cancel"
               @click="$emit('close')"
             />
             <b-button
               :disabled="invalid"
               native-type="submit"
-              label="Save"
+              label="Add"
               type="is-primary"
             />
           </footer>
@@ -87,35 +132,30 @@ export default {
   props: {
     active: {
       type: Boolean,
+      default: false,
+    },
+    schedule: {
+      type: Object,
+      default: () => {},
     },
   },
 
-  data () {
-    return {
-      schedules: [
-        {
-          id: 1, day: 'Monday', timein: '7:00AM', timeout: '5:00 PM', breakin: '12:00 PM', breakout: '1:00 PM',
-        },
-        {
-          id: 2, day: 'Tuesday', timein: '7:00AM', timeout: '5:00 PM', breakin: '12:00 PM', breakout: '1:00 PM',
-        },
-        {
-          id: 3, day: 'Wednesday', timein: '7:00AM', timeout: '5:00 PM', breakin: '12:00 PM', breakout: '1:00 PM',
-        },
-        {
-          id: 4, day: 'Thursday', timein: '7:00AM', timeout: '5:00 PM', breakin: '12:00 PM', breakout: '1:00 PM',
-        },
-        {
-          id: 5, day: 'Friday', timein: '7:00AM', timeout: '5:00 PM', breakin: '12:00 PM', breakout: '1:00 PM',
-        },
-        {
-          id: 6, day: 'Saturday', timein: '-', timeout: '-', breakin: '-', breakout: '-',
-        },
-        {
-          id: 7, day: 'Sunday', timein: '-', timeout: '-', breakin: '-', breakout: '-',
-        },
-      ],
-    };
+  computed: {
+    form: {
+      get () {
+        return { ...this.schedule };
+      },
+      set (value) {
+        return value;
+      },
+    },
+  },
+
+  methods: {
+    submit () {
+      this.$emit('submit', this.form);
+      this.$emit('close');
+    },
   },
 };
 </script>
