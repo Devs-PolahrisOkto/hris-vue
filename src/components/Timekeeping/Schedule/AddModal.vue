@@ -10,7 +10,7 @@
         <div class="modal-card">
           <header class="modal-card-head is-flex is-justify-content-space-between">
             <h6 class="is-size-6 has-text-weight-bold">
-              Add Work Shift
+              Add Schedule
             </h6>
             <button
               type="button"
