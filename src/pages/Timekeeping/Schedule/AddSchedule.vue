@@ -23,13 +23,11 @@
           is-justify-content-space-between
           is-align-items-start px-3 pt-5"
         >
-          <b-field class="mb-5">
-
-          </b-field>
+          <b-input placeholder="Schedule Name" class="mb-5"></b-input>
         </div>
         <div class="card-content">
           <b-table
-            :data="meta.isEmpty ? [] : list"
+            :data="meta.isEmpty ? [] : newSchedule"
             :striped="meta.isStriped"
             :hoverable="meta.isHoverable"
             :mobile-cards="meta.hasMobileCards"
@@ -68,7 +66,8 @@
               label="Time In & Time Out"
               centered
             >
-              {{ `${props.row.timeIn} - ${props.row.timeOut}` }}
+              {{ props.row.timeIn | formatTimeToString }} -
+              {{ props.row.timeOut | formatTimeToString }}
             </b-table-column>
 
             <b-table-column
@@ -76,7 +75,8 @@
               label="Morning Break Time"
               centered
             >
-              {{ `${props.row.morningBreakIn} - ${props.row.morningBreakOut}` }}
+              {{ props.row.morningBreakIn | formatTimeToString }} -
+              {{ props.row.morningBreakOut | formatTimeToString }}
             </b-table-column>
 
             <b-table-column
@@ -84,7 +84,8 @@
               label="Lunch Break Time"
               centered
             >
-              {{ `${props.row.lunchBreakIn} - ${props.row.lunchBreakOut}` }}
+              {{ props.row.lunchBreakIn | formatTimeToString }} -
+              {{ props.row.lunchBreakOut | formatTimeToString }}
             </b-table-column>
 
             <b-table-column
@@ -92,7 +93,8 @@
               label="Afternoon Break Time"
               centered
             >
-              {{ `${props.row.afternoonBreakIn} - ${props.row.afternoonBreakOut}` }}
+              {{ props.row.afternoonBreakIn | formatTimeToString }} -
+              {{ props.row.afternoonBreakOut | formatTimeToString }}
             </b-table-column>
 
             <b-table-column
@@ -109,12 +111,23 @@
             </b-table-column>
           </b-table>
         </div>
+        <div
+          class="is-flex is-justify-content-end p-3"
+        >
+          <b-button
+            native-type="submit"
+            class="is-primary mt-6 mr-auto"
+          >
+            <span class="has-text-weight-bold px-6">Save Schedule</span>
+          </b-button>
+        </div>
       </div>
     </div>
     <!-- Add Work Shift Form -->
     <!-- Start Modals -->
     <add-modal
       :active="addModal"
+      :schedule="selectedSchedule"
       @close="addModal = !addModal"
       @submit="updateSchedule"
     ></add-modal>
@@ -124,6 +137,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import date from '@/mixins/date';
 
 export default {
   components: {
@@ -134,11 +148,11 @@ export default {
   data () {
     return {
       addModal: false,
-      selectedEmployee: null,
-      employee: '',
-      workShifts: [],
+      selectedSchedule: {},
     };
   },
+
+  mixins: [ date ],
 
   computed: {
     ...mapGetters({
@@ -146,14 +160,24 @@ export default {
       list: 'schedule/addSchedule/table/list',
       meta: 'schedule/addSchedule/table/meta',
     }),
+    newSchedule: {
+      get () {
+        return [ ...this.list ];
+      },
+      set (value) {
+        return value;
+      },
+    },
   },
 
   methods: {
     editSchedule (schedule) {
-      console.log(schedule);
+      this.selectedSchedule = { ...schedule };
+      this.addModal = true;
     },
     updateSchedule (schedule) {
-      console.log(schedule);
+      const index = this.newSchedule.findIndex(obj => obj.day === schedule.day);
+      this.$set(this.newSchedule, index, schedule);
     },
   },
 };
