@@ -78,6 +78,24 @@ const routes = [
     },
   },
   {
+    path: '/timekeeping/workshifts',
+    name: 'WorkShifts',
+    component: () => import(/* webpackChunkName: "WorkShifts" */ '@/pages/Timekeeping/WorkShift/WorkShifts.vue'),
+    meta: {
+      forAuth: true,
+      parent: 'timekeeping',
+    },
+  },
+  {
+    path: '/timekeeping/workshifts/add',
+    name: 'AddWorkShift',
+    component: () => import(/* webpackChunkName: "AddWorkShift" */ '@/pages/Timekeeping/WorkShift/AddWorkShift.vue'),
+    meta: {
+      forAuth: true,
+      parent: 'timekeeping',
+    },
+  },
+  {
     path: '/timekeeping/leaves',
     name: 'Leaves',
     component: () => import(/* webpackChunkName: "Leaves" */ '@/pages/Timekeeping/Leaves.vue'),
