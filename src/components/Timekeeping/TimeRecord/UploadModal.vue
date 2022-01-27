@@ -29,9 +29,9 @@
           </b-upload>
         </b-field>
       </section>
-      <footer class="modal-card-foot">
+      <footer class="modal-card-foot is-flex is-justify-content-flex-end">
         <b-button
-          label="Close"
+          label="Cancel"
           @click="$emit('close')"
         />
         <b-button
