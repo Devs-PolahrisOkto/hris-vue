@@ -18,7 +18,7 @@
               @click="$emit('close')"
             ></button>
           </header>
-          <section class="modal-card-body py-6" style="height: 500px;">
+          <section class="modal-card-body py-6" style="height: 600px;">
             <b-field label="Employee" class="pb-4">
               <b-autocomplete
                 v-model="employee"
@@ -30,36 +30,84 @@
                 <template #empty>No results found</template>
               </b-autocomplete>
             </b-field>
-            <div class="columns pt-4">
+            <h5 class="is-size-6 mb-3">Time In & Time Out</h5>
+            <div class="columns">
               <div class="column">
-                <date-picker-field
-                  v-model="form.time_in"
-                  label="Time In"
+                <clock-picker-field
+                  placeholder="From"
+                  label-position="on-border"
+                  label="From"
                   rules="required"
                   mode="eager"
-                ></date-picker-field>
+                  icon="clock"
+                ></clock-picker-field>
               </div>
               <div class="column">
-                <date-picker-field
-                  v-model="form.time_out"
-                  label="Time Out"
+                <clock-picker-field
+                  placeholder="To"
+                  label-position="on-border"
+                  label="To"
                   rules="required"
                   mode="eager"
-                ></date-picker-field>
+                  icon="clock"
+                ></clock-picker-field>
               </div>
             </div>
-            <div class="columns pt-2 pb-6">
+            <h5 class="is-size-6 mb-3">Morning Break Time</h5>
+            <div class="columns">
               <div class="column">
-                <date-picker-field
-                  v-model="form.break_in"
-                  label="Break In"
-                ></date-picker-field>
+                <clock-picker-field
+                  placeholder="From"
+                  label-position="on-border"
+                  label="From"
+                  icon="clock"
+                ></clock-picker-field>
               </div>
               <div class="column">
-                <date-picker-field
-                  v-model="form.break_out"
-                  label="Break Out"
-                ></date-picker-field>
+                <clock-picker-field
+                  placeholder="To"
+                  label-position="on-border"
+                  label="To"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+            </div>
+            <h5 class="is-size-6 mb-3">Lunch Break Time</h5>
+            <div class="columns">
+              <div class="column">
+                <clock-picker-field
+                  placeholder="From"
+                  label-position="on-border"
+                  label="From"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+              <div class="column">
+                <clock-picker-field
+                  placeholder="To"
+                  label-position="on-border"
+                  label="To"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+            </div>
+            <h5 class="is-size-6 mb-3">Afternoon Break Time</h5>
+            <div class="columns">
+              <div class="column">
+                <clock-picker-field
+                  placeholder="From"
+                  label-position="on-border"
+                  label="From"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+              <div class="column">
+                <clock-picker-field
+                  placeholder="To"
+                  label-position="on-border"
+                  label="To"
+                  icon="clock"
+                ></clock-picker-field>
               </div>
             </div>
           </section>
