@@ -81,11 +81,11 @@
           aria-page-label="Page"
           aria-current-label="Current page"
         >
-          <b-table-column field="id" width="40">
+          <!-- <b-table-column field="id" width="40">
             <figure class="image is-24x24">
               <img class="is-rounded" src="https://bulma.io/images/placeholders/24x24.png">
             </figure>
-          </b-table-column>
+          </b-table-column> -->
 
           <b-table-column
             v-slot="props" field="name"
@@ -96,40 +96,61 @@
           </b-table-column>
 
           <b-table-column
-            v-slot="props" field="timein"
-            label="Time-In/Time-Out"
-            sortable
-          >
-            {{ props.row.timein }} - {{ props.row.timeout }}
-          </b-table-column>
-
-          <b-table-column
-            v-slot="props" field="breakin"
-            label="Break-In/Break-Out"
-            sortable
-          >
-            {{ props.row.breakin }} - {{ props.row.breakout }}
-          </b-table-column>
-
-          <b-table-column
             v-slot="props" field="date"
             label="Date"
             sortable
+            centered
           >
             {{ props.row.date }}
           </b-table-column>
 
           <b-table-column
+            v-slot="props" field="timein"
+            label="Time In & Time Out"
+            sortable
+            centered
+          >
+            {{ props.row.timein }} - {{ props.row.timeout }}
+          </b-table-column>
+
+          <b-table-column
+            field="breakin"
+            label="Morning Break Time"
+            sortable
+            centered
+          >
+            -
+          </b-table-column>
+
+          <b-table-column
+            v-slot="props" field="breakin"
+            label="Lunch Break Time"
+            sortable
+            centered
+          >
+            {{ props.row.breakin }} - {{ props.row.breakout }}
+          </b-table-column>
+
+          <b-table-column
+            field="breakin"
+            label="Afternoon Break Time"
+            sortable
+            centered
+          >
+            -
+          </b-table-column>
+
+          <!-- <b-table-column
             v-slot="props" field="status"
             label="Status"
             sortable
           >
             <b-tag type="is-info">{{ props.row.status }}</b-tag>
-          </b-table-column>
+          </b-table-column> -->
 
-          <b-table-column field="option">
+          <!-- <b-table-column field="option" centered>
               <b-button size="is-small" type="is-primary" icon-right="eye" />
-          </b-table-column>
+          </b-table-column> -->
 
           <template #empty>
               <div class="has-text-centered">No records</div>
