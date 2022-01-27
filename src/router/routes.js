@@ -105,6 +105,15 @@ const routes = [
     },
   },
   {
+    path: '/timekeeping/overtime',
+    name: 'Overtime',
+    component: () => import(/* webpackChunkName: "Overtime" */ '@/pages/Timekeeping/Overtime/Overtime.vue'),
+    meta: {
+      forAuth: true,
+      parent: 'timekeeping',
+    },
+  },
+  {
     path: '/timekeeping/leaves',
     name: 'Leaves',
     component: () => import(/* webpackChunkName: "Leaves" */ '@/pages/Timekeeping/Leaves.vue'),
