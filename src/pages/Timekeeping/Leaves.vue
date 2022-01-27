@@ -80,6 +80,14 @@
           </b-table-column> -->
 
           <b-table-column
+            v-slot="props" field="name"
+            label="Name"
+            sortable
+          >
+            {{ props.row.name }}
+          </b-table-column>
+
+          <b-table-column
             field="applicationDate"
             label="Application Date"
             sortable
@@ -89,17 +97,10 @@
           </b-table-column>
 
           <b-table-column
-            v-slot="props" field="name"
-            label="Name"
-            sortable
-          >
-            {{ props.row.name }}
-          </b-table-column>
-
-          <b-table-column
             field="dates"
             label="Dates"
             sortable
+            centered
           >
             01-22-2022, 01-23-2022, 01-25-2022
           </b-table-column>
