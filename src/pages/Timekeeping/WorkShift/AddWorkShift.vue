@@ -36,15 +36,16 @@
           is-align-items-start px-3 pt-5"
         >
           <b-field class="mb-5">
-            <b-autocomplete
-              v-model="employee"
-              :data="employeeList"
-              placeholder="Select employee"
-              icon="magnify"
-              clearable
-              @select="option => selectedEmployee = option">
-              <template #empty>No results found</template>
-            </b-autocomplete>
+            <b-taginput
+              v-model="employees"
+              :data="filteredEmployees"
+              autocomplete
+              :open-on-focus="true"
+              field="user.first_name"
+              icon="account-circle"
+              placeholder="Select employees"
+              @typing="getFilteredTags">
+            </b-taginput>
           </b-field>
         </div>
         <div class="card-content">
@@ -187,8 +188,9 @@ export default {
     return {
       addModal: false,
       selectedEmployee: null,
-      employee: '',
+      employees: [],
       workShifts: [],
+      filteredEmployeesTag: [],
     };
   },
 
@@ -217,9 +219,23 @@ export default {
     hasWorkShifts () {
       return this.filteredWorkShifts.length > 0;
     },
+    filteredEmployees: {
+      get () {
+        return this.filteredEmployeesTag;
+      },
+      set (value) {
+        return value;
+      },
+    },
   },
 
   methods: {
+    getFilteredTags (text) {
+      this.filteredEmployeesTag = [ ...this.employeeList.filter(option => option
+        .toString()
+        .toLowerCase()
+        .includes(text.toLowerCase() || '')) ];
+    },
     addWorkShift (form) {
       this.workShifts.push({ ...form, id: uniqueId() });
     },
