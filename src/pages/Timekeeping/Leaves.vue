@@ -73,10 +73,19 @@
           aria-page-label="Page"
           aria-current-label="Current page"
         >
-          <b-table-column field="id" width="40">
+          <!-- <b-table-column field="id" width="40">
             <figure class="image is-24x24">
               <img class="is-rounded" src="https://bulma.io/images/placeholders/24x24.png">
             </figure>
+          </b-table-column> -->
+
+          <b-table-column
+            field="applicationDate"
+            label="Application Date"
+            sortable
+            centered
+          >
+            01-22-2022
           </b-table-column>
 
           <b-table-column
@@ -88,25 +97,18 @@
           </b-table-column>
 
           <b-table-column
-            v-slot="props" field="from"
-            label="From"
+            field="dates"
+            label="Dates"
             sortable
           >
-            {{ props.row.from }}
-          </b-table-column>
-
-          <b-table-column
-            v-slot="props" field="to"
-            label="To"
-            sortable
-          >
-            {{ props.row.to }}
+            01-22-2022, 01-23-2022, 01-25-2022
           </b-table-column>
 
           <b-table-column
             v-slot="props" field="leaveType"
             label="Leave Type"
             sortable
+            centered
           >
             <b-tag type="is-info">{{ props.row.leaveType }}</b-tag>
           </b-table-column>
@@ -119,7 +121,7 @@
             {{ props.row.reason }}
           </b-table-column>
 
-          <b-table-column field="option">
+          <b-table-column field="option" centered>
               <b-button size="is-small" type="is-primary" icon-right="eye" />
           </b-table-column>
 
