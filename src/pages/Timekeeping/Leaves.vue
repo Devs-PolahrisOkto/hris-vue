@@ -14,7 +14,7 @@
         <header class="is-flex is-justify-content-space-between is-align-items-center py-2 px-3">
           <h6 class="has-text-weight-medium is-flex is-align-items-center">
             <b-icon icon="calendar-clock-outline"></b-icon>
-            <h6 class="is-size-6 has-text-weight-semibold px-3">Employee Leave Record</h6>
+            <h6 class="is-size-6 has-text-weight-semibold px-3">Leave Requests</h6>
           </h6>
           <div>
             <b-tooltip label="Add">
