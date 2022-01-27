@@ -10,7 +10,7 @@
         <div class="modal-card">
           <header class="modal-card-head is-flex is-justify-content-space-between">
             <h6 class="is-size-6 has-text-weight-bold">
-              Add Leave
+              Add Overtime
             </h6>
             <button
               type="button"
@@ -30,20 +30,35 @@
                 <template #empty>No results found</template>
               </b-autocomplete>
             </b-field>
-            <b-field label="Dates" class="pb-4">
-              <b-datepicker
-                v-model="form.dates"
-                placeholder="Select dates"
-                multiple>
-              </b-datepicker>
-            </b-field>
-            <b-field label="Leave Type">
-              <b-select placeholder="Select leave type" expanded>
-                <option value="vl">VL</option>
-                <option value="sl">SL</option>
-              </b-select>
-            </b-field>
-            <b-field label="Reason" class="pt-4">
+            <date-picker-field
+              v-model="form.date"
+              label="Date"
+              rules="required"
+              mode="eager"
+            ></date-picker-field>
+            <div class="columns my-4">
+              <div class="column">
+                <clock-picker-field
+                  v-model="form.from"
+                  placeholder="From"
+                  label="From"
+                  rules="required"
+                  mode="eager"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+              <div class="column">
+                <clock-picker-field
+                  v-model="form.to"
+                  placeholder="To"
+                  label="To"
+                  rules="required"
+                  mode="eager"
+                  icon="clock"
+                ></clock-picker-field>
+              </div>
+            </div>
+            <b-field label="Reason" class="mt-3">
               <b-input maxlength="40" type="textarea"></b-input>
             </b-field>
           </section>
@@ -77,7 +92,10 @@ export default {
     return {
       form: {
         user: null,
-        dates: [],
+        date: null,
+        from: null,
+        to: null,
+        reason: '',
       },
       employees: [
         'Lebron James',

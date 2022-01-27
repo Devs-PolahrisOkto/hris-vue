@@ -44,6 +44,7 @@
             <li><router-link to="/timekeeping/timerecord">Time In/Out</router-link></li>
             <li><router-link to="/timekeeping/schedules">Schedules</router-link></li>
             <li><router-link to="/timekeeping/workshifts">Work Shifts</router-link></li>
+            <li><router-link to="/timekeeping/overtime">Overtime</router-link></li>
             <li><router-link to="/timekeeping/leaves">Leaves</router-link></li>
         </ul>
       </li>

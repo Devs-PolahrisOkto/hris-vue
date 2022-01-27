@@ -14,7 +14,7 @@
         <header class="is-flex is-justify-content-space-between is-align-items-center py-2 px-3">
           <h6 class="has-text-weight-medium is-flex is-align-items-center">
             <b-icon icon="calendar-clock-outline"></b-icon>
-            <h6 class="is-size-6 has-text-weight-semibold px-3">Employee Leave Record</h6>
+            <h6 class="is-size-6 has-text-weight-semibold px-3">Leave Requests</h6>
           </h6>
           <div>
             <b-tooltip label="Add">
@@ -73,11 +73,11 @@
           aria-page-label="Page"
           aria-current-label="Current page"
         >
-          <b-table-column field="id" width="40">
+          <!-- <b-table-column field="id" width="40">
             <figure class="image is-24x24">
               <img class="is-rounded" src="https://bulma.io/images/placeholders/24x24.png">
             </figure>
-          </b-table-column>
+          </b-table-column> -->
 
           <b-table-column
             v-slot="props" field="name"
@@ -88,25 +88,28 @@
           </b-table-column>
 
           <b-table-column
-            v-slot="props" field="from"
-            label="From"
+            field="applicationDate"
+            label="Application Date"
             sortable
+            centered
           >
-            {{ props.row.from }}
+            01-22-2022
           </b-table-column>
 
           <b-table-column
-            v-slot="props" field="to"
-            label="To"
+            field="dates"
+            label="Dates"
             sortable
+            centered
           >
-            {{ props.row.to }}
+            01-22-2022, 01-23-2022, 01-25-2022
           </b-table-column>
 
           <b-table-column
             v-slot="props" field="leaveType"
             label="Leave Type"
             sortable
+            centered
           >
             <b-tag type="is-info">{{ props.row.leaveType }}</b-tag>
           </b-table-column>
@@ -119,7 +122,7 @@
             {{ props.row.reason }}
           </b-table-column>
 
-          <b-table-column field="option">
+          <b-table-column field="option" centered>
               <b-button size="is-small" type="is-primary" icon-right="eye" />
           </b-table-column>
 
