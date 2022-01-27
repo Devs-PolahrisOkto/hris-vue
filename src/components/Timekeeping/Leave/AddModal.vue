@@ -30,24 +30,13 @@
                 <template #empty>No results found</template>
               </b-autocomplete>
             </b-field>
-            <div class="columns pt-4">
-              <div class="column">
-                <date-picker-field
-                  v-model="form.from"
-                  label="From"
-                  rules="required"
-                  mode="eager"
-                ></date-picker-field>
-              </div>
-              <div class="column">
-                <date-picker-field
-                  v-model="form.to"
-                  label="To"
-                  rules="required"
-                  mode="eager"
-                ></date-picker-field>
-              </div>
-            </div>
+            <b-field label="Dates" class="pb-4">
+              <b-datepicker
+                v-model="form.dates"
+                placeholder="Select dates"
+                multiple>
+              </b-datepicker>
+            </b-field>
             <b-field label="Leave Type">
               <b-select placeholder="Select leave type" expanded>
                 <option value="vl">VL</option>
@@ -58,9 +47,9 @@
               <b-input maxlength="40" type="textarea"></b-input>
             </b-field>
           </section>
-          <footer class="modal-card-foot">
+          <footer class="modal-card-foot is-flex is-justify-content-flex-end">
             <b-button
-              label="Close"
+              label="Cancel"
               @click="$emit('close')"
             />
             <b-button
@@ -88,10 +77,7 @@ export default {
     return {
       form: {
         user: null,
-        from: null,
-        to: null,
-        break_in: null,
-        break_out: null,
+        dates: [],
       },
       employees: [
         'Lebron James',
