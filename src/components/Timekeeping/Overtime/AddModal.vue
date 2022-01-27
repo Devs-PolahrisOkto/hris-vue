@@ -41,7 +41,6 @@
                 <clock-picker-field
                   v-model="form.from"
                   placeholder="From"
-                  label-position="on-border"
                   label="From"
                   rules="required"
                   mode="eager"
@@ -52,7 +51,6 @@
                 <clock-picker-field
                   v-model="form.to"
                   placeholder="To"
-                  label-position="on-border"
                   label="To"
                   rules="required"
                   mode="eager"
@@ -64,9 +62,9 @@
               <b-input maxlength="40" type="textarea"></b-input>
             </b-field>
           </section>
-          <footer class="modal-card-foot">
+          <footer class="modal-card-foot is-flex is-justify-content-flex-end">
             <b-button
-              label="Close"
+              label="Cancel"
               @click="$emit('close')"
             />
             <b-button
