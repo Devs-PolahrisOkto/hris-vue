@@ -22,7 +22,7 @@ class EmployeeRepresentation extends Representation {
       },
       company_id: '',
       department_id: '',
-      positions: '',
+      positions: [],
       documents: [],
       contacts: [{ id: uniqueId(), name: '', description: '' }],
       addresses: [{
