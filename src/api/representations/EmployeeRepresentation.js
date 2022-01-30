@@ -24,13 +24,9 @@ class EmployeeRepresentation extends Representation {
       department_id: '',
       positions: [],
       documents: [],
-      contacts: [{ id: uniqueId(), name: '', description: '' }],
-      addresses: [{
-        id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '',
-      }],
-      education: [{
-        id: uniqueId(), description: '', school: '', degree: '', start_at: null, end_at: null,
-      }],
+      contacts: [],
+      addresses: [],
+      education: [],
       profile_photo: null,
     });
   }
