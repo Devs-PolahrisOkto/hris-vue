@@ -55,11 +55,12 @@
 
               <div class="columns">
                 <div class="column">
-                  <text-field
+                  <select-field
                     v-model="form.user.extension"
                     label-position="on-border"
                     label="Extension"
-                  ></text-field>
+                    :options="EXTENSIONS"
+                  ></select-field>
                 </div>
                 <div class="column">
                   <text-field
@@ -149,26 +150,6 @@
               <div class="columns">
                 <div class="column">
                   <select-field
-                    v-model="form.user.employment_type_id"
-                    label-position="on-border"
-                    label="Employment Type"
-                    rules="required"
-                    mode="eager"
-                    :options="employmentTypesState"
-                  ></select-field>
-                </div>
-                <div class="column">
-                  <select-field
-                    v-model="form.positions"
-                    label-position="on-border"
-                    label="Position"
-                    rules="required"
-                    mode="eager"
-                    :options="positionsState"
-                  ></select-field>
-                </div>
-                <div class="column">
-                  <select-field
                     v-model="form.company_id"
                     label-position="on-border"
                     label="Company"
@@ -186,6 +167,42 @@
                     mode="eager"
                     :options="departmentsState"
                   ></select-field>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <select-field
+                    v-model="form.user.employment_type_id"
+                    label-position="on-border"
+                    label="Employment Type"
+                    rules="required"
+                    mode="eager"
+                    :options="employmentTypesState"
+                  ></select-field>
+                </div>
+                <div class="column">
+                  <!-- <select-field
+                    v-model="form.positions"
+                    label-position="on-border"
+                    label="Position"
+                    rules="required"
+                    mode="eager"
+                    :options="positionsState"
+                  ></select-field> -->
+                  <b-field label="Positions" label-position="on-border">
+                    <b-taginput
+                      v-model="form.positions"
+                      :data="positionsState"
+                      :allow-new="false"
+                      :open-on-focus="true"
+                      field="text"
+                      autocomplete
+                      ellipsis
+                      placeholder="Select positions"
+                      aria-close-label="Delete this tag"
+                      class="pt-0">
+                    </b-taginput>
+                  </b-field>
                 </div>
               </div>
 
@@ -211,7 +228,7 @@
                         <text-field
                           v-model="contact.name"
                           label-position="on-border"
-                          label="Name"
+                          label="Contact No."
                           rules="required"
                           mode="eager"
                         ></text-field>
@@ -220,7 +237,7 @@
                       <text-field
                         v-model="contact.description"
                         label-position="on-border"
-                        label="Description"
+                        label="Contact Name"
                         rules="required"
                         mode="eager"
                       ></text-field>
@@ -453,6 +470,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import { uniqueId } from 'lodash';
 import EmployeeRepresentation from '@/api/representations/EmployeeRepresentation';
+import { EXTENSIONS } from '@/constants';
 
 export default {
   components: {
@@ -462,6 +480,7 @@ export default {
   data () {
     return {
       form: new EmployeeRepresentation(),
+      EXTENSIONS,
     };
   },
 
@@ -495,6 +514,7 @@ export default {
         start_at: this.$moment(obj.start_at).format('YYYY-MM-DD hh:mm:ss'),
         end_at: this.$moment(obj.end_at).format('YYYY-MM-DD hh:mm:ss'),
       }));
+      form.positions = form.positions.map(position => position.value);
       this.saveEmployee(form).then(() => {
         this.$buefy.snackbar.open({
           message: 'Employee has been successfully registered.',

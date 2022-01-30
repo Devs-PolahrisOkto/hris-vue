@@ -12,25 +12,14 @@ const CIVIL_STATUS = [
   { value: 'Divorced', text: 'Divorced' },
 ];
 
-const EMPLOYMENT_TYPES = [
-  { value: 'Regular', text: 'Regular' },
-  { value: 'Probationary', text: 'Probationary' },
-];
-
-const POSITIONS = [
-  { value: 'HR Staff', text: 'HR Staff' },
-  { value: 'Office Staff', text: 'Office Staff' },
-];
-
-const DEPARTMENTS = [
-  { value: 'IT Deparment', text: 'IT Deparment' },
-  { value: 'HR Department', text: 'HR Department' },
+const EXTENSIONS = [
+  { value: 'Mr', text: 'Mr' },
+  { value: 'Ms', text: 'Ms' },
+  { value: 'Mrs', text: 'Mrs' },
 ];
 
 export {
   GENDERS,
   CIVIL_STATUS,
-  EMPLOYMENT_TYPES,
-  POSITIONS,
-  DEPARTMENTS,
+  EXTENSIONS,
 };
