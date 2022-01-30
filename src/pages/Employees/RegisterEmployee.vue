@@ -212,7 +212,7 @@
                         <text-field
                           v-model="contact.name"
                           label-position="on-border"
-                          label="Name"
+                          label="Contact No."
                           rules="required"
                           mode="eager"
                         ></text-field>
@@ -221,7 +221,7 @@
                       <text-field
                         v-model="contact.description"
                         label-position="on-border"
-                        label="Description"
+                        label="Contact Name"
                         rules="required"
                         mode="eager"
                       ></text-field>
