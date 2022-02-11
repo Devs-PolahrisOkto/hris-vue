@@ -285,51 +285,95 @@
               </div>
               <template v-if="form.addresses.length > 0">
                 <template v-for="address in form.addresses">
-                  <div :key="address.id" class="columns">
-                    <div class="column is-3">
-                      <text-field
-                        v-model="address.name"
-                        label-position="on-border"
-                        label="Name"
-                        rules="required"
-                        mode="eager"
-                      ></text-field>
+                  <div :key="address.id">
+                    <div class="columns">
+                      <div class="column is-6">
+                        <text-field
+                          v-model="address.name"
+                          label-position="on-border"
+                          label="Name"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-5">
+                        <text-field
+                          v-model="address.address1"
+                          label-position="on-border"
+                          label="Street"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-1 is-flex is-justify-content-flex-end">
+                        <b-tooltip label="Remove">
+                          <b-button
+                            class="is-pulled-right px-4"
+                            icon-right="delete"
+                            rounded
+                            @click="removeAddress(address)"
+                          />
+                        </b-tooltip>
+                      </div>
                     </div>
-                    <div class="column is-3">
-                      <text-field
-                        v-model="address.address1"
-                        label-position="on-border"
-                        label="Address 1"
-                        rules="required"
-                        mode="eager"
-                      ></text-field>
+                    <div class="columns">
+                      <div class="column is-4">
+                        <text-field
+                          v-model="address.barangay_id"
+                          label-position="on-border"
+                          label="Barangay"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-4">
+                        <text-field
+                          v-model="address.province_id"
+                          label-position="on-border"
+                          label="Province"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-4">
+                        <text-field
+                          v-model="address.region_id"
+                          label-position="on-border"
+                          label="Region"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
                     </div>
-                    <div class="column is-3">
-                      <text-field
-                        v-model="address.address2"
-                        label-position="on-border"
-                        label="Address 2"
-                      ></text-field>
-                    </div>
-                    <div class="column is-2">
-                      <select-field
-                        v-model="address.address_type_id"
-                        label-position="on-border"
-                        label="Type"
-                        rules="required"
-                        mode="eager"
-                        :options="addressTypesState"
-                      ></select-field>
-                    </div>
-                    <div class="column is-1">
-                      <b-tooltip label="Remove">
-                        <b-button
-                          class="is-pulled-right px-4"
-                          icon-right="delete"
-                          rounded
-                          @click="removeAddress(address)"
-                        />
-                      </b-tooltip>
+                    <div class="columns">
+                      <div class="column is-4">
+                        <text-field
+                          v-model="address.state_id"
+                          label-position="on-border"
+                          label="State"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-4">
+                        <text-field
+                          v-model="address.country_id"
+                          label-position="on-border"
+                          label="Country"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-4">
+                        <select-field
+                          v-model="address.address_type_id"
+                          label-position="on-border"
+                          label="Type"
+                          rules="required"
+                          mode="eager"
+                          :options="addressTypesState"
+                        ></select-field>
+                      </div>
                     </div>
                   </div>
                 </template>
@@ -538,7 +582,16 @@ export default {
     },
     addAddress () {
       this.form.addresses.push({
-        id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '',
+        id: uniqueId(),
+        name: '',
+        address1: '',
+        address2: '',
+        barangay_id: '',
+        province_id: '',
+        region_id: '',
+        state_id: '',
+        country_id: '',
+        address_type_id: '',
       });
     },
     removeAddress (address) {
