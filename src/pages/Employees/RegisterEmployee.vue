@@ -242,7 +242,7 @@
                         mode="eager"
                       ></text-field>
                     </div>
-                    <div class="column is-1">
+                    <div class="column is-1 is-flex is-justify-content-flex-end">
                       <b-tooltip label="Remove">
                         <b-button
                           class="is-pulled-right px-4"
@@ -454,7 +454,7 @@
                         mode="eager"
                       ></date-picker-field>
                     </div>
-                    <div class="column is-1">
+                    <div class="column is-1 is-flex is-justify-content-flex-end">
                       <b-tooltip label="Remove" class="px-0">
                         <b-button
                           class="is-pulled-right px-4"
@@ -479,6 +479,117 @@
                 </div>
               </template>
               <!-- Educational Background -->
+
+              <!-- Employment History -->
+              <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
+                <h6 class="is-size-6 has-text-weight-medium has-text-grey">
+                  Employment History
+                </h6>
+                <b-button
+                  v-if="form.education.length > 0"
+                  icon-left="playlist-edit"
+                  type="is-ghost"
+                  class="px-2"
+                  @click="addExperience"
+                >
+                  Add Experience
+                </b-button>
+              </div>
+              <template v-if="form.experiences.length > 0">
+                <template v-for="experience in form.experiences">
+                  <div :key="experience.id">
+                    <div class="columns">
+                      <div class="column is-4">
+                          <text-field
+                            v-model="experience.company"
+                            label-position="on-border"
+                            label="Company"
+                            rules="required"
+                            mode="eager"
+                          ></text-field>
+                      </div>
+                      <div class="column is-4">
+                        <text-field
+                          v-model="experience.project_name"
+                          label-position="on-border"
+                          label="Project Name"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-3">
+                        <text-field
+                          v-model="experience.description"
+                          label-position="on-border"
+                          label="Description"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-1 is-flex is-justify-content-flex-end">
+                        <b-tooltip label="Remove" class="px-0">
+                          <b-button
+                            class="is-pulled-right px-4"
+                            icon-right="delete"
+                            rounded
+                            @click="removeExperience(experience)"
+                          />
+                        </b-tooltip>
+                      </div>
+                    </div>
+                    <div class="columns">
+                      <div class="column is-3">
+                        <text-field
+                          v-model="experience.role"
+                          label-position="on-border"
+                          label="Role"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-3">
+                        <text-field
+                          v-model="experience.salary"
+                          label-position="on-border"
+                          label="Salary"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-3">
+                        <date-picker-field
+                          v-model="experience.start_at"
+                          label-position="on-border"
+                          label="Start at"
+                          rules="required"
+                          mode="eager"
+                        ></date-picker-field>
+                      </div>
+                      <div class="column is-3">
+                        <date-picker-field
+                          v-model="experience.end_at"
+                          label-position="on-border"
+                          label="End at"
+                          rules="required"
+                          mode="eager"
+                        ></date-picker-field>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+              <template v-else>
+                <div class="is-flex is-justify-content-center">
+                  <b-button
+                    icon-left="playlist-edit"
+                    type="is-ghost"
+                    @click="addExperience"
+                  >
+                    Add Experience
+                  </b-button>
+                </div>
+              </template>
+              <!-- Employment History -->
 
               <!-- <b-field class="file">
                 <b-upload v-model="form.profile_photo">
@@ -606,6 +717,22 @@ export default {
     removeEducation (education) {
       const index = this.form.education.indexOf(education);
       this.form.education.splice(index, 1);
+    },
+    addExperience () {
+      this.form.experiences.push({
+        id: uniqueId(),
+        company: '',
+        project_name: '',
+        description: '',
+        role: '',
+        salary: '',
+        start_at: null,
+        end_at: null,
+      });
+    },
+    removeExperience (experience) {
+      const index = this.form.experiences.indexOf(experience);
+      this.form.experiences.splice(index, 1);
     },
   },
 };
