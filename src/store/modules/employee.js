@@ -70,7 +70,9 @@ const actions = {
     if (status !== 200) {
       console.error('saving employee failed');
     } else {
-      await avatarClient.uploadUserAvatar(payload.profile_photo, data.id);
+      if (payload.profile_photo) {
+        await avatarClient.uploadUserAvatar(payload.profile_photo, data.id);
+      }
       commit('ADD_EMPLOYEE', data);
     }
   },
