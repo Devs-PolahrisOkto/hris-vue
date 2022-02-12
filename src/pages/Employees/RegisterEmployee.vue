@@ -168,6 +168,16 @@
                     :options="departmentsState"
                   ></select-field>
                 </div>
+                <div class="column">
+                  <select-field
+                    v-model="form.user.branch_id"
+                    label-position="on-border"
+                    label="Branch"
+                    rules="required"
+                    mode="eager"
+                    :options="branchesState"
+                  ></select-field>
+                </div>
               </div>
               <div class="columns">
                 <div class="column">
@@ -639,6 +649,7 @@ export default {
   computed: {
     ...mapGetters({
       companiesState: 'setting/companiesState',
+      branchesState: 'setting/branchesState',
       departmentsState: 'setting/departmentsState',
       positionsState: 'setting/positionsState',
       employmentTypesState: 'setting/employmentTypesState',
