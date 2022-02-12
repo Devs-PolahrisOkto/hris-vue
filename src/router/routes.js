@@ -125,7 +125,16 @@ const routes = [
   {
     path: '/settings/companies',
     name: 'Company',
-    component: () => import(/* webpackChunkName: "EmployeeProfile" */ '@/pages/Settings/Company.vue'),
+    component: () => import(/* webpackChunkName: "Company" */ '@/pages/Settings/Company.vue'),
+    meta: {
+      forAuth: true,
+      parent: 'settings',
+    },
+  },
+  {
+    path: '/settings/branches',
+    name: 'Branch',
+    component: () => import(/* webpackChunkName: "Branch" */ '@/pages/Settings/Branch.vue'),
     meta: {
       forAuth: true,
       parent: 'settings',
