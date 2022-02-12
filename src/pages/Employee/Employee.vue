@@ -25,6 +25,10 @@
               <h6 v-show="position" class="is-size-6">{{ position }}</h6>
             </div>
             <div class="card-content">
+              <div class="pt-2">
+                <h6 class="is-size-7 has-text-grey-light">Employee No.</h6>
+                <h6 class="is-size-6">{{ employee.employee_number }}</h6>
+              </div>
               <div v-show="employmentType" class="pt-2">
                 <h6 class="is-size-7 has-text-grey-light">Employment Type</h6>
                 <h6 class="is-size-6">{{ employmentType }}</h6>
