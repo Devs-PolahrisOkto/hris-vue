@@ -11,6 +11,11 @@ class SettingClient extends BaseClient {
       .then(response => response);
   }
 
+  branchList () {
+    return this.axios.get(`${this.baseUrl}/branches`)
+      .then(response => response);
+  }
+
   departmentList () {
     return this.axios.get(`${this.baseUrl}/departments`)
       .then(response => response);
