@@ -33,7 +33,7 @@
 export default {
   props: {
     label: String,
-    value: String,
+    value: [ String, Number ],
     labelPosition: String,
     mode: String,
     rules: String,

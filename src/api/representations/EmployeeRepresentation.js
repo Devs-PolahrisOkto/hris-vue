@@ -1,4 +1,3 @@
-import { uniqueId } from 'lodash';
 import Representation from '@/api/representations/Representation';
 
 class EmployeeRepresentation extends Representation {
@@ -27,6 +26,7 @@ class EmployeeRepresentation extends Representation {
       contacts: [],
       addresses: [],
       education: [],
+      experiences: [],
       profile_photo: null,
     });
   }

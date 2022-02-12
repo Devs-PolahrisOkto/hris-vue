@@ -34,18 +34,50 @@
 
       <b-table-column
         v-slot="props" field="address1"
-        label="Address 1"
+        label="Street"
         sortable
       >
         {{ props.row.address1 }}
       </b-table-column>
 
       <b-table-column
-        v-slot="props" field="address2"
-        label="Address 2"
+        v-slot="props" field="barangay_id"
+        label="Barangay"
         sortable width="240"
       >
-        {{ props.row.address2 }}
+        {{ props.row.barangay_id }}
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props" field="province_id"
+        label="Province"
+        sortable width="240"
+      >
+        {{ props.row.province_id }}
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props" field="region_id"
+        label="Region"
+        sortable width="240"
+      >
+        {{ props.row.region_id }}
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props" field="state_id"
+        label="State"
+        sortable width="240"
+      >
+        {{ props.row.state_id }}
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props" field="country_id"
+        label="Country"
+        sortable width="240"
+      >
+        {{ props.row.country_id }}
       </b-table-column>
 
       <template #empty>

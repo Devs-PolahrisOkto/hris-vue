@@ -168,6 +168,16 @@
                     :options="departmentsState"
                   ></select-field>
                 </div>
+                <div class="column">
+                  <select-field
+                    v-model="form.user.branch_id"
+                    label-position="on-border"
+                    label="Branch"
+                    rules="required"
+                    mode="eager"
+                    :options="branchesState"
+                  ></select-field>
+                </div>
               </div>
               <div class="columns">
                 <div class="column">
@@ -181,14 +191,6 @@
                   ></select-field>
                 </div>
                 <div class="column">
-                  <!-- <select-field
-                    v-model="form.positions"
-                    label-position="on-border"
-                    label="Position"
-                    rules="required"
-                    mode="eager"
-                    :options="positionsState"
-                  ></select-field> -->
                   <b-field label="Positions" label-position="on-border">
                     <b-taginput
                       v-model="form.positions"
@@ -242,7 +244,7 @@
                         mode="eager"
                       ></text-field>
                     </div>
-                    <div class="column is-1">
+                    <div class="column is-1 is-flex is-justify-content-flex-end">
                       <b-tooltip label="Remove">
                         <b-button
                           class="is-pulled-right px-4"
@@ -285,51 +287,95 @@
               </div>
               <template v-if="form.addresses.length > 0">
                 <template v-for="address in form.addresses">
-                  <div :key="address.id" class="columns">
-                    <div class="column is-3">
-                      <text-field
-                        v-model="address.name"
-                        label-position="on-border"
-                        label="Name"
-                        rules="required"
-                        mode="eager"
-                      ></text-field>
+                  <div :key="address.id">
+                    <div class="columns">
+                      <div class="column is-6">
+                        <text-field
+                          v-model="address.name"
+                          label-position="on-border"
+                          label="Name"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-5">
+                        <text-field
+                          v-model="address.address1"
+                          label-position="on-border"
+                          label="Street"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-1 is-flex is-justify-content-flex-end">
+                        <b-tooltip label="Remove">
+                          <b-button
+                            class="is-pulled-right px-4"
+                            icon-right="delete"
+                            rounded
+                            @click="removeAddress(address)"
+                          />
+                        </b-tooltip>
+                      </div>
                     </div>
-                    <div class="column is-3">
-                      <text-field
-                        v-model="address.address1"
-                        label-position="on-border"
-                        label="Address 1"
-                        rules="required"
-                        mode="eager"
-                      ></text-field>
+                    <div class="columns">
+                      <div class="column is-4">
+                        <text-field
+                          v-model="address.barangay_id"
+                          label-position="on-border"
+                          label="Barangay"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-4">
+                        <text-field
+                          v-model="address.province_id"
+                          label-position="on-border"
+                          label="Province"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-4">
+                        <text-field
+                          v-model="address.region_id"
+                          label-position="on-border"
+                          label="Region"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
                     </div>
-                    <div class="column is-3">
-                      <text-field
-                        v-model="address.address2"
-                        label-position="on-border"
-                        label="Address 2"
-                      ></text-field>
-                    </div>
-                    <div class="column is-2">
-                      <select-field
-                        v-model="address.address_type_id"
-                        label-position="on-border"
-                        label="Type"
-                        rules="required"
-                        mode="eager"
-                        :options="addressTypesState"
-                      ></select-field>
-                    </div>
-                    <div class="column is-1">
-                      <b-tooltip label="Remove">
-                        <b-button
-                          class="is-pulled-right px-4"
-                          icon-right="delete"
-                          rounded
-                          @click="removeAddress(address)"
-                        />
-                      </b-tooltip>
+                    <div class="columns">
+                      <div class="column is-4">
+                        <text-field
+                          v-model="address.state_id"
+                          label-position="on-border"
+                          label="State"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-4">
+                        <text-field
+                          v-model="address.country_id"
+                          label-position="on-border"
+                          label="Country"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-4">
+                        <select-field
+                          v-model="address.address_type_id"
+                          label-position="on-border"
+                          label="Type"
+                          rules="required"
+                          mode="eager"
+                          :options="addressTypesState"
+                        ></select-field>
+                      </div>
                     </div>
                   </div>
                 </template>
@@ -410,7 +456,7 @@
                         mode="eager"
                       ></date-picker-field>
                     </div>
-                    <div class="column is-1">
+                    <div class="column is-1 is-flex is-justify-content-flex-end">
                       <b-tooltip label="Remove" class="px-0">
                         <b-button
                           class="is-pulled-right px-4"
@@ -436,17 +482,131 @@
               </template>
               <!-- Educational Background -->
 
-              <!-- <b-field class="file">
+              <!-- Employment History -->
+              <div class="is-flex is-justify-content-space-between is-align-items-center my-4">
+                <h6 class="is-size-6 has-text-weight-medium has-text-grey">
+                  Employment History
+                </h6>
+                <b-button
+                  v-if="form.education.length > 0"
+                  icon-left="playlist-edit"
+                  type="is-ghost"
+                  class="px-2"
+                  @click="addExperience"
+                >
+                  Add Experience
+                </b-button>
+              </div>
+              <template v-if="form.experiences.length > 0">
+                <template v-for="experience in form.experiences">
+                  <div :key="experience.id">
+                    <div class="columns">
+                      <div class="column is-4">
+                          <text-field
+                            v-model="experience.company"
+                            label-position="on-border"
+                            label="Company"
+                            rules="required"
+                            mode="eager"
+                          ></text-field>
+                      </div>
+                      <div class="column is-4">
+                        <text-field
+                          v-model="experience.project_name"
+                          label-position="on-border"
+                          label="Project Name"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-3">
+                        <text-field
+                          v-model="experience.description"
+                          label-position="on-border"
+                          label="Description"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-1 is-flex is-justify-content-flex-end">
+                        <b-tooltip label="Remove" class="px-0">
+                          <b-button
+                            class="is-pulled-right px-4"
+                            icon-right="delete"
+                            rounded
+                            @click="removeExperience(experience)"
+                          />
+                        </b-tooltip>
+                      </div>
+                    </div>
+                    <div class="columns">
+                      <div class="column is-3">
+                        <text-field
+                          v-model="experience.role"
+                          label-position="on-border"
+                          label="Role"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-3">
+                        <text-field
+                          v-model="experience.salary"
+                          label-position="on-border"
+                          label="Salary"
+                          rules="required"
+                          mode="eager"
+                        ></text-field>
+                      </div>
+                      <div class="column is-3">
+                        <date-picker-field
+                          v-model="experience.start_at"
+                          label-position="on-border"
+                          label="Start at"
+                          rules="required"
+                          mode="eager"
+                        ></date-picker-field>
+                      </div>
+                      <div class="column is-3">
+                        <date-picker-field
+                          v-model="experience.end_at"
+                          label-position="on-border"
+                          label="End at"
+                          rules="required"
+                          mode="eager"
+                        ></date-picker-field>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+              <template v-else>
+                <div class="is-flex is-justify-content-center">
+                  <b-button
+                    icon-left="playlist-edit"
+                    type="is-ghost"
+                    @click="addExperience"
+                  >
+                    Add Experience
+                  </b-button>
+                </div>
+              </template>
+              <!-- Employment History -->
+
+              <!-- Avatar -->
+              <h6 class="is-size-6 has-text-weight-medium has-text-grey mb-4">
+                Avatar
+              </h6>
+              <span v-show="avatarName" class="tag is-primary my-3">{{ avatarName }}</span>
+              <b-field class="file">
                 <b-upload v-model="form.profile_photo">
+                  <input ref="fileInput" type="file" @change="change">
                   <a class="button">
                     <b-icon icon="upload"></b-icon>
                     <span>Upload Profile Photo</span>
                   </a>
                 </b-upload>
-                <span v-if="form.profile_photo" class="is-size-6 px-3 py-2">
-                  {{ form.profile_photo.name }}
-                </span>
-              </b-field> -->
+              </b-field>
 
               <div class="is-flex is-justify-content-end">
                 <b-button
@@ -457,6 +617,7 @@
                   <span class="has-text-weight-bold px-6">Register</span>
                 </b-button>
               </div>
+              <!-- Avatar -->
 
             </form>
           </ValidationObserver>
@@ -481,12 +642,14 @@ export default {
     return {
       form: new EmployeeRepresentation(),
       EXTENSIONS,
+      avatarName: '',
     };
   },
 
   computed: {
     ...mapGetters({
       companiesState: 'setting/companiesState',
+      branchesState: 'setting/branchesState',
       departmentsState: 'setting/departmentsState',
       positionsState: 'setting/positionsState',
       employmentTypesState: 'setting/employmentTypesState',
@@ -510,6 +673,11 @@ export default {
     save () {
       const form = { ...this.form };
       form.education = form.education.map(obj => ({
+        ...obj,
+        start_at: this.$moment(obj.start_at).format('YYYY-MM-DD hh:mm:ss'),
+        end_at: this.$moment(obj.end_at).format('YYYY-MM-DD hh:mm:ss'),
+      }));
+      form.experiences = form.experiences.map(obj => ({
         ...obj,
         start_at: this.$moment(obj.start_at).format('YYYY-MM-DD hh:mm:ss'),
         end_at: this.$moment(obj.end_at).format('YYYY-MM-DD hh:mm:ss'),
@@ -538,7 +706,16 @@ export default {
     },
     addAddress () {
       this.form.addresses.push({
-        id: uniqueId(), name: '', address1: '', address2: '', address_type_id: '',
+        id: uniqueId(),
+        name: '',
+        address1: '',
+        address2: '',
+        barangay_id: '',
+        province_id: '',
+        region_id: '',
+        state_id: '',
+        country_id: '',
+        address_type_id: '',
       });
     },
     removeAddress (address) {
@@ -553,6 +730,28 @@ export default {
     removeEducation (education) {
       const index = this.form.education.indexOf(education);
       this.form.education.splice(index, 1);
+    },
+    addExperience () {
+      this.form.experiences.push({
+        id: uniqueId(),
+        company: '',
+        project_name: '',
+        description: '',
+        role: '',
+        salary: '',
+        start_at: null,
+        end_at: null,
+      });
+    },
+    removeExperience (experience) {
+      const index = this.form.experiences.indexOf(experience);
+      this.form.experiences.splice(index, 1);
+    },
+    change (evt) {
+      const file = evt.target.files;
+      const [ firstFile ] = file;
+      this.form.profile_photo = firstFile;
+      this.avatarName = firstFile.name;
     },
   },
 };

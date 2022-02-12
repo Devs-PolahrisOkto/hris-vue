@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import initialState from '@/config/employee.state';
 import EmployeeClient from '@/api/clients/EmployeeClient';
+import AvatarClient from '@/api/clients/AvatarClient';
 import Employee from '@/api/models/EmployeeModel';
 
 const client = new EmployeeClient('https://apistaging.polahrisokto.com/api');
+const avatarClient = new AvatarClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
   ...initialState,
@@ -68,6 +70,9 @@ const actions = {
     if (status !== 200) {
       console.error('saving employee failed');
     } else {
+      if (payload.profile_photo) {
+        await avatarClient.uploadUserAvatar(payload.profile_photo, data.id);
+      }
       commit('ADD_EMPLOYEE', data);
     }
   },

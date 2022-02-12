@@ -75,6 +75,7 @@
         <ul class="sub-menu">
           <li><router-link to="/settings/companies" class="link_name">Settings</router-link></li>
           <li><router-link to="/settings/companies">Company</router-link></li>
+          <li><router-link to="/settings/branches">Branches</router-link></li>
           <li><router-link to="/settings/departments">Departments</router-link></li>
           <li><router-link to="/settings/positions">Positions</router-link></li>
           <li><router-link to="/settings/employment-types">Employment Types</router-link></li>
