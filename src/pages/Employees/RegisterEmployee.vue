@@ -677,6 +677,11 @@ export default {
         start_at: this.$moment(obj.start_at).format('YYYY-MM-DD hh:mm:ss'),
         end_at: this.$moment(obj.end_at).format('YYYY-MM-DD hh:mm:ss'),
       }));
+      form.experiences = form.experiences.map(obj => ({
+        ...obj,
+        start_at: this.$moment(obj.start_at).format('YYYY-MM-DD hh:mm:ss'),
+        end_at: this.$moment(obj.end_at).format('YYYY-MM-DD hh:mm:ss'),
+      }));
       form.positions = form.positions.map(position => position.value);
       this.saveEmployee(form).then(() => {
         this.$buefy.snackbar.open({
