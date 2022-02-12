@@ -2,6 +2,7 @@ class Employee {
   constructor (props) {
     if (!props) { return; }
     this.id = props.id;
+    this.employee_number = props.employee_number;
     this.avatar = props.avatar;
     this.gender_id = props.gender_id;
     this.branch_id = props.branch_id;
