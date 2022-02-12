@@ -181,14 +181,6 @@
                   ></select-field>
                 </div>
                 <div class="column">
-                  <!-- <select-field
-                    v-model="form.positions"
-                    label-position="on-border"
-                    label="Position"
-                    rules="required"
-                    mode="eager"
-                    :options="positionsState"
-                  ></select-field> -->
                   <b-field label="Positions" label-position="on-border">
                     <b-taginput
                       v-model="form.positions"
@@ -591,17 +583,20 @@
               </template>
               <!-- Employment History -->
 
-              <!-- <b-field class="file">
+              <!-- Avatar -->
+              <h6 class="is-size-6 has-text-weight-medium has-text-grey mb-4">
+                Avatar
+              </h6>
+              <span v-show="avatarName" class="tag is-primary my-3">{{ avatarName }}</span>
+              <b-field class="file">
                 <b-upload v-model="form.profile_photo">
+                  <input ref="fileInput" type="file" @change="change">
                   <a class="button">
                     <b-icon icon="upload"></b-icon>
                     <span>Upload Profile Photo</span>
                   </a>
                 </b-upload>
-                <span v-if="form.profile_photo" class="is-size-6 px-3 py-2">
-                  {{ form.profile_photo.name }}
-                </span>
-              </b-field> -->
+              </b-field>
 
               <div class="is-flex is-justify-content-end">
                 <b-button
@@ -612,6 +607,7 @@
                   <span class="has-text-weight-bold px-6">Register</span>
                 </b-button>
               </div>
+              <!-- Avatar -->
 
             </form>
           </ValidationObserver>
@@ -636,6 +632,7 @@ export default {
     return {
       form: new EmployeeRepresentation(),
       EXTENSIONS,
+      avatarName: '',
     };
   },
 
@@ -733,6 +730,12 @@ export default {
     removeExperience (experience) {
       const index = this.form.experiences.indexOf(experience);
       this.form.experiences.splice(index, 1);
+    },
+    change (evt) {
+      const file = evt.target.files;
+      const [ firstFile ] = file;
+      this.form.profile_photo = firstFile;
+      this.avatarName = firstFile.name;
     },
   },
 };
