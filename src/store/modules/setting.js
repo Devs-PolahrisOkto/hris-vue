@@ -4,6 +4,7 @@ const client = new SettingClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
   companies: [],
+  branches: [],
   departments: [],
   positions: [],
   employmentTypes: [],
@@ -17,6 +18,12 @@ const state = {
 const getters = {
   companiesState (state) {
     return state.companies.map(obj => ({
+      value: obj.id,
+      text: obj.name,
+    }));
+  },
+  branchesState (state) {
+    return state.branches.map(obj => ({
       value: obj.id,
       text: obj.name,
     }));
@@ -75,6 +82,7 @@ const mutations = {
   SET_LIST (state, settings) {
     const {
       companyList,
+      branchList,
       departmentList,
       positionList,
       employmentTypeList,
@@ -85,6 +93,7 @@ const mutations = {
       genderList,
     } = settings;
     state.companies = companyList;
+    state.branches = branchList;
     state.departments = departmentList;
     state.positions = positionList;
     state.employmentTypes = employmentTypeList;
@@ -101,6 +110,13 @@ const actions = {
     const companyList = client.companyList().then(response => {
       if (response.status !== 200) {
         console.error('fetching company list failed');
+        return [];
+      }
+      return response.data.data;
+    });
+    const branchList = client.branchList().then(response => {
+      if (response.status !== 200) {
+        console.error('fetching branch list failed');
         return [];
       }
       return response.data.data;
@@ -164,6 +180,7 @@ const actions = {
 
     const settings = await Promise.all([
       companyList,
+      branchList,
       departmentList,
       positionList,
       employmentTypeList,
@@ -174,14 +191,15 @@ const actions = {
       genderList,
     ]).then(results => ({
       companyList: results[0],
-      departmentList: results[1],
-      positionList: results[2],
-      employmentTypeList: results[3],
-      addressTypeList: results[4],
-      documentTypeList: results[5],
-      bankList: results[6],
-      civilStatusList: results[7],
-      genderList: results[8],
+      branchList: results[1],
+      departmentList: results[2],
+      positionList: results[3],
+      employmentTypeList: results[4],
+      addressTypeList: results[5],
+      documentTypeList: results[6],
+      bankList: results[7],
+      civilStatusList: results[8],
+      genderList: results[9],
     }));
 
     commit('SET_LIST', settings);
