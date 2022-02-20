@@ -12,7 +12,7 @@ const CIVIL_STATUS = [
   { value: 'Divorced', text: 'Divorced' },
 ];
 
-const EXTENSIONS = [
+const TITLES = [
   { value: 'Mr', text: 'Mr' },
   { value: 'Ms', text: 'Ms' },
   { value: 'Mrs', text: 'Mrs' },
@@ -21,5 +21,5 @@ const EXTENSIONS = [
 export {
   GENDERS,
   CIVIL_STATUS,
-  EXTENSIONS,
+  TITLES,
 };
