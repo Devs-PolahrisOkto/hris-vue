@@ -49,12 +49,14 @@
         <div v-show="layout === 'table'">
           <b-table
             :data="meta.isEmpty ? [] : filteredEmployees"
+            :paginated="meta.isPaginated"
+            :backend-pagination="meta.backendPagination"
+            :backend-sorting="meta.backendSorting"
+            :total="meta.total"
+            :per-page="meta.per_page"
             :striped="meta.isStriped"
             :hoverable="meta.isHoverable"
             :mobile-cards="meta.hasMobileCards"
-            :paginated="meta.isPaginated"
-            :per-page="meta.perPage"
-            :current-page.sync="meta.currentPage"
             :pagination-simple="meta.isPaginationSimple"
             :pagination-position="meta.paginationPosition"
             :default-sort-direction="meta.defaultSortDirection"
@@ -66,6 +68,7 @@
             aria-previous-label="Previous page"
             aria-page-label="Page"
             aria-current-label="Current page"
+            @page-change="onPageChange"
           >
             <b-table-column v-slot="props" field="avatar" width="40">
               <figure class="image is-24x24">
@@ -210,6 +213,9 @@ export default {
     }),
     changeLayout (requestedLayout) {
       this.layout = requestedLayout;
+    },
+    onPageChange (page) {
+      this.getList({ page, size: 10, sort: null });
     },
   },
 };
