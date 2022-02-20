@@ -55,19 +55,19 @@
 
               <div class="columns">
                 <div class="column">
-                  <select-field
+                  <text-field
                     v-model="form.user.extension"
                     label-position="on-border"
                     label="Extension"
-                    :options="EXTENSIONS"
-                  ></select-field>
+                  ></text-field>
                 </div>
                 <div class="column">
-                  <text-field
+                  <select-field
                     v-model="form.user.title"
                     label-position="on-border"
                     label="Title"
-                  ></text-field>
+                    :options="TITLES"
+                  ></select-field>
                 </div>
                 <div class="column">
                   <text-field
@@ -631,7 +631,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import { uniqueId } from 'lodash';
 import EmployeeRepresentation from '@/api/representations/EmployeeRepresentation';
-import { EXTENSIONS } from '@/constants';
+import { TITLES } from '@/constants';
 
 export default {
   components: {
@@ -641,7 +641,7 @@ export default {
   data () {
     return {
       form: new EmployeeRepresentation(),
-      EXTENSIONS,
+      TITLES,
       avatarName: '',
     };
   },
