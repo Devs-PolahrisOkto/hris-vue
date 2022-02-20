@@ -6,8 +6,9 @@ class EmployeeClient extends BaseClient {
     this.baseUrl = `${appUrl}/users`;
   }
 
-  list () {
-    return this.axios.get(this.baseUrl)
+  list (params) {
+    const { page, size, sort } = params;
+    return this.axios.get(`${this.baseUrl}?page=${page}&size=${size}&sort=${sort}`)
       .then(response => response);
   }
 
