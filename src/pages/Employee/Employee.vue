@@ -20,6 +20,7 @@
                 size="is-small"
                 icon-right="pencil"
                 rounded
+                @click="editPersonalModal = true"
               />
             </div>
             <div
@@ -70,6 +71,13 @@
         </div>
       </div>
     </div>
+
+    <!-- Start Modals -->
+    <edit-modal
+      :active="editPersonalModal"
+      @close="editPersonalModal = !editPersonalModal"
+    ></edit-modal>
+    <!-- End Modals -->
   </main-layout>
 </template>
 
@@ -83,11 +91,13 @@ export default {
     PersonalDocuments: () => import('@/components/Employee/Documents/Documents.vue'),
     PayrollRecord: () => import('@/components/Employee/Payroll/Payroll.vue'),
     TimekeepingRecord: () => import('@/components/Employee/Timekeeping/Timekeeping.vue'),
+    EditModal: () => import('@/components/Employee/Personal/EditModal.vue'),
   },
 
   data () {
     return {
       activeTab: 0,
+      editPersonalModal: false,
     };
   },
 
