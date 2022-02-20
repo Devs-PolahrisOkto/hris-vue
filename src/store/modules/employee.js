@@ -30,8 +30,9 @@ const mutations = {
   SET_FORM (state, employee) {
     state.form = { ...employee };
   },
-  SET_LIST ({ table }, employees) {
-    table.list = [ ...employees ];
+  SET_LIST ({ table }, { data, meta }) {
+    table.list = [ ...data ];
+    table.meta = { ...table.meta, ...meta };
   },
   ADD_EMPLOYEE ({ table: { list } }, employee) {
     list.push(employee);
@@ -49,12 +50,12 @@ const mutations = {
 };
 
 const actions = {
-  async list ({ commit }) {
-    const { status, data: { data } } = await client.list();
+  async list ({ commit }, params = { page: 1, size: 10, sort: null }) {
+    const { status, data: { data, meta } } = await client.list(params);
     if (status !== 200) {
       console.error('fetching employee list failed');
     } else {
-      commit('SET_LIST', data);
+      commit('SET_LIST', { data, meta });
     }
   },
   async find ({ commit }, id) {
