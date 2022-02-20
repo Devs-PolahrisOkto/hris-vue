@@ -293,7 +293,7 @@
                         <text-field
                           v-model="address.name"
                           label-position="on-border"
-                          label="Name"
+                          label="House/Bldg No."
                           rules="required"
                           mode="eager"
                         ></text-field>
@@ -352,7 +352,7 @@
                         <text-field
                           v-model="address.state_id"
                           label-position="on-border"
-                          label="State"
+                          label="City"
                           rules="required"
                           mode="eager"
                         ></text-field>
