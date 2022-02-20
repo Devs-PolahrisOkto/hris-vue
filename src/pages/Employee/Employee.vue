@@ -14,9 +14,17 @@
       <div class="columns">
         <div class="column is-3">
           <div class="card">
+            <div class="is-flex is-justify-content-end p-2">
+              <b-button
+                class="px-3"
+                size="is-small"
+                icon-right="pencil"
+                rounded
+              />
+            </div>
             <div
               class="is-flex is-flex-direction-column
-              is-justify-content-center is-align-items-center py-5"
+              is-justify-content-center is-align-items-center"
             >
               <figure class="image is-128x128 mb-2">
                 <img class="is-rounded" :src="employee.avatar">
