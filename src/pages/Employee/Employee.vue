@@ -27,16 +27,16 @@
               class="is-flex is-flex-direction-column
               is-justify-content-center is-align-items-center"
             >
-              <figure class="image is-128x128 mb-2">
-                <img class="is-rounded" :src="employee.avatar">
+              <figure v-show="employeeAvatar" class="image is-128x128 mb-2">
+                <img class="is-rounded" :src="employeeAvatar">
               </figure>
-              <h5 class="is-size-5">{{ employee.fullname }}</h5>
+              <h5 v-show="employeeName" class="is-size-5">{{ employeeName }}</h5>
               <h6 v-show="position" class="is-size-6">{{ position }}</h6>
             </div>
             <div class="card-content">
-              <div class="pt-2">
+              <div v-show="employeeNumber" class="pt-2">
                 <h6 class="is-size-7 has-text-grey-light">Employee No.</h6>
-                <h6 class="is-size-6">{{ employee.user.employee_number }}</h6>
+                <h6 class="is-size-6">{{ employeeNumber }}</h6>
               </div>
               <div v-show="employmentType" class="pt-2">
                 <h6 class="is-size-7 has-text-grey-light">Employment Type</h6>
@@ -104,10 +104,13 @@ export default {
   computed: {
     ...mapGetters({
       employee: 'employee/selected',
+      employeeAvatar: 'employee/selected/employeeAvatar',
+      employeeName: 'employee/selected/employeeName',
+      employeeNumber: 'employee/selected/employeeNumber',
+      employmentType: 'employee/selected/employmentType',
       position: 'employee/selected/position',
       contact: 'employee/selected/contact',
       address: 'employee/selected/address',
-      employmentType: 'employee/selected/employmentType',
     }),
   },
 
