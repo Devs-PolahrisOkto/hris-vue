@@ -216,7 +216,7 @@ export default {
     },
     onPageChange (page) {
       this.getList({
-        page, size: 10, sort: 'created_at', filter: 'firstname',
+        page, size: 10, sort: '-created_at', filter: 'created_at',
       });
     },
   },
