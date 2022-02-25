@@ -35,6 +35,10 @@ class EmployeeRepresentation extends Representation {
   get asViewData () {
     const transformedData = {
       ...this,
+      user: {
+        ...this.user,
+        birthDate: new Date(this.user?.birthDate),
+      },
       fullname: `${this.user?.firstname} ${this.user?.lastname}`,
       primaryPosition: this.positions?.[0]?.name,
       employmentType: this.user?.employment_type?.name,
