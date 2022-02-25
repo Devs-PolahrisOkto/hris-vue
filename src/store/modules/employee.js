@@ -2,7 +2,7 @@ import Vue from 'vue';
 import initialState from '@/config/employee.state';
 import EmployeeClient from '@/api/clients/EmployeeClient';
 import AvatarClient from '@/api/clients/AvatarClient';
-import Employee from '@/api/models/EmployeeModel';
+import EmployeeRepresentation from '@/api/representations/EmployeeRepresentation';
 
 const client = new EmployeeClient('https://apistaging.polahrisokto.com/api');
 const avatarClient = new AvatarClient('https://apistaging.polahrisokto.com/api');
@@ -13,9 +13,9 @@ const state = {
 
 const getters = {
   'table/columns': ({ table: { columns } }) => columns,
-  'table/list': ({ table: { list } }) => list.map(employee => new Employee(employee)),
+  'table/list': ({ table: { list } }) => list.map(employee => (new EmployeeRepresentation(employee)).asViewData),
   'table/meta': ({ table: { meta } }) => meta,
-  selected: ({ selectedEmployee }) => selectedEmployee,
+  selected: ({ selectedEmployee }) => (new EmployeeRepresentation(selectedEmployee)).asViewData,
   'selected/employmentType': ({ selectedEmployee }) => selectedEmployee && selectedEmployee.employment_type && selectedEmployee.employment_type.description,
   'selected/position': ({ selectedEmployee: { positions } }) => positions && positions[0] && positions[0].name,
   'selected/contact': ({ selectedEmployee: { contacts } }) => contacts && contacts[0] && contacts[0].name,
@@ -42,15 +42,15 @@ const mutations = {
     Vue.set(list, index, employee);
   },
   SET_EMPLOYEE (state, employee) {
-    state.selectedEmployee = new Employee(employee);
-  },
-  UPDATE_HEADERS ({ table }, headers) {
-    table.headers = headers;
+    state.selectedEmployee = { ...employee };
   },
 };
 
 const actions = {
-  async list ({ commit }, params = { page: 1, size: 10, sort: null }) {
+  async list ({ commit },
+    params = {
+      page: 1, size: 10, sort: 'created_at', filter: 'firstname',
+    }) {
     const { status, data: { data, meta } } = await client.list(params);
     if (status !== 200) {
       console.error('fetching employee list failed');
@@ -100,9 +100,6 @@ const actions = {
     } else {
       commit('', data);
     }
-  },
-  updateHeaders ({ commit }, headers) {
-    commit('UPDATE_HEADERS', headers);
   },
 };
 
