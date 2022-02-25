@@ -21,7 +21,7 @@
             <div class="columns">
               <div class="column">
                 <text-field
-                  v-model="selectedEmployee.firstname"
+                  v-model="selectedEmployee.user.firstname"
                   label="First Name"
                   rules="required"
                   mode="eager"
@@ -29,14 +29,14 @@
               </div>
               <div class="column">
                 <text-field
-                  v-model="selectedEmployee.middlename"
+                  v-model="selectedEmployee.user.middlename"
                   label="Middle Name"
                   mode="passive"
                 ></text-field>
               </div>
               <div class="column">
                 <text-field
-                  v-model="selectedEmployee.lastname"
+                  v-model="selectedEmployee.user.lastname"
                   label="Last Name"
                   rules="required"
                   mode="eager"
@@ -47,20 +47,20 @@
             <div class="columns">
               <div class="column">
                 <text-field
-                  v-model="selectedEmployee.extension"
+                  v-model="selectedEmployee.user.extension"
                   label="Extension"
                 ></text-field>
               </div>
               <div class="column">
                 <select-field
-                  v-model="selectedEmployee.title"
+                  v-model="selectedEmployee.user.title"
                   label="Title"
                   :options="TITLES"
                 ></select-field>
               </div>
               <div class="column">
                 <text-field
-                  v-model="selectedEmployee.nickname"
+                  v-model="selectedEmployee.user.nickname"
                   label="Nickname"
                 ></text-field>
               </div>
@@ -69,7 +69,7 @@
             <div class="columns">
               <div class="column">
                 <select-field
-                  v-model="selectedEmployee.gender_id"
+                  v-model="selectedEmployee.user.gender_id"
                   label="Gender"
                   rules="required"
                   mode="eager"
@@ -78,7 +78,7 @@
               </div>
               <div class="column">
                 <select-field
-                  v-model="selectedEmployee.civilstatus_id"
+                  v-model="selectedEmployee.user.civilstatus_id"
                   label="Civil Status"
                   rules="required"
                   mode="eager"
@@ -87,7 +87,7 @@
               </div>
               <div class="column">
                 <date-picker-field
-                  v-model="selectedEmployee.birthDate"
+                  v-model="selectedEmployee.user.birthDate"
                   label="Birthdate"
                   rules="required"
                   mode="eager"
@@ -138,10 +138,7 @@ export default {
     }),
     selectedEmployee: {
       get () {
-        return {
-          ...this.employee,
-          birthDate: new Date(this.employee.birthDate),
-        };
+        return { ...this.employee };
       },
       set (value) {
         return value;
