@@ -98,7 +98,7 @@
                 type="is-primary"
                 icon-right="eye"
                 tag="router-link"
-                :to="`/employees/${props.row.id}`"
+                :to="`/employees/${props.row.user.id}`"
               />
             </b-table-column>
 
@@ -131,7 +131,7 @@
                       type="is-primary"
                       icon-right="eye"
                       tag="router-link"
-                      :to="`/employees/${item.id}`"
+                      :to="`/employees/${item.user.id}`"
                     />
                   </div>
                 </article>
@@ -196,7 +196,7 @@ export default {
     }),
     filteredEmployees () {
       return this.list.filter(employee => employee
-        .employeeName
+        .fullname
         .toLowerCase()
         .includes(this.searchField.toLowerCase()));
     },
@@ -215,7 +215,9 @@ export default {
       this.layout = requestedLayout;
     },
     onPageChange (page) {
-      this.getList({ page, size: 10, sort: null });
+      this.getList({
+        page, size: 10, sort: 'created_at', filter: 'firstname',
+      });
     },
   },
 };
