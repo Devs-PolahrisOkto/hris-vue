@@ -3,9 +3,9 @@ export default {
   selectedEmployee: {},
   table: {
     columns: [
-      { title: 'Name', field: 'employeeName', visible: true },
-      { title: 'Position', field: 'positionName', visible: true },
-      { title: 'Employment Type', field: 'employmentTypeName', visible: true },
+      { title: 'Name', field: 'fullname', visible: true },
+      { title: 'Position', field: 'primaryPosition', visible: true },
+      { title: 'Employment Type', field: 'employmentType', visible: true },
     ],
     list: [],
     meta: {
