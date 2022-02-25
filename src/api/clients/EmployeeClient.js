@@ -23,7 +23,7 @@ class EmployeeClient extends BaseClient {
   }
 
   update (user) {
-    return this.axios.put(`${this.baseUrl}/${user.id}`, user)
+    return this.axios.put(`${this.baseUrl}/${user?.user?.id}`, user)
       .then(response => response);
   }
 
