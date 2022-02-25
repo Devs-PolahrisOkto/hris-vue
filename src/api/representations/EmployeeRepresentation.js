@@ -1,7 +1,7 @@
 import Representation from '@/api/representations/Representation';
 
 class EmployeeRepresentation extends Representation {
-  constructor () {
+  constructor (properties) {
     super({
       user: {
         firstname: '',
@@ -28,7 +28,18 @@ class EmployeeRepresentation extends Representation {
       education: [],
       experiences: [],
       profile_photo: null,
+      ...properties,
     });
+  }
+
+  get asViewData () {
+    const transformedData = {
+      ...this,
+      fullname: `${this.user?.firstname} ${this.user?.lastname}`,
+      primaryPosition: this.positions?.[0]?.name,
+      employmentType: this.user?.employment_type?.name,
+    };
+    return transformedData;
   }
 }
 
