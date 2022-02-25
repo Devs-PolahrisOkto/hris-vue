@@ -16,7 +16,10 @@ const getters = {
   'table/list': ({ table: { list } }) => list.map(employee => (new EmployeeRepresentation(employee)).asViewData),
   'table/meta': ({ table: { meta } }) => meta,
   selected: ({ selectedEmployee }) => (new EmployeeRepresentation(selectedEmployee)).asViewData,
-  'selected/employmentType': ({ selectedEmployee }) => selectedEmployee && selectedEmployee.employment_type && selectedEmployee.employment_type.description,
+  'selected/employeeAvatar': (state, getters) => getters.selected?.avatar,
+  'selected/employeeName': (state, getters) => getters.selected?.fullname,
+  'selected/employeeNumber': (state, getters) => getters.selected?.user?.employee_number,
+  'selected/employmentType': (state, getters) => getters.selected?.employmentType,
   'selected/position': ({ selectedEmployee: { positions } }) => positions && positions[0] && positions[0].name,
   'selected/contact': ({ selectedEmployee: { contacts } }) => contacts && contacts[0] && contacts[0].name,
   'selected/address': ({ selectedEmployee: { addresses } }) => addresses && addresses[0] && addresses[0].address1,
@@ -49,7 +52,7 @@ const mutations = {
 const actions = {
   async list ({ commit },
     params = {
-      page: 1, size: 10, sort: 'created_at', filter: 'firstname',
+      page: 1, size: 10, sort: '-created_at', filter: 'created_at',
     }) {
     const { status, data: { data, meta } } = await client.list(params);
     if (status !== 200) {
