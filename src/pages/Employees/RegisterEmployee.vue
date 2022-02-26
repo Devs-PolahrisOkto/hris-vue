@@ -91,7 +91,7 @@
                 </div>
                 <div class="column">
                   <select-field
-                    v-model="form.user.civilstatus_id"
+                    v-model="form.user.civil_status_id"
                     label-position="on-border"
                     label="Civil Status"
                     rules="required"

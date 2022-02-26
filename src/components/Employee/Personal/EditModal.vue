@@ -78,7 +78,7 @@
               </div>
               <div class="column">
                 <select-field
-                  v-model="selectedEmployee.user.civilstatus_id"
+                  v-model="selectedEmployee.user.civil_status_id"
                   label="Civil Status"
                   rules="required"
                   mode="eager"

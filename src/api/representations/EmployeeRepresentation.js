@@ -17,7 +17,7 @@ class EmployeeRepresentation extends Representation {
         gender_id: '',
         employment_type_id: '',
         branch_id: '',
-        civilstatus_id: '',
+        civil_status_id: '',
       },
       company_id: '',
       department_id: '',
