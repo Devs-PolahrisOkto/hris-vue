@@ -1,5 +1,4 @@
 export default {
-  employees: [],
   selectedEmployee: {},
   table: {
     loading: false,
