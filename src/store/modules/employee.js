@@ -14,6 +14,7 @@ const state = {
 const getters = {
   'table/columns': ({ table: { columns } }) => columns,
   'table/list': ({ table: { list } }) => list.map(employee => (new EmployeeRepresentation(employee)).asViewData),
+  'table/list/loading': ({ table: { loading } }) => loading,
   'table/meta': ({ table: { meta } }) => meta,
   selected: ({ selectedEmployee }) => (new EmployeeRepresentation(selectedEmployee)).asViewData,
   'selected/employeeAvatar': (state, getters) => getters.selected?.avatar,
@@ -37,6 +38,9 @@ const mutations = {
     table.list = [ ...data ];
     table.meta = { ...table.meta, ...meta };
   },
+  SET_LIST_LOADING ({ table }, loading) {
+    table.loading = loading;
+  },
   ADD_EMPLOYEE ({ table: { list } }, employee) {
     list.push(employee);
   },
@@ -54,12 +58,14 @@ const actions = {
     params = {
       page: 1, size: 10, sort: '-created_at', filter: 'created_at',
     }) {
+    commit('SET_LIST_LOADING', true);
     const { status, data: { data, meta } } = await client.list(params);
     if (status !== 200) {
       console.error('fetching employee list failed');
     } else {
       commit('SET_LIST', { data, meta });
     }
+    commit('SET_LIST_LOADING', false);
   },
   async find ({ commit }, id) {
     const { status, data: { data } } = await client.find(id);
