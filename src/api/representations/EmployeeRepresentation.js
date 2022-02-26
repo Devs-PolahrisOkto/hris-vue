@@ -1,4 +1,5 @@
 import Representation from '@/api/representations/Representation';
+import AddressRepresentation from '@/api/representations/AddressRepresentation';
 
 class EmployeeRepresentation extends Representation {
   constructor (properties) {
@@ -42,6 +43,7 @@ class EmployeeRepresentation extends Representation {
       fullname: `${this.user?.firstname} ${this.user?.lastname}`,
       primaryPosition: this.positions?.[0]?.name,
       employmentType: this.user?.employment_type?.name,
+      addresses: this.addresses.map(address => (new AddressRepresentation(address)).asViewData),
     };
     return transformedData;
   }
