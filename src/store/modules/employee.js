@@ -21,13 +21,13 @@ const getters = {
   'selected/employeeName': (state, getters) => getters.selected?.fullname,
   'selected/employeeNumber': (state, getters) => getters.selected?.user?.employee_number,
   'selected/employmentType': (state, getters) => getters.selected?.employmentType,
-  'selected/position': ({ selectedEmployee: { positions } }) => positions && positions[0] && positions[0].name,
-  'selected/contact': ({ selectedEmployee: { contacts } }) => contacts && contacts[0] && contacts[0].name,
-  'selected/address': ({ selectedEmployee: { addresses } }) => addresses && addresses[0] && addresses[0].address1,
-  'selected/education': ({ selectedEmployee: { education } }) => education,
-  'selected/addresses': ({ selectedEmployee: { addresses } }) => addresses,
-  'selected/contacts': ({ selectedEmployee: { contacts } }) => contacts,
-  'selected/documents': ({ selectedEmployee: { documents } }) => documents,
+  'selected/position': (state, getters) => getters.selected?.positions?.[0]?.name,
+  'selected/contact': (state, getters) => getters.selected?.contacts?.[0]?.description,
+  'selected/address': (state, getters) => getters.selected?.addresses?.[0]?.address,
+  'selected/education': (state, getters) => getters.selected?.education,
+  'selected/addresses': (state, getters) => getters.selected?.addresses,
+  'selected/contacts': (state, getters) => getters.selected?.contacts,
+  'selected/documents': (state, getters) => getters.selected?.documents,
 };
 
 const mutations = {
