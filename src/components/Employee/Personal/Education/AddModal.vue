@@ -111,7 +111,7 @@ export default {
     }),
     submit () {
       const form = { ...this.form };
-      form.user_id = this.employee.id;
+      form.user_id = this.employee.user.id;
       form.start_at = this.$moment(form.start_at).format('YYYY-MM-DD hh:mm:ss');
       form.end_at = this.$moment(form.end_at).format('YYYY-MM-DD hh:mm:ss');
       this.save(form).then(this.$emit('close'));

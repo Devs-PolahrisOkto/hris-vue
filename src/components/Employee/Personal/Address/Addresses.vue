@@ -2,88 +2,16 @@
   <div class="card mb-4">
     <header class="is-flex is-justify-content-space-between is-align-items-center py-2 pr-2">
       <h6 class="is-size-6 has-text-weight-light px-3">Addresses</h6>
-      <!-- <b-button size="is-small" icon-right="plus" /> -->
     </header>
-    <b-table
-      :data="isEmpty ? [] : addresses"
-      :striped="isStriped"
-      :hoverable="isHoverable"
-      :mobile-cards="hasMobileCards"
-      :paginated="isPaginated"
-      :per-page="perPage"
-      :current-page.sync="currentPage"
-      :pagination-simple="isPaginationSimple"
-      :pagination-position="paginationPosition"
-      :default-sort-direction="defaultSortDirection"
-      :pagination-rounded="isPaginationRounded"
-      :sort-icon="sortIcon"
-      :sort-icon-size="sortIconSize"
-      default-sort="school"
-      aria-next-label="Next page"
-      aria-previous-label="Previous page"
-      aria-page-label="Page"
-      aria-current-label="Current page"
-    >
-      <b-table-column
-        v-slot="props" field="name"
-        label="Name"
-        sortable
+    <template v-for="item in addresses">
+      <div
+        :key="item.id"
+        class="p-3"
       >
-        {{ props.row.name }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="address1"
-        label="Street"
-        sortable
-      >
-        {{ props.row.address1 }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="barangay_id"
-        label="Barangay"
-        sortable width="240"
-      >
-        {{ props.row.barangay_id }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="province_id"
-        label="Province"
-        sortable width="240"
-      >
-        {{ props.row.province_id }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="region_id"
-        label="Region"
-        sortable width="240"
-      >
-        {{ props.row.region_id }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="state_id"
-        label="State"
-        sortable width="240"
-      >
-        {{ props.row.state_id }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="country_id"
-        label="Country"
-        sortable width="240"
-      >
-        {{ props.row.country_id }}
-      </b-table-column>
-
-      <template #empty>
-        <no-record :width="160" :height="160"></no-record>
-      </template>
-    </b-table>
+        <h6 class="is-size-6 has-text-weight-medium">{{ item.address }}</h6>
+        <h6 class="is-size-6">{{ item.type }}</h6>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -107,10 +35,6 @@ export default {
       currentPage: 1,
       perPage: 10,
     };
-  },
-
-  components: {
-    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   computed: {

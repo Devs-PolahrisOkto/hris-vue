@@ -2,48 +2,16 @@
   <div class="card mb-4">
     <header class="is-flex is-justify-content-space-between is-align-items-center py-2 pr-2">
       <h6 class="is-size-6 has-text-weight-light px-3">Contacts</h6>
-      <!-- <b-button size="is-small" icon-right="plus" /> -->
     </header>
-    <b-table
-      :data="isEmpty ? [] : contacts"
-      :striped="isStriped"
-      :hoverable="isHoverable"
-      :mobile-cards="hasMobileCards"
-      :paginated="isPaginated"
-      :per-page="perPage"
-      :current-page.sync="currentPage"
-      :pagination-simple="isPaginationSimple"
-      :pagination-position="paginationPosition"
-      :default-sort-direction="defaultSortDirection"
-      :pagination-rounded="isPaginationRounded"
-      :sort-icon="sortIcon"
-      :sort-icon-size="sortIconSize"
-      default-sort="school"
-      aria-next-label="Next page"
-      aria-previous-label="Previous page"
-      aria-page-label="Page"
-      aria-current-label="Current page"
-    >
-      <b-table-column
-        v-slot="props" field="name"
-        label="Name"
-        sortable
+    <template v-for="item in contacts">
+      <div
+        :key="item.id"
+        class="p-3"
       >
-        {{ props.row.name }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="description"
-        label="Description"
-        sortable width="240"
-      >
-        {{ props.row.description }}
-      </b-table-column>
-
-      <template #empty>
-        <no-record :width="160" :height="160"></no-record>
-      </template>
-    </b-table>
+        <h6 class="is-size-6 has-text-weight-medium">{{ item.name }}</h6>
+        <h6 class="is-size-6">{{ item.description }}</h6>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -67,10 +35,6 @@ export default {
       currentPage: 1,
       perPage: 10,
     };
-  },
-
-  components: {
-    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   computed: {
