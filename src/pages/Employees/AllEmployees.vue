@@ -49,6 +49,7 @@
         <div v-show="layout === 'table'">
           <b-table
             :data="meta.isEmpty ? [] : filteredEmployees"
+            :loading="loading"
             :paginated="meta.isPaginated"
             :backend-pagination="meta.backendPagination"
             :backend-sorting="meta.backendSorting"
@@ -121,9 +122,9 @@
                     </p>
                   </figure>
                   <div class="media-content">
-                    <h5 class="is-size-5 has-text-weight-semibold">{{ item.employeeName }}</h5>
-                    <h6 class="is-size-6 has-text-grey">{{ item.position }}</h6>
-                    <h6 class="is-size-6">{{ item.employmentTypeName }}</h6>
+                    <h5 class="is-size-5 has-text-weight-semibold">{{ item.fullname }}</h5>
+                    <h6 class="is-size-6 has-text-grey">{{ item.primaryPosition }}</h6>
+                    <h6 class="is-size-6">{{ item.employmentType }}</h6>
                   </div>
                   <div class="media-right">
                     <b-button
@@ -192,6 +193,7 @@ export default {
     ...mapGetters({
       columns: 'employee/table/columns',
       list: 'employee/table/list',
+      loading: 'employee/table/list/loading',
       meta: 'employee/table/meta',
     }),
     filteredEmployees () {
