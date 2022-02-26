@@ -2,6 +2,7 @@ export default {
   employees: [],
   selectedEmployee: {},
   table: {
+    loading: false,
     columns: [
       { title: 'Name', field: 'fullname', visible: true },
       { title: 'Position', field: 'primaryPosition', visible: true },
