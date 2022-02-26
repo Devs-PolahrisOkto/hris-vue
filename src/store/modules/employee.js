@@ -75,7 +75,7 @@ const actions = {
       console.error('saving employee failed');
     } else {
       if (payload.profile_photo) {
-        await avatarClient.uploadUserAvatar(payload.profile_photo, data.id);
+        await avatarClient.uploadUserAvatar(payload.profile_photo, data?.user?.id);
       }
       commit('ADD_EMPLOYEE', data);
     }
