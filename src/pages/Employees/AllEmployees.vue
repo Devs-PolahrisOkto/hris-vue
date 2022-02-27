@@ -48,7 +48,7 @@
         <!-- Table Layout -->
         <div v-show="layout === 'table'">
           <b-table
-            :data="meta.isEmpty ? [] : filteredEmployees"
+            :data="meta.isEmpty ? [] : list"
             :loading="loading"
             :paginated="meta.isPaginated"
             :backend-pagination="meta.backendPagination"
@@ -169,6 +169,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { debounce } from 'lodash';
 
 export default {
   components: {
@@ -196,12 +197,17 @@ export default {
       loading: 'employee/table/list/loading',
       meta: 'employee/table/meta',
     }),
-    filteredEmployees () {
-      return this.list.filter(employee => employee
-        .fullname
-        .toLowerCase()
-        .includes(this.searchField.toLowerCase()));
-    },
+  },
+
+  watch: {
+    searchField: debounce(function (query) {
+      this.getList({
+        page: 1,
+        size: 10,
+        sort: '-created_at',
+        filter: query,
+      });
+    }, 500),
   },
 
   created () {
@@ -218,7 +224,10 @@ export default {
     },
     onPageChange (page) {
       this.getList({
-        page, size: 10, sort: '-created_at', filter: 'created_at',
+        page,
+        size: 10,
+        sort: '-created_at',
+        filter: '',
       });
     },
   },
