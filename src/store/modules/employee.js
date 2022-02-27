@@ -52,6 +52,10 @@ const mutations = {
     state.selectedEmployee = { ...employee };
   },
   'EDUCATION/ADD': ({ selectedEmployee }, education) => selectedEmployee.education.push(education || {}),
+  'EDUCATION/UPDATE': ({ selectedEmployee }, education) => {
+    const index = selectedEmployee.education.findIndex(obj => obj.id === education.id);
+    Vue.set(selectedEmployee.education, index, education);
+  },
 };
 
 const actions = {
@@ -112,6 +116,7 @@ const actions = {
     }
   },
   'education/add': ({ commit }, education) => commit('EDUCATION/ADD', education),
+  'education/update': ({ commit }, education) => commit('EDUCATION/UPDATE', education),
 };
 
 export default {
