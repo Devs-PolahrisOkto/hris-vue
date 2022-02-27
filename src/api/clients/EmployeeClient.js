@@ -7,8 +7,10 @@ class EmployeeClient extends BaseClient {
   }
 
   list (params) {
-    const { page, size, sort } = params;
-    return this.axios.get(`${this.baseUrl}?page=${page}&size=${size}&sort=${sort}`)
+    const {
+      page, size, sort, filter,
+    } = params;
+    return this.axios.get(`${this.baseUrl}?page=${page}&size=${size}&sort=${sort}&filter[firstname]=${filter}`)
       .then(response => response);
   }
 
