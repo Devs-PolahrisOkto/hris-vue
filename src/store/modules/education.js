@@ -19,9 +19,17 @@ const actions = {
   async save ({ dispatch }, payload) {
     const { status, data: { data } } = await client.save(payload);
     if (status !== 200) {
-      console.error('fetching employee list failed');
+      console.error('saving education failed');
     } else {
       dispatch('employee/education/add', data, { root: true });
+    }
+  },
+  async update ({ dispatch }, payload) {
+    const { status, data: { data } } = await client.update(payload);
+    if (status !== 200) {
+      console.error('updating education failed');
+    } else {
+      dispatch('employee/education/update', data, { root: true });
     }
   },
 };
