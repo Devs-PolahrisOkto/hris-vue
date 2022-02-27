@@ -72,7 +72,7 @@ const mutations = {
 const actions = {
   async list ({ commit },
     params = {
-      page: 1, size: 10, sort: '-created_at', filter: 'created_at',
+      page: 1, size: 10, sort: '-created_at', filter: '',
     }) {
     commit('SET_LIST_LOADING', true);
     const { status, data: { data, meta } } = await client.list(params);
