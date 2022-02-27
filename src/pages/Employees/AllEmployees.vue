@@ -16,7 +16,7 @@
         <div class="is-flex is-justify-content-space-between py-2">
           <b-input
             v-model="searchField"
-            placeholder="Search..."
+            placeholder="Search name..."
             type="search"
             icon="magnify">
           </b-input>
