@@ -1,5 +1,5 @@
 import Representation from '@/api/representations/Representation';
-import { formatDateToString } from '@/filters/date';
+import { formatDateToString, formatDateTime } from '@/filters/date';
 
 class EducationRepresentation extends Representation {
   constructor (properties) {
@@ -19,6 +19,15 @@ class EducationRepresentation extends Representation {
     const transformedData = {
       ...this,
       inclusiveDates: `(${formatDateToString(this.start_at)} - ${formatDateToString(this.end_at)})`,
+    };
+    return transformedData;
+  }
+
+  get asPayload () {
+    const transformedData = {
+      ...this,
+      start_at: formatDateTime(this.start_at),
+      end_at: formatDateTime(this.end_at),
     };
     return transformedData;
   }
