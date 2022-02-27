@@ -15,6 +15,26 @@ class EducationRepresentation extends Representation {
     });
   }
 
+  // eslint-disable-next-line camelcase
+  get start_at () {
+    return this._start_at;
+  }
+
+  // eslint-disable-next-line camelcase
+  set start_at (value) {
+    this._start_at = value ? new Date(value) : null;
+  }
+
+  // eslint-disable-next-line camelcase
+  get end_at () {
+    return this._end_at;
+  }
+
+  // eslint-disable-next-line camelcase
+  set end_at (value) {
+    this._end_at = value ? new Date(value) : null;
+  }
+
   get asViewData () {
     const transformedData = {
       ...this,
@@ -26,9 +46,11 @@ class EducationRepresentation extends Representation {
   get asPayload () {
     const transformedData = {
       ...this,
-      start_at: formatDateTime(this.start_at),
-      end_at: formatDateTime(this.end_at),
+      start_at: formatDateTime(this._start_at),
+      end_at: formatDateTime(this._end_at),
     };
+    delete transformedData._start_at;
+    delete transformedData._end_at;
     return transformedData;
   }
 }
