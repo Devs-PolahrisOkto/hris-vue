@@ -5,10 +5,10 @@
       <b-button
         size="is-small"
         icon-right="plus"
-        @click="addEducationModal = true"
+        @click="add"
       />
     </header>
-    <!-- Employee Educational Background -->
+    <!-- Educational Background -->
     <template v-for="item in education">
       <div
         :key="item.id"
@@ -17,14 +17,26 @@
         <h6 class="is-size-6 has-text-weight-medium">{{ item.school }}</h6>
         <h6 class="is-size-6">{{ item.degree }}</h6>
         <h6 class="is-size-6">{{ item.inclusiveDates }}</h6>
+        <b-button
+          size="is-small"
+          icon-right="pencil"
+          @click="edit(item)"
+        />
       </div>
     </template>
-    <!-- Employee Educational Background -->
+    <!-- Educational Background -->
     <!-- Start Modals -->
-    <add-modal
-      :active="addEducationModal"
-      @close="addEducationModal = !addEducationModal"
-    ></add-modal>
+    <b-modal
+      v-model="modalState"
+      :width="800"
+      :can-cancel="['x']"
+    >
+      <modal-form
+        :title="formTitle"
+        :form-data="formData"
+        @close="modalState = false"
+      ></modal-form>
+    </b-modal>
     <!-- End Modals -->
   </div>
 </template>
@@ -34,12 +46,14 @@ import { mapGetters } from 'vuex';
 
 export default {
   components: {
-    AddModal: () => import('@/components/Employee/Personal/Education/AddModal.vue'),
+    ModalForm: () => import('@/components/Employee/Personal/Education/ModalForm.vue'),
   },
 
   data () {
     return {
-      addEducationModal: false,
+      modalState: false,
+      formTitle: 'Add Education',
+      formData: {},
     };
   },
 
@@ -47,6 +61,19 @@ export default {
     ...mapGetters({
       education: 'employee/selected/education',
     }),
+  },
+
+  methods: {
+    add () {
+      this.formTitle = 'Add Education';
+      this.formData = {};
+      this.modalState = true;
+    },
+    edit (item) {
+      this.formTitle = 'Edit Education';
+      this.formData = item;
+      this.modalState = true;
+    },
   },
 };
 </script>
