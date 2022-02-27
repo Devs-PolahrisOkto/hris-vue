@@ -16,9 +16,7 @@
       >
         <h6 class="is-size-6 has-text-weight-medium">{{ item.school }}</h6>
         <h6 class="is-size-6">{{ item.degree }}</h6>
-        <h6 class="is-size-6">
-          {{ `(${formatDateToString(item.start_at)} - ${formatDateToString(item.end_at)})` }}
-        </h6>
+        <h6 class="is-size-6">{{ item.inclusiveDates }}</h6>
       </div>
     </template>
     <!-- Employee Educational Background -->
@@ -33,30 +31,14 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import date from '@/mixins/date';
 
 export default {
-  mixins: [ date ],
-
   components: {
     AddModal: () => import('@/components/Employee/Personal/Education/AddModal.vue'),
   },
 
   data () {
     return {
-      isEmpty: false,
-      isStriped: true,
-      isHoverable: true,
-      hasMobileCards: true,
-      isPaginated: false,
-      isPaginationSimple: true,
-      isPaginationRounded: false,
-      paginationPosition: 'bottom',
-      defaultSortDirection: 'asc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
-      currentPage: 1,
-      perPage: 10,
       addEducationModal: false,
     };
   },
