@@ -25,6 +25,7 @@ const getters = {
   'selected/contact': (state, getters) => getters.selected?.contacts?.[0]?.description || '',
   'selected/address': (state, getters) => getters.selected?.addresses?.[0]?.address || '',
   'selected/education': (state, getters) => getters.selected?.education,
+  'selected/experiences': (state, getters) => getters.selected?.experiences,
   'selected/addresses': (state, getters) => getters.selected?.addresses,
   'selected/contacts': (state, getters) => getters.selected?.contacts,
   'selected/documents': (state, getters) => getters.selected?.documents,
