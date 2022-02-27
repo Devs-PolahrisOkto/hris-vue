@@ -16,12 +16,12 @@ const mutations = {
 };
 
 const actions = {
-  async save ({ commit }, payload) {
+  async save ({ dispatch }, payload) {
     const { status, data: { data } } = await client.save(payload);
     if (status !== 200) {
       console.error('fetching employee list failed');
     } else {
-      commit('', data);
+      dispatch('employee/education/add', data, { root: true });
     }
   },
 };
