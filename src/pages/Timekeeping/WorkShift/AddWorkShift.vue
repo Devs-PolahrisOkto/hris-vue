@@ -175,7 +175,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { uniqueId } from 'lodash';
-import date from '@/mixins/date';
+import { formatTimeToString } from '@/filters/date';
 
 export default {
   components: {
@@ -194,7 +194,9 @@ export default {
     };
   },
 
-  mixins: [ date ],
+  filters: {
+    formatTimeToString,
+  },
 
   computed: {
     ...mapGetters({
