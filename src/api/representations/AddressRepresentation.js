@@ -25,6 +25,14 @@ class AddressRepresentation extends Representation {
     };
     return transformedData;
   }
+
+  get asPayload () {
+    const transformedData = {
+      ...this,
+      address_type_id: this.address_type_id?.id,
+    };
+    return transformedData;
+  }
 }
 
 export default AddressRepresentation;
