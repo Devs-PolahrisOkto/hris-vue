@@ -21,9 +21,9 @@ const getters = {
   'selected/employeeName': (state, getters) => getters.selected?.fullname,
   'selected/employeeNumber': (state, getters) => getters.selected?.user?.employee_number,
   'selected/employmentType': (state, getters) => getters.selected?.employmentType,
-  'selected/position': (state, getters) => getters.selected?.positions?.[0]?.name,
-  'selected/contact': (state, getters) => getters.selected?.contacts?.[0]?.description,
-  'selected/address': (state, getters) => getters.selected?.addresses?.[0]?.address,
+  'selected/position': (state, getters) => getters.selected?.positions?.[0]?.name || '',
+  'selected/contact': (state, getters) => getters.selected?.contacts?.[0]?.description || '',
+  'selected/address': (state, getters) => getters.selected?.addresses?.[0]?.address || '',
   'selected/education': (state, getters) => getters.selected?.education,
   'selected/addresses': (state, getters) => getters.selected?.addresses,
   'selected/contacts': (state, getters) => getters.selected?.contacts,
@@ -51,6 +51,7 @@ const mutations = {
   SET_EMPLOYEE (state, employee) {
     state.selectedEmployee = { ...employee };
   },
+  'EDUCATION/ADD': ({ selectedEmployee }, education) => selectedEmployee.education.push(education || {}),
 };
 
 const actions = {
@@ -110,6 +111,7 @@ const actions = {
       commit('', data);
     }
   },
+  'education/add': ({ commit }, education) => commit('EDUCATION/ADD', education),
 };
 
 export default {
