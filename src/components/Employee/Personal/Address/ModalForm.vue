@@ -15,7 +15,6 @@
             <div class="column is-6">
               <text-field
                 v-model="form.name"
-                label-position="on-border"
                 label="House/Bldg No."
                 rules="required"
                 mode="eager"
@@ -24,7 +23,6 @@
             <div class="column is-6">
               <text-field
                 v-model="form.address1"
-                label-position="on-border"
                 label="Street"
                 rules="required"
                 mode="eager"
@@ -35,7 +33,6 @@
             <div class="column is-6">
               <text-field
                 v-model="form.barangay_id"
-                label-position="on-border"
                 label="Barangay"
                 rules="required"
                 mode="eager"
@@ -44,7 +41,6 @@
             <div class="column is-6">
               <text-field
                 v-model="form.province_id"
-                label-position="on-border"
                 label="Province"
                 rules="required"
                 mode="eager"
@@ -55,7 +51,6 @@
             <div class="column is-6">
               <text-field
                 v-model="form.region_id"
-                label-position="on-border"
                 label="Region"
                 rules="required"
                 mode="eager"
@@ -64,7 +59,6 @@
             <div class="column is-6">
               <text-field
                 v-model="form.state_id"
-                label-position="on-border"
                 label="City"
                 rules="required"
                 mode="eager"
@@ -75,7 +69,6 @@
             <div class="column is-6">
               <text-field
                 v-model="form.country_id"
-                label-position="on-border"
                 label="Country"
                 rules="required"
                 mode="eager"
@@ -84,7 +77,6 @@
             <div class="column is-6">
               <select-field
                 v-model="form.address_type_id.id"
-                label-position="on-border"
                 label="Type"
                 rules="required"
                 mode="eager"
