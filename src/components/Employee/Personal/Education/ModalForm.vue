@@ -11,6 +11,27 @@
           ></button>
         </header>
         <section class="modal-card-body py-5">
+          <text-field
+            v-model="form.school"
+            label="School"
+            rules="required"
+            mode="eager"
+            field-class="pb-3"
+          ></text-field>
+          <text-field
+            v-model="form.degree"
+            label="Degree"
+            rules="required"
+            mode="eager"
+            field-class="pb-3"
+          ></text-field>
+          <text-field
+            v-model="form.description"
+            label="Description"
+            rules="required"
+            mode="eager"
+            field-class="pb-3"
+          ></text-field>
           <div class="columns pt-4">
             <div class="column">
               <date-picker-field
@@ -29,27 +50,6 @@
               ></date-picker-field>
             </div>
           </div>
-          <text-field
-            v-model="form.description"
-            label="Description"
-            rules="required"
-            mode="eager"
-            field-class="pb-3"
-          ></text-field>
-          <text-field
-            v-model="form.school"
-            label="School"
-            rules="required"
-            mode="eager"
-            field-class="pb-3"
-          ></text-field>
-          <text-field
-            v-model="form.degree"
-            label="Degree"
-            rules="required"
-            mode="eager"
-            field-class="pb-6"
-          ></text-field>
         </section>
         <footer class="modal-card-foot is-flex is-justify-content-end">
           <b-button
