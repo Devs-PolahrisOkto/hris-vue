@@ -14,7 +14,15 @@ function formatTimeToString (date) {
   return '';
 }
 
+function formatDateTime (date) {
+  if (moment(date).isValid()) {
+    return moment(date).format('YYYY-MM-DD hh:mm:ss');
+  }
+  return null;
+}
+
 export {
   formatDateToString,
   formatTimeToString,
+  formatDateTime,
 };
