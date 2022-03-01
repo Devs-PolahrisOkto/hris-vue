@@ -3,31 +3,31 @@ import BaseClient from './BaseClient';
 class AddressClient extends BaseClient {
   constructor (appUrl) {
     super();
-    this.baseUrl = `${appUrl}/addresses`;
+    this.baseUrl = `${appUrl}/users`;
   }
 
-  list () {
-    return this.axios.get(this.baseUrl)
+  list (userId) {
+    return this.axios.get(`${this.baseUrl}/${userId}/addresses`)
       .then(response => response);
   }
 
-  find (id) {
-    return this.axios.get(`${this.baseUrl}/${id}`)
+  find (userId, id) {
+    return this.axios.get(`${this.baseUrl}/${userId}/addresses/${id}`)
       .then(response => response);
   }
 
-  save (address) {
-    return this.axios.post(this.baseUrl, address)
+  save (userId, address) {
+    return this.axios.post(`${this.baseUrl}/${userId}/addresses`, address)
       .then(response => response);
   }
 
-  update (address) {
-    return this.axios.put(`${this.baseUrl}/${address.id}`, address)
+  update (userId, address) {
+    return this.axios.put(`${this.baseUrl}/${userId}/addresses/${address.id}`, address)
       .then(response => response);
   }
 
-  delete (id) {
-    return this.axios.delete(`${this.baseUrl}/${id}`)
+  delete (userId, id) {
+    return this.axios.delete(`${this.baseUrl}/${userId}/addresses/${id}`)
       .then(response => response);
   }
 }
