@@ -76,7 +76,7 @@
             </div>
             <div class="column is-6">
               <select-field
-                v-model="form.address_type_id.id"
+                v-model="form.address_type_id"
                 label="Type"
                 rules="required"
                 mode="eager"

@@ -21,7 +21,7 @@ class AddressRepresentation extends Representation {
     const transformedData = {
       ...this,
       address: `${this.address1} ${this.barangay_id} ${this.province_id} ${this.region_id} ${this.state_id} ${this.country_id}`,
-      type: this.address_type_id?.name,
+      type: this.address_type?.name,
     };
     return transformedData;
   }
@@ -29,7 +29,6 @@ class AddressRepresentation extends Representation {
   get asPayload () {
     const transformedData = {
       ...this,
-      address_type_id: this.address_type_id?.id,
     };
     return transformedData;
   }
