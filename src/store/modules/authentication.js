@@ -9,9 +9,9 @@ const state = {
 
 const getters = {
   authUserObj: ({ authUser }) => authUser,
-  authUserName: ({ authUser: { user } }) => `${user?.firstname} ${user?.lastname}`,
+  authUserName: ({ authUser }) => `${authUser?.user?.firstname} ${authUser?.user?.lastname}`,
   authUserAvatar: ({ authUser }) => authUser?.avatar,
-  authUserEmail: ({ authUser: { user } }) => user?.email,
+  authUserEmail: ({ authUser }) => authUser?.user?.email,
 };
 
 const mutations = {
