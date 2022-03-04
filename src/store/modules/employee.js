@@ -67,6 +67,11 @@ const mutations = {
     const index = selectedEmployee.experiences.findIndex(obj => obj.id === experience.id);
     Vue.set(selectedEmployee.experiences, index, experience);
   },
+  'CONTACT/ADD': ({ selectedEmployee }, contact) => selectedEmployee.contacts.push(contact || {}),
+  'CONTACT/UPDATE': ({ selectedEmployee }, contact) => {
+    const index = selectedEmployee.contacts.findIndex(obj => obj.id === contact.id);
+    Vue.set(selectedEmployee.contacts, index, contact);
+  },
 };
 
 const actions = {
@@ -132,6 +137,8 @@ const actions = {
   'address/update': ({ commit }, address) => commit('ADDRESS/UPDATE', address),
   'experience/add': ({ commit }, experience) => commit('EXPERIENCE/ADD', experience),
   'experience/update': ({ commit }, experience) => commit('EXPERIENCE/UPDATE', experience),
+  'contact/add': ({ commit }, contact) => commit('CONTACT/ADD', contact),
+  'contact/update': ({ commit }, contact) => commit('CONTACT/UPDATE', contact),
 };
 
 export default {
