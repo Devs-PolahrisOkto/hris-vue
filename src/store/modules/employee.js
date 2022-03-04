@@ -72,6 +72,11 @@ const mutations = {
     const index = selectedEmployee.contacts.findIndex(obj => obj.id === contact.id);
     Vue.set(selectedEmployee.contacts, index, contact);
   },
+  'DOCUMENT/ADD': ({ selectedEmployee }, document) => selectedEmployee.documents.push(document || {}),
+  'DOCUMENT/UPDATE': ({ selectedEmployee }, document) => {
+    const index = selectedEmployee.documents.findIndex(obj => obj.id === document.id);
+    Vue.set(selectedEmployee.documents, index, document);
+  },
 };
 
 const actions = {
@@ -128,7 +133,7 @@ const actions = {
     if (status !== 200) {
       console.error('uploading document failed');
     } else {
-      commit('', data);
+      commit('DOCUMENT/ADD', data);
     }
   },
   'education/add': ({ commit }, education) => commit('EDUCATION/ADD', education),
