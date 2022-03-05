@@ -35,7 +35,7 @@
       >
         <figure class="media-left">
           <p class="image is-64x64">
-            <img :src="`https://hris-resources.s3.us-east-2.amazonaws.com/${props.row.file}`">
+            <img :src="props.row.file">
           </p>
         </figure>
       </b-table-column>
