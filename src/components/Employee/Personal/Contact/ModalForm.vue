@@ -46,6 +46,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { isEmpty } from 'lodash';
+import ContactRepresentation from '@/api/representations/ContactRepresentation';
 
 export default {
   props: {
@@ -65,7 +66,8 @@ export default {
     }),
     form: {
       get () {
-        return isEmpty(this.formData) ? this.contactForm : this.formData;
+        const form = isEmpty(this.formData) ? this.contactForm : this.formData;
+        return new ContactRepresentation(form);
       },
       set (value) {
         return value;
