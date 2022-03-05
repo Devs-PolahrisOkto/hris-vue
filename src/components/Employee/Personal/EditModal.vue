@@ -116,6 +116,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { TITLES } from '@/constants';
+import EmployeeRepresentation from '@/api/representations/EmployeeRepresentation';
 
 export default {
   props: {
@@ -138,7 +139,7 @@ export default {
     }),
     selectedEmployee: {
       get () {
-        return { ...this.employee };
+        return new EmployeeRepresentation(this.employee);
       },
       set (value) {
         return value;
@@ -156,7 +157,7 @@ export default {
       update: 'employee/update',
     }),
     submit () {
-      this.update(this.selectedEmployee).then(this.$emit('close'));
+      this.update(this.selectedEmployee.asUpdatePayload).then(this.$emit('close'));
     },
   },
 };
