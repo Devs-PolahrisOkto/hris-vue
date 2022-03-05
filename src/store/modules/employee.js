@@ -113,7 +113,7 @@ const actions = {
     }
   },
   async update ({ commit }, payload) {
-    const { status, data: { data } } = await client.update(payload.user);
+    const { status, data: { data } } = await client.update(payload);
     if (status !== 200) {
       console.error('updating employee failed');
     } else {
