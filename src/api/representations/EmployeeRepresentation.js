@@ -54,6 +54,24 @@ class EmployeeRepresentation extends Representation {
     };
     return transformedData;
   }
+
+  get asUpdatePayload () {
+    const clone = {
+      id: this.user?.id,
+      firstname: this.user?.firstname,
+      middlename: this.user?.middlename,
+      lastname: this.user?.lastname,
+      nickname: this.user?.nickname,
+      extension: this.user?.extension,
+      title: this.user?.title,
+      birthDate: this.user?.birthDate,
+      username: this.user?.username,
+      email: this.user?.email,
+      gender_id: this.user?.gender_id,
+      civil_status_id: this.user?.civil_status_id,
+    };
+    return clone;
+  }
 }
 
 export default EmployeeRepresentation;
