@@ -52,11 +52,16 @@
           </div>
         </div>
         <b-tooltip label="Option" class="is-align-self-center">
-          <b-button
-            type="is-ghost"
-            size="is-medium"
-            icon-right="dots-vertical"
-          />
+          <b-dropdown aria-role="list" position="is-bottom-left">
+            <template #trigger>
+              <b-button
+                type="is-ghost"
+                size="is-medium"
+                icon-right="dots-vertical"
+              />
+            </template>
+            <b-dropdown-item aria-role="listitem">Delete</b-dropdown-item>
+          </b-dropdown>
         </b-tooltip>
       </div>
     </template>
