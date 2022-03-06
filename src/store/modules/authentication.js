@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import initialState from '@/config/authentication.state';
 import AuthenticationClient from '@/api/clients/AuthenticationClient';
 
@@ -12,6 +13,8 @@ const getters = {
   authUserName: ({ authUser }) => `${authUser?.user?.firstname} ${authUser?.user?.lastname}`,
   authUserAvatar: ({ authUser }) => authUser?.avatar,
   authUserEmail: ({ authUser }) => authUser?.user?.email,
+  errors: ({ errors }) => errors,
+  hasErrors: ({ errors: { errors } }) => !isEmpty(errors),
 };
 
 const mutations = {
@@ -29,17 +32,28 @@ const mutations = {
     localStorage.removeItem('authToken');
     localStorage.removeItem('authUser');
   },
+  SET_ERRORS (state, errors) {
+    state.errors = errors;
+  },
+  CLEAR_ERRORS (state) {
+    state.errors = {
+      errors: {},
+      message: '',
+    };
+  },
 };
 
 const actions = {
   async login ({ commit }, payload) {
-    const { status, data: { token, user } } = await client.login(payload);
+    const { status, data } = await client.login(payload);
     if (status !== 200) {
+      commit('SET_ERRORS', data);
       console.error('login failed');
       return false;
     }
-    commit('SET_AUTH_TOKEN', token);
-    commit('SET_AUTH_USER', user);
+    commit('SET_AUTH_TOKEN', data?.token);
+    commit('SET_AUTH_USER', data?.user);
+    commit('CLEAR_ERRORS');
     return true;
   },
   logout ({ commit }) {
