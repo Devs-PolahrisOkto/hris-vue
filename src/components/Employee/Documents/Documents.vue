@@ -51,7 +51,7 @@
             <h6 class="is-size-7 has-text-weight-light">{{ item.lastModified }}</h6>
           </div>
         </div>
-        <b-tooltip label="Option" class="is-align-self-center">
+        <!-- <b-tooltip label="Option" class="is-align-self-center">
           <b-dropdown aria-role="list" position="is-bottom-left">
             <template #trigger>
               <b-button
@@ -65,7 +65,7 @@
               @click="deleteDocument(item.id)"
             >Delete</b-dropdown-item>
           </b-dropdown>
-        </b-tooltip>
+        </b-tooltip> -->
       </div>
     </template>
     <!-- Documents -->
