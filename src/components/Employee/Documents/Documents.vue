@@ -15,8 +15,9 @@
       </b-tooltip>
     </header>
     <!-- Documents -->
-    <template v-for="item in documents">
+    <template v-if="hasDocuments">
       <div
+        v-for="item in documents"
         :key="item.id"
         class="is-flex is-justify-content-space-between p-3"
       >
@@ -68,6 +69,9 @@
         </b-tooltip> -->
       </div>
     </template>
+    <template v-else>
+      <no-record width="200" height="200"></no-record>
+    </template>
     <!-- Documents -->
     <!-- Upload Modal -->
     <upload-modal
@@ -90,6 +94,7 @@ export default {
 
   computed: {
     ...mapGetters({
+      hasDocuments: 'employee/selected/hasDocuments',
       documents: 'employee/selected/documents',
     }),
   },
@@ -102,6 +107,7 @@ export default {
     MsOldExcelFileIllustration: () => import('@/components/Illustrations/MsOldExcelFileIllustration.vue'),
     PdfFileIllustration: () => import('@/components/Illustrations/PdfFileIllustration.vue'),
     DefaultFileTypeIllustration: () => import('@/components/Illustrations/DefaultFileTypeIllustration.vue'),
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   methods: {

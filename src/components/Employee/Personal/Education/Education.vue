@@ -15,8 +15,9 @@
       </b-tooltip>
     </header>
     <!-- Educational Background -->
-    <template v-for="item in education">
+    <template v-if="hasEducation">
       <div
+        v-for="item in education"
         :key="item.id"
         class="p-3"
       >
@@ -32,6 +33,9 @@
         <h6 class="is-size-6">{{ item.degree }}</h6>
         <h6 class="is-size-6">{{ item.inclusiveDates }}</h6>
       </div>
+    </template>
+    <template v-else>
+      <no-record width="200" height="200"></no-record>
     </template>
     <!-- Educational Background -->
     <!-- Start Modals -->
@@ -56,6 +60,7 @@ import { mapGetters } from 'vuex';
 export default {
   components: {
     ModalForm: () => import('@/components/Employee/Personal/Education/ModalForm.vue'),
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   data () {
@@ -68,6 +73,7 @@ export default {
 
   computed: {
     ...mapGetters({
+      hasEducation: 'employee/selected/hasEducation',
       education: 'employee/selected/education',
     }),
   },

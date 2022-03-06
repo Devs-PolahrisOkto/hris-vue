@@ -15,8 +15,9 @@
       </b-tooltip>
     </header>
     <!-- Addresses -->
-    <template v-for="item in addresses">
+    <template v-if="hasAddresses">
       <div
+        v-for="item in addresses"
         :key="item.id"
         class="p-3"
       >
@@ -31,6 +32,9 @@
         </div>
         <h6 class="is-size-6">{{ item.type }}</h6>
       </div>
+    </template>
+    <template v-else>
+      <no-record width="200" height="200"></no-record>
     </template>
     <!-- Addresses -->
     <!-- Start Modals -->
@@ -55,6 +59,7 @@ import { mapGetters } from 'vuex';
 export default {
   components: {
     ModalForm: () => import('@/components/Employee/Personal/Address/ModalForm.vue'),
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
   data () {
@@ -67,6 +72,7 @@ export default {
 
   computed: {
     ...mapGetters({
+      hasAddresses: 'employee/selected/hasAddresses',
       addresses: 'employee/selected/addresses',
     }),
   },
