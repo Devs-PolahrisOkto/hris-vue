@@ -33,6 +33,15 @@ const actions = {
       dispatch('employee/document/update', data, { root: true });
     }
   },
+  async delete ({ dispatch, rootGetters }, id) {
+    const userId = rootGetters['employee/selected']?.user?.id;
+    const { status } = await client.delete(userId, id);
+    if (status !== 200) {
+      console.error('deleting document failed');
+    } else {
+      dispatch('employee/document/delete', id, { root: true });
+    }
+  },
 };
 
 export default {
