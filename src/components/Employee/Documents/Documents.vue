@@ -23,7 +23,27 @@
         <div class="is-flex">
           <figure class="media-left">
             <p class="image is-64x64">
-              <img :src="item.file">
+              <template v-if="item.type === 'docx'">
+                <ms-new-word-file-illustration></ms-new-word-file-illustration>
+              </template>
+              <template v-else-if="item.type === 'doc'">
+                <ms-old-word-file-illustration></ms-old-word-file-illustration>
+              </template>
+              <template v-else-if="item.type === 'xlsx'">
+                <ms-new-excel-file-illustration></ms-new-excel-file-illustration>
+              </template>
+              <template v-else-if="item.type === 'xls'">
+                <ms-old-excel-file-illustration></ms-old-excel-file-illustration>
+              </template>
+              <template v-else-if="item.type === 'pdf'">
+                <pdf-file-illustration></pdf-file-illustration>
+              </template>
+              <template v-else-if="isImageFile(item.type)">
+                <img :src="item.file">
+              </template>
+              <template v-else>
+                <default-file-type-illustration></default-file-type-illustration>
+              </template>
             </p>
           </figure>
           <div class="is-flex is-flex-direction-column">
@@ -68,6 +88,18 @@ export default {
 
   components: {
     UploadModal: () => import('@/components/Employee/Documents/UploadModal.vue'),
+    MsNewWordFileIllustration: () => import('@/components/Illustrations/MsNewWordFileIllustration.vue'),
+    MsOldWordFileIllustration: () => import('@/components/Illustrations/MsOldWordFileIllustration.vue'),
+    MsNewExcelFileIllustration: () => import('@/components/Illustrations/MsNewExcelFileIllustration.vue'),
+    MsOldExcelFileIllustration: () => import('@/components/Illustrations/MsOldExcelFileIllustration.vue'),
+    PdfFileIllustration: () => import('@/components/Illustrations/PdfFileIllustration.vue'),
+    DefaultFileTypeIllustration: () => import('@/components/Illustrations/DefaultFileTypeIllustration.vue'),
+  },
+
+  methods: {
+    isImageFile (type) {
+      return [ 'jpeg', 'jpg', 'png' ].some(item => item === type);
+    },
   },
 };
 </script>
