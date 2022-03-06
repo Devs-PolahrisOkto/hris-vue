@@ -14,58 +14,33 @@
         />
       </b-tooltip>
     </header>
-    <b-table
-      :data="isEmpty ? [] : documents"
-      :striped="isStriped"
-      :hoverable="isHoverable"
-      :mobile-cards="hasMobileCards"
-      :paginated="isPaginated"
-      :per-page="perPage"
-      :current-page.sync="currentPage"
-      :pagination-simple="isPaginationSimple"
-      :pagination-position="paginationPosition"
-      :default-sort-direction="defaultSortDirection"
-      :pagination-rounded="isPaginationRounded"
-      :sort-icon="sortIcon"
-      :sort-icon-size="sortIconSize"
-      default-sort="school"
-      aria-next-label="Next page"
-      aria-previous-label="Previous page"
-      aria-page-label="Page"
-      aria-current-label="Current page"
-    >
-      <b-table-column
-        v-slot="props" field="file"
-        label="File"
-        sortable
+    <!-- Documents -->
+    <template v-for="item in documents">
+      <div
+        :key="item.id"
+        class="is-flex is-justify-content-space-between p-3"
       >
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img :src="props.row.file">
-          </p>
-        </figure>
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="name"
-        label="Name"
-        sortable
-      >
-        {{ props.row.name }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="description"
-        label="Description"
-        sortable
-      >
-        {{ props.row.description }}
-      </b-table-column>
-
-      <template #empty>
-        <no-record :width="160" :height="160"></no-record>
-      </template>
-    </b-table>
+        <div class="is-flex">
+          <figure class="media-left">
+            <p class="image is-64x64">
+              <img :src="item.file">
+            </p>
+          </figure>
+          <div class="is-flex is-flex-direction-column">
+            <h6 class="is-size-6">{{ item.name }}</h6>
+            <h6 class="is-size-7 has-text-weight-light">{{ item.lastModified }}</h6>
+          </div>
+        </div>
+        <b-tooltip label="Option" class="is-align-self-center">
+          <b-button
+            type="is-ghost"
+            size="is-medium"
+            icon-right="dots-vertical"
+          />
+        </b-tooltip>
+      </div>
+    </template>
+    <!-- Documents -->
     <!-- Upload Modal -->
     <upload-modal
       :active="uploadModal"
@@ -82,19 +57,6 @@ export default {
   data () {
     return {
       uploadModal: false,
-      isEmpty: false,
-      isStriped: true,
-      isHoverable: true,
-      hasMobileCards: true,
-      isPaginated: false,
-      isPaginationSimple: true,
-      isPaginationRounded: false,
-      paginationPosition: 'bottom',
-      defaultSortDirection: 'asc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
-      currentPage: 1,
-      perPage: 10,
     };
   },
 
@@ -106,7 +68,6 @@ export default {
 
   components: {
     UploadModal: () => import('@/components/Employee/Documents/UploadModal.vue'),
-    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 };
 </script>
