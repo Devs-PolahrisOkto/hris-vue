@@ -1,7 +1,7 @@
 <template>
   <b-modal
     v-model="active"
-    :width="640"
+    :width="800"
     :can-cancel="['x']"
   >
     <div class="modal-card">
@@ -32,9 +32,9 @@
           </section>
         </b-upload>
       </section>
-      <footer class="modal-card-foot">
+      <footer class="modal-card-foot is-flex is-justify-content-end">
         <b-button
-          label="Close"
+          label="Cancel"
           @click="$emit('close')"
         />
         <b-button
