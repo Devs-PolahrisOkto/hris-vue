@@ -11,6 +11,10 @@
           </p>
         </header>
         <div class="card-content">
+          <request-error-messages
+            v-if="hasErrors"
+            :errors="errors"
+          ></request-error-messages>
           <div class="content">
             <text-field
               v-model="form.email"
@@ -27,9 +31,6 @@
               mode="eager"
               field-class="mb-5"
             ></text-field>
-            <b-field>
-              <b-checkbox>Remember Me</b-checkbox>
-            </b-field>
           </div>
         </div>
         <footer class="card-footer is-flex is-flex-direction-column p-5">
@@ -53,11 +54,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
     AuthLayout: () => import('@/layouts/AuthLayout.vue'),
+    RequestErrorMessages: () => import('@/components/Notification/RequestErrorMessages.vue'),
   },
 
   data () {
@@ -68,6 +70,13 @@ export default {
         device_name: 'kuyabixby',
       },
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      hasErrors: 'authentication/hasErrors',
+      errors: 'authentication/errors',
+    }),
   },
 
   methods: {
