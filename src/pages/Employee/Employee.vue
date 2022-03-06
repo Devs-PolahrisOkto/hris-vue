@@ -55,16 +55,16 @@
         </div>
         <div class="column is-9">
           <b-tabs v-model="activeTab">
-            <b-tab-item label="Personal">
+            <b-tab-item label="Personal" icon="card-account-details-outline">
               <personal-data></personal-data>
             </b-tab-item>
-            <b-tab-item label="Documents">
+            <b-tab-item label="Documents" icon="file-document-multiple">
               <personal-documents></personal-documents>
             </b-tab-item>
-            <b-tab-item label="Timekeeping">
+            <b-tab-item label="Timekeeping" icon="account-clock">
               <timekeeping-record></timekeeping-record>
             </b-tab-item>
-            <b-tab-item label="Payroll">
+            <b-tab-item label="Payroll" icon="cash-multiple">
               <payroll-record></payroll-record>
             </b-tab-item>
           </b-tabs>
