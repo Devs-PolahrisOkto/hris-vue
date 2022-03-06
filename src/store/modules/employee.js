@@ -120,22 +120,6 @@ const actions = {
       commit('SET_EMPLOYEE', data);
     }
   },
-  async upload ({ commit }, payload) {
-    const { status, data: { data } } = await client.upload(payload);
-    if (status !== 200) {
-      console.error('uploading file failed');
-    } else {
-      commit('', data);
-    }
-  },
-  async uploadDocument ({ commit }, { file, id }) {
-    const { status, data: { data } } = await client.uploadDocument(file, id);
-    if (status !== 200) {
-      console.error('uploading document failed');
-    } else {
-      commit('DOCUMENT/ADD', data);
-    }
-  },
   'education/add': ({ commit }, education) => commit('EDUCATION/ADD', education),
   'education/update': ({ commit }, education) => commit('EDUCATION/UPDATE', education),
   'address/add': ({ commit }, address) => commit('ADDRESS/ADD', address),
@@ -144,6 +128,8 @@ const actions = {
   'experience/update': ({ commit }, experience) => commit('EXPERIENCE/UPDATE', experience),
   'contact/add': ({ commit }, contact) => commit('CONTACT/ADD', contact),
   'contact/update': ({ commit }, contact) => commit('CONTACT/UPDATE', contact),
+  'document/add': ({ commit }, document) => commit('DOCUMENT/ADD', document),
+  'document/update': ({ commit }, document) => commit('DOCUMENT/UPDATE', document),
 };
 
 export default {
