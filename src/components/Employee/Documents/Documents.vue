@@ -1,12 +1,18 @@
 <template>
   <div class="card mb-4">
     <header class="is-flex is-justify-content-space-between is-align-items-center py-2 pr-2">
-      <h6 class="is-size-6 has-text-weight-light px-3">Documents</h6>
-      <b-button
-        size="is-small"
-        icon-right="plus"
-        @click="uploadModal = true"
-      />
+      <div class="is-flex px-2">
+        <b-icon icon="file-document-outline"></b-icon>
+        <h6 class="is-size-6 has-text-weight-light px-3">Documents</h6>
+      </div>
+      <b-tooltip label="Upload Document">
+        <b-button
+          type="is-ghost"
+          size="is-medium"
+          icon-right="plus-circle-outline"
+          @click="uploadModal = true"
+        />
+      </b-tooltip>
     </header>
     <b-table
       :data="isEmpty ? [] : documents"
