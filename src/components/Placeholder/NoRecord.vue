@@ -14,11 +14,11 @@ export default {
   props: {
     width: {
       type: Number,
-      default: 250.71039,
+      default: 300,
     },
     height: {
       type: Number,
-      default: 267.98584,
+      default: 300,
     },
   },
 };
