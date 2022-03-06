@@ -14,13 +14,16 @@
         :key="item.id"
         class="p-3"
       >
-        <h6 class="is-size-6 has-text-weight-medium">{{ item.name }}</h6>
+        <div class="is-flex ">
+          <h6 class="is-size-6 has-text-weight-medium">{{ item.name }}</h6>
+          <a
+            class="icon is-clickable mx-2"
+            @click="edit(item)"
+          >
+            <i class="mdi mdi-pencil"></i>
+          </a>
+        </div>
         <h6 class="is-size-6">{{ item.description }}</h6>
-        <b-button
-          size="is-small"
-          icon-right="pencil"
-          @click="edit(item)"
-        />
       </div>
     </template>
     <!-- Contacts -->
