@@ -77,6 +77,10 @@ const mutations = {
     const index = selectedEmployee.documents.findIndex(obj => obj.id === document.id);
     Vue.set(selectedEmployee.documents, index, document);
   },
+  'DOCUMENT/DELETE': ({ selectedEmployee }, id) => {
+    const index = selectedEmployee.documents.findIndex(obj => obj.id === id);
+    selectedEmployee.documents.splice(index, 1);
+  },
 };
 
 const actions = {
@@ -130,6 +134,7 @@ const actions = {
   'contact/update': ({ commit }, contact) => commit('CONTACT/UPDATE', contact),
   'document/add': ({ commit }, document) => commit('DOCUMENT/ADD', document),
   'document/update': ({ commit }, document) => commit('DOCUMENT/UPDATE', document),
+  'document/delete': ({ commit }, id) => commit('DOCUMENT/DELETE', id),
 };
 
 export default {
