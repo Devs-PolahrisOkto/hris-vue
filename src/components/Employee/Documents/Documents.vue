@@ -60,7 +60,10 @@
                 icon-right="dots-vertical"
               />
             </template>
-            <b-dropdown-item aria-role="listitem">Delete</b-dropdown-item>
+            <b-dropdown-item
+              aria-role="listitem"
+              @click="deleteDocument(item.id)"
+            >Delete</b-dropdown-item>
           </b-dropdown>
         </b-tooltip>
       </div>
@@ -76,7 +79,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   data () {
@@ -102,8 +105,14 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      delete: 'document/delete',
+    }),
     isImageFile (type) {
       return [ 'jpeg', 'jpg', 'png' ].some(item => item === type);
+    },
+    deleteDocument (id) {
+      this.delete(id);
     },
   },
 };
