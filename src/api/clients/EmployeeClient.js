@@ -28,14 +28,6 @@ class EmployeeClient extends BaseClient {
     return this.axios.put(`${this.baseUrl}/${user?.id}`, user)
       .then(response => response);
   }
-
-  uploadDocument (file, id) {
-    const formdata = new FormData();
-    formdata.append('file', file);
-    formdata.append('type', 1);
-    return this.axios.post(`${this.baseUrl}/${id}/documents`, formdata)
-      .then(response => response);
-  }
 }
 
 export default EmployeeClient;
