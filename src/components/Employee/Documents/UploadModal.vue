@@ -67,7 +67,7 @@ export default {
 
   methods: {
     ...mapActions({
-      uploadDocument: 'employee/uploadDocument',
+      save: 'document/save',
     }),
     change (evt) {
       const file = evt.target.files;
@@ -76,7 +76,7 @@ export default {
       this.fileName = firstFile.name;
     },
     upload () {
-      this.uploadDocument({ file: this.file, id: this.$route.params.id })
+      this.save(this.file)
         .then(() => this.$emit('close'));
     },
   },
