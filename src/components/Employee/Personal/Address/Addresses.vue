@@ -1,12 +1,18 @@
 <template>
   <div class="card mb-4">
     <header class="is-flex is-justify-content-space-between is-align-items-center py-2 pr-2">
-      <h6 class="is-size-6 has-text-weight-light px-3">Addresses</h6>
-      <b-button
-        size="is-small"
-        icon-right="plus"
-        @click="add"
-      />
+      <div class="is-flex px-2">
+        <b-icon icon="home-variant-outline"></b-icon>
+        <h6 class="is-size-6 has-text-weight-light px-3">Addresses</h6>
+      </div>
+      <b-tooltip label="Add Address">
+        <b-button
+          type="is-ghost"
+          size="is-medium"
+          icon-right="plus-circle-outline"
+          @click="add"
+        />
+      </b-tooltip>
     </header>
     <!-- Addresses -->
     <template v-for="item in addresses">
