@@ -21,8 +21,16 @@ function formatDateTime (date) {
   return null;
 }
 
+function formatDateFromNow (date) {
+  if (moment(date).isValid()) {
+    return moment(date).fromNow();
+  }
+  return null;
+}
+
 export {
   formatDateToString,
   formatTimeToString,
   formatDateTime,
+  formatDateFromNow,
 };
