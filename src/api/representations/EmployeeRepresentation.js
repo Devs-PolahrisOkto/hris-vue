@@ -2,6 +2,7 @@ import Representation from '@/api/representations/Representation';
 import AddressRepresentation from '@/api/representations/AddressRepresentation';
 import EducationRepresentation from '@/api/representations/EducationRepresentation';
 import ExperienceRepresentation from '@/api/representations/ExperienceRepresentation';
+import DocumentRepresentation from '@/api/representations/DocumentRepresentation';
 
 class EmployeeRepresentation extends Representation {
   constructor (properties) {
@@ -51,6 +52,8 @@ class EmployeeRepresentation extends Representation {
         new EducationRepresentation(education)).asViewData),
       experiences: this.experiences.map(experience => (
         new ExperienceRepresentation(experience)).asViewData),
+      documents: this.documents.map(document => (
+        new DocumentRepresentation(document)).asViewData),
     };
     return transformedData;
   }
