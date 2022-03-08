@@ -33,9 +33,8 @@ const actions = {
       dispatch('employee/document/update', data, { root: true });
     }
   },
-  async delete ({ dispatch, rootGetters }, id) {
-    const userId = rootGetters['employee/selected']?.user?.id;
-    const { status } = await client.delete(userId, id);
+  async delete ({ dispatch }, id) {
+    const { status } = await client.delete(id);
     if (status !== 200) {
       console.error('deleting document failed');
     } else {
