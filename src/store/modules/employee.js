@@ -17,6 +17,7 @@ const getters = {
   'table/list/loading': ({ table: { loading } }) => loading,
   'table/meta': ({ table: { meta } }) => meta,
   selected: ({ selectedEmployee }) => (new EmployeeRepresentation(selectedEmployee)).asViewData,
+  'selected/id': (state, getters) => getters.selected?.user?.id,
   'selected/employeeAvatar': (state, getters) => getters.selected?.avatar,
   'selected/employeeName': (state, getters) => getters.selected?.fullname,
   'selected/employeeNumber': (state, getters) => getters.selected?.user?.employee_number,
@@ -127,6 +128,14 @@ const actions = {
       console.error('updating employee failed');
     } else {
       commit('SET_EMPLOYEE', data);
+    }
+  },
+  async uploadNewAvatar ({ getters }, avatar) {
+    const base64Regex = new RegExp(/^(data):(.*?)(;base64,)/);
+    const empId = getters['selected/id'];
+    if (base64Regex.test(avatar)) {
+      const blob = await fetch(avatar).then(response => response.blob());
+      await avatarClient.uploadUserAvatar(blob, empId);
     }
   },
   'education/add': ({ commit }, education) => commit('EDUCATION/ADD', education),
