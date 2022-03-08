@@ -27,9 +27,11 @@
               class="is-flex is-flex-direction-column
               is-justify-content-center is-align-items-center"
             >
-              <figure v-show="employeeAvatar" class="image is-128x128 mb-2">
-                <img class="is-rounded" :src="employeeAvatar">
-              </figure>
+              <a @click="editAvatarModal = true">
+                <figure v-show="employeeAvatar" class="image is-128x128 mb-2">
+                  <img class="is-rounded" :src="employeeAvatar">
+                </figure>
+              </a>
               <h5 v-show="employeeName" class="is-size-5">{{ employeeName }}</h5>
               <h6 v-show="position" class="is-size-6">{{ position }}</h6>
             </div>
@@ -77,6 +79,10 @@
       :active="editPersonalModal"
       @close="editPersonalModal = !editPersonalModal"
     ></edit-modal>
+    <edit-avatar
+      :active="editAvatarModal"
+      @close="editAvatarModal = !editAvatarModal"
+    ></edit-avatar>
     <!-- End Modals -->
   </main-layout>
 </template>
@@ -92,12 +98,14 @@ export default {
     PayrollRecord: () => import('@/components/Employee/Payroll/Payroll.vue'),
     TimekeepingRecord: () => import('@/components/Employee/Timekeeping/Timekeeping.vue'),
     EditModal: () => import('@/components/Employee/Personal/EditModal.vue'),
+    EditAvatar: () => import('@/components/Employee/Personal/EditAvatar.vue'),
   },
 
   data () {
     return {
       activeTab: 0,
       editPersonalModal: false,
+      editAvatarModal: false,
     };
   },
 
