@@ -3,16 +3,16 @@ import BaseClient from './BaseClient';
 class DocumentClient extends BaseClient {
   constructor (appUrl) {
     super();
-    this.baseUrl = `${appUrl}/users`;
+    this.baseUrl = `${appUrl}`;
   }
 
   list (userId) {
-    return this.axios.get(`${this.baseUrl}/${userId}/documents`)
+    return this.axios.get(`${this.baseUrl}/users/${userId}/documents`)
       .then(response => response);
   }
 
   find (userId, id) {
-    return this.axios.get(`${this.baseUrl}/${userId}/documents/${id}`)
+    return this.axios.get(`${this.baseUrl}/users/${userId}/documents/${id}`)
       .then(response => response);
   }
 
@@ -20,17 +20,17 @@ class DocumentClient extends BaseClient {
     const formdata = new FormData();
     formdata.append('file', file);
     formdata.append('type', 1);
-    return this.axios.post(`${this.baseUrl}/${userId}/documents`, formdata)
+    return this.axios.post(`${this.baseUrl}/users/${userId}/documents`, formdata)
       .then(response => response);
   }
 
   update (userId, document) {
-    return this.axios.put(`${this.baseUrl}/${userId}/documents/${document.id}`, document)
+    return this.axios.put(`${this.baseUrl}/users/${userId}/documents/${document.id}`, document)
       .then(response => response);
   }
 
-  delete (userId, id) {
-    return this.axios.delete(`${this.baseUrl}/${userId}/documents/${id}`)
+  delete (id) {
+    return this.axios.delete(`${this.baseUrl}/documents/${id}`)
       .then(response => response);
   }
 }
