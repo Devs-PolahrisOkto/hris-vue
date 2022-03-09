@@ -28,11 +28,18 @@
               class="is-flex is-flex-direction-column
               is-justify-content-center is-align-items-center"
             >
-              <a @click="editAvatarModal = true">
-                <figure v-show="employeeAvatar" class="image is-128x128 mb-2">
-                  <img class="is-rounded" :src="employeeAvatar">
-                </figure>
-              </a>
+              <figure v-show="employeeAvatar" class="image is-128x128 mb-2 avatar--editable">
+                <img
+                  class="avatar--editable__img is-rounded"
+                  :src="employeeAvatar"
+                >
+                <a
+                  class="avatar--editable__btn icon is-clickable mx-2"
+                  @click="editAvatarModal = true"
+                >
+                  <i class="mdi mdi-camera"></i>
+                </a>
+              </figure>
               <h5 v-show="employeeName" class="is-size-5">{{ employeeName }}</h5>
               <h6 v-show="position" class="is-size-6">{{ position }}</h6>
             </div>
