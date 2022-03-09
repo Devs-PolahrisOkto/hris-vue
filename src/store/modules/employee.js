@@ -58,6 +58,9 @@ const mutations = {
   SET_EMPLOYEE (state, employee) {
     state.selectedEmployee = { ...employee };
   },
+  UPDATE_SELECTED_EMPLOYEE_AVATAR (state, avatar) {
+    state.selectedEmployee.avatar = avatar;
+  },
   'EDUCATION/ADD': ({ selectedEmployee }, education) => selectedEmployee.education.push(education || {}),
   'EDUCATION/UPDATE': ({ selectedEmployee }, education) => {
     const index = selectedEmployee.education.findIndex(obj => obj.id === education.id);
@@ -130,12 +133,13 @@ const actions = {
       commit('SET_EMPLOYEE', data);
     }
   },
-  async uploadNewAvatar ({ getters }, avatar) {
+  async uploadNewAvatar ({ commit, getters }, avatar) {
     const base64Regex = new RegExp(/^(data):(.*?)(;base64,)/);
     const empId = getters['selected/id'];
     if (base64Regex.test(avatar)) {
       const blob = await fetch(avatar).then(response => response.blob());
-      await avatarClient.uploadUserAvatar(blob, empId);
+      const { data: { data } } = await avatarClient.uploadUserAvatar(blob, empId);
+      commit('UPDATE_SELECTED_EMPLOYEE_AVATAR', data);
     }
   },
   'education/add': ({ commit }, education) => commit('EDUCATION/ADD', education),
