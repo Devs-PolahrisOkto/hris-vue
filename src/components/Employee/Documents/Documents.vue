@@ -63,6 +63,10 @@
             </template>
             <b-dropdown-item
               aria-role="listitem"
+              @click="downloadDocument(item)"
+            >Download</b-dropdown-item>
+            <b-dropdown-item
+              aria-role="listitem"
               @click="deleteDocument(item.id)"
             >Delete</b-dropdown-item>
           </b-dropdown>
@@ -84,6 +88,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { saveAs } from 'file-saver';
 
 export default {
   data () {
@@ -116,6 +121,16 @@ export default {
     }),
     isImageFile (type) {
       return [ 'jpeg', 'jpg', 'png' ].some(item => item === type);
+    },
+    downloadDocument (item) {
+      saveAs(item.file, item.name);
+      // const url = URL.createObjectURL(new Blob([ item.file ]));
+      // const link = document.createElement('a');
+      // link.href = url;
+      // link.target = '_blank';
+      // link.download = item.name;
+      // link.click();
+      // URL.revokeObjectURL(url);
     },
     deleteDocument (id) {
       this.delete(id);
