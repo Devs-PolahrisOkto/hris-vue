@@ -113,7 +113,12 @@ export default {
     submit () {
       const img = this.$refs.vueavatar.getImageScaled();
       const imgDataUrl = img.toDataURL();
-      this.uploadNewAvatar(imgDataUrl).then(this.$emit('close'));
+      this.uploadNewAvatar(imgDataUrl).then(() => {
+        this.rotation = 0;
+        this.scale = 1;
+        this.borderRadius = 0;
+        this.$emit('close');
+      });
     },
     onImageReady () {
       this.scale = 1;
