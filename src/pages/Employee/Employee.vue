@@ -15,13 +15,14 @@
         <div class="column is-3">
           <div class="card">
             <div class="is-flex is-justify-content-end p-2">
-              <b-button
-                class="px-3"
-                size="is-small"
-                icon-right="pencil"
-                rounded
-                @click="editPersonalModal = true"
-              />
+              <b-tooltip label="Edit Personal Details">
+                <a
+                  class="icon is-clickable mx-2"
+                  @click="editPersonalModal = true"
+                >
+                  <i class="mdi mdi-pencil"></i>
+                </a>
+              </b-tooltip>
             </div>
             <div
               class="is-flex is-flex-direction-column
