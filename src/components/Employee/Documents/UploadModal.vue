@@ -76,8 +76,11 @@ export default {
       this.fileName = firstFile.name;
     },
     upload () {
-      this.save(this.file)
-        .then(() => this.$emit('close'));
+      this.save(this.file).then(() => {
+        this.file = null;
+        this.fileName = '';
+        this.$emit('close');
+      });
     },
   },
 };
