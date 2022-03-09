@@ -7,7 +7,8 @@ class AuthenticationClient {
 
   login (credentials) {
     return axios.post(this.baseUrl, credentials)
-      .then(response => response);
+      .then(response => response)
+      .catch(error => error.response);
   }
 
   logout () {

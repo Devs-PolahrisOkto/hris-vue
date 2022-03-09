@@ -6,11 +6,11 @@
 export default {
   props: {
     width: {
-      type: Number,
+      type: [ Number, String ],
       default: 360.13137,
     },
     height: {
-      type: Number,
+      type: [ Number, String ],
       default: 371.14799,
     },
   }

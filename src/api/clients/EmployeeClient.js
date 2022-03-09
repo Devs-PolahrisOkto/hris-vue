@@ -6,8 +6,11 @@ class EmployeeClient extends BaseClient {
     this.baseUrl = `${appUrl}/users`;
   }
 
-  list () {
-    return this.axios.get(this.baseUrl)
+  list (params) {
+    const {
+      page, size, sort, filter,
+    } = params;
+    return this.axios.get(`${this.baseUrl}?page=${page}&size=${size}&sort=${sort}&filter[firstname]=${filter}`)
       .then(response => response);
   }
 
@@ -22,22 +25,7 @@ class EmployeeClient extends BaseClient {
   }
 
   update (user) {
-    return this.axios.put(`${this.baseUrl}/${user.id}`, user)
-      .then(response => response);
-  }
-
-  upload (file) {
-    const formdata = new FormData();
-    formdata.append('file', file);
-    return this.axios.post(`${this.baseUrl}/import`, formdata)
-      .then(response => response);
-  }
-
-  uploadDocument (file, id) {
-    const formdata = new FormData();
-    formdata.append('file', file);
-    formdata.append('type', 1);
-    return this.axios.post(`${this.baseUrl}/${id}/documents`, formdata)
+    return this.axios.put(`${this.baseUrl}/${user?.id}`, user)
       .then(response => response);
   }
 }

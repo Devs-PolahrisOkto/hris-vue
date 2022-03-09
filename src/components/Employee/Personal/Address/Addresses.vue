@@ -1,89 +1,55 @@
 <template>
   <div class="card mb-4">
     <header class="is-flex is-justify-content-space-between is-align-items-center py-2 pr-2">
-      <h6 class="is-size-6 has-text-weight-light px-3">Addresses</h6>
-      <!-- <b-button size="is-small" icon-right="plus" /> -->
+      <div class="is-flex px-2">
+        <b-icon icon="home-variant-outline"></b-icon>
+        <h6 class="is-size-6 has-text-weight-light px-3">Addresses</h6>
+      </div>
+      <b-tooltip label="Add Address">
+        <b-button
+          type="is-ghost"
+          size="is-medium"
+          icon-right="plus-circle-outline"
+          @click="add"
+        />
+      </b-tooltip>
     </header>
-    <b-table
-      :data="isEmpty ? [] : addresses"
-      :striped="isStriped"
-      :hoverable="isHoverable"
-      :mobile-cards="hasMobileCards"
-      :paginated="isPaginated"
-      :per-page="perPage"
-      :current-page.sync="currentPage"
-      :pagination-simple="isPaginationSimple"
-      :pagination-position="paginationPosition"
-      :default-sort-direction="defaultSortDirection"
-      :pagination-rounded="isPaginationRounded"
-      :sort-icon="sortIcon"
-      :sort-icon-size="sortIconSize"
-      default-sort="school"
-      aria-next-label="Next page"
-      aria-previous-label="Previous page"
-      aria-page-label="Page"
-      aria-current-label="Current page"
+    <!-- Addresses -->
+    <template v-if="hasAddresses">
+      <div
+        v-for="item in addresses"
+        :key="item.id"
+        class="p-3"
+      >
+        <div class="is-flex ">
+          <h6 class="is-size-6 has-text-weight-medium">{{ item.address }}</h6>
+          <a
+            class="icon is-clickable mx-2"
+            @click="edit(item)"
+          >
+            <i class="mdi mdi-pencil"></i>
+          </a>
+        </div>
+        <h6 class="is-size-6">{{ item.type }}</h6>
+      </div>
+    </template>
+    <template v-else>
+      <no-record width="200" height="200"></no-record>
+    </template>
+    <!-- Addresses -->
+    <!-- Start Modals -->
+    <b-modal
+      v-model="modalState"
+      :width="800"
+      :can-cancel="['x']"
     >
-      <b-table-column
-        v-slot="props" field="name"
-        label="Name"
-        sortable
-      >
-        {{ props.row.name }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="address1"
-        label="Street"
-        sortable
-      >
-        {{ props.row.address1 }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="barangay_id"
-        label="Barangay"
-        sortable width="240"
-      >
-        {{ props.row.barangay_id }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="province_id"
-        label="Province"
-        sortable width="240"
-      >
-        {{ props.row.province_id }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="region_id"
-        label="Region"
-        sortable width="240"
-      >
-        {{ props.row.region_id }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="state_id"
-        label="State"
-        sortable width="240"
-      >
-        {{ props.row.state_id }}
-      </b-table-column>
-
-      <b-table-column
-        v-slot="props" field="country_id"
-        label="Country"
-        sortable width="240"
-      >
-        {{ props.row.country_id }}
-      </b-table-column>
-
-      <template #empty>
-        <no-record :width="160" :height="160"></no-record>
-      </template>
-    </b-table>
+      <modal-form
+        :title="formTitle"
+        :form-data="formData"
+        @close="modalState = false"
+      ></modal-form>
+    </b-modal>
+    <!-- End Modals -->
   </div>
 </template>
 
@@ -91,32 +57,37 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  data () {
-    return {
-      isEmpty: false,
-      isStriped: true,
-      isHoverable: true,
-      hasMobileCards: true,
-      isPaginated: false,
-      isPaginationSimple: true,
-      isPaginationRounded: false,
-      paginationPosition: 'bottom',
-      defaultSortDirection: 'asc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
-      currentPage: 1,
-      perPage: 10,
-    };
+  components: {
+    ModalForm: () => import('@/components/Employee/Personal/Address/ModalForm.vue'),
+    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
   },
 
-  components: {
-    NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
+  data () {
+    return {
+      modalState: false,
+      formTitle: 'Add Address',
+      formData: {},
+    };
   },
 
   computed: {
     ...mapGetters({
+      hasAddresses: 'employee/selected/hasAddresses',
       addresses: 'employee/selected/addresses',
     }),
+  },
+
+  methods: {
+    add () {
+      this.formTitle = 'Add Address';
+      this.formData = {};
+      this.modalState = true;
+    },
+    edit (item) {
+      this.formTitle = 'Edit Address';
+      this.formData = item;
+      this.modalState = true;
+    },
   },
 };
 </script>

@@ -16,7 +16,7 @@
         <div class="is-flex is-justify-content-space-between py-2">
           <b-input
             v-model="searchField"
-            placeholder="Search..."
+            placeholder="Search name..."
             type="search"
             icon="magnify">
           </b-input>
@@ -48,13 +48,16 @@
         <!-- Table Layout -->
         <div v-show="layout === 'table'">
           <b-table
-            :data="meta.isEmpty ? [] : filteredEmployees"
+            :data="meta.isEmpty ? [] : list"
+            :loading="loading"
+            :paginated="meta.isPaginated"
+            :backend-pagination="meta.backendPagination"
+            :backend-sorting="meta.backendSorting"
+            :total="meta.total"
+            :per-page="meta.per_page"
             :striped="meta.isStriped"
             :hoverable="meta.isHoverable"
             :mobile-cards="meta.hasMobileCards"
-            :paginated="meta.isPaginated"
-            :per-page="meta.perPage"
-            :current-page.sync="meta.currentPage"
             :pagination-simple="meta.isPaginationSimple"
             :pagination-position="meta.paginationPosition"
             :default-sort-direction="meta.defaultSortDirection"
@@ -66,6 +69,7 @@
             aria-previous-label="Previous page"
             aria-page-label="Page"
             aria-current-label="Current page"
+            @page-change="onPageChange"
           >
             <b-table-column v-slot="props" field="avatar" width="40">
               <figure class="image is-24x24">
@@ -95,7 +99,7 @@
                 type="is-primary"
                 icon-right="eye"
                 tag="router-link"
-                :to="`/employees/${props.row.id}`"
+                :to="`/employees/${props.row.user.id}`"
               />
             </b-table-column>
 
@@ -118,9 +122,9 @@
                     </p>
                   </figure>
                   <div class="media-content">
-                    <h5 class="is-size-5 has-text-weight-semibold">{{ item.employeeName }}</h5>
-                    <h6 class="is-size-6 has-text-grey">{{ item.position }}</h6>
-                    <h6 class="is-size-6">{{ item.employmentTypeName }}</h6>
+                    <h5 class="is-size-5 has-text-weight-semibold">{{ item.fullname }}</h5>
+                    <h6 class="is-size-6 has-text-grey">{{ item.primaryPosition }}</h6>
+                    <h6 class="is-size-6">{{ item.employmentType }}</h6>
                   </div>
                   <div class="media-right">
                     <b-button
@@ -128,7 +132,7 @@
                       type="is-primary"
                       icon-right="eye"
                       tag="router-link"
-                      :to="`/employees/${item.id}`"
+                      :to="`/employees/${item.user.id}`"
                     />
                   </div>
                 </article>
@@ -165,6 +169,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { debounce } from 'lodash';
 
 export default {
   components: {
@@ -189,14 +194,20 @@ export default {
     ...mapGetters({
       columns: 'employee/table/columns',
       list: 'employee/table/list',
+      loading: 'employee/table/list/loading',
       meta: 'employee/table/meta',
     }),
-    filteredEmployees () {
-      return this.list.filter(employee => employee
-        .employeeName
-        .toLowerCase()
-        .includes(this.searchField.toLowerCase()));
-    },
+  },
+
+  watch: {
+    searchField: debounce(function (query) {
+      this.getList({
+        page: 1,
+        size: 10,
+        sort: '-created_at',
+        filter: query,
+      });
+    }, 500),
   },
 
   created () {
@@ -210,6 +221,14 @@ export default {
     }),
     changeLayout (requestedLayout) {
       this.layout = requestedLayout;
+    },
+    onPageChange (page) {
+      this.getList({
+        page,
+        size: 10,
+        sort: '-created_at',
+        filter: '',
+      });
     },
   },
 };

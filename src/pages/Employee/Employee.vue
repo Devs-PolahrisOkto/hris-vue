@@ -14,20 +14,39 @@
       <div class="columns">
         <div class="column is-3">
           <div class="card">
+            <div class="is-flex is-justify-content-end p-2">
+              <b-tooltip label="Edit Personal Details">
+                <a
+                  class="icon is-clickable mx-2"
+                  @click="editPersonalModal = true"
+                >
+                  <i class="mdi mdi-pencil"></i>
+                </a>
+              </b-tooltip>
+            </div>
             <div
               class="is-flex is-flex-direction-column
-              is-justify-content-center is-align-items-center py-5"
+              is-justify-content-center is-align-items-center"
             >
-              <figure class="image is-128x128 mb-2">
-                <img class="is-rounded" :src="employee.avatar">
+              <figure v-show="employeeAvatar" class="image is-128x128 mb-2 avatar--editable">
+                <img
+                  class="avatar--editable__img is-rounded"
+                  :src="employeeAvatar"
+                >
+                <a
+                  class="avatar--editable__btn icon is-clickable mx-2"
+                  @click="editAvatarModal = true"
+                >
+                  <i class="mdi mdi-camera"></i>
+                </a>
               </figure>
-              <h5 class="is-size-5">{{ employee.employeeName }}</h5>
+              <h5 v-show="employeeName" class="is-size-5">{{ employeeName }}</h5>
               <h6 v-show="position" class="is-size-6">{{ position }}</h6>
             </div>
             <div class="card-content">
-              <div class="pt-2">
+              <div v-show="employeeNumber" class="pt-2">
                 <h6 class="is-size-7 has-text-grey-light">Employee No.</h6>
-                <h6 class="is-size-6">{{ employee.employee_number }}</h6>
+                <h6 class="is-size-6">{{ employeeNumber }}</h6>
               </div>
               <div v-show="employmentType" class="pt-2">
                 <h6 class="is-size-7 has-text-grey-light">Employment Type</h6>
@@ -46,22 +65,33 @@
         </div>
         <div class="column is-9">
           <b-tabs v-model="activeTab">
-            <b-tab-item label="Personal">
+            <b-tab-item label="Personal" icon="card-account-details-outline">
               <personal-data></personal-data>
             </b-tab-item>
-            <b-tab-item label="Documents">
+            <b-tab-item label="Documents" icon="file-document-multiple">
               <personal-documents></personal-documents>
             </b-tab-item>
-            <b-tab-item label="Timekeeping">
+            <b-tab-item label="Timekeeping" icon="account-clock">
               <timekeeping-record></timekeeping-record>
             </b-tab-item>
-            <b-tab-item label="Payroll">
+            <b-tab-item label="Payroll" icon="cash-multiple">
               <payroll-record></payroll-record>
             </b-tab-item>
           </b-tabs>
         </div>
       </div>
     </div>
+
+    <!-- Start Modals -->
+    <edit-modal
+      :active="editPersonalModal"
+      @close="editPersonalModal = !editPersonalModal"
+    ></edit-modal>
+    <edit-avatar
+      :active="editAvatarModal"
+      @close="editAvatarModal = !editAvatarModal"
+    ></edit-avatar>
+    <!-- End Modals -->
   </main-layout>
 </template>
 
@@ -75,21 +105,28 @@ export default {
     PersonalDocuments: () => import('@/components/Employee/Documents/Documents.vue'),
     PayrollRecord: () => import('@/components/Employee/Payroll/Payroll.vue'),
     TimekeepingRecord: () => import('@/components/Employee/Timekeeping/Timekeeping.vue'),
+    EditModal: () => import('@/components/Employee/Personal/EditModal.vue'),
+    EditAvatar: () => import('@/components/Employee/Personal/EditAvatar.vue'),
   },
 
   data () {
     return {
       activeTab: 0,
+      editPersonalModal: false,
+      editAvatarModal: false,
     };
   },
 
   computed: {
     ...mapGetters({
       employee: 'employee/selected',
+      employeeAvatar: 'employee/selected/employeeAvatar',
+      employeeName: 'employee/selected/employeeName',
+      employeeNumber: 'employee/selected/employeeNumber',
+      employmentType: 'employee/selected/employmentType',
       position: 'employee/selected/position',
       contact: 'employee/selected/contact',
       address: 'employee/selected/address',
-      employmentType: 'employee/selected/employmentType',
     }),
   },
 
