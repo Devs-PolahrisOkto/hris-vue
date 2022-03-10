@@ -142,6 +142,12 @@ const actions = {
       commit('UPDATE_SELECTED_EMPLOYEE_AVATAR', data);
     }
   },
+  async upload (_, payload) {
+    const { status } = await client.upload(payload);
+    if (status !== 200) {
+      console.error('uploading file failed');
+    }
+  },
   'education/add': ({ commit }, education) => commit('EDUCATION/ADD', education),
   'education/update': ({ commit }, education) => commit('EDUCATION/UPDATE', education),
   'address/add': ({ commit }, address) => commit('ADDRESS/ADD', address),
