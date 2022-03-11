@@ -1,28 +1,44 @@
+import { isEmpty } from 'lodash';
 import DocumentClient from '@/api/clients/DocumentClient';
 
 const client = new DocumentClient('https://apistaging.polahrisokto.com/api');
 
 const state = {
-
+  errors: {
+    errors: {},
+    message: '',
+  },
 };
 
 const getters = {
-
+  errors: ({ errors }) => errors,
+  hasErrors: ({ errors: { errors } }) => !isEmpty(errors),
 };
 
 const mutations = {
-
+  SET_ERRORS (state, errors) {
+    state.errors = errors;
+  },
+  CLEAR_ERRORS (state) {
+    state.errors = {
+      errors: {},
+      message: '',
+    };
+  },
 };
 
 const actions = {
-  async save ({ dispatch, rootGetters }, file) {
+  async save ({ commit, dispatch, rootGetters }, file) {
     const userId = rootGetters['employee/selected']?.user?.id;
-    const { status, data: { data } } = await client.save(userId, file);
+    const { status, data } = await client.save(userId, file);
     if (status !== 200) {
+      commit('SET_ERRORS', data);
       console.error('saving document failed');
-    } else {
-      dispatch('employee/document/add', data, { root: true });
+      return Promise.reject();
     }
+    dispatch('employee/document/add', data, { root: true });
+    commit('CLEAR_ERRORS');
+    return Promise.resolve();
   },
   async update ({ dispatch, rootGetters }, payload) {
     const userId = rootGetters['employee/selected']?.user?.id;
