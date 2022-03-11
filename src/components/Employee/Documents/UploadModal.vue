@@ -16,6 +16,10 @@
         ></button>
       </header>
       <section class="modal-card-body is-flex is-flex-direction-column is-align-items-center">
+        <request-error-messages
+          v-if="hasErrors"
+          :errors="errors"
+        ></request-error-messages>
         <span v-show="fileName" class="tag is-primary my-3">{{ fileName }}</span>
         <b-upload drag-drop>
           <input ref="fileInput" type="file" @change="change">
@@ -49,7 +53,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -58,11 +62,22 @@ export default {
     },
   },
 
+  components: {
+    RequestErrorMessages: () => import('@/components/Notification/RequestErrorMessages.vue'),
+  },
+
   data () {
     return {
       file: null,
       fileName: '',
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      hasErrors: 'document/hasErrors',
+      errors: 'document/errors',
+    }),
   },
 
   methods: {

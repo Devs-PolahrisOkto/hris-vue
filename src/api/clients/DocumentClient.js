@@ -21,7 +21,8 @@ class DocumentClient extends BaseClient {
     formdata.append('file', file);
     formdata.append('type', 1);
     return this.axios.post(`${this.baseUrl}/users/${userId}/documents`, formdata)
-      .then(response => response);
+      .then(response => ({ status: response?.status, data: response?.data?.data }))
+      .catch(error => error.response);
   }
 
   update (userId, document) {

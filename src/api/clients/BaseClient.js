@@ -19,18 +19,8 @@ class BaseClient {
       if (status === 401) {
         window.location = '/';
       }
+      return Promise.reject(error);
     });
-  }
-
-  _handleResponse (filter) {
-    return response => {
-      if (filter(response)) {
-        return response;
-      }
-
-      console.error('Response from server: ', response);
-      throw response;
-    };
   }
 }
 

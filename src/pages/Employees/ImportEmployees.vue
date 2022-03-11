@@ -44,20 +44,33 @@
             </b-tooltip>
           </div>
         </div>
+        <!-- Errors -->
+        <upload-error-messages
+          v-if="hasErrors"
+          :errors="errors"
+        ></upload-error-messages>
+        <!-- Errors -->
         <!-- Imported Data Table -->
-        <b-table
-          :data="importedData"
-          :columns="columns"
-          :sticky-header="stickyHeaders"
-          striped
-          narrowed
-          hoverable
-        >
-          <template #empty>
-            <no-record></no-record>
-          </template>
-        </b-table>
+        <template v-if="importedData.length">
+          <b-table
+            :data="importedData"
+            :columns="columns"
+            :sticky-header="stickyHeaders"
+            striped
+            narrowed
+            hoverable
+          >
+            <template #empty>
+              <no-record></no-record>
+            </template>
+          </b-table>
+        </template>
         <!-- Imported Data Table -->
+        <!-- Empty State -->
+        <template v-else>
+          <no-record></no-record>
+        </template>
+        <!-- Empty State -->
       </div>
     </div>
     <!-- Import Employees -->
@@ -67,12 +80,13 @@
 <script>
 import XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
     MainLayout: () => import('@/layouts/MainLayout.vue'),
     NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
+    UploadErrorMessages: () => import('@/components/Notification/UploadErrorMessages.vue'),
   },
 
   data () {
@@ -81,6 +95,18 @@ export default {
       fileName: '',
       importedData: [],
       columns: [
+        {
+          field: 'company number',
+          label: 'Company No.',
+        },
+        {
+          field: 'username',
+          label: 'Username',
+        },
+        {
+          field: 'email',
+          label: 'Email',
+        },
         {
           field: 'firstname',
           label: 'First Name',
@@ -102,21 +128,48 @@ export default {
           label: 'Title',
         },
         {
-          field: 'birthDate',
+          field: 'extension',
+          label: 'Extension',
+        },
+        {
+          field: 'birth date',
           label: 'Birthdate',
         },
         {
-          field: 'username',
-          label: 'Username',
+          field: 'gender',
+          label: 'Gender',
           centered: true,
         },
         {
-          field: 'email',
-          label: 'Email',
+          field: 'civil status',
+          label: 'Civil Status',
+        },
+        {
+          field: 'employment',
+          label: 'Employment Type',
+        },
+        {
+          field: 'company',
+          label: 'Company',
+        },
+        {
+          field: 'branch',
+          label: 'Branch',
+        },
+        {
+          field: 'department',
+          label: 'Department',
         },
       ],
       stickyHeaders: true,
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      errors: 'employee/import/errors',
+      hasErrors: 'employee/import/hasErrors',
+    }),
   },
 
   methods: {
@@ -152,14 +205,22 @@ export default {
       workbook.SheetNames.push('Employee Details');
       const templateHeader = [
         [
+          'company number',
+          'username',
+          'email',
           'firstname',
           'middlename',
           'lastname',
           'nickname',
           'title',
-          'birthDate',
-          'username',
-          'email',
+          'extension',
+          'birth date',
+          'gender',
+          'civil status',
+          'employment',
+          'company',
+          'branch',
+          'department',
         ],
       ];
       const Sheet1 = XLSX.utils.aoa_to_sheet(templateHeader);

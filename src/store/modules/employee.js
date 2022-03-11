@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { isEmpty, sortBy } from 'lodash';
 import initialState from '@/config/employee.state';
 import EmployeeClient from '@/api/clients/EmployeeClient';
 import AvatarClient from '@/api/clients/AvatarClient';
@@ -35,6 +36,8 @@ const getters = {
   'selected/hasContacts': (state, getters) => getters.selected?.contacts?.length,
   'selected/documents': (state, getters) => getters.selected?.documents,
   'selected/hasDocuments': (state, getters) => getters.selected?.documents?.length,
+  'import/errors': ({ import: { errors } }) => sortBy(errors, [ 'row' ]),
+  'import/hasErrors': ({ import: { errors } }) => !isEmpty(errors),
 };
 
 const mutations = {
@@ -60,6 +63,9 @@ const mutations = {
   },
   UPDATE_SELECTED_EMPLOYEE_AVATAR (state, avatar) {
     state.selectedEmployee.avatar = avatar;
+  },
+  SET_IMPORT_ERRORS (state, errors) {
+    state.import.errors = errors;
   },
   'EDUCATION/ADD': ({ selectedEmployee }, education) => selectedEmployee.education.push(education || {}),
   'EDUCATION/UPDATE': ({ selectedEmployee }, education) => {
@@ -141,6 +147,15 @@ const actions = {
       const { data: { data } } = await avatarClient.uploadUserAvatar(blob, empId);
       commit('UPDATE_SELECTED_EMPLOYEE_AVATAR', data);
     }
+  },
+  async upload ({ commit }, payload) {
+    const { status, data } = await client.upload(payload);
+    if (status !== 200) {
+      commit('SET_IMPORT_ERRORS', data);
+      console.error('uploading file failed');
+      return Promise.reject();
+    }
+    return Promise.resolve();
   },
   'education/add': ({ commit }, education) => commit('EDUCATION/ADD', education),
   'education/update': ({ commit }, education) => commit('EDUCATION/UPDATE', education),
