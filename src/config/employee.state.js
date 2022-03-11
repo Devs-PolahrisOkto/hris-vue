@@ -27,4 +27,7 @@ export default {
       per_page: 10,
     },
   },
+  import: {
+    errors: [],
+  },
 };
