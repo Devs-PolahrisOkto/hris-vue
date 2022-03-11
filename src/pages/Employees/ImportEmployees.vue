@@ -44,6 +44,12 @@
             </b-tooltip>
           </div>
         </div>
+        <!-- Errors -->
+        <upload-error-messages
+          v-if="hasErrors"
+          :errors="errors"
+        ></upload-error-messages>
+        <!-- Errors -->
         <!-- Imported Data Table -->
         <template v-if="importedData.length">
           <b-table
@@ -80,6 +86,7 @@ export default {
   components: {
     MainLayout: () => import('@/layouts/MainLayout.vue'),
     NoRecord: () => import('@/components/Placeholder/NoRecord.vue'),
+    UploadErrorMessages: () => import('@/components/Notification/UploadErrorMessages.vue'),
   },
 
   data () {
@@ -161,6 +168,7 @@ export default {
   computed: {
     ...mapGetters({
       errors: 'employee/import/errors',
+      hasErrors: 'employee/import/hasErrors',
     }),
   },
 
