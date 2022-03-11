@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { isEmpty } from 'lodash';
+import { isEmpty, sortBy } from 'lodash';
 import initialState from '@/config/employee.state';
 import EmployeeClient from '@/api/clients/EmployeeClient';
 import AvatarClient from '@/api/clients/AvatarClient';
@@ -36,7 +36,7 @@ const getters = {
   'selected/hasContacts': (state, getters) => getters.selected?.contacts?.length,
   'selected/documents': (state, getters) => getters.selected?.documents,
   'selected/hasDocuments': (state, getters) => getters.selected?.documents?.length,
-  'import/errors': ({ import: { errors } }) => errors,
+  'import/errors': ({ import: { errors } }) => sortBy(errors, [ 'row' ]),
   'import/hasErrors': ({ import: { errors } }) => !isEmpty(errors),
 };
 
