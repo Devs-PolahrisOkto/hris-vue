@@ -35,6 +35,7 @@ const getters = {
   'selected/hasContacts': (state, getters) => getters.selected?.contacts?.length,
   'selected/documents': (state, getters) => getters.selected?.documents,
   'selected/hasDocuments': (state, getters) => getters.selected?.documents?.length,
+  'import/errors': ({ import: { errors } }) => errors,
 };
 
 const mutations = {
@@ -60,6 +61,9 @@ const mutations = {
   },
   UPDATE_SELECTED_EMPLOYEE_AVATAR (state, avatar) {
     state.selectedEmployee.avatar = avatar;
+  },
+  SET_IMPORT_ERRORS (state, errors) {
+    state.import.errors = errors;
   },
   'EDUCATION/ADD': ({ selectedEmployee }, education) => selectedEmployee.education.push(education || {}),
   'EDUCATION/UPDATE': ({ selectedEmployee }, education) => {
@@ -142,11 +146,14 @@ const actions = {
       commit('UPDATE_SELECTED_EMPLOYEE_AVATAR', data);
     }
   },
-  async upload (_, payload) {
-    const { status } = await client.upload(payload);
+  async upload ({ commit }, payload) {
+    const { status, data } = await client.upload(payload);
     if (status !== 200) {
+      commit('SET_IMPORT_ERRORS', data);
       console.error('uploading file failed');
+      return Promise.reject();
     }
+    return Promise.resolve();
   },
   'education/add': ({ commit }, education) => commit('EDUCATION/ADD', education),
   'education/update': ({ commit }, education) => commit('EDUCATION/UPDATE', education),
