@@ -74,7 +74,7 @@
 <script>
 import XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -156,6 +156,12 @@ export default {
       ],
       stickyHeaders: true,
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      errors: 'employee/import/errors',
+    }),
   },
 
   methods: {
