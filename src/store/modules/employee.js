@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { isEmpty } from 'lodash';
 import initialState from '@/config/employee.state';
 import EmployeeClient from '@/api/clients/EmployeeClient';
 import AvatarClient from '@/api/clients/AvatarClient';
@@ -36,6 +37,7 @@ const getters = {
   'selected/documents': (state, getters) => getters.selected?.documents,
   'selected/hasDocuments': (state, getters) => getters.selected?.documents?.length,
   'import/errors': ({ import: { errors } }) => errors,
+  'import/hasErrors': ({ import: { errors } }) => !isEmpty(errors),
 };
 
 const mutations = {
