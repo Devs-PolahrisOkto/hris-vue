@@ -73,7 +73,7 @@
           >
             <b-table-column v-slot="props" field="avatar" width="40">
               <figure class="image is-24x24">
-                <img class="is-rounded" :src="props.row.avatar">
+                <img class="is-rounded" :src="getProfileImageUrl(props.row)">
               </figure>
             </b-table-column>
 
@@ -170,6 +170,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { debounce } from 'lodash';
+import Avatar from '@/mixins/avatar';
 
 export default {
   components: {
@@ -189,6 +190,8 @@ export default {
       isLayoutModalActive: false,
     };
   },
+
+  mixins: [ Avatar ],
 
   computed: {
     ...mapGetters({
