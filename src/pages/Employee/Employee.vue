@@ -28,10 +28,10 @@
               class="is-flex is-flex-direction-column
               is-justify-content-center is-align-items-center"
             >
-              <figure v-show="employeeAvatar" class="image is-128x128 mb-2 avatar--editable">
+              <figure class="image is-128x128 mb-2 avatar--editable">
                 <img
                   class="avatar--editable__img is-rounded"
-                  :src="employeeAvatar"
+                  :src="getProfileImageUrl(employee)"
                 >
                 <a
                   class="avatar--editable__btn icon is-clickable mx-2"
@@ -97,6 +97,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import Avatar from '@/mixins/avatar';
 
 export default {
   components: {
@@ -116,6 +117,8 @@ export default {
       editAvatarModal: false,
     };
   },
+
+  mixins: [ Avatar ],
 
   computed: {
     ...mapGetters({
