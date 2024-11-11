@@ -41,7 +41,7 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-vue": "^6.2.2",
     "eslint-plugin-vuejs-accessibility": "^1.1.0",
-    "node-sass": "^4.12.0",
+    "sass": "^1.32.0",  // Updated to use `sass` instead of `node-sass`
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   }
